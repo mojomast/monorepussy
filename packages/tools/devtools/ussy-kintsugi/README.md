@@ -1,3 +1,5 @@
+<a href="https://github.com/mojomast/kintsugiussy/actions/workflows/ci.yml"><img src="https://github.com/mojomast/kintsugiussy/actions/workflows/ci.yml/badge.svg"></a>
+
 # Kintsugi — Visible Repair History That Makes Code Stronger at the Scars
 
 > *In Japanese kintsugi, the crack is filled with gold — the repair is the most beautiful part.*
@@ -19,6 +21,7 @@ Bug fixes are invisible. A developer writes `fix: null check on user.email`, com
 
 ```bash
 pip install -e .
+pip install pytest
 ```
 
 Or from source:
@@ -27,6 +30,7 @@ Or from source:
 git clone <repo>
 cd kintsugi
 pip install -e .
+pip install pytest
 ```
 
 ## Usage
