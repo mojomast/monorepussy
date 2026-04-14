@@ -69,14 +69,20 @@ class ScanResult:
     findings: list = field(default_factory=list)
     files_scanned: int = 0
     total_findings: int = 0
+    _seen: set = field(default_factory=set, repr=False, compare=False)
 
     def add(self, finding: Finding):
+        """Add a finding, deduplicating by (file, line, column, rule_id)."""
+        dedup_key = (finding.file, finding.line, finding.column, finding.rule_id)
+        if dedup_key in self._seen:
+            return
+        self._seen.add(dedup_key)
         self.findings.append(finding)
-        self.total_findings = len(self.findings)
+        self.total_findings += 1
 
     def merge(self, other: "ScanResult"):
-        self.findings.extend(other.findings)
-        self.total_findings = len(self.findings)
+        for f in other.findings:
+            self.add(f)
         self.files_scanned += other.files_scanned
 
     def to_dict(self) -> dict:

@@ -33,7 +33,6 @@ def _shannon_entropy(data: str) -> float:
 
 def _decode_space_tab_binary(line: str) -> str:
     """Attempt to decode trailing whitespace as binary (space=0, tab=1)."""
-    # Find trailing whitespace
     stripped = line.rstrip("\n\r")
     trailing_start = len(stripped.rstrip())
     if trailing_start >= len(stripped):
@@ -79,8 +78,9 @@ class WhitespaceScanner:
         """Initialize with configurable entropy threshold.
 
         Args:
-            entropy_threshold: Minimum Shannon entropy (0-1 range) to flag
-                whitespace as potentially steganographic. Default 0.8.
+            entropy_threshold: Minimum Shannon entropy (0-1 range, binary alphabet)
+                to flag whitespace as potentially steganographic. Default 0.8.
+                On a space/tab binary alphabet, max entropy is 1.0 (equal mix).
         """
         self.entropy_threshold = entropy_threshold
 
@@ -89,10 +89,13 @@ class WhitespaceScanner:
         findings = []
 
         # 1. Check trailing whitespace for binary encoding
-        findings.extend(self._check_trailing_binary(file_path, line_num, line))
+        binary_findings = self._check_trailing_binary(file_path, line_num, line)
+        findings.extend(binary_findings)
 
-        # 2. Check for unusual trailing whitespace length
-        findings.extend(self._check_trailing_length(file_path, line_num, line))
+        # 2. Only flag trailing length if binary encoding was NOT already found
+        #    (avoids duplicate findings on the same trailing whitespace)
+        if not binary_findings:
+            findings.extend(self._check_trailing_length(file_path, line_num, line))
 
         # 3. Check for mixed tabs/spaces in indentation
         findings.extend(self._check_mixed_indent(file_path, line_num, line))
@@ -120,7 +123,7 @@ class WhitespaceScanner:
                 ),
                 char_code=None,
                 character=None,
-                context_text=f"trailing: {repr(line.rstrip('\n\r')[len(line.rstrip('\n\r').rstrip()):])}",
+                context_text=f"trailing: {repr(line.rstrip(chr(10)+chr(13))[len(line.rstrip(chr(10)+chr(13)).rstrip()):])}",
                 rule_id="STEN004a",
             ))
         return findings
@@ -147,7 +150,12 @@ class WhitespaceScanner:
         return findings
 
     def _check_mixed_indent(self, file_path: str, line_num: int, line: str) -> list:
-        """Check for mixed tab/space indentation — could encode data."""
+        """Check for mixed tab/space indentation — could encode data.
+
+        Entropy is computed on the raw binary alphabet {space, tab}.
+        Max entropy on this alphabet is 1.0 (equal distribution).
+        The entropy_threshold (default 0.8) is compared directly to this value.
+        """
         findings = []
         stripped = line.lstrip()
         indent = line[:len(line) - len(stripped)]
@@ -159,14 +167,11 @@ class WhitespaceScanner:
         has_tabs = "\t" in indent
 
         if has_spaces and has_tabs:
-            # Calculate entropy of the indentation
+            # Raw Shannon entropy on the {space, tab} binary alphabet (max = 1.0)
             entropy = _shannon_entropy(indent)
-            # Normalize by max possible entropy
-            max_entropy = math.log2(len(set(indent))) if len(set(indent)) > 1 else 1
-            norm_entropy = entropy / max_entropy if max_entropy > 0 else 0
 
             severity = Severity.MEDIUM
-            if norm_entropy > self.entropy_threshold:
+            if entropy > self.entropy_threshold:
                 severity = Severity.HIGH
 
             findings.append(Finding(
@@ -177,8 +182,8 @@ class WhitespaceScanner:
                 severity=severity,
                 context=Context.WHITESPACE,
                 message=(
-                    f"Mixed tab/space indentation (entropy={entropy:.2f}, "
-                    f"normalized={norm_entropy:.2f}): potential steganographic encoding"
+                    f"Mixed tab/space indentation (entropy={entropy:.3f}/1.0): "
+                    f"potential steganographic encoding"
                 ),
                 char_code=None,
                 character=None,
@@ -190,14 +195,12 @@ class WhitespaceScanner:
     def _check_whitespace_entropy(self, file_path: str, line_num: int, line: str) -> list:
         """Analyze overall whitespace entropy for anomalous patterns."""
         findings = []
-        # Extract all whitespace from the line
         ws_chars = "".join(ch for ch in line if ch in " \t")
         if len(ws_chars) < 8:
             return findings
 
         entropy = _shannon_entropy(ws_chars)
-        # Max entropy for space/tab is 1.0
-        # If we have high entropy in whitespace, it could be encoding data
+        # Max entropy for space/tab binary alphabet is 1.0
         if entropy > self.entropy_threshold:
             findings.append(Finding(
                 scanner=self.name,
@@ -207,7 +210,7 @@ class WhitespaceScanner:
                 severity=Severity.MEDIUM,
                 context=Context.WHITESPACE,
                 message=(
-                    f"High whitespace entropy ({entropy:.3f}): "
+                    f"High whitespace entropy ({entropy:.3f}/1.0): "
                     f"whitespace patterns may encode hidden data"
                 ),
                 char_code=None,

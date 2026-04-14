@@ -73,35 +73,52 @@ class ScannerEngine:
         return result
 
     def scan_diff(self, diff_ref: str) -> ScanResult:
-        """Scan only lines changed in a git diff."""
+        """Scan only lines changed in a git diff.
+
+        For a commit ref (e.g. HEAD~1, abc123) we use 'git show' to get the
+        diff introduced by that commit.  For range syntax (a..b, a...b) we
+        use 'git diff' as before.  Falls back to the working-tree diff
+        (git diff <ref>) only when the show/range command returns nothing.
+        """
         result = ScanResult()
+        cwd = os.getcwd()
+
+        # Choose the right git command based on the ref format
+        is_range = ".." in diff_ref
+        if is_range:
+            primary_cmd = ["git", "diff", diff_ref]
+        else:
+            # 'git show' gives the diff of a single commit; works for HEAD~1 etc.
+            primary_cmd = ["git", "show", "--format=\"\"", diff_ref]
+
         try:
-            diff_output = subprocess.run(
-                ["git", "diff", diff_ref],
+            proc = subprocess.run(
+                primary_cmd,
                 capture_output=True, text=True, timeout=30,
             )
-            if diff_output.returncode != 0:
-                print(f"Warning: git diff failed: {diff_output.stderr.strip()}", file=sys.stderr)
+            diff_text = proc.stdout
+
+            if proc.returncode != 0:
+                print(f"Warning: git command failed: {proc.stderr.strip()}", file=sys.stderr)
                 return result
 
-            diff_text = diff_output.stdout
+            # Fallback: working-tree diff (unstaged changes against ref)
             if not diff_text.strip():
-                # Try diff against working tree
-                diff_output = subprocess.run(
-                    ["git", "diff", "--cached", diff_ref],
+                fallback = subprocess.run(
+                    ["git", "diff", diff_ref],
                     capture_output=True, text=True, timeout=30,
                 )
-                diff_text = diff_output.stdout
+                diff_text = fallback.stdout
 
         except FileNotFoundError:
             print("Error: git not found. diff command requires git.", file=sys.stderr)
             return result
         except subprocess.TimeoutExpired:
-            print("Error: git diff timed out.", file=sys.stderr)
+            print("Error: git command timed out.", file=sys.stderr)
             return result
 
         # Parse diff to get changed lines per file
-        changed_lines = self._parse_diff(diff_text)
+        changed_lines = self._parse_diff(diff_text, cwd)
 
         for file_path, line_numbers in changed_lines.items():
             if not os.path.isfile(file_path):
@@ -159,16 +176,28 @@ class ScannerEngine:
 
         result.files_scanned += 1
 
-    def _parse_diff(self, diff_text: str) -> dict:
-        """Parse unified diff output to get {file: set(line_numbers)}."""
+    def _parse_diff(self, diff_text: str, repo_root: str) -> dict:
+        """Parse unified diff output to get {file: set(line_numbers)}.
+
+        File paths are resolved relative to repo_root and validated to
+        prevent path-traversal outside the project directory.
+        """
         result = {}
         current_file = None
         current_line = 0
         in_hunk = False
+        repo_root_real = os.path.realpath(repo_root)
 
         for line in diff_text.split("\n"):
             if line.startswith("+++ b/"):
-                current_file = line[6:]
+                rel_path = line[6:]
+                # Resolve and guard against traversal
+                candidate = os.path.realpath(os.path.join(repo_root, rel_path))
+                if not candidate.startswith(repo_root_real + os.sep) and candidate != repo_root_real:
+                    current_file = None
+                    in_hunk = False
+                    continue
+                current_file = candidate
                 result[current_file] = set()
                 in_hunk = False
             elif line.startswith("@@"):
@@ -176,7 +205,6 @@ class ScannerEngine:
                 parts = line.split("+")
                 if len(parts) >= 2:
                     range_part = parts[1].split(",")[0].strip()
-                    # Handle @@ -a,b +c,d @@  or @@ -a +c @@
                     range_part = range_part.split("@")[0].strip()
                     try:
                         current_line = int(range_part)
@@ -185,14 +213,11 @@ class ScannerEngine:
                 in_hunk = True
             elif in_hunk and current_file:
                 if line.startswith("+"):
-                    # Added line — scan this
                     result[current_file].add(current_line)
                     current_line += 1
                 elif line.startswith("-"):
-                    # Removed line — don't advance
                     pass
                 elif not line.startswith("\\"):
-                    # Context line
                     current_line += 1
 
         return result
