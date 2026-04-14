@@ -1,0 +1,13 @@
+# Test fixture: zero-width characters
+password​ = "secret123"
+user‌name = "admin"
+admin‍role = "superuser"
+api_key⁠ = "sk-1234567890"
+token﻿ = "bearer xyz"
+access‎ = True
+deny‏ = False
+hidden = "vi​si​ble"
+# Comment has ​ zero-width space
+calc⁡ = 42
+mul⁢ = 3.14
+sep⁣ = ","
