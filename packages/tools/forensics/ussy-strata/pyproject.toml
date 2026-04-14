@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "stratagit"
+version = "0.1.0"
+description = "Geological metaphor for Git history visualization"
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "MIT"}
+keywords = ["git", "visualization", "geological", "stratigraphy"]
+
+[project.scripts]
+stratagit = "stratagit.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["stratagit*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
