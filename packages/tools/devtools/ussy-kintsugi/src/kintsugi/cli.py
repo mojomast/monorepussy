@@ -111,12 +111,15 @@ def cmd_stress(args):
     """Stress-test all golden joints."""
     root = args.root or "."
     junit_output = getattr(args, "junit_output", None)
+    no_ast = getattr(args, "no_ast", False)
 
     print("🏋️ Stress testing golden joints...")
     print("   (Removing repairs one at a time and running referenced tests)")
+    if no_ast:
+        print("   (--no-ast: using text-based fallback for all joints)")
     print()
 
-    report = stress_test_all(root=root, junit_output=junit_output)
+    report = stress_test_all(root=root, junit_output=junit_output, no_ast=no_ast)
 
     print(f"Results: {report.total} joints tested")
     print(f"  ⛩️ Solid gold (still needed): {report.solid_count}")
@@ -226,6 +229,12 @@ def build_parser() -> argparse.ArgumentParser:
     stress_parser = subparsers.add_parser("stress", help="Stress-test all golden joints")
     stress_parser.add_argument("--root", default=".", help="Repository root path")
     stress_parser.add_argument("--junit-output", default=None, help="Path for JUnit XML output")
+    stress_parser.add_argument(
+        "--no-ast",
+        action="store_true",
+        default=False,
+        help="Skip AST manipulation and use text-based commenting (useful when AST is unreliable)",
+    )
 
     # archaeology
     arch_parser = subparsers.add_parser("archaeology", help="Reconstruct fracture history of a file")
