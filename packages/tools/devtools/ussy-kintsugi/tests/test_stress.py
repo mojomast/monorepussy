@@ -41,6 +41,65 @@ class TestLineCommenter:
         modified, found = comment_out_line(source, 2)
         assert found is True
 
+    def test_comment_out_annassign(self):
+        source = "class Foo:\n    def __init__(self, x):\n        self.value: int = x\n"
+        modified, found = comment_out_line(source, 3)
+        assert found is True
+        assert "pass" in modified
+
+    def test_comment_out_delete(self):
+        source = "cache = {}\ndel cache\n"
+        modified, found = comment_out_line(source, 2)
+        assert found is True
+        assert "pass" in modified
+
+    def test_comment_out_with(self):
+        source = "def read(path):\n    with open(path) as f:\n        data = f.read()\n    return data\n"
+        modified, found = comment_out_line(source, 2)
+        assert found is True
+        assert "pass" in modified
+
+    def test_comment_out_asyncwith(self):
+        source = "async def read(path):\n    async with open(path) as f:\n        data = await f.read()\n    return data\n"
+        modified, found = comment_out_line(source, 2)
+        assert found is True
+        assert "pass" in modified
+
+    def test_comment_out_for(self):
+        source = "def process(items):\n    for item in items:\n        print(item)\n"
+        modified, found = comment_out_line(source, 2)
+        assert found is True
+        assert "pass" in modified
+
+    def test_comment_out_while(self):
+        source = "def countdown(n):\n    while n > 0:\n        n -= 1\n"
+        modified, found = comment_out_line(source, 2)
+        assert found is True
+        assert "pass" in modified
+
+    def test_comment_out_try(self):
+        source = "def safe_div(a, b):\n    try:\n        return a / b\n    except ZeroDivisionError:\n        return 0\n"
+        modified, found = comment_out_line(source, 2)
+        assert found is True
+        assert "pass" in modified
+
+    def test_comment_out_inside_async_function(self):
+        source = "async def handler():\n    result = await fetch()\n    return result\n"
+        modified, found = comment_out_line(source, 2)
+        assert found is True
+        assert "pass" in modified
+
+    def test_no_ast_flag_uses_text_fallback(self):
+        source = "x = 1\ny = 2\n"
+        modified, found = comment_out_line(source, 1, no_ast=True)
+        assert found is True
+        assert "KINTSUGI_REMOVED" in modified
+        # Text fallback preserves line structure with a comment prefix
+        lines = modified.splitlines()
+        assert lines[0].startswith("# KINTSUGI_REMOVED:")
+        # Second line is untouched
+        assert lines[1] == "y = 2"
+
 
 class TestCommentOutLine:
     """Test text-based fallback for commenting out lines."""

@@ -39,6 +39,13 @@ class TestBuildParser:
         parser = build_parser()
         args = parser.parse_args(["stress"])
         assert args.command == "stress"
+        assert args.no_ast is False
+
+    def test_parser_stress_no_ast_flag(self):
+        parser = build_parser()
+        args = parser.parse_args(["stress", "--no-ast"])
+        assert args.command == "stress"
+        assert args.no_ast is True
 
     def test_parser_archaeology_command(self):
         parser = build_parser()

@@ -2,6 +2,35 @@
 
 Uses AST manipulation to temporarily comment out repair lines, runs referenced tests,
 and records whether the repair is still necessary (solid_gold) or redundant (hollow).
+
+AST node support in LineCommenter
+----------------------------------
+The following statement types are handled via AST manipulation (``ast.unparse`` is used
+to regenerate source, which requires Python 3.9+):
+
+* ``Expr``        — bare expression statements
+* ``Assign``      — simple assignment (``x = 1``)
+* ``AugAssign``   — augmented assignment (``x += 1``)
+* ``AnnAssign``   — annotated assignment (``x: int = 1``)
+* ``Delete``      — del statement (``del x``)
+* ``Return``      — return statement
+* ``Raise``       — raise statement
+* ``Assert``      — assert statement
+* ``If``          — if block (the *entire* block is replaced with ``pass``, which may
+                   silence more code than just the first line — this is intentional)
+* ``For``         — for loop (entire block replaced with ``pass``)
+* ``While``       — while loop (entire block replaced with ``pass``)
+* ``With``        — with statement (entire block replaced with ``pass``)
+* ``AsyncWith``   — async with statement (entire block replaced with ``pass``)
+* ``Try``         — try/except block (entire block replaced with ``pass``)
+* ``FunctionDef`` / ``AsyncFunctionDef`` — traversed so that statements *inside*
+                   functions and async functions are reachable
+
+If the target line is not matched by any of the above visitors (e.g. a decorator line,
+or a line inside an f-string), ``LineCommenter.found`` remains ``False`` and
+``comment_out_line`` falls back to text-based commenting.  Pass ``no_ast=True`` to
+``comment_out_line`` (or use ``kintsugi stress --no-ast``) to skip AST manipulation
+entirely and always use the text-based fallback.
 """
 
 from __future__ import annotations
@@ -95,6 +124,10 @@ class LineCommenter(ast.NodeTransformer):
         self.generic_visit(node)
         return node
 
+    def visit_AsyncFunctionDef(self, node):
+        self.generic_visit(node)
+        return node
+
     def _comment_out_line(self, node):
         """If the node is on the target line, replace it with pass + comment."""
         if hasattr(node, "lineno") and node.lineno == self.target_line:
@@ -114,10 +147,31 @@ class LineCommenter(ast.NodeTransformer):
     def visit_AugAssign(self, node):
         return self._comment_out_line(node)
 
+    def visit_AnnAssign(self, node):
+        return self._comment_out_line(node)
+
+    def visit_Delete(self, node):
+        return self._comment_out_line(node)
+
     def visit_Return(self, node):
         return self._comment_out_line(node)
 
     def visit_If(self, node):
+        return self._comment_out_line(node)
+
+    def visit_For(self, node):
+        return self._comment_out_line(node)
+
+    def visit_While(self, node):
+        return self._comment_out_line(node)
+
+    def visit_With(self, node):
+        return self._comment_out_line(node)
+
+    def visit_AsyncWith(self, node):
+        return self._comment_out_line(node)
+
+    def visit_Try(self, node):
         return self._comment_out_line(node)
 
     def visit_Raise(self, node):
@@ -127,51 +181,46 @@ class LineCommenter(ast.NodeTransformer):
         return self._comment_out_line(node)
 
 
-def comment_out_line(source: str, line_number: int) -> Tuple[str, bool]:
+def comment_out_line(source: str, line_number: int, no_ast: bool = False) -> Tuple[str, bool]:
     """Comment out a specific line in Python source code using AST manipulation.
 
     Args:
         source: Python source code.
         line_number: 1-indexed line number to comment out.
+        no_ast: When True, skip AST manipulation and use text-based commenting directly.
 
     Returns:
         Tuple of (modified_source, found_line).
     """
-    try:
-        tree = ast.parse(source)
-    except SyntaxError:
-        # If we can't parse, fall back to text-based commenting
-        lines = source.splitlines(keepends=True)
-        if 1 <= line_number <= len(lines):
-            lines[line_number - 1] = f"# KINTSUGI_REMOVED: {lines[line_number - 1].lstrip('# ')}"
-            return "".join(lines), True
-        return source, False
+    if not no_ast:
+        try:
+            tree = ast.parse(source)
+        except SyntaxError:
+            # If we can't parse, fall back to text-based commenting
+            lines = source.splitlines(keepends=True)
+            if 1 <= line_number <= len(lines):
+                lines[line_number - 1] = f"# KINTSUGI_REMOVED: {lines[line_number - 1].lstrip('# ')}"
+                return "".join(lines), True
+            return source, False
 
-    commenter = LineCommenter(line_number)
-    modified_tree = commenter.visit(tree)
+        commenter = LineCommenter(line_number)
+        modified_tree = commenter.visit(tree)
 
-    if not commenter.found:
-        # Fall back to text-based commenting
-        lines = source.splitlines(keepends=True)
-        if 1 <= line_number <= len(lines):
-            original = lines[line_number - 1].lstrip()
-            indent = lines[line_number - 1][: len(lines[line_number - 1]) - len(original)]
-            lines[line_number - 1] = f"{indent}# KINTSUGI_REMOVED: {original}"
-            return "".join(lines), True
-        return source, False
+        if commenter.found:
+            try:
+                modified_source = ast.unparse(modified_tree)
+                return modified_source, True
+            except Exception:
+                pass  # fall through to text-based fallback
 
-    try:
-        modified_source = ast.unparse(modified_tree)
-        return modified_source, True
-    except Exception:
-        # Fall back to text-based
-        lines = source.splitlines(keepends=True)
-        if 1 <= line_number <= len(lines):
-            original = lines[line_number - 1].lstrip()
-            indent = lines[line_number - 1][: len(lines[line_number - 1]) - len(original)]
-            lines[line_number - 1] = f"{indent}# KINTSUGI_REMOVED: {original}"
-            return "".join(lines), True
-        return source, False
+    # Text-based fallback (used when no_ast=True, AST match not found, or ast.unparse fails)
+    lines = source.splitlines(keepends=True)
+    if 1 <= line_number <= len(lines):
+        original = lines[line_number - 1].lstrip()
+        indent = lines[line_number - 1][: len(lines[line_number - 1]) - len(original)]
+        lines[line_number - 1] = f"{indent}# KINTSUGI_REMOVED: {original}"
+        return "".join(lines), True
+    return source, False
 
 
 def run_test(test_ref: str, project_root: Optional[str] = None) -> Tuple[bool, str]:
@@ -209,12 +258,14 @@ def run_test(test_ref: str, project_root: Optional[str] = None) -> Tuple[bool, s
 def stress_test_joint(
     joint: Joint,
     project_root: Optional[str] = None,
+    no_ast: bool = False,
 ) -> StressResult:
     """Stress-test a single joint by temporarily removing its repair and running the test.
 
     Args:
         joint: The golden joint to test.
         project_root: Root directory of the project.
+        no_ast: When True, skip AST manipulation and use text-based commenting directly.
 
     Returns:
         StressResult indicating whether the joint is solid_gold or hollow.
@@ -254,7 +305,7 @@ def stress_test_joint(
         return result
 
     # Comment out the repair line
-    modified_source, found = comment_out_line(original_source, joint.line)
+    modified_source, found = comment_out_line(original_source, joint.line, no_ast=no_ast)
 
     if not found:
         result.outcome = "error"
@@ -291,12 +342,14 @@ def stress_test_joint(
 def stress_test_all(
     root: Optional[str] = None,
     junit_output: Optional[str] = None,
+    no_ast: bool = False,
 ) -> StressReport:
     """Stress-test all joints in the store.
 
     Args:
         root: Repository root path.
         junit_output: Optional path to write JUnit XML output.
+        no_ast: When True, skip AST manipulation and use text-based commenting directly.
 
     Returns:
         StressReport with results for all joints.
@@ -306,7 +359,7 @@ def stress_test_all(
     report = StressReport()
 
     for joint in joints:
-        result = stress_test_joint(joint, root)
+        result = stress_test_joint(joint, root, no_ast=no_ast)
         report.results.append(result)
 
         # Update joint status in store
