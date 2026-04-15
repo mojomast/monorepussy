@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fatigue"
+version = "1.0.0"
+description = "Fracture Mechanics for Code Decay Prediction — applies Paris' Law to model and predict code decay"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+keywords = ["code-quality", "fracture-mechanics", "paris-law", "tech-debt", "static-analysis"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Quality Assurance",
+]
+
+[project.scripts]
+fatigue = "fatigue.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["fatigue*"]
+exclude = ["fixtures*", "tests*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
