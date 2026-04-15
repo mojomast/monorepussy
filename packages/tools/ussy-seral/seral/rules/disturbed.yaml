@@ -1,0 +1,12 @@
+mandatory:
+  - 1 reviewer required (focus on correctness)
+  - Document all changes in PR description
+  - Flag high-risk areas for extra attention
+recommended:
+  - Pair programming on critical changes
+  - Extra test coverage for refactored areas
+  - Communication to team about large changes
+  - Incremental changes preferred over big bang
+forbidden:
+  - Silent refactoring without PR
+  - Deleting code without migration plan

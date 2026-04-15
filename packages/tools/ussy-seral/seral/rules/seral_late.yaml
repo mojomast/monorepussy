@@ -1,0 +1,15 @@
+mandatory:
+  - 2 reviewers required
+  - CI must pass before merge (including integration tests)
+  - No direct push to main
+  - New dependencies require ADR (Architecture Decision Record)
+  - Max PR size: 400 lines
+  - Breaking changes require team notification
+recommended:
+  - Test requirement: 70% coverage for new code
+  - Performance benchmarks for critical paths
+  - Security review for authentication-adjacent code
+forbidden:
+  - Force-push to any branch
+  - Skipping CI
+  - Adding TODO/FIXME without ticket

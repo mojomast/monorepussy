@@ -1,0 +1,8 @@
+mandatory:
+  - At least 1 person must review code (can be author)
+  - No force-push to main branch
+recommended:
+  - Keep PRs small and fast (< 200 lines ideal)
+  - Use feature flags for experimental changes
+  - Document intent in PR description
+forbidden: []

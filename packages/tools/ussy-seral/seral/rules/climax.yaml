@@ -1,0 +1,15 @@
+mandatory:
+  - 2 reviewers required (min 1 from module owners)
+  - All changes need integration test coverage
+  - No new dependencies without ADR
+  - Breaking changes require RFC
+  - CI must pass on all dependent modules
+recommended:
+  - Canary deployment for all changes
+  - Performance regression testing
+  - Security review for auth-adjacent code
+forbidden:
+  - Direct push to main
+  - Skipping CI
+  - Adding TODO/FIXME without ticket
+  - Force-push to any branch
