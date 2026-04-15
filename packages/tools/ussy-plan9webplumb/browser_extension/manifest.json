@@ -1,0 +1,33 @@
+{
+  "manifest_version": 3,
+  "name": "Plan9-WebPlumb",
+  "version": "0.1.0",
+  "description": "Pipe selected text, URLs, and DOM elements to your local Plan9-WebPlumb server",
+  "permissions": [
+    "activeTab",
+    "contextMenus",
+    "clipboardRead",
+    "scripting"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
+  ],
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_title": "Plumb this!",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png"
+    }
+  }
+}
