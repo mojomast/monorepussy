@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mint"
+version = "0.1.0"
+description = "Numismatic Package Provenance & Version Classification"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+authors = [{name = "Mint Contributors"}]
+keywords = ["numismatics", "provenance", "grading", "supply-chain", "security"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Security",
+    "Topic :: Software Development :: Quality Assurance",
+]
+
+[project.scripts]
+mint = "mint.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["mint*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
