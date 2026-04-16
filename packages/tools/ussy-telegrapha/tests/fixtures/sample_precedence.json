@@ -1,0 +1,29 @@
+{
+  "classes": [
+    {
+      "name": "circuit-breaker signals",
+      "label": "FLASH",
+      "arrival_rate": 0.00833,
+      "service_time": 0.050,
+      "preemption_overhead": 0.003
+    },
+    {
+      "name": "payment processing",
+      "label": "IMMEDIATE",
+      "arrival_rate": 2.0,
+      "service_time": 0.200
+    },
+    {
+      "name": "user-facing requests",
+      "label": "PRIORITY",
+      "arrival_rate": 10.0,
+      "service_time": 0.100
+    },
+    {
+      "name": "batch analytics",
+      "label": "ROUTINE",
+      "arrival_rate": 0.5,
+      "service_time": 5.0
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "name": "order-processing",
+  "metadata": {
+    "team": "platform",
+    "env": "production"
+  },
+  "routes": [
+    {
+      "name": "order-to-ledger",
+      "hops": [
+        {
+          "name": "order-service",
+          "degradation": 0.005,
+          "reliability": 0.9999,
+          "details": "schema field loss: billing_address.optional",
+          "serialization_degradation": 0.002,
+          "deserialization_degradation": 0.003
+        },
+        {
+          "name": "payment",
+          "degradation": 0.030,
+          "reliability": 0.9995,
+          "details": "trace context dropped by payment gateway",
+          "serialization_degradation": 0.015,
+          "deserialization_degradation": 0.015
+        },
+        {
+          "name": "fraud-check",
+          "degradation": 0.020,
+          "reliability": 0.9998,
+          "details": "metadata stripped by fraud service",
+          "serialization_degradation": 0.010,
+          "deserialization_degradation": 0.010
+        },
+        {
+          "name": "ledger",
+          "degradation": 0.040,
+          "reliability": 0.9990,
+          "details": "protobuf downgrade v3→v2, 3 fields lost",
+          "serialization_degradation": 0.020,
+          "deserialization_degradation": 0.020
+        }
+      ]
+    },
+    {
+      "name": "api-to-db",
+      "hops": [
+        {
+          "name": "api-gateway",
+          "reliability": 0.9999
+        },
+        {
+          "name": "auth",
+          "reliability": 0.9995
+        },
+        {
+          "name": "user-service",
+          "reliability": 0.9998
+        },
+        {
+          "name": "db",
+          "reliability": 0.9999
+        }
+      ]
+    }
+  ]
+}
