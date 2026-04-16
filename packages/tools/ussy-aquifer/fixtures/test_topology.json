@@ -1,0 +1,87 @@
+{
+  "name": "test_pipeline",
+  "services": [
+    {
+      "name": "ingestion",
+      "hydraulic_conductivity": 1000.0,
+      "specific_storage": 0.01,
+      "queue_depth": 50,
+      "processing_latency": 0.01,
+      "replicas": 1,
+      "is_recharge": true,
+      "grid_x": 0,
+      "grid_y": 2
+    },
+    {
+      "name": "validator",
+      "hydraulic_conductivity": 500.0,
+      "specific_storage": 0.02,
+      "queue_depth": 120,
+      "processing_latency": 0.05,
+      "replicas": 1,
+      "grid_x": 1,
+      "grid_y": 1
+    },
+    {
+      "name": "enricher",
+      "hydraulic_conductivity": 300.0,
+      "specific_storage": 0.015,
+      "queue_depth": 80,
+      "processing_latency": 0.08,
+      "replicas": 1,
+      "grid_x": 1,
+      "grid_y": 3
+    },
+    {
+      "name": "transformer",
+      "hydraulic_conductivity": 200.0,
+      "specific_storage": 0.03,
+      "queue_depth": 200,
+      "processing_latency": 0.12,
+      "replicas": 2,
+      "grid_x": 2,
+      "grid_y": 2
+    },
+    {
+      "name": "cache_writer",
+      "hydraulic_conductivity": 800.0,
+      "specific_storage": 0.01,
+      "queue_depth": 10,
+      "processing_latency": 0.005,
+      "replicas": 1,
+      "grid_x": 3,
+      "grid_y": 1
+    },
+    {
+      "name": "db_writer",
+      "hydraulic_conductivity": 150.0,
+      "specific_storage": 0.05,
+      "queue_depth": 300,
+      "processing_latency": 0.2,
+      "replicas": 3,
+      "grid_x": 3,
+      "grid_y": 3
+    },
+    {
+      "name": "api_out",
+      "hydraulic_conductivity": 600.0,
+      "specific_storage": 0.01,
+      "queue_depth": 20,
+      "processing_latency": 0.02,
+      "replicas": 1,
+      "is_discharge": true,
+      "grid_x": 4,
+      "grid_y": 2
+    }
+  ],
+  "connections": [
+    {"source": "ingestion", "target": "validator", "connection_type": "porous"},
+    {"source": "ingestion", "target": "enricher", "connection_type": "porous"},
+    {"source": "validator", "target": "transformer", "connection_type": "porous"},
+    {"source": "enricher", "target": "transformer", "connection_type": "porous"},
+    {"source": "transformer", "target": "cache_writer", "connection_type": "porous"},
+    {"source": "transformer", "target": "db_writer", "connection_type": "porous"},
+    {"source": "cache_writer", "target": "api_out", "connection_type": "porous"},
+    {"source": "db_writer", "target": "api_out", "connection_type": "porous"}
+  ]
+}
