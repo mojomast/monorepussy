@@ -1,0 +1,8 @@
+Running tests...
+FAILED auth-module/login.test.js
+  AssertionError: expected 200 but got 401
+  at Object.<anonymous> (auth-module/login.test.js:42)
+FAILED auth-module/session.test.js
+  TypeError: Cannot read property 'token' of undefined
+3 tests FAILED, 12 passed
+exit code 1

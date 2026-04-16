@@ -1,0 +1,6 @@
+Building project...
+export CC=gcc
+export GCC_VERSION=12.2
+Compiling auth-module...
+Compilation complete.
+BUILD SUCCESSFUL
