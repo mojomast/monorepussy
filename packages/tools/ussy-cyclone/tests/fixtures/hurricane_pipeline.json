@@ -1,0 +1,48 @@
+{
+    "stages": [
+        {
+            "name": "input",
+            "type": "sqs",
+            "forward_rate": 100.0,
+            "reprocessing_rate": 150.0,
+            "queue_depth": 50000,
+            "consumer_count": 1,
+            "error_rate": 300.0,
+            "dlq_depth": 100000,
+            "base_retry_rate": 50.0
+        },
+        {
+            "name": "process",
+            "type": "generic",
+            "forward_rate": 50.0,
+            "reprocessing_rate": 200.0,
+            "queue_depth": 80000,
+            "consumer_count": 1,
+            "error_rate": 400.0,
+            "dlq_depth": 200000,
+            "base_retry_rate": 80.0
+        },
+        {
+            "name": "output",
+            "type": "generic",
+            "forward_rate": 20.0,
+            "reprocessing_rate": 300.0,
+            "queue_depth": 100000,
+            "consumer_count": 1,
+            "error_rate": 500.0,
+            "dlq_depth": 500000,
+            "base_retry_rate": 100.0
+        }
+    ],
+    "edges": [
+        ["input", "process"],
+        ["process", "output"]
+    ],
+    "retry_edges": [
+        ["input", "input", 2.5],
+        ["process", "process", 3.0],
+        ["output", "output", 2.0],
+        ["output", "process", 1.8],
+        ["process", "input", 1.5]
+    ]
+}
