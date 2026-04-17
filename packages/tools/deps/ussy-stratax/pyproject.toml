@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "strata"
+version = "0.1.0"
+description = "Geological Semver for Codebase Archeology — measure behavioral stability of dependencies"
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "MIT"}
+authors = [{name = "Strata Contributors"}]
+keywords = ["semver", "dependencies", "stability", "behavioral-probes", "geological"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Quality Assurance",
+    "Topic :: Software Development :: Testing",
+]
+
+dependencies = [
+    "requests>=2.25",
+    "pyyaml>=5.4",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0", "pytest-cov"]
+
+[project.scripts]
+strata = "strata.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["strata*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
