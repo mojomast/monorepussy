@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gridiron"
+version = "0.1.0"
+description = "Power Grid Reliability Engineering for Dependency Ecosystem Health"
+requires-python = ">=3.9"
+license = {text = "MIT"}
+
+[project.scripts]
+gridiron = "gridiron.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["gridiron*"]
