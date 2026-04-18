@@ -1,0 +1,52 @@
+{
+  "licenses": {
+    "MIT": {
+      "spdx_id": "MIT",
+      "hs_code": "01.01.01",
+      "family": "permissive",
+      "obligations": ["attribution", "notice_retention"]
+    },
+    "Apache-2.0": {
+      "spdx_id": "Apache-2.0",
+      "hs_code": "01.02.01",
+      "family": "permissive",
+      "obligations": ["attribution", "notice_retention", "patent_grant", "changes_disclosure"]
+    },
+    "GPL-3.0": {
+      "spdx_id": "GPL-3.0",
+      "hs_code": "03.02.01",
+      "family": "strong_copyleft",
+      "obligations": ["attribution", "source_disclosure", "copyleft_inheritance", "changes_disclosure", "patent_grant", "installation_info"]
+    },
+    "AGPL-3.0": {
+      "spdx_id": "AGPL-3.0",
+      "hs_code": "03.03.01",
+      "family": "strong_copyleft",
+      "obligations": ["attribution", "source_disclosure", "copyleft_inheritance", "changes_disclosure", "patent_grant", "installation_info", "indemnification"]
+    },
+    "LGPL-2.1": {
+      "spdx_id": "LGPL-2.1",
+      "hs_code": "02.01.02",
+      "family": "weak_copyleft",
+      "obligations": ["attribution", "source_disclosure", "copyleft_inheritance", "changes_disclosure"]
+    },
+    "CC0-1.0": {
+      "spdx_id": "CC0-1.0",
+      "hs_code": "05.01.01",
+      "family": "public_domain",
+      "obligations": []
+    }
+  },
+  "compatibility_pairs": [
+    {"from": "MIT", "to": "Apache-2.0", "expected": "compatible"},
+    {"from": "AGPL-3.0", "to": "Proprietary", "expected": "incompatible"},
+    {"from": "GPL-2.0-only", "to": "Apache-2.0", "expected": "incompatible"},
+    {"from": "LGPL-2.1", "to": "Apache-2.0", "expected": "conditional"},
+    {"from": "CC0-1.0", "to": "MIT", "expected": "compatible"}
+  ],
+  "origin_scenarios": [
+    {"module": "core", "third_party_ratio": 0.02, "modification_ratio": 0.0, "expected_status": "wholly_obtained"},
+    {"module": "utils", "third_party_ratio": 0.50, "modification_ratio": 0.60, "expected_status": "substantially_transformed"},
+    {"module": "vendor", "third_party_ratio": 0.80, "modification_ratio": 0.10, "expected_status": "non_originating"}
+  ]
+}
