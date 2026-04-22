@@ -1,6 +1,6 @@
 # Welcome to Ussyverse
 
-The **ussyverse** is a unified monorepo consolidating ~50 Python CLI tools for code quality, security, forensics, and developer productivity.
+The **ussyverse** (monorepussy) is a unified monorepo consolidating 50+ Python CLI tools for code quality, security, forensics, and developer productivity.
 
 ## What is Ussyverse?
 
@@ -16,11 +16,17 @@ Originally 63 separate repositories on github.com/mojomast, these tools are now 
 
 ```bash
 # Clone the repository
-git clone https://github.com/mojomast/ussyverse.git
-cd ussyverse
+git clone https://github.com/mojomast/monorepussy.git
+cd monorepussy
 
 # Install all tools
-uv sync --extra all
+uv sync --extra all --group dev
+
+# Run all tests
+pytest
+
+# Serve documentation locally
+mkdocs serve
 ```
 
 ## Package Categories Overview
@@ -31,9 +37,10 @@ uv sync --extra all
 | **Forensics** | 2 | Git forensics: ussy-strata, ussy-churn |
 | **Security** | 1 | Steganography scanner: ussy-steno |
 | **Quality** | 1 | Test suite quality: ussy-calibre |
-| **Dependencies** | 4 | Dependency analysis: ussy-gridiron, ussy-chromato, ussy-cambium, ussy-stratax |
+| **Dependencies** | 5 | Dependency analysis: ussy-gridiron, ussy-chromato, ussy-cambium, ussy-stratax, ussy-deps |
 | **Governance** | 2 | Code governance: ussy-sentinel, ussy-parliament |
 | **Developer Tools** | 4 | Dev utilities: ussy-snapshot, ussy-kintsugi, ussy-assay, ussy-petrichor |
+| **Tier 2 Tools** | 28 | Additional specialized tools (see README for full list) |
 
 ## Learn More
 
