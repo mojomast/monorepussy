@@ -8,8 +8,8 @@ from pathlib import Path
 
 import pytest
 
-from snapshot.models import Snapshot, SnapshotMetadata, TerminalState, MentalContext, OpenFile, EditorState
-from snapshot.storage import (
+from ussy_snapshot.models import Snapshot, SnapshotMetadata, TerminalState, MentalContext, OpenFile, EditorState
+from ussy_snapshot.storage import (
     save_snapshot,
     load_snapshot,
     load_metadata,

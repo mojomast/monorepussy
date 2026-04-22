@@ -4,8 +4,8 @@ from pathlib import Path
 
 import pytest
 
-from assay.grade import grade_project, grade_module, grade_label, compute_trends
-from assay.models import ProjectAnalysis, ModuleAnalysis, FunctionAnalysis, GradeTrend
+from ussy_assay.grade import grade_project, grade_module, grade_label, compute_trends
+from ussy_assay.models import ProjectAnalysis, ModuleAnalysis, FunctionAnalysis, GradeTrend
 
 
 class TestGradeProject:

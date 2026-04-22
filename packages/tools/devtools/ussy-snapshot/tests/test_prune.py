@@ -5,14 +5,14 @@ from datetime import datetime, timezone, timedelta
 
 import pytest
 
-from snapshot.prune import (
+from ussy_snapshot.prune import (
     parse_duration,
     prune_snapshots,
     get_storage_usage,
     _human_size,
 )
-from snapshot.models import Snapshot, SnapshotMetadata
-from snapshot.storage import save_snapshot
+from ussy_snapshot.models import Snapshot, SnapshotMetadata
+from ussy_snapshot.storage import save_snapshot
 
 
 @pytest.fixture
@@ -67,15 +67,19 @@ class TestPruneSnapshots:
     def test_prune_by_age(self, storage_dir):
         # Create an "old" snapshot
         old_time = (datetime.now(timezone.utc) - timedelta(days=10)).isoformat()
-        save_snapshot(Snapshot(
-            name="old-snap",
-            metadata=SnapshotMetadata(name="old-snap", created_at=old_time),
-        ))
+        save_snapshot(
+            Snapshot(
+                name="old-snap",
+                metadata=SnapshotMetadata(name="old-snap", created_at=old_time),
+            )
+        )
         # Create a "new" snapshot
-        save_snapshot(Snapshot(
-            name="new-snap",
-            metadata=SnapshotMetadata(name="new-snap"),
-        ))
+        save_snapshot(
+            Snapshot(
+                name="new-snap",
+                metadata=SnapshotMetadata(name="new-snap"),
+            )
+        )
         deleted = prune_snapshots(older_than="7d")
         assert "old-snap" in deleted
         assert "new-snap" not in deleted
@@ -83,45 +87,58 @@ class TestPruneSnapshots:
     def test_prune_keep_last(self, storage_dir):
         for i in range(5):
             old_time = (datetime.now(timezone.utc) - timedelta(days=10)).isoformat()
-            save_snapshot(Snapshot(
-                name=f"snap-{i}",
-                metadata=SnapshotMetadata(name=f"snap-{i}", created_at=old_time),
-            ))
+            save_snapshot(
+                Snapshot(
+                    name=f"snap-{i}",
+                    metadata=SnapshotMetadata(name=f"snap-{i}", created_at=old_time),
+                )
+            )
         deleted = prune_snapshots(older_than="7d", keep_last=2)
         # Should keep 2 most recent
         assert len(deleted) == 3
 
     def test_prune_dry_run(self, storage_dir):
         old_time = (datetime.now(timezone.utc) - timedelta(days=10)).isoformat()
-        save_snapshot(Snapshot(
-            name="old-snap",
-            metadata=SnapshotMetadata(name="old-snap", created_at=old_time),
-        ))
+        save_snapshot(
+            Snapshot(
+                name="old-snap",
+                metadata=SnapshotMetadata(name="old-snap", created_at=old_time),
+            )
+        )
         deleted = prune_snapshots(older_than="7d", dry_run=True)
         assert "old-snap" in deleted
         # Should still exist
-        from snapshot.storage import snapshot_exists
+        from ussy_snapshot.storage import snapshot_exists
+
         assert snapshot_exists("old-snap")
 
     def test_prune_with_tags(self, storage_dir):
         old_time = (datetime.now(timezone.utc) - timedelta(days=10)).isoformat()
-        save_snapshot(Snapshot(
-            name="tagged-snap",
-            metadata=SnapshotMetadata(name="tagged-snap", created_at=old_time, tags=["milestone"]),
-        ))
-        save_snapshot(Snapshot(
-            name="untagged-snap",
-            metadata=SnapshotMetadata(name="untagged-snap", created_at=old_time),
-        ))
+        save_snapshot(
+            Snapshot(
+                name="tagged-snap",
+                metadata=SnapshotMetadata(
+                    name="tagged-snap", created_at=old_time, tags=["milestone"]
+                ),
+            )
+        )
+        save_snapshot(
+            Snapshot(
+                name="untagged-snap",
+                metadata=SnapshotMetadata(name="untagged-snap", created_at=old_time),
+            )
+        )
         deleted = prune_snapshots(older_than="7d", exclude_tags=["milestone"])
         assert "tagged-snap" not in deleted
         assert "untagged-snap" in deleted
 
     def test_prune_nothing_old_enough(self, storage_dir):
-        save_snapshot(Snapshot(
-            name="recent-snap",
-            metadata=SnapshotMetadata(name="recent-snap"),
-        ))
+        save_snapshot(
+            Snapshot(
+                name="recent-snap",
+                metadata=SnapshotMetadata(name="recent-snap"),
+            )
+        )
         deleted = prune_snapshots(older_than="7d")
         assert deleted == []
 

@@ -3,14 +3,14 @@
 import os
 from unittest.mock import patch, MagicMock
 
-from snapshot.process import (
+from ussy_snapshot.process import (
     capture_processes,
     restart_process,
     restart_processes,
     is_process_running,
     stop_process,
 )
-from snapshot.models import ProcessRecord
+from ussy_snapshot.models import ProcessRecord
 
 
 class TestCaptureProcesses:

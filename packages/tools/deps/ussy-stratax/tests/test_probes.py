@@ -1,8 +1,8 @@
 """Tests for probe generator and runner."""
 import pytest
-from strata.models import Probe, ProbeResult
-from strata.probes.generator import ProbeGenerator
-from strata.probes.runner import ProbeRunner, SimulatedProbeRunner
+from ussy_stratax.models import Probe, ProbeResult
+from ussy_stratax.probes.generator import ProbeGenerator
+from ussy_stratax.probes.runner import ProbeRunner, SimulatedProbeRunner
 
 
 class TestProbeGenerator:

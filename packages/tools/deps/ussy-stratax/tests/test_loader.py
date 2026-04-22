@@ -2,7 +2,7 @@
 import os
 import tempfile
 import pytest
-from strata.probes.loader import ProbeLoader
+from ussy_stratax.probes.loader import ProbeLoader
 
 
 class TestProbeLoader:

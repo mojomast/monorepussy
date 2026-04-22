@@ -2,9 +2,9 @@
 
 import pytest
 
-from gridiron.graph import DependencyGraph
-from gridiron.instruments.flow_optimizer import FlowOptimizer
-from gridiron.models import DependencyEdge, PackageInfo
+from ussy_gridiron.graph import DependencyGraph
+from ussy_gridiron.instruments.flow_optimizer import FlowOptimizer
+from ussy_gridiron.models import DependencyEdge, PackageInfo
 
 
 def _make_simple_opf_graph():

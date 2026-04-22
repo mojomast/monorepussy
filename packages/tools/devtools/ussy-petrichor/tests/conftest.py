@@ -7,7 +7,7 @@ from pathlib import Path
 
 import pytest
 
-from petrichor.db import SoilDB
+from ussy_petrichor.db import SoilDB
 
 
 @pytest.fixture

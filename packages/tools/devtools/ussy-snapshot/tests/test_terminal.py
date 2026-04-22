@@ -3,14 +3,14 @@
 import os
 from unittest.mock import patch, MagicMock
 
-from snapshot.terminal import (
+from ussy_snapshot.terminal import (
     capture_terminals,
     _capture_current_terminal,
     _get_relevant_env_vars,
     _get_shell_history,
     restore_terminal,
 )
-from snapshot.models import TerminalState
+from ussy_snapshot.models import TerminalState
 
 
 class TestCaptureTerminals:

@@ -195,17 +195,19 @@ uv run mypy packages/
 
 | Phase | Dates | Repos | Status |
 |-------|-------|-------|--------|
-| Phase 1 | Apr 2026 | Foundation + pilot (triageussy) | 🔄 In Progress |
-| Phase 2 | May 2026 | Tier 1 clusters (11 repos) | ⏳ Planned |
-| Phase 3 | Jun 2026 | Tier 1 remaining + Tier 2 batch 1 | ⏳ Planned |
-| Phase 4 | Jul 2026 | Tier 2 completion | ⏳ Planned |
-| Phase 5 | Aug 2026 | Tier 3 archive + cleanup | ⏳ Planned |
+| Phase 1 | Apr 2026 | Foundation + shared libraries | ✅ Complete |
+| Phase 2 | Apr 2026 | Tier 1 individual repos (3 migrated) | 🔄 In Progress |
+| Phase 3 | May 2026 | Tier 1 clusters + remaining | ⏳ Planned |
+| Phase 4 | Jun 2026 | Tier 2 batch migration | ⏳ Planned |
+| Phase 5 | Jul 2026 | Tier 3 archive + cleanup | ⏳ Planned |
 
 ### 5.1 Migrated Repositories
 
 | Repo | Migration Date | New Location | Status |
 |------|---------------|--------------|--------|
-| triageussy | TBD | `packages/tools/triage/ussy-triage/` | ⏳ Planned |
+| triageussy | Apr 2026 | `packages/tools/triage/ussy-triage/` | ✅ Migrated |
+| sentinelussy | Apr 2026 | `packages/tools/governance/ussy-sentinel/` | ✅ Migrated |
+| gridironussy | Apr 2026 | `packages/tools/deps/ussy-gridiron/` | ✅ Migrated |
 
 ### 5.2 Archived Repositories
 

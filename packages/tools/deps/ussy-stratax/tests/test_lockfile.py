@@ -3,7 +3,7 @@ import json
 import os
 import tempfile
 import pytest
-from strata.scanner.lockfile import Dependency, LockfileParser
+from ussy_stratax.scanner.lockfile import Dependency, LockfileParser
 
 
 class TestDependency:

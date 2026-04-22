@@ -1,8 +1,8 @@
 import pytest
-from parliament.models import Agent, Motion, MotionStatus, Session
-from parliament.motion import compute_criticality_tier
-from parliament.quorum import QuorumEngine, quorum_required
-from parliament.storage import SQLiteStore
+from ussy_parliament.models import Agent, Motion, MotionStatus, Session
+from ussy_parliament.motion import compute_criticality_tier
+from ussy_parliament.quorum import QuorumEngine, quorum_required
+from ussy_parliament.storage import SQLiteStore
 
 
 class TestQuorumRequired:

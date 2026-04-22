@@ -4,14 +4,14 @@ from pathlib import Path
 
 import pytest
 
-from assay.slag import (
+from ussy_assay.slag import (
     detect_slag_in_function,
     detect_slag_in_source,
     detect_slag_in_project,
     grade_improvement_estimate,
     _classify_slag_type,
 )
-from assay.models import Category, ClassifiedLine, FunctionAnalysis, SlagItem
+from ussy_assay.models import Category, ClassifiedLine, FunctionAnalysis, SlagItem
 
 
 class TestDetectSlagInFunction:

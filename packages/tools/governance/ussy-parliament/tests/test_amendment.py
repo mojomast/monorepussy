@@ -1,14 +1,14 @@
 import pytest
-from parliament.amendment import (
+from ussy_parliament.amendment import (
     AmendmentEngine,
     GERMANENESS_THRESHOLD,
     MAX_AMENDMENT_DEPTH,
     germaneness,
     is_amendment_admissible,
 )
-from parliament.models import MotionStatus
-from parliament.motion import MotionEngine
-from parliament.storage import SQLiteStore
+from ussy_parliament.models import MotionStatus
+from ussy_parliament.motion import MotionEngine
+from ussy_parliament.storage import SQLiteStore
 
 
 class TestGermaneness:

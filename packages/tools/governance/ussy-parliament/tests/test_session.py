@@ -1,10 +1,10 @@
 import pytest
-from parliament.models import MotionStatus, ViolationType, VoteMethod, Vote
+from ussy_parliament.models import MotionStatus, ViolationType, VoteMethod, Vote
 
 
 class TestParliamentSession:
     def test_init_chamber(self, tmp_chamber):
-        from parliament.session import ParliamentSession
+        from ussy_parliament.session import ParliamentSession
         s = ParliamentSession(tmp_chamber)
         s.init_chamber()
         assert (tmp_chamber).exists()

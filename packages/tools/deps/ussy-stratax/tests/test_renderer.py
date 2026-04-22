@@ -1,6 +1,6 @@
 """Tests for ASCII renderer."""
 import pytest
-from strata.models import (
+from ussy_stratax.models import (
     BedrockReport,
     DiffResult,
     ErosionReport,
@@ -8,7 +8,7 @@ from strata.models import (
     ScanResult,
     StratigraphicColumn,
 )
-from strata.render.ascii import ASCIIRenderer
+from ussy_stratax.render.ascii import ASCIIRenderer
 
 
 class TestASCIIRenderer:

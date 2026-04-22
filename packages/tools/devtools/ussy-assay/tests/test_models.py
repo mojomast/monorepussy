@@ -2,7 +2,7 @@
 
 import pytest
 
-from assay.models import (
+from ussy_assay.models import (
     Category,
     ClassifiedLine,
     FunctionAnalysis,

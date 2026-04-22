@@ -1,19 +1,24 @@
 [build-system]
-requires = ["setuptools>=64", "wheel"]
-build-backend = "setuptools.build_meta"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
 [project]
-name = "snapshot"
+name = "ussy-snapshot"
 version = "0.1.0"
 description = "Freeze and thaw your entire development state — terminals, files, processes, environment, and mental context"
-requires-python = ">=3.9"
+requires-python = ">=3.11"
 license = {text = "MIT"}
+dependencies = [
+    "ussy-core",
+]
 
 [project.scripts]
-snapshot = "snapshot.cli:main"
+ussy-snapshot = "ussy_snapshot.cli:main"
+snapshot = "ussy_snapshot.legacy:main"
 
-[tool.setuptools.packages.find]
-include = ["snapshot*"]
+[tool.hatch.build.targets.wheel]
+packages = ["src/ussy_snapshot"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+pythonpath = ["src"]

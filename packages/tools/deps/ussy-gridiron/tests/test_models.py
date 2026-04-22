@@ -5,7 +5,7 @@ from datetime import datetime, timezone
 
 import pytest
 
-from gridiron.models import (
+from ussy_gridiron.models import (
     CTIViolation,
     ComplianceCategory,
     ComplianceResult,

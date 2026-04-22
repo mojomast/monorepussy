@@ -1,6 +1,6 @@
-<a href="https://github.com/mojomast/kintsugiussy/actions/workflows/ci.yml"><img src="https://github.com/mojomast/kintsugiussy/actions/workflows/ci.yml/badge.svg"></a>
+# ussy-kintsugi — Visible Repair History That Makes Code Stronger at the Scars
 
-# Kintsugi — Visible Repair History That Makes Code Stronger at the Scars
+> **Migrated**: This package was formerly `kintsugiussy` and is now part of the [ussyverse monorepo](https://github.com/mojomast/ussyverse).
 
 > *In Japanese kintsugi, the crack is filled with gold — the repair is the most beautiful part.*
 
@@ -20,17 +20,15 @@ Bug fixes are invisible. A developer writes `fix: null check on user.email`, com
 ## Installation
 
 ```bash
-pip install -e .
-pip install pytest
+pip install ussy-kintsugi
 ```
 
-Or from source:
+Or from the monorepo:
 
 ```bash
-git clone <repo>
-cd kintsugi
-pip install -e .
-pip install pytest
+git clone https://github.com/mojomast/ussyverse
+cd ussyverse
+uv sync
 ```
 
 ## Usage
@@ -38,7 +36,7 @@ pip install pytest
 ### Mark a bug fix as a golden joint
 
 ```bash
-kintsugi mark --bug PROJ-892 --severity critical \
+ussy-kintsugi mark --bug PROJ-892 --severity critical \
   --break-desc "user.email was None when OAuth returned empty dict" \
   --repair "Added None guard before .lower()" \
   --removal-impact "TypeError crash on login for OAuth users with no email" \
@@ -53,7 +51,7 @@ This:
 ### Generate a scar map
 
 ```bash
-kintsugi map src/
+ussy-kintsugi map src/
 ```
 
 Output:
@@ -69,7 +67,7 @@ Scar density reveals **structural weakness** — modules with many golden joints
 ### Stress test all joints (CI integration)
 
 ```bash
-kintsugi stress --junit-output=kintsugi-results.xml
+ussy-kintsugi stress --junit-output=kintsugi-results.xml
 ```
 
 For each joint, Kintsugi:
@@ -81,7 +79,7 @@ For each joint, Kintsugi:
 ### Archaeology on a file
 
 ```bash
-kintsugi archaeology src/payments/charge.py
+ussy-kintsugi archaeology src/payments/charge.py
 ```
 
 Reconstructs the fracture history with patterns and refactoring suggestions.
@@ -89,7 +87,7 @@ Reconstructs the fracture history with patterns and refactoring suggestions.
 ### Find hollow joints
 
 ```bash
-kintsugi hollow
+ussy-kintsugi hollow
 ```
 
 Lists all joints where the repair may be redundant.
@@ -97,20 +95,21 @@ Lists all joints where the repair may be redundant.
 ### List all joints
 
 ```bash
-kintsugi list
+ussy-kintsugi list
 ```
 
 ## Architecture
 
 ```
-kintsugi/
+ussy_kintsugi/
 ├── __init__.py        # Package version
 ├── joint.py           # Joint data model and JSONL storage
 ├── scanner.py         # Source file scanner (reads/writes inline annotations)
 ├── scar_map.py        # Scar density map generation
 ├── stress.py          # Stress testing engine (AST-based inverse mutation testing)
 ├── archaeology.py     # Fracture history reconstruction
-└── cli.py             # CLI interface (argparse)
+├── cli.py             # CLI interface (argparse)
+└── legacy.py          # Deprecated 'kintsugi' entry point
 ```
 
 ### Storage
@@ -149,7 +148,7 @@ Joints are stored in `.kintsugi/joints.jsonl` — one JSON line per joint, commi
 
 ## Dependencies
 
-Zero external dependencies — pure Python stdlib only. Python 3.9+.
+Zero external dependencies — pure Python stdlib only. Python 3.11+.
 
 ## License
 

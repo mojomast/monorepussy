@@ -3,7 +3,7 @@ import json
 import os
 import tempfile
 import pytest
-from strata.cli import main, build_parser
+from ussy_stratax.cli import main, build_parser
 
 
 class TestCLIParser:

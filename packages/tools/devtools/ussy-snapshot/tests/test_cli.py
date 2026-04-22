@@ -6,7 +6,7 @@ from unittest.mock import patch, MagicMock
 
 import pytest
 
-from snapshot.cli import main, create_parser
+from ussy_snapshot.cli import main, create_parser
 
 
 @pytest.fixture

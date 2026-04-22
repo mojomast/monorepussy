@@ -1,4 +1,6 @@
-# Petrichor — Configuration Drift Detection Through Soil Memory
+# ussy-petrichor — Configuration Drift Detection Through Soil Memory
+
+> **Migrated** from [petrichorussy](https://github.com/mojomast/petrichorussy) into the [ussyverse monorepo](https://github.com/mojomast/ussyverse).
 
 > *Petrichor: the scent of rain on dry earth — the soil's memory of water.*
 
@@ -23,13 +25,13 @@ The killer feature of Petrichor is detecting when "drift" is actually a **correc
 ## Installation
 
 ```bash
-pip install .
+pip install ussy-petrichor
 ```
 
-Or for development:
+Or from the monorepo:
 
 ```bash
-pip install -e .
+uv sync
 ```
 
 ## Usage
@@ -38,75 +40,84 @@ pip install -e .
 
 ```bash
 # Initialize soil memory for a directory
-petrichor init /etc/nginx/ --desired-state=git://infra/nginx/
+ussy-petrichor init /etc/nginx/ --desired-state=git://infra/nginx/
 ```
 
 ### Snapshot
 
 ```bash
 # Record current state as a soil layer
-petrichor snapshot /etc/nginx/
+ussy-petrichor snapshot /etc/nginx/
 ```
 
 ### Check for Drift
 
 ```bash
 # Check for drift with full history
-petrichor drift /etc/nginx/nginx.conf
+ussy-petrichor drift /etc/nginx/nginx.conf
 ```
 
 ### Rain Gauge (Drift Frequency)
 
 ```bash
 # Run the rain gauge over the last 30 days
-petrichor gauge --days=30
+ussy-petrichor gauge --days=30
 ```
 
 ### Groundwater (Latent Drift)
 
 ```bash
 # Check declared vs. effective vs. intended
-petrichor groundwater /etc/nginx/nginx.conf
+ussy-petrichor groundwater /etc/nginx/nginx.conf
 ```
 
 ### Predict Future Drift
 
 ```bash
 # Predict likely drifts in the next 7 days
-petrichor scent --days=7
+ussy-petrichor scent --days=7
 ```
 
 ### Soil Profile (Layered History)
 
 ```bash
 # Get full soil profile with 10 layers
-petrichor profile /etc/nginx/nginx.conf --depth=10
+ussy-petrichor profile /etc/nginx/nginx.conf --depth=10
 ```
 
 ### Export
 
 ```bash
 # Export drift history as JSON
-petrichor export --format=json --days=90
+ussy-petrichor export --format=json --days=90
 
 # Export as text
-petrichor export --format=text --days=90
+ussy-petrichor export --format=text --days=90
 ```
 
 ### Set Desired State
 
 ```bash
 # From a file
-petrichor desired /etc/nginx/nginx.conf --from-file=desired.conf
+ussy-petrichor desired /etc/nginx/nginx.conf --from-file=desired.conf
 
 # From a hash
-petrichor desired /etc/nginx/nginx.conf --hash=abc123...
+ussy-petrichor desired /etc/nginx/nginx.conf --hash=abc123...
+```
+
+## Legacy CLI
+
+The old `petrichor` command still works but prints a deprecation warning:
+
+```bash
+petrichor --help
+# DeprecationWarning: The 'petrichor' command is deprecated. Use 'ussy-petrichor' instead.
 ```
 
 ## Architecture
 
 ```
-petrichor/
+ussy_petrichor/
 ├── cli.py          # CLI interface (argparse)
 ├── db.py           # SQLite storage layer (.petrichor/soil.db)
 ├── soil.py         # Soil layer management (snapshot, drift detection, correction detection)
@@ -116,7 +127,8 @@ petrichor/
 ├── profile.py      # Soil profile visualization
 ├── export.py       # Export drift history (JSON, text)
 ├── hash.py         # SHA-256 content hashing
-└── diff.py         # Diff computation (unified diff, changed key extraction)
+├── diff.py         # Diff computation (unified diff, changed key extraction)
+└── legacy.py       # Deprecation wrapper for old entry point
 ```
 
 ### Storage

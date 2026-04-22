@@ -1,7 +1,7 @@
 """Tests for stratigraphic analysis (integration)."""
 import pytest
-from strata.models import ProbeResult, VersionProbeResult
-from strata.analysis.stratigraphic import StratigraphicAnalyzer
+from ussy_stratax.models import ProbeResult, VersionProbeResult
+from ussy_stratax.analysis.stratigraphic import StratigraphicAnalyzer
 
 
 def make_version_results(version_data):

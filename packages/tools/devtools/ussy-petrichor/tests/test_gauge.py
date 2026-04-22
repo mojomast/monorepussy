@@ -1,7 +1,7 @@
 """Tests for petrichor.gauge module."""
 
-from petrichor.db import SoilDB
-from petrichor.gauge import DriftTrend, RainGauge
+from ussy_petrichor.db import SoilDB
+from ussy_petrichor.gauge import DriftTrend, RainGauge
 
 
 class TestDriftTrend:

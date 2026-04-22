@@ -2,8 +2,8 @@
 
 import pytest
 
-from assay.alloy import detect_alloys, find_pure_functions, _count_interleavings, _generate_suggestions
-from assay.models import Category, ClassifiedLine, FunctionAnalysis, AlloyInfo
+from ussy_assay.alloy import detect_alloys, find_pure_functions, _count_interleavings, _generate_suggestions
+from ussy_assay.models import Category, ClassifiedLine, FunctionAnalysis, AlloyInfo
 
 
 def _make_func(name: str, categories: list[Category]) -> FunctionAnalysis:

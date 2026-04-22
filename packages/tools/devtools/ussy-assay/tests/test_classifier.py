@@ -5,14 +5,14 @@ from pathlib import Path
 
 import pytest
 
-from assay.classifier import (
+from ussy_assay.classifier import (
     classify_source,
     _is_logging_call,
     _is_debug_log,
     _is_framework_call,
     _classify_line_heuristic,
 )
-from assay.models import Category
+from ussy_assay.models import Category
 
 
 # ── Basic classification ──────────────────────────────────────────────────
@@ -119,7 +119,7 @@ class TestClassifySource:
         # depending on AST behavior; at minimum, the function should be found
         assert func.name == "index"
         # Verify the heuristic classifies decorators correctly
-        from assay.classifier import _classify_line_heuristic
+        from ussy_assay.classifier import _classify_line_heuristic
         cat = _classify_line_heuristic("@app.route('/')", 1, None, [])
         assert cat == Category.FRAMEWORK
 

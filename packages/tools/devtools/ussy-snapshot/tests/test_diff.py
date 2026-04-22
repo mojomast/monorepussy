@@ -5,8 +5,8 @@ from datetime import datetime, timezone
 
 import pytest
 
-from snapshot.diff import diff_snapshots, format_diff, _diff_terminals, _diff_editor, _diff_environment
-from snapshot.models import (
+from ussy_snapshot.diff import diff_snapshots, format_diff, _diff_terminals, _diff_editor, _diff_environment
+from ussy_snapshot.models import (
     Snapshot,
     SnapshotMetadata,
     TerminalState,
@@ -17,7 +17,7 @@ from snapshot.models import (
     EnvironmentState,
     MentalContext,
 )
-from snapshot.storage import save_snapshot
+from ussy_snapshot.storage import save_snapshot
 
 
 @pytest.fixture

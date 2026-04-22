@@ -1,7 +1,7 @@
 import pytest
 from datetime import datetime, timezone
 
-from parliament.models import (
+from ussy_parliament.models import (
     Agent,
     Appeal,
     EntryType,

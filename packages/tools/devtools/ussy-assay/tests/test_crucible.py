@@ -2,8 +2,8 @@
 
 import pytest
 
-from assay.crucible import build_crucible, count_callers, crucible_rank_emoji, _call_name
-from assay.models import (
+from ussy_assay.crucible import build_crucible, count_callers, crucible_rank_emoji, _call_name
+from ussy_assay.models import (
     Category,
     ClassifiedLine,
     CrucibleEntry,
@@ -28,7 +28,7 @@ class TestCountCallers:
         f = tmp_path / "test.py"
         f.write_text(source)
 
-        from assay.classifier import classify_source
+        from ussy_assay.classifier import classify_source
         func_analyses = classify_source(source, str(f))
         mod = ModuleAnalysis(file_path=str(f), functions=func_analyses)
         project = ProjectAnalysis(modules=[mod])

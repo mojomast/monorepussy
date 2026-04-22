@@ -2,8 +2,8 @@
 
 from datetime import datetime, timezone, timedelta
 
-from petrichor.db import SoilDB
-from petrichor.scent import ScentDetector, DriftPrediction
+from ussy_petrichor.db import SoilDB
+from ussy_petrichor.scent import ScentDetector, DriftPrediction
 
 
 class TestDriftPrediction:

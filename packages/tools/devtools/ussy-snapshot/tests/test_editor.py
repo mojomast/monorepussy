@@ -5,14 +5,14 @@ import tempfile
 from pathlib import Path
 from unittest.mock import patch
 
-from snapshot.editor import (
+from ussy_snapshot.editor import (
     detect_active_editor,
     capture_editor_state,
     _parse_vim_session,
     _parse_jetbrains_workspace,
     restore_editor_state,
 )
-from snapshot.models import EditorState, OpenFile, CursorPosition
+from ussy_snapshot.models import EditorState, OpenFile, CursorPosition
 
 
 class TestDetectActiveEditor:

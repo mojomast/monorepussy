@@ -4,8 +4,8 @@ import os
 import sys
 import pytest
 
-from gridiron.cli import build_graph, create_parser, main
-from gridiron.graph import DependencyGraph
+from ussy_gridiron.cli import build_graph, create_parser, main
+from ussy_gridiron.graph import DependencyGraph
 
 
 FIXTURES_DIR = os.path.join(os.path.dirname(__file__), "fixtures")
@@ -145,8 +145,8 @@ class TestDBModule:
     """Tests for the SQLite database module."""
 
     def test_save_and_load_package(self):
-        from gridiron.db import GridironDB
-        from gridiron.models import PackageInfo
+        from ussy_gridiron.db import GridironDB
+        from ussy_gridiron.models import PackageInfo
         from datetime import datetime, timezone
 
         db = GridironDB()
@@ -166,8 +166,8 @@ class TestDBModule:
         db.close()
 
     def test_save_and_load_edge(self):
-        from gridiron.db import GridironDB
-        from gridiron.models import DependencyEdge, PackageInfo
+        from ussy_gridiron.db import GridironDB
+        from ussy_gridiron.models import DependencyEdge, PackageInfo
 
         db = GridironDB()
         db.save_package(PackageInfo(name="a"))
@@ -181,7 +181,7 @@ class TestDBModule:
         db.close()
 
     def test_save_analysis_result(self):
-        from gridiron.db import GridironDB
+        from ussy_gridiron.db import GridironDB
 
         db = GridironDB()
         db.save_analysis("n1", "/tmp/test", {"score": 95.0})
@@ -189,7 +189,7 @@ class TestDBModule:
         db.close()
 
     def test_load_nonexistent_package(self):
-        from gridiron.db import GridironDB
+        from ussy_gridiron.db import GridironDB
 
         db = GridironDB()
         result = db.load_package("nonexistent")
@@ -201,8 +201,8 @@ class TestReportFormatter:
     """Tests for the report formatter."""
 
     def test_text_format(self):
-        from gridiron.report import ReportFormatter
-        from gridiron.models import FullReport, N1Report, HealthStatus
+        from ussy_gridiron.report import ReportFormatter
+        from ussy_gridiron.models import FullReport, N1Report, HealthStatus
 
         report = FullReport(
             project_path="/test",
@@ -215,8 +215,8 @@ class TestReportFormatter:
         assert "80.0%" in output
 
     def test_json_format(self):
-        from gridiron.report import ReportFormatter
-        from gridiron.models import FullReport, N1Report, HealthStatus
+        from ussy_gridiron.report import ReportFormatter
+        from ussy_gridiron.models import FullReport, N1Report, HealthStatus
 
         report = FullReport(
             project_path="/test",

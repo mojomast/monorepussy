@@ -4,9 +4,9 @@ from pathlib import Path
 
 import pytest
 
-from assay.classifier import classify_source
-from assay.compose import compose_function, compose_module, compose_bar
-from assay.models import Category, ClassifiedLine, FunctionAnalysis
+from ussy_assay.classifier import classify_source
+from ussy_assay.compose import compose_function, compose_module, compose_bar
+from ussy_assay.models import Category, ClassifiedLine, FunctionAnalysis
 
 
 class TestComposeFunction:

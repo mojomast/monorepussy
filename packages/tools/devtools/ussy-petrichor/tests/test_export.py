@@ -2,9 +2,9 @@
 
 import json
 
-from petrichor.db import SoilDB
-from petrichor.export import Exporter
-from petrichor.soil import SoilMemory
+from ussy_petrichor.db import SoilDB
+from ussy_petrichor.export import Exporter
+from ussy_petrichor.soil import SoilMemory
 
 
 class TestExporter:

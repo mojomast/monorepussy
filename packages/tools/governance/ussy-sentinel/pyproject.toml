@@ -1,20 +1,29 @@
 [build-system]
-requires = ["setuptools>=64", "wheel"]
-build-backend = "setuptools.build_meta"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
 [project]
-name = "sentinel"
+name = "ussy-sentinel"
 version = "1.0.0"
 description = "Immunological Self/Non-Self Code Governance using Negative Selection"
 readme = "README.md"
-requires-python = ">=3.8"
+requires-python = ">=3.11"
 license = {text = "MIT"}
+dependencies = [
+    "ussy-core",
+    "ussy-ast",
+]
 
 [project.scripts]
-sentinel = "sentinel.cli:main"
+ussy-sentinel = "ussy_sentinel.cli:main"
+sentinel = "ussy_sentinel.legacy:sentinel_alias"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/ussy_sentinel"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+pythonpath = ["src"]
 python_files = ["test_*.py"]
 python_classes = ["Test*"]
 python_functions = ["test_*"]

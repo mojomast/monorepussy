@@ -7,8 +7,8 @@ from pathlib import Path
 
 import pytest
 
-from parliament.cli import build_parser, main
-from parliament.session import ParliamentSession
+from ussy_parliament.cli import build_parser, main
+from ussy_parliament.session import ParliamentSession
 
 
 class TestCLIParser:
@@ -20,7 +20,9 @@ class TestCLIParser:
 
     def test_motion_create_parses(self):
         parser = build_parser()
-        args = parser.parse_args(["--chamber", ".parl", "motion", "create", "--agent", "bot", "--action", "deploy"])
+        args = parser.parse_args(
+            ["--chamber", ".parl", "motion", "create", "--agent", "bot", "--action", "deploy"]
+        )
         assert args.command == "motion"
         assert args.motion_cmd == "create"
         assert args.agent == "bot"
@@ -58,7 +60,9 @@ class TestCLIParser:
 
     def test_poo_parses(self):
         parser = build_parser()
-        args = parser.parse_args(["point-of-order", "MP-1", "--agent", "bot", "--violation", "quorum_deficit"])
+        args = parser.parse_args(
+            ["point-of-order", "MP-1", "--agent", "bot", "--violation", "quorum_deficit"]
+        )
         assert args.command == "point-of-order"
         assert args.violation == "quorum_deficit"
 
@@ -88,7 +92,18 @@ class TestCLIIntegration:
 
     def test_cli_agent_register_and_list(self, tmp_chamber, capsys):
         main(["--chamber", str(tmp_chamber), "init", str(tmp_chamber)])
-        main(["--chamber", str(tmp_chamber), "agent", "register", "bot", "orchestration", "--weight", "1.5"])
+        main(
+            [
+                "--chamber",
+                str(tmp_chamber),
+                "agent",
+                "register",
+                "bot",
+                "orchestration",
+                "--weight",
+                "1.5",
+            ]
+        )
         main(["--chamber", str(tmp_chamber), "agent", "list"])
         captured = capsys.readouterr()
         assert "bot" in captured.out
@@ -97,7 +112,20 @@ class TestCLIIntegration:
     def test_cli_motion_create_and_second(self, tmp_chamber, capsys):
         main(["--chamber", str(tmp_chamber), "init", str(tmp_chamber)])
         main(["--chamber", str(tmp_chamber), "agent", "register", "bot", "test"])
-        main(["--chamber", str(tmp_chamber), "motion", "create", "--agent", "bot", "--action", "deploy", "--scope", "prod"])
+        main(
+            [
+                "--chamber",
+                str(tmp_chamber),
+                "motion",
+                "create",
+                "--agent",
+                "bot",
+                "--action",
+                "deploy",
+                "--scope",
+                "prod",
+            ]
+        )
         captured = capsys.readouterr()
         # Extract motion id from output
         lines = captured.out.splitlines()
@@ -110,7 +138,18 @@ class TestCLIIntegration:
     def test_cli_motion_status(self, tmp_chamber, capsys):
         main(["--chamber", str(tmp_chamber), "init", str(tmp_chamber)])
         main(["--chamber", str(tmp_chamber), "agent", "register", "bot", "test"])
-        main(["--chamber", str(tmp_chamber), "motion", "create", "--agent", "bot", "--action", "deploy"])
+        main(
+            [
+                "--chamber",
+                str(tmp_chamber),
+                "motion",
+                "create",
+                "--agent",
+                "bot",
+                "--action",
+                "deploy",
+            ]
+        )
         captured = capsys.readouterr()
         lines = captured.out.splitlines()
         motion_id = [l for l in lines if l.startswith("Motion #")][0].split()[1].lstrip("#")
@@ -132,9 +171,24 @@ class TestCLIIntegration:
     def test_cli_aminute_generation(self, tmp_chamber, capsys):
         main(["--chamber", str(tmp_chamber), "init", str(tmp_chamber)])
         main(["--chamber", str(tmp_chamber), "agent", "register", "bot", "test"])
-        main(["--chamber", str(tmp_chamber), "motion", "create", "--agent", "bot", "--action", "deploy"])
+        main(
+            [
+                "--chamber",
+                str(tmp_chamber),
+                "motion",
+                "create",
+                "--agent",
+                "bot",
+                "--action",
+                "deploy",
+            ]
+        )
         captured = capsys.readouterr()
-        motion_id = [l for l in captured.out.splitlines() if l.startswith("Motion #")][0].split()[1].lstrip("#")
+        motion_id = (
+            [l for l in captured.out.splitlines() if l.startswith("Motion #")][0]
+            .split()[1]
+            .lstrip("#")
+        )
         main(["--chamber", str(tmp_chamber), "minutes", motion_id])
         captured2 = capsys.readouterr()
         assert "Minutes for Session" in captured2.out
@@ -143,9 +197,26 @@ class TestCLIIntegration:
         main(["--chamber", str(tmp_chamber), "init", str(tmp_chamber)])
         for a in ["bot", "bot2"]:
             main(["--chamber", str(tmp_chamber), "agent", "register", a, "test"])
-        main(["--chamber", str(tmp_chamber), "motion", "create", "--agent", "bot", "--action", "deploy", "--scope", "prod"])
+        main(
+            [
+                "--chamber",
+                str(tmp_chamber),
+                "motion",
+                "create",
+                "--agent",
+                "bot",
+                "--action",
+                "deploy",
+                "--scope",
+                "prod",
+            ]
+        )
         captured = capsys.readouterr()
-        motion_id = [l for l in captured.out.splitlines() if l.startswith("Motion #")][0].split()[1].lstrip("#")
+        motion_id = (
+            [l for l in captured.out.splitlines() if l.startswith("Motion #")][0]
+            .split()[1]
+            .lstrip("#")
+        )
         main(["--chamber", str(tmp_chamber), "motion", "second", motion_id, "--agent", "bot2"])
         main(["--chamber", str(tmp_chamber), "vote", "open", motion_id])
         main(["--chamber", str(tmp_chamber), "vote", "cast", motion_id, "--agent", "bot", "--aye"])
@@ -157,21 +228,77 @@ class TestCLIIntegration:
     def test_cli_point_of_order(self, tmp_chamber, capsys):
         main(["--chamber", str(tmp_chamber), "init", str(tmp_chamber)])
         main(["--chamber", str(tmp_chamber), "agent", "register", "bot", "test"])
-        main(["--chamber", str(tmp_chamber), "motion", "create", "--agent", "bot", "--action", "deploy"])
+        main(
+            [
+                "--chamber",
+                str(tmp_chamber),
+                "motion",
+                "create",
+                "--agent",
+                "bot",
+                "--action",
+                "deploy",
+            ]
+        )
         captured = capsys.readouterr()
-        motion_id = [l for l in captured.out.splitlines() if l.startswith("Motion #")][0].split()[1].lstrip("#")
-        main(["--chamber", str(tmp_chamber), "point-of-order", motion_id, "--agent", "bot", "--violation", "quorum_deficit"])
+        motion_id = (
+            [l for l in captured.out.splitlines() if l.startswith("Motion #")][0]
+            .split()[1]
+            .lstrip("#")
+        )
+        main(
+            [
+                "--chamber",
+                str(tmp_chamber),
+                "point-of-order",
+                motion_id,
+                "--agent",
+                "bot",
+                "--violation",
+                "quorum_deficit",
+            ]
+        )
         captured2 = capsys.readouterr()
         assert "Point of Order raised" in captured2.out
 
     def test_cli_amend(self, tmp_chamber, capsys):
         main(["--chamber", str(tmp_chamber), "init", str(tmp_chamber)])
         main(["--chamber", str(tmp_chamber), "agent", "register", "bot", "test"])
-        main(["--chamber", str(tmp_chamber), "motion", "create", "--agent", "bot", "--action", "deploy", "--scope", "prod"])
+        main(
+            [
+                "--chamber",
+                str(tmp_chamber),
+                "motion",
+                "create",
+                "--agent",
+                "bot",
+                "--action",
+                "deploy",
+                "--scope",
+                "prod",
+            ]
+        )
         captured = capsys.readouterr()
-        motion_id = [l for l in captured.out.splitlines() if l.startswith("Motion #")][0].split()[1].lstrip("#")
+        motion_id = (
+            [l for l in captured.out.splitlines() if l.startswith("Motion #")][0]
+            .split()[1]
+            .lstrip("#")
+        )
         main(["--chamber", str(tmp_chamber), "motion", "second", motion_id, "--agent", "bot"])
-        main(["--chamber", str(tmp_chamber), "amend", motion_id, "--agent", "bot", "--action", "rollback", "--scope", "prod"])
+        main(
+            [
+                "--chamber",
+                str(tmp_chamber),
+                "amend",
+                motion_id,
+                "--agent",
+                "bot",
+                "--action",
+                "rollback",
+                "--scope",
+                "prod",
+            ]
+        )
         captured2 = capsys.readouterr()
         assert "Amendment #" in captured2.out
 
@@ -181,7 +308,7 @@ class TestCLISubprocess:
         env = os.environ.copy()
         env["PARLIAMENT_CHAMBER"] = str(tmp_chamber)
         result = subprocess.run(
-            [sys.executable, "-m", "parliament", "init", str(tmp_chamber)],
+            [sys.executable, "-m", "ussy_parliament", "init", str(tmp_chamber)],
             capture_output=True,
             text=True,
             cwd=str(Path(__file__).parent.parent),

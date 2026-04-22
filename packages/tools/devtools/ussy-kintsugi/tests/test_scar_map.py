@@ -2,8 +2,8 @@
 
 import pytest
 
-from kintsugi.joint import Joint
-from kintsugi.scar_map import (
+from ussy_kintsugi.joint import Joint
+from ussy_kintsugi.scar_map import (
     FileScarInfo,
     DirectoryScarInfo,
     build_scar_map,

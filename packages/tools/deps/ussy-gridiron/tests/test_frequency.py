@@ -2,9 +2,9 @@
 
 import pytest
 
-from gridiron.graph import DependencyGraph
-from gridiron.instruments.frequency import FrequencyMonitor, _bump_major
-from gridiron.models import DependencyEdge, PackageInfo, VersionShock
+from ussy_gridiron.graph import DependencyGraph
+from ussy_gridiron.instruments.frequency import FrequencyMonitor, _bump_major
+from ussy_gridiron.models import DependencyEdge, PackageInfo, VersionShock
 
 
 def _make_graph_with_rigid():

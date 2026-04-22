@@ -5,14 +5,14 @@ from pathlib import Path
 
 import pytest
 
-from kintsugi.scanner import (
+from ussy_kintsugi.scanner import (
     parse_inline_joint,
     scan_file,
     scan_directory,
     insert_annotation,
     JOINT_HEADER_RE,
 )
-from kintsugi.joint import Joint
+from ussy_kintsugi.joint import Joint
 
 
 # ── Test fixtures ──

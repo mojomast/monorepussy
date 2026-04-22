@@ -1,7 +1,7 @@
 """Tests for version diff comparison."""
 import pytest
-from strata.models import ProbeResult, VersionProbeResult
-from strata.diff import VersionDiffer
+from ussy_stratax.models import ProbeResult, VersionProbeResult
+from ussy_stratax.diff import VersionDiffer
 
 
 def make_version_result(version, passes):

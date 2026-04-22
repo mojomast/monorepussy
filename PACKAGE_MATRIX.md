@@ -14,12 +14,12 @@ This matrix maps all 63 repositories from github.com/mojomast to their monorepo 
 
 ## Tier 1: Act Now (11 repos)
 
-| # | Repo | Decision | Target Package | Path | Dependencies | Test Count | Priority | Justification |
-|---|------|----------|----------------|------|--------------|------------|----------|---------------|
-| 1 | triageussy | KEEP | ussy-triage | packages/tools/triage/ | stdlib only | ~8 | P0 | Tier 1, unique forensic methodology, zero deps, pilot candidate |
-| 2 | stenographussy | MERGE | ussy-steno | packages/tools/security/ | stdlib only | ~10 | P0 | Tier 1, merge with stenography; full-featured successor with SARIF |
-| 3 | sentinelussy | KEEP | ussy-sentinel | packages/tools/governance/ | stdlib only | ~8 | P0 | Tier 1, unique immunological governance, no overlap |
-| 4 | gridironussy | KEEP | ussy-gridiron | packages/tools/deps/ | stdlib only | ~8 | P0 | Tier 1, dependency analysis cluster; power-grid reliability metaphor |
+| # | Repo | Decision | Target Package | Path | Dependencies | Test Count | Priority | Status | Justification |
+|---|------|----------|----------------|------|--------------|------------|----------|--------|---------------|
+| 1 | triageussy | KEEP | ussy-triage | packages/tools/triage/ | stdlib only | 160 | P0 | **Migrated** | Tier 1, unique forensic methodology, zero deps, pilot candidate |
+| 2 | stenographussy | MERGE | ussy-steno | packages/tools/security/ | stdlib only | ~10 | P0 | Planned | Tier 1, merge with stenography; full-featured successor with SARIF |
+| 3 | sentinelussy | KEEP | ussy-sentinel | packages/tools/governance/ | stdlib only | 117 | P0 | **Migrated** | Tier 1, unique immunological governance, no overlap |
+| 4 | gridironussy | KEEP | ussy-gridiron | packages/tools/deps/ | stdlib only | 162 | P0 | **Migrated** | Tier 1, dependency analysis cluster; power-grid reliability metaphor |
 | 5 | parliamentussy | KEEP | ussy-parliament | packages/tools/governance/ | stdlib only | ~8 | P0 | Tier 1, unique agent governance domain, requires Python 3.11 |
 | 6 | snapshotussy | KEEP | ussy-snapshot | packages/tools/devtools/ | stdlib only | ~8 | P0 | Tier 1, unique dev state management; fix secret storage in migration |
 | 7 | strataussy | KEEP | ussy-stratax | packages/tools/deps/ | requests, pyyaml | ~8 | P0 | Tier 1, dependency analysis cluster; behavioral probing; renamed to avoid conflict with ussy-strata |

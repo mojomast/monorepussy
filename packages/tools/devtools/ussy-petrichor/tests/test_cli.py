@@ -8,7 +8,7 @@ from pathlib import Path
 
 import pytest
 
-from petrichor.cli import build_parser, main
+from ussy_petrichor.cli import build_parser, main
 
 
 class TestCLIParser:

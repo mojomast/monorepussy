@@ -1,6 +1,6 @@
 """Tests for petrichor.diff module."""
 
-from petrichor.diff import compute_diff, diff_stats, extract_changed_keys, lines_changed
+from ussy_petrichor.diff import compute_diff, diff_stats, extract_changed_keys, lines_changed
 
 
 class TestComputeDiff:

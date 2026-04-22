@@ -4,9 +4,9 @@ import os
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 
-from petrichor.db import SoilDB
-from petrichor.hash import string_hash
-from petrichor.soil import SoilMemory, SoilLayer
+from ussy_petrichor.db import SoilDB
+from ussy_petrichor.hash import string_hash
+from ussy_petrichor.soil import SoilMemory, SoilLayer
 
 
 class TestSoilLayer:

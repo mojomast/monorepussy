@@ -6,8 +6,8 @@ from pathlib import Path
 
 import pytest
 
-from kintsugi.joint import Joint, JointStore
-from kintsugi.stress import (
+from ussy_kintsugi.joint import Joint, JointStore
+from ussy_kintsugi.stress import (
     LineCommenter,
     comment_out_line,
     StressResult,

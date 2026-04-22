@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pytest
 
-from assay.cli import main, build_parser
+from ussy_assay.cli import main, build_parser
 
 
 class TestBuildParser:
@@ -95,7 +95,7 @@ class TestMainFunction:
 class TestCLIEntryPoint:
     def test_version(self):
         result = subprocess.run(
-            [sys.executable, "-m", "assay", "--version"],
+            [sys.executable, "-m", "ussy_assay", "--version"],
             capture_output=True,
             text=True,
             cwd=str(Path(__file__).parent.parent),

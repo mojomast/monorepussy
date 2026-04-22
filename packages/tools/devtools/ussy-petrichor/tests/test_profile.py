@@ -1,9 +1,9 @@
 """Tests for petrichor.profile module."""
 
-from petrichor.db import SoilDB
-from petrichor.hash import string_hash
-from petrichor.profile import SoilProfiler
-from petrichor.soil import SoilMemory
+from ussy_petrichor.db import SoilDB
+from ussy_petrichor.hash import string_hash
+from ussy_petrichor.profile import SoilProfiler
+from ussy_petrichor.soil import SoilMemory
 
 
 class TestSoilProfiler:

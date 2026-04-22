@@ -1,7 +1,7 @@
 """Tests for fault line detection."""
 import pytest
-from strata.models import BedrockReport, FaultLine
-from strata.analysis.faults import FaultLineDetector
+from ussy_stratax.models import BedrockReport, FaultLine
+from ussy_stratax.analysis.faults import FaultLineDetector
 
 
 class TestFaultLineDetector:

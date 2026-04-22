@@ -3,8 +3,8 @@ import json
 import os
 import tempfile
 import pytest
-from strata.models import Probe
-from strata.registry.local import LocalRegistry
+from ussy_stratax.models import Probe
+from ussy_stratax.registry.local import LocalRegistry
 
 
 class TestLocalRegistry:

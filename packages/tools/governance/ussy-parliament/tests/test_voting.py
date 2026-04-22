@@ -1,7 +1,7 @@
 import pytest
-from parliament.models import Agent, Motion, MotionStatus, Vote, VoteMethod
-from parliament.storage import SQLiteStore
-from parliament.voting import VotingEngine, tally_votes
+from ussy_parliament.models import Agent, Motion, MotionStatus, Vote, VoteMethod
+from ussy_parliament.storage import SQLiteStore
+from ussy_parliament.voting import VotingEngine, tally_votes
 
 
 class TestTallyVotes:

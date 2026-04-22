@@ -2,9 +2,9 @@
 
 import pytest
 
-from gridiron.graph import DependencyGraph
-from gridiron.instruments.relay import RelayCoordinator
-from gridiron.models import DependencyEdge, ErrorHandlerContext, HandlerZone, PackageInfo
+from ussy_gridiron.graph import DependencyGraph
+from ussy_gridiron.instruments.relay import RelayCoordinator
+from ussy_gridiron.models import DependencyEdge, ErrorHandlerContext, HandlerZone, PackageInfo
 
 
 def _make_graph_with_handlers():

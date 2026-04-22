@@ -2,9 +2,9 @@
 
 import pytest
 
-from gridiron.graph import DependencyGraph
-from gridiron.instruments.contingency import ContingencyAnalyzer
-from gridiron.models import DependencyEdge, PackageInfo, SystemState
+from ussy_gridiron.graph import DependencyGraph
+from ussy_gridiron.instruments.contingency import ContingencyAnalyzer
+from ussy_gridiron.models import DependencyEdge, PackageInfo, SystemState
 
 
 def _make_graph_with_spof():

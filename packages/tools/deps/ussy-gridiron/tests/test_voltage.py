@@ -2,9 +2,9 @@
 
 import pytest
 
-from gridiron.graph import DependencyGraph
-from gridiron.instruments.voltage import VoltageAnalyst
-from gridiron.models import DependencyEdge, PackageInfo
+from ussy_gridiron.graph import DependencyGraph
+from ussy_gridiron.instruments.voltage import VoltageAnalyst
+from ussy_gridiron.models import DependencyEdge, PackageInfo
 
 
 def _make_healthy_graph():

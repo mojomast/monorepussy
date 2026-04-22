@@ -6,7 +6,7 @@ from unittest.mock import patch
 
 import pytest
 
-from snapshot.core import (
+from ussy_snapshot.core import (
     save,
     load,
     new,
@@ -16,8 +16,8 @@ from snapshot.core import (
     format_snapshot_list,
     _format_age,
 )
-from snapshot.models import Snapshot, SnapshotMetadata, MentalContext
-from snapshot.storage import save_snapshot, load_snapshot, snapshot_exists
+from ussy_snapshot.models import Snapshot, SnapshotMetadata, MentalContext
+from ussy_snapshot.storage import save_snapshot, load_snapshot, snapshot_exists
 
 
 @pytest.fixture

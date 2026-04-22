@@ -1,8 +1,8 @@
 """Tests for petrichor.groundwater module."""
 
-from petrichor.db import SoilDB
-from petrichor.groundwater import GroundwaterDetector, GroundwaterLayer
-from petrichor.hash import string_hash
+from ussy_petrichor.db import SoilDB
+from ussy_petrichor.groundwater import GroundwaterDetector, GroundwaterLayer
+from ussy_petrichor.hash import string_hash
 
 
 class TestGroundwaterLayer:

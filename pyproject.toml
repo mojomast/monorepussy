@@ -10,10 +10,30 @@ dependencies = [
     "ussy-ast",
     "ussy-sqlite",
     "ussy-report",
+    "ussy-triage",
+    "ussy-sentinel",
+    "ussy-gridiron",
+    "ussy-parliament",
+    "ussy-stratax",
+    "ussy-kintsugi",
+    "ussy-assay",
+    "ussy-petrichor",
+    "ussy-snapshot",
 ]
 
 [tool.uv.workspace]
-members = ["packages/*/*"]
+members = [
+    "packages/libs/*",
+    "packages/tools/forensics/*",
+    "packages/tools/security/*",
+    "packages/tools/visualization/*",
+    "packages/tools/quality/*",
+    "packages/tools/deps/*",
+    "packages/tools/triage/*",
+    "packages/tools/governance/*",
+    "packages/tools/devtools/*",
+    "packages/apps/*",
+]
 exclude = ["packages/archive"]
 
 [tool.uv.sources]
@@ -23,6 +43,15 @@ ussy-git = { workspace = true }
 ussy-ast = { workspace = true }
 ussy-sqlite = { workspace = true }
 ussy-report = { workspace = true }
+ussy-triage = { workspace = true }
+ussy-sentinel = { workspace = true }
+ussy-gridiron = { workspace = true }
+ussy-parliament = { workspace = true }
+ussy-stratax = { workspace = true }
+ussy-kintsugi = { workspace = true }
+ussy-assay = { workspace = true }
+ussy-petrichor = { workspace = true }
+ussy-snapshot = { workspace = true }
 
 [build-system]
 requires = ["hatchling"]

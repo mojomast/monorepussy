@@ -2,8 +2,8 @@
 
 import pytest
 
-from kintsugi.joint import Joint, JointStore
-from kintsugi.archaeology import (
+from ussy_kintsugi.joint import Joint, JointStore
+from ussy_kintsugi.archaeology import (
     FractureEvent,
     ArchaeologyReport,
     build_archaeology_report,

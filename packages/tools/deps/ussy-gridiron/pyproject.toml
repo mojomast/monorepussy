@@ -1,16 +1,26 @@
 [build-system]
-requires = ["setuptools>=61.0"]
-build-backend = "setuptools.build_meta"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
 [project]
-name = "gridiron"
+name = "ussy-gridiron"
 version = "0.1.0"
 description = "Power Grid Reliability Engineering for Dependency Ecosystem Health"
-requires-python = ">=3.9"
+readme = "README.md"
+requires-python = ">=3.11"
 license = {text = "MIT"}
+dependencies = [
+    "ussy-core",
+    "ussy-report",
+]
 
 [project.scripts]
-gridiron = "gridiron.cli:main"
+ussy-gridiron = "ussy_gridiron.cli:main"
+gridiron = "ussy_gridiron.legacy:gridiron_alias"
 
-[tool.setuptools.packages.find]
-include = ["gridiron*"]
+[tool.hatch.build.targets.wheel]
+packages = ["src/ussy_gridiron"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

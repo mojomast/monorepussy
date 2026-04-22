@@ -1,5 +1,5 @@
 import pytest
-from parliament.models import (
+from ussy_parliament.models import (
     Agent,
     Appeal,
     Motion,
@@ -10,9 +10,9 @@ from parliament.models import (
     ViolationType,
     Vote,
 )
-from parliament.points_of_order import PointsOfOrderEngine
-from parliament.quorum import QuorumEngine
-from parliament.storage import SQLiteStore
+from ussy_parliament.points_of_order import PointsOfOrderEngine
+from ussy_parliament.quorum import QuorumEngine
+from ussy_parliament.storage import SQLiteStore
 
 
 class TestPointsOfOrderEngine:

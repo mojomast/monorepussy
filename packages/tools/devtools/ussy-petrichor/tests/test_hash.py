@@ -2,7 +2,7 @@
 
 import hashlib
 
-from petrichor.hash import content_hash, file_hash, string_hash
+from ussy_petrichor.hash import content_hash, file_hash, string_hash
 
 
 class TestContentHash:

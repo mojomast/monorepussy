@@ -1,20 +1,28 @@
 [build-system]
-requires = ["setuptools>=68.0", "wheel"]
-build-backend = "setuptools.build_meta"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
 [project]
-name = "assay"
+name = "ussy-assay"
 version = "0.1.0"
 description = "Metallurgical code grading - separate precious logic from slag"
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 license = {text = "MIT"}
 authors = [{name = "Assay Team"}]
+dependencies = [
+    "ussy-core",
+]
 
 [project.scripts]
-assay = "assay.cli:main"
+ussy-assay = "ussy_assay.cli:main"
+assay = "ussy_assay.legacy:main"
 
-[tool.setuptools.packages.find]
-include = ["assay*"]
+[tool.hatch.build.targets.wheel]
+packages = ["src/ussy_assay"]
+
+[tool.uv.sources]
+ussy-core = { workspace = true }
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+pythonpath = ["src"]

@@ -2,9 +2,9 @@
 
 import pytest
 
-from gridiron.graph import DependencyGraph
-from gridiron.instruments.grid_code import GridCodeInspector
-from gridiron.models import (
+from ussy_gridiron.graph import DependencyGraph
+from ussy_gridiron.instruments.grid_code import GridCodeInspector
+from ussy_gridiron.models import (
     ComplianceCategory,
     ComplianceResult,
     DependencyEdge,

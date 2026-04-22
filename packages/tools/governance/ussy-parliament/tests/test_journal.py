@@ -1,9 +1,9 @@
 import pytest
 from datetime import datetime, timezone
 
-from parliament.journal import JournalEngine
-from parliament.models import EntryType, JournalEntry
-from parliament.storage import JournalStore
+from ussy_parliament.journal import JournalEngine
+from ussy_parliament.models import EntryType, JournalEntry
+from ussy_parliament.storage import JournalStore
 
 
 class TestJournalEngine:

@@ -2,7 +2,7 @@
 
 import pytest
 
-from assay.formatter import (
+from ussy_assay.formatter import (
     format_grade_report,
     format_compose_report,
     format_alloy_report,
@@ -11,7 +11,7 @@ from assay.formatter import (
     _grade_bar,
     _compose_bar,
 )
-from assay.models import (
+from ussy_assay.models import (
     Category,
     ClassifiedLine,
     CrucibleEntry,

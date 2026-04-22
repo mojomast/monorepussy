@@ -4,12 +4,12 @@ import os
 from datetime import datetime, timezone
 from unittest.mock import patch
 
-from snapshot.context import (
+from ussy_snapshot.context import (
     capture_mental_context,
     format_context_display,
     _auto_suggest_context,
 )
-from snapshot.models import MentalContext
+from ussy_snapshot.models import MentalContext
 
 
 class TestCaptureMentalContext:

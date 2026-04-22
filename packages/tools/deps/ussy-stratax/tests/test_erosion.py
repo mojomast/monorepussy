@@ -1,7 +1,7 @@
 """Tests for erosion analysis."""
 import pytest
-from strata.models import ProbeResult, VersionProbeResult
-from strata.analysis.erosion import ErosionAnalyzer
+from ussy_stratax.models import ProbeResult, VersionProbeResult
+from ussy_stratax.analysis.erosion import ErosionAnalyzer
 
 
 def make_version_results(pass_rates):

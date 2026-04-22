@@ -2,9 +2,9 @@
 import os
 import tempfile
 import pytest
-from strata.models import ProbeResult, VersionProbeResult
-from strata.scanner.lockfile import Dependency
-from strata.scanner.scanner import ProjectScanner
+from ussy_stratax.models import ProbeResult, VersionProbeResult
+from ussy_stratax.scanner.lockfile import Dependency
+from ussy_stratax.scanner.scanner import ProjectScanner
 
 
 def make_version_results(pass_patterns):

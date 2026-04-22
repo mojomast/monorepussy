@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-from parliament.session import ParliamentSession
+from ussy_parliament.session import ParliamentSession
 
 
 collect_ignore = ["fixtures"]

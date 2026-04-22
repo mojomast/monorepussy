@@ -1,7 +1,7 @@
 """Tests for bedrock analysis."""
 import pytest
-from strata.models import ProbeResult, VersionProbeResult, BedrockReport
-from strata.analysis.bedrock import BedrockAnalyzer
+from ussy_stratax.models import ProbeResult, VersionProbeResult, BedrockReport
+from ussy_stratax.analysis.bedrock import BedrockAnalyzer
 
 
 def make_version_results(pass_patterns):

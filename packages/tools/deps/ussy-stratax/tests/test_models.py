@@ -1,6 +1,6 @@
 """Tests for core data models."""
 import pytest
-from strata.models import (
+from ussy_stratax.models import (
     Probe,
     ProbeResult,
     VersionProbeResult,

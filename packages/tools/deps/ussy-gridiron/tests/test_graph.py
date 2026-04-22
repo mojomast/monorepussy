@@ -2,8 +2,8 @@
 
 import pytest
 
-from gridiron.graph import DependencyGraph
-from gridiron.models import DependencyEdge, PackageInfo
+from ussy_gridiron.graph import DependencyGraph
+from ussy_gridiron.models import DependencyEdge, PackageInfo
 
 
 def _make_simple_graph():

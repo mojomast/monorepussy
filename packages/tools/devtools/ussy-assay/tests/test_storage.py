@@ -5,14 +5,14 @@ from pathlib import Path
 
 import pytest
 
-from assay.models import (
+from ussy_assay.models import (
     Category,
     ClassifiedLine,
     FunctionAnalysis,
     ModuleAnalysis,
     ProjectAnalysis,
 )
-from assay.storage import save_analysis, load_latest_run, list_runs
+from ussy_assay.storage import save_analysis, load_latest_run, list_runs
 
 
 class TestSaveAndLoad:

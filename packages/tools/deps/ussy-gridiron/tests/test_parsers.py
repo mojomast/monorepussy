@@ -3,9 +3,9 @@
 import os
 import pytest
 
-from gridiron.parsers.package_json import parse_package_json
-from gridiron.parsers.requirements_txt import parse_requirements_txt
-from gridiron.parsers.pyproject_toml import parse_pyproject_toml
+from ussy_gridiron.parsers.package_json import parse_package_json
+from ussy_gridiron.parsers.requirements_txt import parse_requirements_txt
+from ussy_gridiron.parsers.pyproject_toml import parse_pyproject_toml
 
 
 FIXTURES_DIR = os.path.join(os.path.dirname(__file__), "fixtures")

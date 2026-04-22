@@ -8,7 +8,7 @@ from pathlib import Path
 
 import pytest
 
-from kintsugi.joint import Joint, JointStore, KINTSUGI_DIR, JOINTS_FILE, _generate_joint_id
+from ussy_kintsugi.joint import Joint, JointStore, KINTSUGI_DIR, JOINTS_FILE, _generate_joint_id
 
 
 # ── Joint dataclass tests ──

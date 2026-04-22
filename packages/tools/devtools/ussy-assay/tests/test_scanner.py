@@ -4,7 +4,7 @@ from pathlib import Path
 
 import pytest
 
-from assay.scanner import _resolve_paths, _walk_py_files, read_source
+from ussy_assay.scanner import _resolve_paths, _walk_py_files, read_source
 
 
 class TestResolvePaths:

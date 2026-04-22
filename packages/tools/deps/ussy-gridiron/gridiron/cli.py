@@ -10,22 +10,22 @@ from datetime import datetime, timezone
 from typing import List, Optional
 
 from gridiron import __version__
-from gridiron.graph import DependencyGraph
-from gridiron.models import (
+from ussy_gridiron.graph import DependencyGraph
+from ussy_gridiron.models import (
     FullReport,
     HealthStatus,
     VersionShock,
 )
-from gridiron.parsers.package_json import parse_package_json
-from gridiron.parsers.requirements_txt import parse_requirements_txt
-from gridiron.parsers.pyproject_toml import parse_pyproject_toml
-from gridiron.instruments.contingency import ContingencyAnalyzer
-from gridiron.instruments.frequency import FrequencyMonitor
-from gridiron.instruments.flow_optimizer import FlowOptimizer
-from gridiron.instruments.relay import RelayCoordinator
-from gridiron.instruments.voltage import VoltageAnalyst
-from gridiron.instruments.grid_code import GridCodeInspector
-from gridiron.report import ReportFormatter
+from ussy_gridiron.parsers.package_json import parse_package_json
+from ussy_gridiron.parsers.requirements_txt import parse_requirements_txt
+from ussy_gridiron.parsers.pyproject_toml import parse_pyproject_toml
+from ussy_gridiron.instruments.contingency import ContingencyAnalyzer
+from ussy_gridiron.instruments.frequency import FrequencyMonitor
+from ussy_gridiron.instruments.flow_optimizer import FlowOptimizer
+from ussy_gridiron.instruments.relay import RelayCoordinator
+from ussy_gridiron.instruments.voltage import VoltageAnalyst
+from ussy_gridiron.instruments.grid_code import GridCodeInspector
+from ussy_gridiron.report import ReportFormatter
 
 
 def build_graph(project_path: str) -> DependencyGraph:

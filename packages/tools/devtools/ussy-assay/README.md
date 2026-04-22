@@ -1,19 +1,21 @@
-# Assay — Metallurgical Code Grading
+# ussy-assay — Metallurgical Code Grading
 
 > Separate precious logic from slag
 
-Assay analyzes source code the way a metallurgist assays ore — determining its composition, grade, and quality. It separates code into structural categories (the "elements"), measures the ratio of precious logic to slag, detects alloys (mixed concerns), and produces a grading report that tells you where your codebase's value actually lives.
+**Migrated to the ussyverse monorepo.**
+
+ussy-assay analyzes source code the way a metallurgist assays ore — determining its composition, grade, and quality. It separates code into structural categories (the "elements"), measures the ratio of precious logic to slag, detects alloys (mixed concerns), and produces a grading report that tells you where your codebase's value actually lives.
 
 ## Installation
 
 ```bash
-pip install -e .
+pip install ussy-assay
 ```
 
 Or use directly:
 
 ```bash
-python -m assay grade src/
+python -m ussy_assay grade src/
 ```
 
 ## Usage
@@ -21,7 +23,7 @@ python -m assay grade src/
 ### Grade Report — Measure precious logic percentage
 
 ```bash
-assay grade src/
+ussy-assay grade src/
 ```
 
 Shows each function's "grade" — what percentage of its lines are pure domain/business logic vs. infrastructure (validation, logging, error handling, framework calls, or outright slag).
@@ -29,7 +31,7 @@ Shows each function's "grade" — what percentage of its lines are pure domain/b
 ### Composition Breakdown — Elemental analysis per function
 
 ```bash
-assay compose src/payment/process.py
+ussy-assay compose src/payment/process.py
 ```
 
 Breaks down each function into its constituent elements: 💎 Business, 🛡️ Validation, 📝 Logging, 🔌 Framework, ⚠️ Error Handling, 🗑️ Slag.
@@ -37,7 +39,7 @@ Breaks down each function into its constituent elements: 💎 Business, 🛡️ 
 ### Alloy Detection — Find mixed-concern functions
 
 ```bash
-assay alloy src/
+ussy-assay alloy src/
 ```
 
 Detects "alloyed" functions — those with 3+ concerns interleaved. Suggests extraction refactoring to improve grade.
@@ -45,7 +47,7 @@ Detects "alloyed" functions — those with 3+ concerns interleaved. Suggests ext
 ### Crucible Map — Locate most valuable code
 
 ```bash
-assay crucible src/
+ussy-assay crucible src/
 ```
 
 Ranks functions by value density (grade × caller count), showing which functions are your most valuable assets and which are unstable low-grade code.
@@ -53,7 +55,7 @@ Ranks functions by value density (grade × caller count), showing which function
 ### Slag Report — Identify removable waste
 
 ```bash
-assay slag src/
+ussy-assay slag src/
 ```
 
 Finds reachable but valueless code: debug logging, TODO/FIXME comments, unreachable error branches, commented-out code.
@@ -61,7 +63,7 @@ Finds reachable but valueless code: debug logging, TODO/FIXME comments, unreacha
 ### Continuous Monitoring
 
 ```bash
-assay watch src/ --interval 5
+ussy-assay watch src/ --interval 5
 ```
 
 Watches for file changes and re-analyzes on modification.
@@ -69,7 +71,7 @@ Watches for file changes and re-analyzes on modification.
 ## Architecture
 
 ```
-assay/
+ussy_assay/
 ├── __init__.py        # Package init, version
 ├── __main__.py        # python -m support
 ├── cli.py             # Argparse CLI with subcommands
@@ -87,7 +89,7 @@ assay/
 
 ### Classification Engine
 
-The core of Assay is the AST-based classifier (`classifier.py`):
+The core of ussy-assay is the AST-based classifier (`classifier.py`):
 
 1. **AST parsing**: Each Python file is parsed into an AST. Function definitions are extracted.
 2. **Statement classification**: Each line is classified into one of six categories:
@@ -113,8 +115,9 @@ Results are persisted in SQLite (`.assay.db`) per project, enabling trend tracki
 
 ## Dependencies
 
-- Python 3.10+
-- No external dependencies (stdlib only: `ast`, `sqlite3`, `argparse`, `dataclasses`, etc.)
+- Python 3.11+
+- ussy-core (workspace dependency)
+- No external runtime dependencies (stdlib only: `ast`, `sqlite3`, `argparse`, `dataclasses`, etc.)
 
 ## License
 

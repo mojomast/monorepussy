@@ -5,7 +5,7 @@ import tempfile
 from pathlib import Path
 from unittest.mock import patch
 
-from snapshot.environment import (
+from ussy_snapshot.environment import (
     capture_environment,
     parse_env_file,
     restore_environment,
@@ -14,7 +14,7 @@ from snapshot.environment import (
     _is_relevant,
     _find_env_files,
 )
-from snapshot.models import EnvironmentState
+from ussy_snapshot.models import EnvironmentState
 
 
 class TestIsSecret:

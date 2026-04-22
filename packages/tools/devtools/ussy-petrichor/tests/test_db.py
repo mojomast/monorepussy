@@ -4,7 +4,7 @@ import json
 import os
 from datetime import datetime, timezone
 
-from petrichor.db import SoilDB
+from ussy_petrichor.db import SoilDB
 
 
 class TestSoilDBInit:

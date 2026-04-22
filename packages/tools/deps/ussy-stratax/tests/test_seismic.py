@@ -1,7 +1,7 @@
 """Tests for seismic analysis."""
 import pytest
-from strata.models import ProbeResult, VersionProbeResult
-from strata.analysis.seismic import SeismicAnalyzer
+from ussy_stratax.models import ProbeResult, VersionProbeResult
+from ussy_stratax.analysis.seismic import SeismicAnalyzer
 
 
 def make_version_results(pass_patterns):

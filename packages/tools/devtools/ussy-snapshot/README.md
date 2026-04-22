@@ -1,6 +1,6 @@
-# Snapshot — Freeze and Thaw Your Entire Development State
+# ussy-snapshot — Freeze and Thaw Your Entire Development State
 
-**Snapshot** brings Smalltalk's image-based persistence to modern development. It freezes your **entire development state** — IDE, terminals, running processes, environment, and even a brief note about what you were thinking — into a named snapshot, and thaws it back on demand.
+**ussy-snapshot** brings Smalltalk's image-based persistence to modern development. It freezes your **entire development state** — IDE, terminals, running processes, environment, and even a brief note about what you were thinking — into a named snapshot, and thaws it back on demand.
 
 ## Why?
 
@@ -11,13 +11,13 @@ Snapshot solves this by capturing your complete development state as an atomic u
 ## Installation
 
 ```bash
-pip install .
+pip install ussy-snapshot
 ```
 
-Or for development:
+Or in the ussyverse monorepo:
 
 ```bash
-pip install -e .
+uv sync
 ```
 
 ## Usage
@@ -26,15 +26,15 @@ pip install -e .
 
 ```bash
 # Save everything — terminals, files, processes, environment, and a note
-snapshot save "feature-auth-oauth"
-snapshot save "feature-auth-oauth" --note "Was about to wire up the callback handler in auth.py:47"
+ussy-snapshot save "feature-auth-oauth"
+ussy-snapshot save "feature-auth-oauth" --note "Was about to wire up the callback handler in auth.py:47"
 ```
 
 ### Load a saved state
 
 ```bash
 # Restore everything and get a reminder of what you were doing
-snapshot load "feature-auth-oauth"
+ussy-snapshot load "feature-auth-oauth"
 # → 🧠 MENTAL CONTEXT REMINDER
 # → 📝 Note: Was about to wire up the callback handler in auth.py:47
 # → 🌿 Branch: feature-auth-oauth
@@ -44,74 +44,74 @@ snapshot load "feature-auth-oauth"
 
 ```bash
 # Create a clean environment snapshot
-snapshot new "hotfix-prod-502"
+ussy-snapshot new "hotfix-prod-502"
 ```
 
 ### List snapshots
 
 ```bash
-snapshot list
-snapshot list --sort name
-snapshot list --verbose
+ussy-snapshot list
+ussy-snapshot list --sort name
+ussy-snapshot list --verbose
 ```
 
 ### Peek at a snapshot
 
 ```bash
 # Show what's in a snapshot without loading it
-snapshot peek "feature-auth-oauth"
+ussy-snapshot peek "feature-auth-oauth"
 ```
 
 ### Diff two snapshots
 
 ```bash
 # See what changed between two development states
-snapshot diff "monday-morning" "wednesday-afternoon"
+ussy-snapshot diff "monday-morning" "wednesday-afternoon"
 ```
 
 ### Prune old snapshots
 
 ```bash
-snapshot prune --older-than 7d
-snapshot prune --keep-last 5
-snapshot prune --older-than 30d --dry-run
+ussy-snapshot prune --older-than 7d
+ussy-snapshot prune --keep-last 5
+ussy-snapshot prune --older-than 30d --dry-run
 ```
 
 ### Export & Import
 
 ```bash
 # Export for sharing with a colleague
-snapshot export "feature-auth-oauth" --output snapshot.tar.gz
+ussy-snapshot export "feature-auth-oauth" --output snapshot.tar.gz
 
 # Import a colleague's snapshot
-snapshot import snapshot.tar.gz --name "colleagues-state"
+ussy-snapshot import snapshot.tar.gz --name "colleagues-state"
 ```
 
 ### Tag snapshots
 
 ```bash
 # Tag for long-term retention
-snapshot tag "feature-auth-oauth" milestone-v2-release
-snapshot untag "feature-auth-oauth" milestone-v2-release
+ussy-snapshot tag "feature-auth-oauth" milestone-v2-release
+ussy-snapshot untag "feature-auth-oauth" milestone-v2-release
 ```
 
 ### Run as module
 
 ```bash
-python -m snapshot save "test-snap"
-python -m snapshot list
+python -m ussy_snapshot save "test-snap"
+python -m ussy_snapshot list
 ```
 
 ## Architecture
 
 ```
-snapshot/
+ussy_snapshot/
 ├── __init__.py          # Package init, version
 ├── __main__.py          # python -m support
 ├── cli.py               # argparse CLI with all subcommands
 ├── core.py              # Core operations: save, load, new, peek, tag, untag
 ├── models.py            # Dataclasses: Snapshot, TerminalState, EditorState, etc.
-├── storage.py           # Read/write snapshots to ~/.local/share/snapshot/
+├── storage.py           # Read/write snapshots to ~/.local/share/ussy-snapshot/
 ├── terminal.py          # Terminal state capture (tmux, current terminal)
 ├── editor.py            # IDE/editor state capture (VS Code, Vim, JetBrains)
 ├── process.py           # Process state capture and restart
@@ -138,21 +138,20 @@ Each snapshot captures five dimensions of development state:
 
 ### Storage
 
-Snapshots are stored in `~/.local/share/snapshot/<name>/` as JSON files:
+Snapshots are stored in `~/.local/share/ussy-snapshot/<name>/` as JSON files:
 - `snapshot.json` — Complete snapshot data
 - `metadata.json` — Lightweight metadata for fast listing
 
-Override the storage directory with the `SNAPSHOT_DIR` environment variable.
+Override the storage directory with the `USSY_SNAPSHOT_DIR` environment variable.
 
-### Zero Dependencies
+### Dependencies
 
-Snapshot uses only Python standard library modules — no external dependencies required.
+- `ussy-core` — shared utilities from the ussyverse monorepo
 
 ## Running Tests
 
 ```bash
-pip install pytest
-pytest tests/ -v
+uv run pytest tests/ -v
 ```
 
 ## License

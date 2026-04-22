@@ -8,8 +8,8 @@ from pathlib import Path
 
 import pytest
 
-from snapshot.export import export_snapshot, import_snapshot
-from snapshot.models import (
+from ussy_snapshot.export import export_snapshot, import_snapshot
+from ussy_snapshot.models import (
     Snapshot,
     SnapshotMetadata,
     TerminalState,
@@ -18,7 +18,7 @@ from snapshot.models import (
     EnvironmentState,
     MentalContext,
 )
-from snapshot.storage import save_snapshot, load_snapshot
+from ussy_snapshot.storage import save_snapshot, load_snapshot
 
 
 @pytest.fixture
@@ -138,7 +138,7 @@ class TestImportSnapshot:
         output = str(output_dir / "test.tar.gz")
         export_snapshot("export-test", output_path=output)
         # Delete original
-        from snapshot.storage import delete_snapshot
+        from ussy_snapshot.storage import delete_snapshot
         delete_snapshot("export-test")
         # Import
         name = import_snapshot(output)
@@ -158,7 +158,7 @@ class TestImportSnapshot:
         export_snapshot("roundtrip", output_path=output)
         
         # Delete and re-import
-        from snapshot.storage import delete_snapshot
+        from ussy_snapshot.storage import delete_snapshot
         delete_snapshot("roundtrip")
         name = import_snapshot(output)
         loaded = load_snapshot(name)

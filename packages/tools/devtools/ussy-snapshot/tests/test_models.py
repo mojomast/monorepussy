@@ -3,7 +3,7 @@
 import json
 from datetime import datetime, timezone
 
-from snapshot.models import (
+from ussy_snapshot.models import (
     CursorPosition,
     OpenFile,
     EditorState,

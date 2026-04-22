@@ -1,12 +1,12 @@
 import pytest
-from parliament.models import MotionStatus, VoteMethod
-from parliament.motion import (
+from ussy_parliament.models import MotionStatus, VoteMethod
+from ussy_parliament.motion import (
     MotionEngine,
     compute_criticality_tier,
     compute_impact_score,
     compute_required_seconds,
 )
-from parliament.storage import SQLiteStore
+from ussy_parliament.storage import SQLiteStore
 
 
 class TestComputeImpactScore:
