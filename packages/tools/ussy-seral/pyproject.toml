@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "seral"
+version = "0.1.0"
+description = "Codebase successional stage detection with governance prescriptions"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+dependencies = [
+    "click>=8.0",
+    "rich>=13.0",
+    "pyyaml>=6.0",
+]
+
+[project.scripts]
+seral = "seral.cli:main"
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0", "pytest-cov"]
+
+[tool.setuptools.packages.find]
+include = ["seral*"]
+
+[tool.setuptools.package-data]
+seral = ["rules/*.yaml"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

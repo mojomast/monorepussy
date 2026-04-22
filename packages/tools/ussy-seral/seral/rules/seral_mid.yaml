@@ -1,0 +1,13 @@
+mandatory:
+  - Code review required (1 reviewer, minimum from module contributors)
+  - CI must pass before merge
+  - No direct push to main
+  - New dependencies require justification comment
+  - Max PR size: 400 lines
+recommended:
+  - Test requirement: 50% coverage for new code
+  - Document architectural decisions for new patterns
+  - Add integration tests for cross-module changes
+forbidden:
+  - Force-push to feature branches
+  - Experimental branch protection exemption

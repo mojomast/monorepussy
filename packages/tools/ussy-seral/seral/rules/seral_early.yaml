@@ -1,0 +1,10 @@
+mandatory:
+  - Code review required (1 reviewer)
+  - CI must pass before merge
+  - No direct push to main
+recommended:
+  - New dependencies require justification comment
+  - Start adding unit tests for new code
+  - Document public APIs
+forbidden:
+  - Force-push to feature branches
