@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "endemic"
+version = "0.1.0"
+description = "Epidemiological Analysis of Code Pattern Propagation"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+
+[project.scripts]
+endemic = "endemic.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["endemic*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_functions = ["test_*"]
