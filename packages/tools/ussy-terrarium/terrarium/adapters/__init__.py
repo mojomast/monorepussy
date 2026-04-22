@@ -71,6 +71,8 @@ def load_adapters(
     kompressi_data: Optional[str] = None,
     churnmap_data: Optional[str] = None,
     seral_data: Optional[str] = None,
+    proprioception_data: Optional[str] = None,
+    snapshot_data: Optional[str] = None,
 ) -> List[BaseAdapter]:
     """Load all available adapters based on provided data paths.
 
@@ -90,6 +92,8 @@ def load_adapters(
         "kompressi": kompressi_data,
         "churnmap": churnmap_data,
         "seral": seral_data,
+        "proprioception": proprioception_data,
+        "snapshot": snapshot_data,
     }
 
     for cls in _get_adapter_classes():

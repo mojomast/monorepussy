@@ -13,6 +13,8 @@ from terrarium.adapters.sentinel import SentinelAdapter
 from terrarium.adapters.kompressi import KompressiAdapter
 from terrarium.adapters.churnmap import ChurnmapAdapter
 from terrarium.adapters.seral import SeralAdapter
+from terrarium.adapters.proprioception import ProprioceptionAdapter
+from terrarium.adapters.snapshot import SnapshotAdapter
 from terrarium.adapters import load_adapters, merge_health_states, reset_adapter_cache
 from terrarium.ecosystem.model import OrganismHealthState
 
@@ -612,3 +614,58 @@ class TestSixAdapterIntegration:
         assert adapters == []
         merged = merge_health_states(adapters)
         assert merged == {}
+
+
+class TestProprioceptionAdapter:
+    """Unit tests for the proprioceptionussy adapter."""
+
+    def test_load_maps_limb_drift(self):
+        path = os.path.join(FIXTURES_DIR, "proprioception.json")
+        adapter = ProprioceptionAdapter(data_path=path)
+        states = adapter.load()
+
+        assert len(states) == 3  # src, tests, root
+        # 1 of 2 limbs is dirty → drift_score = 0.5
+        # vitality = 1.0 - 0.5 * 0.3 = 0.85
+        for state in states.values():
+            assert state.vitality == pytest.approx(0.85, abs=0.01)
+
+    def test_stub_mode_fallback(self):
+        adapter = ProprioceptionAdapter(data_path=None)
+        assert adapter.load() == {}
+        # Should be in stub mode since proprioceptionussy is not installed
+        assert adapter.STUB_MODE is True
+
+
+class TestSnapshotAdapter:
+    """Unit tests for the snapshotussy adapter."""
+
+    def test_load_maps_open_files(self):
+        path = os.path.join(FIXTURES_DIR, "snapshot.json")
+        adapter = SnapshotAdapter(data_path=path)
+        states = adapter.load()
+
+        assert "src/auth.py" in states
+        assert "src/utils.py" in states
+
+    def test_memory_pressure_calculation(self):
+        path = os.path.join(FIXTURES_DIR, "snapshot.json")
+        adapter = SnapshotAdapter(data_path=path)
+        states = adapter.load()
+
+        # 2 open files / 20 = 0.1, 2 processes / 10 = 0.2, 12 env / 50 = 0.24
+        # pressure = (0.1 + 0.2 + 0.24) / 3 = 0.18
+        # vitality = 1.0 - 0.18 * 0.25 = 0.955
+        auth = states["src/auth.py"]
+        assert auth.vitality == pytest.approx(
+            0.955 * 0.8, abs=0.01
+        )  # modified=True penalty
+
+        utils = states["src/utils.py"]
+        assert utils.vitality == pytest.approx(0.955, abs=0.01)  # modified=False
+
+    def test_stub_mode_fallback(self):
+        adapter = SnapshotAdapter(data_path=None)
+        assert adapter.load() == {}
+        # Should be in stub mode since snapshotussy is not installed
+        assert adapter.STUB_MODE is True

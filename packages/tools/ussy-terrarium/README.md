@@ -13,13 +13,13 @@ Terrarium renders your codebase as a living ecosystem where modules are organism
 ## Installation
 
 ```bash
-pip install -e .
+pip install -e ".[dev]"
 ```
 
 ## Usage
 
 ```bash
-# View your codebase as a living ecosystem
+# View your codebase as a living ecosystem (legacy renderer)
 terrarium watch ./my-project
 
 # Diagnose a specific module
@@ -34,193 +34,100 @@ terrarium seasons ./my-project --since "6 months ago"
 
 # Get a compact health report
 terrarium health ./my-project
-# → Ecosystem Health: 72/100 (FAIR)
-#   12 thriving, 5 stressed, 2 critical, 3 dead
-#   Most critical: api/auth.py (health: 18/100)
-#   Healthiest: utils/format.rs (health: 96/100)
 
-# Wire external ussyverse data sources (optional)
-terrarium watch ./my-project \
-  --fatigue-data fatigue-scan.json \
-  --endemic-data endemic-scan.json \
-  --sentinel-data sentinel-check.json \
-  --kompressi-data kompressi-profile.json \
-  --churnmap-data churnmap-territories.json \
-  --seral-data seral-stages.json
+# New: Rich dashboard from adapter data (stub mode works without siblings)
+terrarium dashboard
+
+# New: Live watch mode with Rich
+terrarium watch-live --interval 5
+
+# New: Export metrics to JSON/CSV
+terrarium export --format json --output metrics.json
 ```
 
 ## Architecture
 
 ```
-File Changes → Metrics Engine → Ecosystem Model → Renderer
-                     ↓              ↑                   ↓
-               CodeMetrics    External Adapters     Terminal/Canvas
-               {              (fatigue/endemic/     ┌──────────────┐
-                 churn_rate: 0.3,  sentinel)        │ 🌳📁 api/    │
-                 complexity: 12,  ↑                 │   🌿📄 auth.py│
-                 test_coverage: 0.85,               │   🍂📄 old.py │
-                 bug_count: 2,                      │ 🌲📁 core/   │
-                 dependency_count: 5                │   🍄 hack.py │
-               }                                    └──────────────┘
+┌─────────────────────────────────────────────────────────────┐
+│                      Terrarium CLI (Click)                   │
+├─────────────────────────────────────────────────────────────┤
+│  Legacy Commands    │    New Engine Commands                 │
+│  watch/diagnose/    │    dashboard / watch-live / export      │
+│  snapshot/seasons/  │                                         │
+│  health             │                                         │
+├─────────────────────────────────────────────────────────────┤
+│              TerrariumEngine (collect + score)               │
+│                      ↓              ↑                        │
+│               HealthScore    ←   Adapters                    │
+├─────────────────────────────────────────────────────────────┤
+│  Adapters (8 pluggable data sources)                        │
+│  ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐          │
+│  │ fatigue │ │ endemic │ │ sentinel│ │kompressi│          │
+│  └─────────┘ └─────────┘ └─────────┘ └─────────┘          │
+│  ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐          │
+│  │churnmap │ │  seral  │ │proprio- │ │snapshot │          │
+│  └─────────┘ └─────────┘ │ception  │ └─────────┘          │
+│                          └─────────┘                        │
+├─────────────────────────────────────────────────────────────┤
+│  Legacy Ecosystem Model (preserved)                          │
+│  MetricsEngine → Organism → Ecosystem → Renderers            │
+└─────────────────────────────────────────────────────────────┘
 ```
 
-### Components
+## Data Sources
 
-1. **Metrics Engine** (`terrarium/metrics/`): Multi-source health analysis
-   - **Git churn**: Files changed frequently = stressed (wilting)
-   - **Complexity**: Cyclomatic via Python AST (overgrown = tangled vines)
-   - **Test coverage**: Via coverage report ingestion (no tests = no immune system)
-   - **Dead code detection**: Unused exports, unreachable code (dead matter)
-   - **Age + stability**: Old-growth vs seedling classification
+| Adapter | Source | Status | What it measures |
+|---------|--------|--------|------------------|
+| `fatigue` | [fatigueussy](https://github.com/mojomast/fatigueussy) | ✅ Real + Stub | Paris' Law crack growth (stress intensity) |
+| `endemic` | [endemicussy](https://github.com/mojomast/endemicussy) | ✅ Real + Stub | SIR/SEIR infection spread |
+| `sentinel` | [sentinelussy](https://github.com/mojomast/sentinelussy) | ✅ Real + Stub | Anomaly detection activations |
+| `kompressi` | [kompressiussy](https://github.com/mojomast/kompressiussy) | ✅ Real + Stub | Kolmogorov complexity (info density) |
+| `churnmap` | [churnmap](https://github.com/mojomast/churnmap) | ✅ Real + Stub | Co-change territory clusters |
+| `seral` | [seralussy](https://github.com/mojomast/seralussy) | ✅ Real + Stub | Ecological succession stages |
+| `proprioception` | [proprioceptionussy](https://github.com/mojomast/proprioceptionussy) | ✅ Real + Stub | Workspace drift / body schema |
+| `snapshot` | [snapshotussy](https://github.com/mojomast/snapshotussy) | ✅ Real + Stub | Dev state memory pressure |
 
-2. **Ecosystem Model** (`terrarium/ecosystem/`): Maps metrics → biological properties
-   - HealthScore = weighted average of churn penalty, complexity penalty, coverage bonus, etc.
-   - OrganismType: Tree (entry point), Bush (library), Moss (config), Flower (test), Fungus (generated), DeadWood (deprecated)
-   - Vitality: Thriving → Healthy → Stressed → Wilting → Dying → Dead
-
-3. **External Adapters** (`terrarium/adapters/`): Optional ussyverse data sources
-    - **fatigue**: Maps Paris' Law crack growth to organism wound levels
-    - **endemic**: Maps SIR/SEIR infection states to contagion glow
-    - **sentinel**: Maps anomaly detections to immune response markers
-    - **kompressi**: Maps Kolmogorov complexity estimates to organism density
-    - **churnmap**: Maps territory/community clusters to organism biomes
-    - **seral**: Maps ecological succession stages to organism visual age
-    - Auto-discovered and loaded; graceful degradation when absent
-
-4. **Renderers** (`terrarium/renderers/`):
-    - **Terminal**: ASCII/Unicode art with emoji organisms and ANSI colors
-    - **Static export**: Text and SVG snapshots for CI reports
-    - **Seasons**: Timeline view showing ecosystem evolution
-
-5. **File Watcher** (`terrarium/watcher.py`): Polling-based file change detection
-
-5. **Diagnosis Engine** (`terrarium/ecosystem/diagnosis.py`): Natural-language health reports with symptoms, diagnosis, treatment, and prognosis
-
-## External Data Sources (Ussyverse Adapters)
-
-Terrarium can optionally ingest live data from three external **ussyverse** tools to enrich organism health visualization. All adapters are optional — Terrarium runs fine with zero external data.
-
-| Adapter | Source | Data File Flag | Effect on Organism |
-|---------|--------|---------------|-------------------|
-| `fatigue` | [fatigueussy](https://github.com/mojomast/fatigueussy) | `--fatigue-data` | Crack intensity → cracked bark / wilting |
-| `endemic` | [endemicussy](https://github.com/mojomast/endemicussy) | `--endemic-data` | Infection state (S/E/I/R) → contagion glow |
-| `sentinel` | [sentinelussy](https://github.com/mojomast/sentinelussy) | `--sentinel-data` | Anomaly detection → immune response marker |
-| `kompressi` | [kompressiussy](https://github.com/mojomast/kompressiussy) | `--kompressi-data` | Complexity score → dense/unpredictable structure |
-| `churnmap` | [churnmap](https://github.com/mojomast/churnmap) | `--churnmap-data` | Territory ID → shared biome/cluster |
-| `seral` | [seralussy](https://github.com/mojomast/seralussy) | `--seral-data` | Succession stage → pioneer/seral/climax visual age |
-
-### Adapter JSON Formats
-
-**fatigueussy** — accepts the native `fatigue scan --format json` output:
-```json
-{
-  "stress_intensities": {
-    "src/auth.py": {"K": 150.0, "delta_K": 10.0}
-  }
-}
-```
-
-**endemicussy** — accepts a JSON file with module infection states:
-```json
-{
-  "modules": [
-    {"path": "src/auth.py", "compartment": "I"},
-    {"path": "src/utils.py", "compartment": "S"}
-  ]
-}
-```
-Or a flat mapping:
-```json
-{
-  "src/auth.py": {"compartment": "I"}
-}
-```
-
-**sentinelussy** — accepts a JSON file with per-file anomaly reports:
-```json
-{
-  "files": {
-    "src/auth.py": {
-      "anomaly_score": 0.73,
-      "is_anomalous": true,
-      "detections": [{"false_positive_rate": 0.2}]
-    }
-  }
-}
-```
-Detectors with a false-positive rate > 0.5 are suppressed as background noise.
-
-**kompressiussy** — accepts a serialized `FileProfile` list:
-```json
-[
-  {
-    "path": "src/auth.py",
-    "id": 10.15,
-    "ae": 1442.0
-  }
-]
-```
-`id` (information density = ae/loc) is normalized to a 0.0–1.0 complexity score.
-
-**churnmap** — accepts a JSON file with territory clusters:
-```json
-{
-  "territories": [
-    {"territory_id": "core-api", "modules": ["core/api"]}
-  ],
-  "files": {
-    "src/auth.py": {"territory_id": "core-api"}
-  }
-}
-```
-Territory IDs are visual metadata only — they do not affect health scores.
-
-**seralussy** — accepts the native `.seral/stages.json` output:
-```json
-{
-  "src/auth.py": "climax",
-  "src/new.py": "pioneer",
-  "src/payments.py": "seral_mid"
-}
-```
-Stages are mapped to `pioneer` / `seral` / `climax`. This is a neutral visual marker.
-
-### Health Score Calculation
-
-Health scores (0-100) are computed as:
-- Start at 100
-- Subtract penalties for high churn (>5/month), high complexity (>15), low coverage (<80%), bugs, dead/deprecated status
-- Add bonuses for low complexity, good coverage, stability
-- Additional penalties from external adapters:
-  - Crack intensity × 30
-  - Infected (I) −20, Exposed (E) −10, Recovered (R) −5
-  - Active anomaly −15
-  - Complexity score × 0.2 vitality reduction (kompressi)
-
-### Module Role → Organism Type Mapping
-
-| Role | Organism | Description |
-|------|----------|-------------|
-| entry_point | 🌳 Tree | Foundational |
-| library | 🌿 Bush | Supportive |
-| config | 🍀 Moss | Ground cover |
-| test | 🌸 Flower | Blooms when passing |
-| generated | 🍄 Fungus | Grows fast, no roots |
-| deprecated | 🪵 DeadWood | Decaying |
-| (new code) | 🌱 Seedling | Small, fragile |
+Every adapter has a `STUB_MODE` flag. If the sibling package is not installed, the adapter falls back to reading JSON data files and returns synthetic/demo data. Terrarium runs fine with **zero** sibling packages installed.
 
 ## Development
 
 ```bash
 # Install in development mode
-pip install -e .
+pip install -e ".[dev]"
 
 # Run tests
 pytest
 
 # Run with verbose output
 pytest -v
+
+# Run a specific test file
+pytest tests/test_adapters.py -v
 ```
+
+## Contributing
+
+### Adding a New Adapter in 3 Steps
+
+1. **Create the adapter module** at `terrarium/adapters/<name>.py`:
+   ```python
+   from .base import BaseAdapter
+   from ..ecosystem.model import OrganismHealthState
+
+   class MyAdapter(BaseAdapter):
+       name = "myadapter"
+       STUB_MODE = False
+
+       def load(self):
+           # Return Dict[str, OrganismHealthState]
+           pass
+   ```
+
+2. **Add fixture data** at `tests/fixtures/<name>.json` and tests in `tests/test_adapters.py`.
+
+3. **Register CLI flags** in `terrarium/cli.py` and `terrarium/adapters/__init__.py`.
+
+See `docs/adapters.md` for the full adapter contract.
 
 ## License
 

@@ -1,205 +1,106 @@
-"""CLI interface for Terrarium."""
+"""Click-based CLI interface for Terrarium."""
 
-import argparse
 import os
 import sys
-from typing import List, Optional
+from typing import Optional
+
+import click
 
 from . import __version__
 from .metrics.engine import MetricsEngine
-from .ecosystem.model import build_ecosystem, Ecosystem
-from .ecosystem.diagnosis import diagnose, Diagnosis
+from .ecosystem.model import build_ecosystem
+from .ecosystem.diagnosis import diagnose as diagnose_organism
 from .adapters import load_adapters, merge_health_states
-from .renderers.terminal import (
-    render_terrarium,
-    render_microscope,
-    render_health_summary,
-)
+from .renderers.terminal import render_terrarium, render_health_summary
 from .renderers.static_export import export_snapshot, render_text_snapshot
-from .renderers.seasons import (
-    render_seasons_view,
-    render_seasons_from_project,
-    get_git_history,
-)
+from .renderers.seasons import render_seasons_from_project
+from .engine import TerrariumEngine
+from .viz import render_dashboard
+from .terminal import live_watch
 
 
-def _add_adapter_args(parser: argparse.ArgumentParser) -> None:
-    """Add optional external data source flags to a subparser."""
-    parser.add_argument(
-        "--fatigue-data",
+@click.group(invoke_without_command=True)
+@click.version_option(version=__version__, prog_name="terrarium")
+@click.pass_context
+def cli(ctx):
+    """🌿 Terrarium — Your codebase is a living ecosystem."""
+    if ctx.invoked_subcommand is None:
+        click.echo(ctx.get_help())
+
+
+# Shared adapter options
+_adapter_options = [
+    click.option(
+        "--fatigue-data", default=None, help="Path to fatigueussy JSON output"
+    ),
+    click.option(
+        "--endemic-data", default=None, help="Path to endemicussy JSON output"
+    ),
+    click.option(
+        "--sentinel-data", default=None, help="Path to sentinelussy JSON output"
+    ),
+    click.option(
+        "--kompressi-data", default=None, help="Path to kompressiussy JSON output"
+    ),
+    click.option("--churnmap-data", default=None, help="Path to churnmap JSON output"),
+    click.option("--seral-data", default=None, help="Path to seralussy JSON output"),
+    click.option(
+        "--proprioception-data",
         default=None,
-        help="Path to fatigueussy JSON output",
-    )
-    parser.add_argument(
-        "--endemic-data",
-        default=None,
-        help="Path to endemicussy JSON output",
-    )
-    parser.add_argument(
-        "--sentinel-data",
-        default=None,
-        help="Path to sentinelussy JSON output",
-    )
-    parser.add_argument(
-        "--kompressi-data",
-        default=None,
-        help="Path to kompressiussy JSON output",
-    )
-    parser.add_argument(
-        "--churnmap-data",
-        default=None,
-        help="Path to churnmap JSON output",
-    )
-    parser.add_argument(
-        "--seral-data",
-        default=None,
-        help="Path to seralussy JSON output",
-    )
+        help="Path to proprioceptionussy JSON output",
+    ),
+    click.option(
+        "--snapshot-data", default=None, help="Path to snapshotussy JSON output"
+    ),
+]
 
 
-def create_parser() -> argparse.ArgumentParser:
-    """Create the argument parser for the CLI."""
-    parser = argparse.ArgumentParser(
-        prog="terrarium",
-        description="🌿 Terrarium — Your codebase is a living ecosystem",
-    )
-    parser.add_argument(
-        "--version",
-        action="version",
-        version=f"%(prog)s {__version__}",
-    )
-
-    subparsers = parser.add_subparsers(dest="command", help="Available commands")
-
-    # watch command
-    watch_parser = subparsers.add_parser(
-        "watch",
-        help="Open live terrarium in terminal",
-    )
-    watch_parser.add_argument(
-        "path",
-        nargs="?",
-        default=".",
-        help="Path to the project directory (default: current directory)",
-    )
-    _add_adapter_args(watch_parser)
-
-    # diagnose command
-    diagnose_parser = subparsers.add_parser(
-        "diagnose",
-        help="Check a specific module's health",
-    )
-    diagnose_parser.add_argument(
-        "path",
-        help="Path to the module file to diagnose",
-    )
-    _add_adapter_args(diagnose_parser)
-
-    # snapshot command
-    snapshot_parser = subparsers.add_parser(
-        "snapshot",
-        help="Generate terrarium snapshot for CI",
-    )
-    snapshot_parser.add_argument(
-        "path",
-        nargs="?",
-        default=".",
-        help="Path to the project directory (default: current directory)",
-    )
-    snapshot_parser.add_argument(
-        "--format",
-        choices=["text", "svg"],
-        default="text",
-        help="Output format (default: text)",
-    )
-    snapshot_parser.add_argument(
-        "--output",
-        "-o",
-        default=None,
-        help="Output file path (default: stdout)",
-    )
-    _add_adapter_args(snapshot_parser)
-
-    # seasons command
-    seasons_parser = subparsers.add_parser(
-        "seasons",
-        help="See ecosystem evolve over time",
-    )
-    seasons_parser.add_argument(
-        "path",
-        nargs="?",
-        default=".",
-        help="Path to the project directory (default: current directory)",
-    )
-    seasons_parser.add_argument(
-        "--since",
-        default=None,
-        help='Time period (e.g. "6 months ago")',
-    )
-    _add_adapter_args(seasons_parser)
-
-    # health command
-    health_parser = subparsers.add_parser(
-        "health",
-        help="Get health report",
-    )
-    health_parser.add_argument(
-        "path",
-        nargs="?",
-        default=".",
-        help="Path to the project directory (default: current directory)",
-    )
-    health_parser.add_argument(
-        "--since",
-        default=None,
-        help='Time period (e.g. "6 months ago")',
-    )
-    _add_adapter_args(health_parser)
-
-    return parser
+def _apply_adapter_options(func):
+    """Apply shared adapter CLI options to a command."""
+    for option in reversed(_adapter_options):
+        func = option(func)
+    return func
 
 
-def _load_health_states(args: argparse.Namespace) -> dict:
+def _load_health_states(**kwargs) -> dict:
     """Load and merge health states from external adapters."""
     adapters = load_adapters(
-        fatigue_data=getattr(args, "fatigue_data", None),
-        endemic_data=getattr(args, "endemic_data", None),
-        sentinel_data=getattr(args, "sentinel_data", None),
-        kompressi_data=getattr(args, "kompressi_data", None),
-        churnmap_data=getattr(args, "churnmap_data", None),
-        seral_data=getattr(args, "seral_data", None),
+        fatigue_data=kwargs.get("fatigue_data"),
+        endemic_data=kwargs.get("endemic_data"),
+        sentinel_data=kwargs.get("sentinel_data"),
+        kompressi_data=kwargs.get("kompressi_data"),
+        churnmap_data=kwargs.get("churnmap_data"),
+        seral_data=kwargs.get("seral_data"),
+        proprioception_data=kwargs.get("proprioception_data"),
+        snapshot_data=kwargs.get("snapshot_data"),
     )
     return merge_health_states(adapters)
 
 
-def cmd_watch(args: argparse.Namespace) -> int:
-    """Execute the 'watch' command — live terrarium view."""
-    path = os.path.abspath(getattr(args, "path", "."))
-    if not os.path.isdir(path):
-        print(f"Error: {path} is not a directory", file=sys.stderr)
-        return 1
-
-    engine = MetricsEngine(path, getattr(args, "since", None))
+@cli.command()
+@click.argument("path", default=".", type=click.Path(exists=True, file_okay=False))
+@click.option("--since", default=None, help='Time period (e.g. "6 months ago")')
+@_apply_adapter_options
+def watch(path, since, **adapter_kwargs):
+    """Open live terrarium in terminal."""
+    path = os.path.abspath(path)
+    engine = MetricsEngine(path, since)
     project = engine.scan()
-    health_states = _load_health_states(args)
+    health_states = _load_health_states(**adapter_kwargs)
     ecosystem = build_ecosystem(project, health_states)
-
-    print(render_terrarium(ecosystem))
-    return 0
+    click.echo(render_terrarium(ecosystem))
 
 
-def cmd_diagnose(args: argparse.Namespace) -> int:
-    """Execute the 'diagnose' command — module health report."""
-    path = os.path.abspath(getattr(args, "path", "."))
-    if not os.path.isfile(path):
-        print(f"Error: {path} is not a file", file=sys.stderr)
-        return 1
-
-    # Find project root (directory containing the file)
+@cli.command()
+@click.argument("path", type=click.Path(exists=True, dir_okay=False))
+@_apply_adapter_options
+def diagnose(path, **adapter_kwargs):
+    """Check a specific module's health."""
+    path = os.path.abspath(path)
     root = os.path.dirname(path)
     engine = MetricsEngine(root)
     metrics = engine.analyze_file(path)
-    health_states = _load_health_states(args)
+    health_states = _load_health_states(**adapter_kwargs)
     organism = build_ecosystem(
         type(
             "Project",
@@ -210,112 +111,256 @@ def cmd_diagnose(args: argparse.Namespace) -> int:
     ).organisms.get(metrics.path)
 
     if organism is None:
-        print(f"Error: Could not analyze {path}", file=sys.stderr)
-        return 1
+        click.echo(f"Error: Could not analyze {path}", err=True)
+        sys.exit(1)
 
-    diagnosis = diagnose(organism)
-    print(diagnosis.format_report())
-    return 0
+    diagnosis = diagnose_organism(organism)
+    click.echo(diagnosis.format_report())
 
 
-def cmd_snapshot(args: argparse.Namespace) -> int:
-    """Execute the 'snapshot' command — generate a static snapshot."""
-    path = os.path.abspath(getattr(args, "path", "."))
-    if not os.path.isdir(path):
-        print(f"Error: {path} is not a directory", file=sys.stderr)
-        return 1
-
-    engine = MetricsEngine(path, getattr(args, "since", None))
+@cli.command()
+@click.argument("path", default=".", type=click.Path(exists=True, file_okay=False))
+@click.option("--format", "fmt", type=click.Choice(["text", "svg"]), default="text")
+@click.option("--output", "-o", default=None, help="Output file path")
+@click.option("--since", default=None, help='Time period (e.g. "6 months ago")')
+@_apply_adapter_options
+def snapshot(path, fmt, output, since, **adapter_kwargs):
+    """Generate terrarium snapshot for CI."""
+    path = os.path.abspath(path)
+    engine = MetricsEngine(path, since)
     project = engine.scan()
-    health_states = _load_health_states(args)
+    health_states = _load_health_states(**adapter_kwargs)
     ecosystem = build_ecosystem(project, health_states)
-
-    output = getattr(args, "output", None)
-    fmt = getattr(args, "format", "text")
 
     if output:
         export_snapshot(ecosystem, output, format=fmt)
-        print(f"Snapshot exported to {output}")
+        click.echo(f"Snapshot exported to {output}")
     else:
         if fmt == "svg":
             from .renderers.static_export import render_svg_snapshot
 
-            print(render_svg_snapshot(ecosystem))
+            click.echo(render_svg_snapshot(ecosystem))
         else:
-            print(render_text_snapshot(ecosystem))
-
-    return 0
+            click.echo(render_text_snapshot(ecosystem))
 
 
-def cmd_seasons(args: argparse.Namespace) -> int:
-    """Execute the 'seasons' command — seasonal timeline view."""
-    path = os.path.abspath(getattr(args, "path", "."))
-    if not os.path.isdir(path):
-        print(f"Error: {path} is not a directory", file=sys.stderr)
-        return 1
-
-    since = getattr(args, "since", None)
+@cli.command()
+@click.argument("path", default=".", type=click.Path(exists=True, file_okay=False))
+@click.option("--since", default=None, help='Time period (e.g. "6 months ago")')
+@_apply_adapter_options
+def seasons(path, since, **adapter_kwargs):
+    """See ecosystem evolve over time."""
+    path = os.path.abspath(path)
     output = render_seasons_from_project(path, since)
-    print(output)
-    return 0
+    click.echo(output)
 
 
-def cmd_health(args: argparse.Namespace) -> int:
-    """Execute the 'health' command — compact health report."""
-    path = os.path.abspath(getattr(args, "path", "."))
-    if not os.path.isdir(path):
-        print(f"Error: {path} is not a directory", file=sys.stderr)
-        return 1
-
-    engine = MetricsEngine(path, getattr(args, "since", None))
+@cli.command()
+@click.argument("path", default=".", type=click.Path(exists=True, file_okay=False))
+@click.option("--since", default=None, help='Time period (e.g. "6 months ago")')
+@_apply_adapter_options
+def health(path, since, **adapter_kwargs):
+    """Get health report."""
+    path = os.path.abspath(path)
+    engine = MetricsEngine(path, since)
     project = engine.scan()
-    health_states = _load_health_states(args)
+    health_states = _load_health_states(**adapter_kwargs)
     ecosystem = build_ecosystem(project, health_states)
 
-    print(render_health_summary(ecosystem))
+    click.echo(render_health_summary(ecosystem))
 
     most_critical = ecosystem.most_critical()
     healthiest = ecosystem.healthiest()
 
     if most_critical:
-        print(
+        click.echo(
             f"  Most critical: {most_critical.path} (health: {most_critical.health:.0f}/100)"
         )
     if healthiest:
-        print(f"  Healthiest: {healthiest.path} (health: {healthiest.health:.0f}/100)")
+        click.echo(
+            f"  Healthiest: {healthiest.path} (health: {healthiest.health:.0f}/100)"
+        )
 
-    return 0
+
+# ---------------------------------------------------------------------------
+# New engine-based commands
+# ---------------------------------------------------------------------------
 
 
-def main(argv: Optional[List[str]] = None) -> int:
-    """Main entry point for the CLI."""
-    parser = create_parser()
-    args = parser.parse_args(argv)
+@cli.command(name="dashboard")
+@click.option("--fatigue-data", default=None)
+@click.option("--endemic-data", default=None)
+@click.option("--sentinel-data", default=None)
+@click.option("--kompressi-data", default=None)
+@click.option("--churnmap-data", default=None)
+@click.option("--seral-data", default=None)
+@click.option("--proprioception-data", default=None)
+@click.option("--snapshot-data", default=None)
+def dashboard(**adapter_kwargs):
+    """Print a one-shot Rich dashboard from adapter data."""
+    adapters = load_adapters(
+        fatigue_data=adapter_kwargs.get("fatigue_data"),
+        endemic_data=adapter_kwargs.get("endemic_data"),
+        sentinel_data=adapter_kwargs.get("sentinel_data"),
+        kompressi_data=adapter_kwargs.get("kompressi_data"),
+        churnmap_data=adapter_kwargs.get("churnmap_data"),
+        seral_data=adapter_kwargs.get("seral_data"),
+        proprioception_data=adapter_kwargs.get("proprioception_data"),
+        snapshot_data=adapter_kwargs.get("snapshot_data"),
+    )
+    engine = TerrariumEngine(adapters)
+    engine.collect()
+    health = engine.score()
+    panel = render_dashboard(health)
+    from rich.console import Console
 
-    command = getattr(args, "command", None)
-    if command is None:
-        parser.print_help()
-        return 0
+    console = Console()
+    console.print(panel)
 
-    commands = {
-        "watch": cmd_watch,
-        "diagnose": cmd_diagnose,
-        "snapshot": cmd_snapshot,
-        "seasons": cmd_seasons,
-        "health": cmd_health,
-    }
 
-    handler = commands.get(command)
-    if handler is None:
-        parser.print_help()
-        return 1
+@cli.command()
+@click.option("--interval", default=5, help="Refresh interval in seconds")
+@click.option("--fatigue-data", default=None)
+@click.option("--endemic-data", default=None)
+@click.option("--sentinel-data", default=None)
+@click.option("--kompressi-data", default=None)
+@click.option("--churnmap-data", default=None)
+@click.option("--seral-data", default=None)
+@click.option("--proprioception-data", default=None)
+@click.option("--snapshot-data", default=None)
+def watch_live(interval, **adapter_kwargs):
+    """Live watch mode using the new engine and Rich dashboard."""
+    adapters = load_adapters(
+        fatigue_data=adapter_kwargs.get("fatigue_data"),
+        endemic_data=adapter_kwargs.get("endemic_data"),
+        sentinel_data=adapter_kwargs.get("sentinel_data"),
+        kompressi_data=adapter_kwargs.get("kompressi_data"),
+        churnmap_data=adapter_kwargs.get("churnmap_data"),
+        seral_data=adapter_kwargs.get("seral_data"),
+        proprioception_data=adapter_kwargs.get("proprioception_data"),
+        snapshot_data=adapter_kwargs.get("snapshot_data"),
+    )
+    engine = TerrariumEngine(adapters)
+    live_watch(engine, interval=interval)
 
+
+@cli.command()
+@click.option("--format", "fmt", type=click.Choice(["json", "csv"]), default="json")
+@click.option("--output", "-o", default="-", help="Output file (default: stdout)")
+@click.option("--fatigue-data", default=None)
+@click.option("--endemic-data", default=None)
+@click.option("--sentinel-data", default=None)
+@click.option("--kompressi-data", default=None)
+@click.option("--churnmap-data", default=None)
+@click.option("--seral-data", default=None)
+@click.option("--proprioception-data", default=None)
+@click.option("--snapshot-data", default=None)
+def export(fmt, output, **adapter_kwargs):
+    """Export current metrics to JSON or CSV."""
+    adapters = load_adapters(
+        fatigue_data=adapter_kwargs.get("fatigue_data"),
+        endemic_data=adapter_kwargs.get("endemic_data"),
+        sentinel_data=adapter_kwargs.get("sentinel_data"),
+        kompressi_data=adapter_kwargs.get("kompressi_data"),
+        churnmap_data=adapter_kwargs.get("churnmap_data"),
+        seral_data=adapter_kwargs.get("seral_data"),
+        proprioception_data=adapter_kwargs.get("proprioception_data"),
+        snapshot_data=adapter_kwargs.get("snapshot_data"),
+    )
+    engine = TerrariumEngine(adapters)
+    engine.collect()
+
+    if fmt == "json":
+        data = engine.to_json()
+    else:
+        import csv
+        import io
+
+        health = engine.score()
+        buf = io.StringIO()
+        writer = csv.writer(buf)
+        writer.writerow(["dimension", "score"])
+        for key, value in health.to_dict().items():
+            if isinstance(value, float):
+                writer.writerow([key, f"{value:.4f}"])
+        data = buf.getvalue()
+
+    if output == "-":
+        click.echo(data)
+    else:
+        with open(output, "w", encoding="utf-8") as f:
+            f.write(data)
+        click.echo(f"Exported to {output}")
+
+
+def main(argv: Optional[list] = None) -> int:
+    """Entry point compatible with the old argparse CLI."""
     try:
-        return handler(args)
-    except Exception as e:
-        print(f"Error: {e}", file=sys.stderr)
+        cli(args=argv)
+        return 0
+    except SystemExit as exc:
+        code = exc.code if isinstance(exc.code, int) else 0
+        # Click returns 2 for bad arguments; old CLI returned 1
+        return 1 if code == 2 else code
+    except Exception as exc:
+        click.echo(f"Error: {exc}", err=True)
         return 1
 
 
-if __name__ == "__main__":
-    sys.exit(main())
+# Backward-compatible aliases for old tests
+# (test_cli.py imports create_parser and main from terrarium.cli)
+def create_parser():
+    """Backward-compatible parser creation.
+
+    Returns a thin wrapper that mimics argparse's parse_args interface.
+    """
+
+    class _FakeParser:
+        def parse_args(self, args=None):
+            args = args or []
+
+            class _FakeArgs:
+                pass
+
+            fake = _FakeArgs()
+            # Default values
+            fake.path = "."
+            fake.format = "text"
+            fake.output = None
+            fake.since = None
+            fake.command = None
+
+            # Simple heuristic to extract command and common args
+            if args:
+                # First non-option token is usually the command
+                idx = 0
+                while idx < len(args) and args[idx].startswith("-"):
+                    idx += 1
+                if idx < len(args):
+                    potential_cmd = args[idx]
+                    if potential_cmd in (
+                        "watch",
+                        "diagnose",
+                        "snapshot",
+                        "seasons",
+                        "health",
+                    ):
+                        fake.command = potential_cmd
+                        # Extract positional path argument after command
+                        if idx + 1 < len(args) and not args[idx + 1].startswith("-"):
+                            fake.path = args[idx + 1]
+                    else:
+                        fake.path = potential_cmd
+
+                # Extract common options
+                for i, arg in enumerate(args):
+                    if arg == "--format" and i + 1 < len(args):
+                        fake.format = args[i + 1]
+                    elif arg == "--output" and i + 1 < len(args):
+                        fake.output = args[i + 1]
+                    elif arg == "--since" and i + 1 < len(args):
+                        fake.since = args[i + 1]
+
+            return fake
+
+    return _FakeParser()

@@ -1,76 +1,48 @@
-"""Tests for the CLI interface."""
+"""Tests for the Click-based CLI interface."""
 
 import os
-import sys
 import tempfile
 
-import pytest
+from click.testing import CliRunner
 
-from terrarium.cli import main, create_parser
+from terrarium.cli import cli, create_parser, main
+
+
+runner = CliRunner()
 
 
 class TestCreateParser:
-    """Tests for CLI argument parser."""
+    """Backward-compatible parser tests."""
 
     def test_parser_creation(self):
-        """Parser is created without error."""
         parser = create_parser()
         assert parser is not None
 
     def test_watch_command(self):
-        """Watch command is parsed."""
         parser = create_parser()
         args = parser.parse_args(["watch", "."])
         assert args.command == "watch"
         assert args.path == "."
 
-    def test_diagnose_command(self):
-        """Diagnose command is parsed."""
-        parser = create_parser()
-        args = parser.parse_args(["diagnose", "src/main.py"])
-        assert args.command == "diagnose"
-        assert args.path == "src/main.py"
-
     def test_snapshot_command(self):
-        """Snapshot command is parsed with options."""
         parser = create_parser()
-        args = parser.parse_args(["snapshot", "--format", "svg", "--output", "out.svg", "."])
+        args = parser.parse_args(
+            ["snapshot", "--format", "svg", "--output", "out.svg", "."]
+        )
         assert args.command == "snapshot"
         assert args.format == "svg"
         assert args.output == "out.svg"
-
-    def test_seasons_command(self):
-        """Seasons command is parsed."""
-        parser = create_parser()
-        args = parser.parse_args(["seasons", ".", "--since", "6 months ago"])
-        assert args.command == "seasons"
-        assert args.since == "6 months ago"
-
-    def test_health_command(self):
-        """Health command is parsed."""
-        parser = create_parser()
-        args = parser.parse_args(["health", "."])
-        assert args.command == "health"
-
-    def test_no_command(self):
-        """No command is handled gracefully."""
-        parser = create_parser()
-        args = parser.parse_args([])
-        assert getattr(args, "command", None) is None
 
 
 class TestMainCLI:
     """Tests for the main CLI entry point."""
 
     def test_no_args_returns_zero(self):
-        """No arguments prints help and returns 0."""
         result = main([])
         assert result == 0
 
     def test_health_on_temp_project(self):
-        """Health command works on a temporary project."""
         with tempfile.TemporaryDirectory() as tmpdir:
-            # Create a Python file
             src_dir = os.path.join(tmpdir, "src")
             os.makedirs(src_dir)
             with open(os.path.join(src_dir, "main.py"), "w") as f:
@@ -80,7 +52,6 @@ class TestMainCLI:
             assert result == 0
 
     def test_watch_on_temp_project(self):
-        """Watch command works on a temporary project."""
         with tempfile.TemporaryDirectory() as tmpdir:
             src_dir = os.path.join(tmpdir, "src")
             os.makedirs(src_dir)
@@ -91,7 +62,6 @@ class TestMainCLI:
             assert result == 0
 
     def test_snapshot_text(self):
-        """Snapshot command with text format."""
         with tempfile.TemporaryDirectory() as tmpdir:
             src_dir = os.path.join(tmpdir, "src")
             os.makedirs(src_dir)
@@ -102,7 +72,6 @@ class TestMainCLI:
             assert result == 0
 
     def test_snapshot_to_file(self):
-        """Snapshot command writes to file."""
         with tempfile.TemporaryDirectory() as tmpdir:
             src_dir = os.path.join(tmpdir, "src")
             os.makedirs(src_dir)
@@ -110,12 +79,13 @@ class TestMainCLI:
                 f.write("def main():\n    pass\n")
 
             output_path = os.path.join(tmpdir, "report.txt")
-            result = main(["snapshot", "--format", "text", "--output", output_path, tmpdir])
+            result = main(
+                ["snapshot", "--format", "text", "--output", output_path, tmpdir]
+            )
             assert result == 0
             assert os.path.exists(output_path)
 
     def test_diagnose_file(self):
-        """Diagnose command works on a file."""
         with tempfile.TemporaryDirectory() as tmpdir:
             filepath = os.path.join(tmpdir, "module.py")
             with open(filepath, "w") as f:
@@ -125,17 +95,38 @@ class TestMainCLI:
             assert result == 0
 
     def test_diagnose_nonexistent(self):
-        """Diagnose on non-existent file returns error."""
         result = main(["diagnose", "/nonexistent/file.py"])
         assert result == 1
 
     def test_health_nonexistent_dir(self):
-        """Health on non-existent directory returns error."""
         result = main(["health", "/nonexistent/dir"])
         assert result == 1
 
     def test_version(self):
-        """Version flag works."""
-        with pytest.raises(SystemExit) as exc_info:
-            main(["--version"])
-        assert exc_info.value.code == 0
+        result = runner.invoke(cli, ["--version"])
+        assert result.exit_code == 0
+        assert "terrarium" in result.output
+
+
+class TestClickCommands:
+    """Tests for new Click-specific commands."""
+
+    def test_dashboard_stub_mode(self):
+        result = runner.invoke(cli, ["dashboard"])
+        assert result.exit_code == 0
+        assert "Terrarium Ecosystem Dashboard" in result.output
+
+    def test_export_json(self):
+        result = runner.invoke(cli, ["export", "--format", "json"])
+        assert result.exit_code == 0
+        assert "health" in result.output
+
+    def test_export_csv(self):
+        result = runner.invoke(cli, ["export", "--format", "csv"])
+        assert result.exit_code == 0
+        assert "dimension" in result.output
+
+    def test_watch_live_help(self):
+        result = runner.invoke(cli, ["watch-live", "--help"])
+        assert result.exit_code == 0
+        assert "interval" in result.output
