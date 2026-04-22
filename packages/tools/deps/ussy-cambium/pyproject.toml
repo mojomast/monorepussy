@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cambium"
+version = "0.1.0"
+description = "Horticultural grafting science for dependency compatibility analysis"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [{name = "Cambium Contributors"}]
+
+[project.scripts]
+cambium = "cambium.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["cambium*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
