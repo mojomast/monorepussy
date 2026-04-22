@@ -1,0 +1,151 @@
+{
+  "health": {
+    "overall": 0.72,
+    "fatigue": 0.68,
+    "epidemic": 0.85,
+    "anomaly": 0.91,
+    "drift": 0.79,
+    "churn": 0.45,
+    "complexity": 0.62,
+    "territory": "core-auth",
+    "succession": "climax"
+  },
+  "adapters": {
+    "fatigue": {
+      "count": 15,
+      "states": {
+        "src/main.py": {"vitality": 0.75, "crack_intensity": 0.25, "infection_state": "S", "anomaly_active": false, "complexity_score": 0.18, "territory_id": "core-auth", "succession_stage": "climax"},
+        "src/auth.py": {"vitality": 0.45, "crack_intensity": 0.55, "infection_state": "I", "anomaly_active": true, "complexity_score": 0.42, "territory_id": "core-auth", "succession_stage": "climax"},
+        "src/utils.py": {"vitality": 0.88, "crack_intensity": 0.12, "infection_state": "S", "anomaly_active": false, "complexity_score": 0.15, "territory_id": "utils-helpers", "succession_stage": "seral"},
+        "src/models.py": {"vitality": 0.92, "crack_intensity": 0.08, "infection_state": "S", "anomaly_active": false, "complexity_score": 0.05, "territory_id": "core-auth", "succession_stage": "climax"},
+        "src/database.py": {"vitality": 0.70, "crack_intensity": 0.30, "infection_state": "S", "anomaly_active": false, "complexity_score": 0.22, "territory_id": "core-auth", "succession_stage": "climax"},
+        "src/cache.py": {"vitality": 0.85, "crack_intensity": 0.15, "infection_state": "S", "anomaly_active": false, "complexity_score": 0.10, "territory_id": "utils-helpers", "succession_stage": "seral"},
+        "src/notifications.py": {"vitality": 0.65, "crack_intensity": 0.35, "infection_state": "E", "anomaly_active": false, "complexity_score": 0.28, "territory_id": "integrations", "succession_stage": "seral"},
+        "src/api.py": {"vitality": 0.58, "crack_intensity": 0.42, "infection_state": "S", "anomaly_active": true, "complexity_score": 0.35, "territory_id": "core-auth", "succession_stage": "pioneer"},
+        "src/worker.py": {"vitality": 0.78, "crack_intensity": 0.22, "infection_state": "S", "anomaly_active": false, "complexity_score": 0.20, "territory_id": "background", "succession_stage": "pioneer"},
+        "src/metrics.py": {"vitality": 0.90, "crack_intensity": 0.10, "infection_state": "S", "anomaly_active": false, "complexity_score": 0.12, "territory_id": "utils-helpers", "succession_stage": "seral"},
+        "src/search.py": {"vitality": 0.82, "crack_intensity": 0.18, "infection_state": "S", "anomaly_active": false, "complexity_score": 0.25, "territory_id": "utils-helpers", "succession_stage": "seral"},
+        "src/integrations.py": {"vitality": 0.55, "crack_intensity": 0.45, "infection_state": "I", "anomaly_active": false, "complexity_score": 0.30, "territory_id": "integrations", "succession_stage": "pioneer"},
+        "src/config.py": {"vitality": 0.95, "crack_intensity": 0.05, "infection_state": "S", "anomaly_active": false, "complexity_score": 0.03, "territory_id": "utils-helpers", "succession_stage": "climax"},
+        "src/schemas.py": {"vitality": 0.62, "crack_intensity": 0.38, "infection_state": "E", "anomaly_active": true, "complexity_score": 0.48, "territory_id": "core-auth", "succession_stage": "pioneer"},
+        "src/logging_utils.py": {"vitality": 0.88, "crack_intensity": 0.12, "infection_state": "S", "anomaly_active": false, "complexity_score": 0.08, "territory_id": "utils-helpers", "succession_stage": "climax"}
+      },
+      "stub": false
+    },
+    "endemic": {
+      "count": 15,
+      "states": {
+        "src/main.py": {"vitality": 1.0, "crack_intensity": 0.0, "infection_state": "S", "anomaly_active": false, "complexity_score": 0.0, "territory_id": null, "succession_stage": "seral"},
+        "src/auth.py": {"vitality": 0.3, "crack_intensity": 0.0, "infection_state": "I", "anomaly_active": false, "complexity_score": 0.0, "territory_id": null, "succession_stage": "seral"},
+        "src/utils.py": {"vitality": 1.0, "crack_intensity": 0.0, "infection_state": "S", "anomaly_active": false, "complexity_score": 0.0, "territory_id": null, "succession_stage": "seral"},
+        "src/models.py": {"vitality": 1.0, "crack_intensity": 0.0, "infection_state": "S", "anomaly_active": false, "complexity_score": 0.0, "territory_id": null, "succession_stage": "seral"},
+        "src/database.py": {"vitality": 1.0, "crack_intensity": 0.0, "infection_state": "S", "anomaly_active": false, "complexity_score": 0.0, "territory_id": null, "succession_stage": "seral"},
+        "src/cache.py": {"vitality": 1.0, "crack_intensity": 0.0, "infection_state": "S", "anomaly_active": false, "complexity_score": 0.0, "territory_id": null, "succession_stage": "seral"},
+        "src/notifications.py": {"vitality": 0.7, "crack_intensity": 0.0, "infection_state": "E", "anomaly_active": false, "complexity_score": 0.0, "territory_id": null, "succession_stage": "seral"},
+        "src/api.py": {"vitality": 1.0, "crack_intensity": 0.0, "infection_state": "S", "anomaly_active": false, "complexity_score": 0.0, "territory_id": null, "succession_stage": "seral"},
+        "src/worker.py": {"vitality": 1.0, "crack_intensity": 0.0, "infection_state": "S", "anomaly_active": false, "complexity_score": 0.0, "territory_id": null, "succession_stage": "seral"},
+        "src/metrics.py": {"vitality": 1.0, "crack_intensity": 0.0, "infection_state": "S", "anomaly_active": false, "complexity_score": 0.0, "territory_id": null, "succession_stage": "seral"},
+        "src/search.py": {"vitality": 1.0, "crack_intensity": 0.0, "infection_state": "S", "anomaly_active": false, "complexity_score": 0.0, "territory_id": null, "succession_stage": "seral"},
+        "src/integrations.py": {"vitality": 0.3, "crack_intensity": 0.0, "infection_state": "I", "anomaly_active": false, "complexity_score": 0.0, "territory_id": null, "succession_stage": "seral"},
+        "src/config.py": {"vitality": 1.0, "crack_intensity": 0.0, "infection_state": "S", "anomaly_active": false, "complexity_score": 0.0, "territory_id": null, "succession_stage": "seral"},
+        "src/schemas.py": {"vitality": 0.7, "crack_intensity": 0.0, "infection_state": "E", "anomaly_active": false, "complexity_score": 0.0, "territory_id": null, "succession_stage": "seral"},
+        "src/logging_utils.py": {"vitality": 1.0, "crack_intensity": 0.0, "infection_state": "S", "anomaly_active": false, "complexity_score": 0.0, "territory_id": null, "succession_stage": "seral"}
+      },
+      "stub": false
+    },
+    "sentinel": {
+      "count": 15,
+      "states": {
+        "src/main.py": {"vitality": 0.95, "crack_intensity": 0.0, "infection_state": "S", "anomaly_active": false, "complexity_score": 0.0, "territory_id": null, "succession_stage": "seral"},
+        "src/auth.py": {"vitality": 0.27, "crack_intensity": 0.0, "infection_state": "S", "anomaly_active": true, "complexity_score": 0.0, "territory_id": null, "succession_stage": "seral"},
+        "src/utils.py": {"vitality": 1.0, "crack_intensity": 0.0, "infection_state": "S", "anomaly_active": false, "complexity_score": 0.0, "territory_id": null, "succession_stage": "seral"},
+        "src/models.py": {"vitality": 1.0, "crack_intensity": 0.0, "infection_state": "S", "anomaly_active": false, "complexity_score": 0.0, "territory_id": null, "succession_stage": "seral"},
+        "src/database.py": {"vitality": 1.0, "crack_intensity": 0.0, "infection_state": "S", "anomaly_active": false, "complexity_score": 0.0, "territory_id": null, "succession_stage": "seral"},
+        "src/cache.py": {"vitality": 1.0, "crack_intensity": 0.0, "infection_state": "S", "anomaly_active": false, "complexity_score": 0.0, "territory_id": null, "succession_stage": "seral"},
+        "src/notifications.py": {"vitality": 1.0, "crack_intensity": 0.0, "infection_state": "S", "anomaly_active": false, "complexity_score": 0.0, "territory_id": null, "succession_stage": "seral"},
+        "src/api.py": {"vitality": 0.35, "crack_intensity": 0.0, "infection_state": "S", "anomaly_active": true, "complexity_score": 0.0, "territory_id": null, "succession_stage": "seral"},
+        "src/worker.py": {"vitality": 1.0, "crack_intensity": 0.0, "infection_state": "S", "anomaly_active": false, "complexity_score": 0.0, "territory_id": null, "succession_stage": "seral"},
+        "src/metrics.py": {"vitality": 1.0, "crack_intensity": 0.0, "infection_state": "S", "anomaly_active": false, "complexity_score": 0.0, "territory_id": null, "succession_stage": "seral"},
+        "src/search.py": {"vitality": 1.0, "crack_intensity": 0.0, "infection_state": "S", "anomaly_active": false, "complexity_score": 0.0, "territory_id": null, "succession_stage": "seral"},
+        "src/integrations.py": {"vitality": 0.88, "crack_intensity": 0.0, "infection_state": "S", "anomaly_active": false, "complexity_score": 0.0, "territory_id": null, "succession_stage": "seral"},
+        "src/config.py": {"vitality": 1.0, "crack_intensity": 0.0, "infection_state": "S", "anomaly_active": false, "complexity_score": 0.0, "territory_id": null, "succession_stage": "seral"},
+        "src/schemas.py": {"vitality": 0.15, "crack_intensity": 0.0, "infection_state": "S", "anomaly_active": true, "complexity_score": 0.0, "territory_id": null, "succession_stage": "seral"},
+        "src/logging_utils.py": {"vitality": 1.0, "crack_intensity": 0.0, "infection_state": "S", "anomaly_active": false, "complexity_score": 0.0, "territory_id": null, "succession_stage": "seral"}
+      },
+      "stub": false
+    },
+    "kompressi": {
+      "count": 15,
+      "states": {
+        "src/main.py": {"vitality": 0.964, "crack_intensity": 0.0, "infection_state": "S", "anomaly_active": false, "complexity_score": 0.18, "territory_id": null, "succession_stage": "seral"},
+        "src/auth.py": {"vitality": 0.916, "crack_intensity": 0.0, "infection_state": "S", "anomaly_active": false, "complexity_score": 0.42, "territory_id": null, "succession_stage": "seral"},
+        "src/utils.py": {"vitality": 0.970, "crack_intensity": 0.0, "infection_state": "S", "anomaly_active": false, "complexity_score": 0.15, "territory_id": null, "succession_stage": "seral"},
+        "src/models.py": {"vitality": 0.990, "crack_intensity": 0.0, "infection_state": "S", "anomaly_active": false, "complexity_score": 0.05, "territory_id": null, "succession_stage": "seral"},
+        "src/database.py": {"vitality": 0.956, "crack_intensity": 0.0, "infection_state": "S", "anomaly_active": false, "complexity_score": 0.22, "territory_id": null, "succession_stage": "seral"},
+        "src/cache.py": {"vitality": 0.980, "crack_intensity": 0.0, "infection_state": "S", "anomaly_active": false, "complexity_score": 0.10, "territory_id": null, "succession_stage": "seral"},
+        "src/notifications.py": {"vitality": 0.944, "crack_intensity": 0.0, "infection_state": "S", "anomaly_active": false, "complexity_score": 0.28, "territory_id": null, "succession_stage": "seral"},
+        "src/api.py": {"vitality": 0.930, "crack_intensity": 0.0, "infection_state": "S", "anomaly_active": false, "complexity_score": 0.35, "territory_id": null, "succession_stage": "seral"},
+        "src/worker.py": {"vitality": 0.960, "crack_intensity": 0.0, "infection_state": "S", "anomaly_active": false, "complexity_score": 0.20, "territory_id": null, "succession_stage": "seral"},
+        "src/metrics.py": {"vitality": 0.976, "crack_intensity": 0.0, "infection_state": "S", "anomaly_active": false, "complexity_score": 0.12, "territory_id": null, "succession_stage": "seral"},
+        "src/search.py": {"vitality": 0.950, "crack_intensity": 0.0, "infection_state": "S", "anomaly_active": false, "complexity_score": 0.25, "territory_id": null, "succession_stage": "seral"},
+        "src/integrations.py": {"vitality": 0.940, "crack_intensity": 0.0, "infection_state": "S", "anomaly_active": false, "complexity_score": 0.30, "territory_id": null, "succession_stage": "seral"},
+        "src/config.py": {"vitality": 0.994, "crack_intensity": 0.0, "infection_state": "S", "anomaly_active": false, "complexity_score": 0.03, "territory_id": null, "succession_stage": "seral"},
+        "src/schemas.py": {"vitality": 0.904, "crack_intensity": 0.0, "infection_state": "S", "anomaly_active": false, "complexity_score": 0.48, "territory_id": null, "succession_stage": "seral"},
+        "src/logging_utils.py": {"vitality": 0.984, "crack_intensity": 0.0, "infection_state": "S", "anomaly_active": false, "complexity_score": 0.08, "territory_id": null, "succession_stage": "seral"}
+      },
+      "stub": false
+    },
+    "churnmap": {
+      "count": 15,
+      "states": {
+        "src/main.py": {"vitality": 1.0, "crack_intensity": 0.0, "infection_state": "S", "anomaly_active": false, "complexity_score": 0.0, "territory_id": "core-auth", "succession_stage": "climax"},
+        "src/auth.py": {"vitality": 1.0, "crack_intensity": 0.0, "infection_state": "S", "anomaly_active": false, "complexity_score": 0.0, "territory_id": "core-auth", "succession_stage": "climax"},
+        "src/utils.py": {"vitality": 1.0, "crack_intensity": 0.0, "infection_state": "S", "anomaly_active": false, "complexity_score": 0.0, "territory_id": "utils-helpers", "succession_stage": "seral"},
+        "src/models.py": {"vitality": 1.0, "crack_intensity": 0.0, "infection_state": "S", "anomaly_active": false, "complexity_score": 0.0, "territory_id": "core-auth", "succession_stage": "climax"},
+        "src/database.py": {"vitality": 1.0, "crack_intensity": 0.0, "infection_state": "S", "anomaly_active": false, "complexity_score": 0.0, "territory_id": "core-auth", "succession_stage": "climax"},
+        "src/cache.py": {"vitality": 1.0, "crack_intensity": 0.0, "infection_state": "S", "anomaly_active": false, "complexity_score": 0.0, "territory_id": "utils-helpers", "succession_stage": "seral"},
+        "src/notifications.py": {"vitality": 1.0, "crack_intensity": 0.0, "infection_state": "S", "anomaly_active": false, "complexity_score": 0.0, "territory_id": "integrations", "succession_stage": "seral"},
+        "src/api.py": {"vitality": 1.0, "crack_intensity": 0.0, "infection_state": "S", "anomaly_active": false, "complexity_score": 0.0, "territory_id": "core-auth", "succession_stage": "pioneer"},
+        "src/worker.py": {"vitality": 1.0, "crack_intensity": 0.0, "infection_state": "S", "anomaly_active": false, "complexity_score": 0.0, "territory_id": "background", "succession_stage": "pioneer"},
+        "src/metrics.py": {"vitality": 1.0, "crack_intensity": 0.0, "infection_state": "S", "anomaly_active": false, "complexity_score": 0.0, "territory_id": "utils-helpers", "succession_stage": "seral"},
+        "src/search.py": {"vitality": 1.0, "crack_intensity": 0.0, "infection_state": "S", "anomaly_active": false, "complexity_score": 0.0, "territory_id": "utils-helpers", "succession_stage": "seral"},
+        "src/integrations.py": {"vitality": 1.0, "crack_intensity": 0.0, "infection_state": "S", "anomaly_active": false, "complexity_score": 0.0, "territory_id": "integrations", "succession_stage": "pioneer"},
+        "src/config.py": {"vitality": 1.0, "crack_intensity": 0.0, "infection_state": "S", "anomaly_active": false, "complexity_score": 0.0, "territory_id": "utils-helpers", "succession_stage": "climax"},
+        "src/schemas.py": {"vitality": 1.0, "crack_intensity": 0.0, "infection_state": "S", "anomaly_active": false, "complexity_score": 0.0, "territory_id": "core-auth", "succession_stage": "pioneer"},
+        "src/logging_utils.py": {"vitality": 1.0, "crack_intensity": 0.0, "infection_state": "S", "anomaly_active": false, "complexity_score": 0.0, "territory_id": "utils-helpers", "succession_stage": "climax"}
+      },
+      "stub": false
+    },
+    "seral": {
+      "count": 15,
+      "states": {
+        "src/main.py": {"vitality": 1.0, "crack_intensity": 0.0, "infection_state": "S", "anomaly_active": false, "complexity_score": 0.0, "territory_id": null, "succession_stage": "climax"},
+        "src/auth.py": {"vitality": 1.0, "crack_intensity": 0.0, "infection_state": "S", "anomaly_active": false, "complexity_score": 0.0, "territory_id": null, "succession_stage": "climax"},
+        "src/utils.py": {"vitality": 1.0, "crack_intensity": 0.0, "infection_state": "S", "anomaly_active": false, "complexity_score": 0.0, "territory_id": null, "succession_stage": "seral"},
+        "src/models.py": {"vitality": 1.0, "crack_intensity": 0.0, "infection_state": "S", "anomaly_active": false, "complexity_score": 0.0, "territory_id": null, "succession_stage": "climax"},
+        "src/database.py": {"vitality": 1.0, "crack_intensity": 0.0, "infection_state": "S", "anomaly_active": false, "complexity_score": 0.0, "territory_id": null, "succession_stage": "climax"},
+        "src/cache.py": {"vitality": 1.0, "crack_intensity": 0.0, "infection_state": "S", "anomaly_active": false, "complexity_score": 0.0, "territory_id": null, "succession_stage": "seral"},
+        "src/notifications.py": {"vitality": 1.0, "crack_intensity": 0.0, "infection_state": "S", "anomaly_active": false, "complexity_score": 0.0, "territory_id": null, "succession_stage": "seral"},
+        "src/api.py": {"vitality": 1.0, "crack_intensity": 0.0, "infection_state": "S", "anomaly_active": false, "complexity_score": 0.0, "territory_id": null, "succession_stage": "pioneer"},
+        "src/worker.py": {"vitality": 1.0, "crack_intensity": 0.0, "infection_state": "S", "anomaly_active": false, "complexity_score": 0.0, "territory_id": null, "succession_stage": "pioneer"},
+        "src/metrics.py": {"vitality": 1.0, "crack_intensity": 0.0, "infection_state": "S", "anomaly_active": false, "complexity_score": 0.0, "territory_id": null, "succession_stage": "seral"},
+        "src/search.py": {"vitality": 1.0, "crack_intensity": 0.0, "infection_state": "S", "anomaly_active": false, "complexity_score": 0.0, "territory_id": null, "succession_stage": "seral"},
+        "src/integrations.py": {"vitality": 1.0, "crack_intensity": 0.0, "infection_state": "S", "anomaly_active": false, "complexity_score": 0.0, "territory_id": null, "succession_stage": "pioneer"},
+        "src/config.py": {"vitality": 1.0, "crack_intensity": 0.0, "infection_state": "S", "anomaly_active": false, "complexity_score": 0.0, "territory_id": null, "succession_stage": "climax"},
+        "src/schemas.py": {"vitality": 1.0, "crack_intensity": 0.0, "infection_state": "S", "anomaly_active": false, "complexity_score": 0.0, "territory_id": null, "succession_stage": "pioneer"},
+        "src/logging_utils.py": {"vitality": 1.0, "crack_intensity": 0.0, "infection_state": "S", "anomaly_active": false, "complexity_score": 0.0, "territory_id": null, "succession_stage": "climax"}
+      },
+      "stub": false
+    },
+    "proprioception": {
+      "count": 0,
+      "states": {},
+      "stub": true
+    },
+    "snapshot": {
+      "count": 0,
+      "states": {},
+      "stub": true
+    }
+  }
+}

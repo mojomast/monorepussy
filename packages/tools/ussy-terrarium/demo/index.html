@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terrarium — Your Codebase Is a Living Ecosystem</title>
+  <meta name="description" content="Terrarium renders your codebase as a living ecosystem where modules are organisms, dependencies are food chains, and code health is visible as biological vitality.">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="Terrarium — Your Codebase Is a Living Ecosystem">
+  <meta property="og:description" content="Watch your code breathe. Terrarium renders your codebase as a living ecosystem with biological health metaphors.">
+  <meta property="og:image" content="https://terrarium.ussyco.de/fixtures/demo_snapshot.svg">
+  <meta property="og:url" content="https://terrarium.ussyco.de">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Fonts -->
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&f[]=boska@400,700" rel="stylesheet">
+
+  <!-- External Libraries -->
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1/dist/chartjs-plugin-annotation.min.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    :root {
+      --bg: #171614;
+      --bg-elevated: #1e1d1b;
+      --text: #e8e6e3;
+      --text-muted: #a09d99;
+      --accent: #4f98a3;
+      --accent-glow: rgba(79, 152, 163, 0.3);
+      --border: rgba(79, 152, 163, 0.15);
+      --font-body: 'Satoshi', system-ui, sans-serif;
+      --font-display: 'Boska', Georgia, serif;
+    }
+
+    [data-theme="light"] {
+      --bg: #f5f3f0;
+      --bg-elevated: #ffffff;
+      --text: #171614;
+      --text-muted: #6b6966;
+      --accent: #3a7a85;
+      --accent-glow: rgba(58, 122, 133, 0.2);
+      --border: rgba(58, 122, 133, 0.2);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* Header */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(23, 22, 20, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      transition: background 0.3s ease;
+    }
+
+    [data-theme="light"] .header {
+      background: rgba(245, 243, 240, 0.85);
+    }
+
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .brand-icon {
+      width: 36px;
+      height: 36px;
+    }
+
+    .brand-text h1 {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .brand-text span {
+      font-size: 12px;
+      color: var(--text-muted);
+      display: block;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .header-actions a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.2s;
+    }
+
+    .header-actions a:hover {
+      color: var(--accent);
+    }
+
+    .theme-toggle {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 8px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+
+    .theme-toggle:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: 80px 24px 60px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .hero h2 {
+      font-family: var(--font-display);
+      font-size: clamp(36px, 6vw, 56px);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      font-size: 18px;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto 32px;
+    }
+
+    .cta-group {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 500;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: none;
+      font-family: inherit;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: #3a7a85;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px var(--accent-glow);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* Sections */
+    .section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 24px;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+
+    .section-subtitle {
+      color: var(--text-muted);
+      font-size: 14px;
+      margin-bottom: 24px;
+    }
+
+    /* Panels grid */
+    .panels-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 24px;
+    }
+
+    @media (max-width: 768px) {
+      .panels-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .panel {
+      min-height: 360px;
+    }
+
+    /* How it works */
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 32px;
+    }
+
+    @media (max-width: 768px) {
+      .steps-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .step {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 32px 24px;
+      text-align: center;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .step:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    }
+
+    .step-icon {
+      width: 48px;
+      height: 48px;
+      margin: 0 auto 16px;
+      background: var(--accent);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+    }
+
+    .step h3 {
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    .step p {
+      color: var(--text-muted);
+      font-size: 14px;
+      margin-bottom: 16px;
+    }
+
+    .step code {
+      display: block;
+      background: rgba(0, 0, 0, 0.2);
+      padding: 10px 14px;
+      border-radius: 6px;
+      font-family: 'SF Mono', Monaco, monospace;
+      font-size: 13px;
+      color: var(--accent);
+      word-break: break-all;
+    }
+
+    [data-theme="light"] .step code {
+      background: rgba(0, 0, 0, 0.05);
+    }
+
+    /* Adapters */
+    .adapters-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-top: 32px;
+    }
+
+    @media (max-width: 1024px) {
+      .adapters-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .adapters-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .adapter-card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px;
+      transition: border-color 0.2s;
+    }
+
+    .adapter-card:hover {
+      border-color: var(--accent);
+    }
+
+    .adapter-card h4 {
+      font-size: 15px;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .adapter-card .source {
+      font-size: 12px;
+      color: var(--accent);
+      margin-bottom: 8px;
+      font-family: monospace;
+    }
+
+    .adapter-card p {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 48px 24px;
+      border-top: 1px solid var(--border);
+      margin-top: 40px;
+    }
+
+    .footer p {
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    .footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: var(--bg-elevated);
+      color: var(--text);
+      padding: 12px 24px;
+      border-radius: 8px;
+      border: 1px solid var(--accent);
+      font-size: 14px;
+      z-index: 1000;
+      opacity: 0;
+      transition: all 0.3s ease;
+      pointer-events: none;
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <!-- Toast -->
+  <div class="toast" id="toast">Copied to clipboard!</div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-inner">
+      <a href="/" class="brand">
+        <svg class="brand-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="18" cy="28" rx="10" ry="4" fill="#4f98a3" opacity="0.3"/>
+          <path d="M18 28 C18 28 10 20 10 14 C10 8 14 4 18 4 C22 4 26 8 26 14 C26 20 18 28 18 28Z" fill="#4f98a3"/>
+          <path d="M18 10 C18 10 14 14 14 18 C14 22 16 24 18 24 C20 24 22 22 22 18 C22 14 18 10 18 10Z" fill="#6ab5bf"/>
+          <circle cx="18" cy="14" r="2" fill="#e8af34"/>
+        </svg>
+        <div class="brand-text">
+          <h1>Terrarium</h1>
+          <span>Your codebase is a living ecosystem</span>
+        </div>
+      </a>
+      <div class="header-actions">
+        <a href="https://github.com/mojomast/terrariumussy" target="_blank" rel="noopener">
+          <i data-lucide="github" style="width:18px;height:18px;"></i>
+          GitHub
+        </a>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+          <i data-lucide="sun" id="themeIcon"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <h2>Watch your code breathe.</h2>
+    <p>Terrarium renders your codebase as a living ecosystem where modules are organisms, dependencies are food chains, and code health is visible as biological vitality. See stress, infection, and decay before they become critical.</p>
+    <div class="cta-group">
+      <a href="https://github.com/mojomast/terrariumussy" target="_blank" rel="noopener" class="btn btn-primary">
+        <i data-lucide="github" style="width:18px;height:18px;"></i>
+        View on GitHub
+      </a>
+      <button class="btn btn-secondary" id="copyInstall">
+        <i data-lucide="copy" style="width:18px;height:18px;"></i>
+        pip install terrarium
+      </button>
+    </div>
+  </section>
+
+  <!-- Ecosystem Panel -->
+  <section class="section">
+    <h3 class="section-title">Live Ecosystem</h3>
+    <p class="section-subtitle">Terrarium scanning itself — 15 modules, 4 territory clusters, real health signals</p>
+    <div id="ecosystem-panel" class="panel"></div>
+  </section>
+
+  <!-- Dashboard + Seasons -->
+  <section class="section">
+    <div class="panels-grid">
+      <div id="dashboard-panel" class="panel"></div>
+      <div id="seasons-panel" class="panel"></div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="section">
+    <h3 class="section-title">How it works</h3>
+    <div class="steps-grid">
+      <div class="step">
+        <div class="step-icon"><i data-lucide="download" style="width:24px;height:24px;"></i></div>
+        <h3>Install</h3>
+        <p>Add terrarium to your Python project with pip. Zero sibling packages required — runs in stub mode.</p>
+        <code>pip install terrarium</code>
+      </div>
+      <div class="step">
+        <div class="step-icon"><i data-lucide="terminal" style="width:24px;height:24px;"></i></div>
+        <h3>Run</h3>
+        <p>Point terrarium at your codebase. It scans files, reads git history, and loads adapter data.</p>
+        <code>terrarium health ./my-project</code>
+      </div>
+      <div class="step">
+        <div class="step-icon"><i data-lucide="eye" style="width:24px;height:24px;"></i></div>
+        <h3>Understand</h3>
+        <p>Read the ecosystem. See which modules are thriving, stressed, infected, or decaying.</p>
+        <code>terrarium watch ./my-project</code>
+      </div>
+    </div>
+  </section>
+
+  <!-- Adapters -->
+  <section class="section">
+    <h3 class="section-title">Adapters</h3>
+    <p class="section-subtitle">8 pluggable data sources that map biological signals to code health</p>
+    <div class="adapters-grid">
+      <div class="adapter-card">
+        <h4><i data-lucide="activity" style="width:16px;height:16px;"></i> fatigue</h4>
+        <div class="source">fatigueussy</div>
+        <p>Paris' Law crack growth — stress intensity in code changes</p>
+      </div>
+      <div class="adapter-card">
+        <h4><i data-lucide="bug" style="width:16px;height:16px;"></i> endemic</h4>
+        <div class="source">endemicussy</div>
+        <p>SIR/SEIR infection spread — bug propagation modeling</p>
+      </div>
+      <div class="adapter-card">
+        <h4><i data-lucide="alert-triangle" style="width:16px;height:16px;"></i> sentinel</h4>
+        <div class="source">sentinelussy</div>
+        <p>Anomaly detection activations — unusual code patterns</p>
+      </div>
+      <div class="adapter-card">
+        <h4><i data-lucide="zap" style="width:16px;height:16px;"></i> kompressi</h4>
+        <div class="source">kompressiussy</div>
+        <p>Kolmogorov complexity — information density per module</p>
+      </div>
+      <div class="adapter-card">
+        <h4><i data-lucide="git-branch" style="width:16px;height:16px;"></i> churnmap</h4>
+        <div class="source">churnmap</div>
+        <p>Co-change territory clusters — files that change together</p>
+      </div>
+      <div class="adapter-card">
+        <h4><i data-lucide="sprout" style="width:16px;height:16px;"></i> seral</h4>
+        <div class="source">seralussy</div>
+        <p>Ecological succession stages — pioneer, seral, climax</p>
+      </div>
+      <div class="adapter-card">
+        <h4><i data-lucide="move" style="width:16px;height:16px;"></i> proprioception</h4>
+        <div class="source">proprioceptionussy</div>
+        <p>Workspace drift — body schema of your dev environment</p>
+      </div>
+      <div class="adapter-card">
+        <h4><i data-lucide="camera" style="width:16px;height:16px;"></i> snapshot</h4>
+        <div class="source">snapshotussy</div>
+        <p>Dev state memory pressure — open files, processes, env</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>
+      MIT License · <a href="https://github.com/mojomast/terrariumussy">GitHub</a> · Built with terrariumussy scanning itself
+    </p>
+  </footer>
+
+  <script type="module">
+    import { initEcosystemPanel } from './panels/ecosystem.js';
+    import { initDashboardPanel } from './panels/dashboard.js';
+    import { initSeasonsPanel } from './panels/seasons.js';
+
+    // Initialize Lucide icons
+    lucide.createIcons();
+
+    // Initialize panels
+    initEcosystemPanel('#ecosystem-panel');
+    initDashboardPanel('#dashboard-panel');
+    initSeasonsPanel('#seasons-panel');
+
+    // Theme toggle
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+    const html = document.documentElement;
+
+    function updateThemeIcon() {
+      const isDark = html.classList.contains('dark');
+      themeIcon.setAttribute('data-lucide', isDark ? 'sun' : 'moon');
+      lucide.createIcons();
+    }
+
+    themeToggle.addEventListener('click', () => {
+      if (html.classList.contains('dark')) {
+        html.removeAttribute('class');
+        html.setAttribute('data-theme', 'light');
+      } else {
+        html.classList.add('dark');
+        html.removeAttribute('data-theme');
+      }
+      updateThemeIcon();
+    });
+
+    // Copy install command
+    const copyBtn = document.getElementById('copyInstall');
+    const toast = document.getElementById('toast');
+
+    copyBtn.addEventListener('click', () => {
+      navigator.clipboard.writeText('pip install terrarium').then(() => {
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 2000);
+      });
+    });
+
+    // Respect prefers-color-scheme
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+      if (!html.classList.contains('dark')) {
+        html.setAttribute('data-theme', 'light');
+        updateThemeIcon();
+      }
+    }
+  </script>
+</body>
+</html>

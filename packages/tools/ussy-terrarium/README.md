@@ -1,5 +1,7 @@
 # 🌿 Terrarium — Your Codebase Is a Living Ecosystem
 
+[![Demo](https://img.shields.io/badge/demo-live-4f98a3?style=flat-square)](https://terrarium.ussyco.de)
+
 Terrarium renders your codebase as a living ecosystem where modules are organisms, dependencies are food chains, and code health is visible as biological vitality.
 
 - **Healthy modules** are lush, green organisms 🌳
