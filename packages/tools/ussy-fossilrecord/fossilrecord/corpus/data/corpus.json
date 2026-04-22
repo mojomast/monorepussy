@@ -1,0 +1,204 @@
+{
+  "programs": [
+    {
+      "name": "Brainfuck Hello World",
+      "language": "Brainfuck",
+      "source": "++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->>+[<]<-]>>.>---.+++++++..+++.>>.<-.<.+++.------.--------.>>+.>++.",
+      "expected_behavior": "Prints 'Hello World!' followed by a newline",
+      "categories": ["minimalistic", "obfuscated", "concise"],
+      "difficulty": 2
+    },
+    {
+      "name": "Brainfuck Cat",
+      "language": "Brainfuck",
+      "source": ",[.,]",
+      "expected_behavior": "Echoes stdin to stdout (cat program)",
+      "categories": ["minimalistic", "concise"],
+      "difficulty": 1
+    },
+    {
+      "name": "Brainfuck Nested Loops",
+      "language": "Brainfuck",
+      "source": "+++++[>+++++[>++<-]<-]>>.",
+      "expected_behavior": "Computes 5*5*2=50 and outputs character with ASCII code 50 ('2')",
+      "categories": ["minimalistic", "obfuscated"],
+      "difficulty": 2
+    },
+    {
+      "name": "Befunge Hello World",
+      "language": "Befunge-93",
+      "source": "0\"!dlroW ,olleH\":v\n               v:_@#\n               >  ^",
+      "expected_behavior": "Prints 'Hello, World!' by pushing characters onto the stack in reverse and printing them",
+      "categories": ["2d", "obfuscated"],
+      "difficulty": 3
+    },
+    {
+      "name": "Befunge Quine",
+      "language": "Befunge-93",
+      "source": "01->1# +# :# 0# g# ,# :# 5# 8# *# 4# +# -# _@",
+      "expected_behavior": "Prints its own source code (quine)",
+      "categories": ["2d", "self-modifying", "obfuscated"],
+      "difficulty": 4
+    },
+    {
+      "name": "Whitespace Hello World",
+      "language": "Whitespace",
+      "source": "   \t  \t   \n\t\n     \t\t  \t \t\n\t\n     \t\t \t\t  \n\t\n     \t\t\t  \t\n\t\n     \t\t \t \t \n\t\n     \t    \n\t\n     \t  \t \t \n\t\n     \t\t\t\t \n\t\n     \t \t\t  \n\t\n     \t\t \t\t\t\n\t\n     \t\t\t  \n\t\n     \t   \t\n\t\n  \n\n\n",
+      "expected_behavior": "Prints 'Hello World' using only whitespace characters",
+      "categories": ["whitespace", "obfuscated"],
+      "difficulty": 3
+    },
+    {
+      "name": "INTERCAL Hello World",
+      "language": "INTERCAL",
+      "source": "DO ,1 <- #13\nPLEASE DO ,1 SUB #1 <- #238\nDO ,1 SUB #2 <- #112\nDO ,1 SUB #3 <- #112\nDO ,1 SUB #4 <- #0\nDO ,1 SUB #5 <- #64\nDO ,1 SUB #6 <- #64\nDO ,1 SUB #7 <- #48\nDO ,1 SUB #8 <- #26\nDO ,1 SUB #9 <- #244\nPLEASE DO ,1 SUB #10 <- #168\nDO ,1 SUB #11 <- #24\nDO ,1 SUB #12 <- #16\nDO ,1 SUB #13 <- #214\nPLEASE READ OUT ,1\nPLEASE GIVE UP",
+      "expected_behavior": "Prints 'Hello, World!' using INTERCAL's bizarre output encoding",
+      "categories": ["parody", "obfuscated"],
+      "difficulty": 4
+    },
+    {
+      "name": "Shakespeare Hello World",
+      "language": "Shakespeare",
+      "source": "The Infamous Hello World Program.\n\nRomeo, a young man with a remarkable patience.\nJuliet, a likewise young woman of remarkable grace.\nHamlet, a temporary variable.\n\n                    Act I: Hello World!\n\n                    Scene I: Letters.\n\n[Enter Romeo and Juliet]\n\nRomeo:\nYou pretty little warm thing!\n\n                    Scene II: Output.\n\nHamlet:\nSpeak your mind!\n\n[Exeunt]",
+      "expected_behavior": "Outputs characters using Shakespearean dialogue",
+      "categories": ["natural-language", "obfuscated"],
+      "difficulty": 4
+    },
+    {
+      "name": "GolfScript Hello World",
+      "language": "GolfScript",
+      "source": "'Hello World!'",
+      "expected_behavior": "Pushes the string 'Hello World!' onto the stack and outputs it",
+      "categories": ["concise", "obfuscated"],
+      "difficulty": 1
+    },
+    {
+      "name": "GolfScript Factorial",
+      "language": "GolfScript",
+      "source": "~{1\\{)*}/}:f;",
+      "expected_behavior": "Computes factorial of input number",
+      "categories": ["concise", "obfuscated"],
+      "difficulty": 3
+    },
+    {
+      "name": "Malbolge Hello World",
+      "language": "Malbolge",
+      "source": "(=<`#9]~6ZY327Uv4-Us0G&h9EfC]F{o}n2uSq1!x[N'iQW^~<",
+      "expected_behavior": "Prints 'Hello World!' — one of the hardest programs to write",
+      "categories": ["self-modifying", "obfuscated"],
+      "difficulty": 5
+    },
+    {
+      "name": "Piet Hello World",
+      "language": "Piet",
+      "source": "# Piet is a visual language using bitmap images\n# This represents a program that prints Hello World\n# Actual Piet programs are images with colored blocks\n# Codel size: 1px, using standard palette\n# The program pushes H(72), e(101), l(108), l(108), o(111)\n# then outputs each character",
+      "expected_behavior": "Prints 'Hello World' — program is encoded as a colored image",
+      "categories": ["visual", "obfuscated"],
+      "difficulty": 5
+    },
+    {
+      "name": "Jelly Hello World",
+      "language": "Jelly",
+      "source": "\u203d\u01c2\u012d\u00bb",
+      "expected_behavior": "Prints 'Hello World' using Jelly's string compression",
+      "categories": ["concise", "obfuscated"],
+      "difficulty": 2
+    },
+    {
+      "name": "APL Hello World",
+      "language": "APL",
+      "source": "\u2349\u2190'Hello World'",
+      "expected_behavior": "Prints 'Hello World'",
+      "categories": ["concise", "obfuscated"],
+      "difficulty": 1
+    },
+    {
+      "name": "Befunge Calculator",
+      "language": "Befunge-93",
+      "source": ">&\"0\"-:v v  _ v\n  >`!#v_   >  \n  >+    \\-  \n    @._",
+      "expected_behavior": "Reads two numbers and performs arithmetic based on direction",
+      "categories": ["2d", "obfuscated"],
+      "difficulty": 3
+    },
+    {
+      "name": "Brainfuck Adder",
+      "language": "Brainfuck",
+      "source": ",>,<<[->>-[->>+<<]>[-<+>]>[-<+>]<<]>[-]>>[-<<+>>]<<.",
+      "expected_behavior": "Reads two single-digit numbers and outputs their sum",
+      "categories": ["minimalistic", "obfuscated", "concise"],
+      "difficulty": 3
+    },
+    {
+      "name": "FALSE Fibonacci",
+      "language": "FALSE",
+      "source": "0 1 [\\$\\$\\$@+\\][\\.,]",
+      "expected_behavior": "Prints Fibonacci numbers",
+      "categories": ["concise", "obfuscated"],
+      "difficulty": 3
+    },
+    {
+      "name": "Chef Hello World",
+      "language": "Chef",
+      "source": "Hello World Souffle.\n\nIngredients.\n72 g haricot beans\n101 g butter\n108 g eggs\n108 g sugar\n111 g flour\n32 g olive oil\n87 g water\n111 g milk\n114 g zucchini\n100 g salmon\n33 g chocolate\n\nMethod.\nPut haricot beans into mixing bowl.\nPut butter into mixing bowl.\nPut eggs into mixing bowl.\nPut sugar into mixing bowl.\nPut flour into mixing bowl.\nPut olive oil into mixing bowl.\nPut water into mixing bowl.\nPut milk into mixing bowl.\nPut zucchini into mixing bowl.\nPut salmon into mixing bowl.\nPut chocolate into mixing bowl.\nPour contents of mixing bowl into baking dish.\n\nServes 1.",
+      "expected_behavior": "Prints 'Hello World!' using ASCII values of ingredient amounts",
+      "categories": ["natural-language", "parody", "obfuscated"],
+      "difficulty": 3
+    },
+    {
+      "name": "Whitespace Counter",
+      "language": "Whitespace",
+      "source": "   \t\t\t\n\t\n     \t\t  \n\t\n     \t \n\t\n     \t\t  \n\n\n",
+      "expected_behavior": "Pushes numbers and prints them — a simple counter using only whitespace",
+      "categories": ["whitespace", "obfuscated"],
+      "difficulty": 2
+    },
+    {
+      "name": "Brainfuck Quine",
+      "language": "Brainfuck",
+      "source": "->++>+++>+<<<[[->>[>>>]<[>>>]>>>[->>+<<]>[->+<]>]<<<[>+<<<+<]<[<]>>[>>>]<[>>>]>>>[->>+<<]>[->+<]>]<<<[>+<<<+<]<[<]>>>[>>>]>>>[-[->>+<<]>[-<+>]>]<<[<]<[-]>[-]<<[>+<-]<[<]>[[->>+<<]>[-<+>]>]<<[<]<[-]>[-]<<[>+<-]<[<]>[[->>+<<]>[-<+>]>]<<[<]<[-]>[-]<<[>+<-]<[<]>>>[[->>+<<]>[-<+>]>]<<[<]<[-]>[-]<<[>+<-]<[<]>>>[[->>+<<]>[-<+>]>]<<[<]<[-]>[-]<<[>+<-]<[<]>>>[[->>+<<]>[-<+>]>]<<[<]<[-]>[-]<<[>+<-]<[<]>>>[[->>+<<]>[-<+>]>]<<[<]<[-]>[-]<<[>+<-]<[<]>>>[[->>+<<]>[-<+>]>]<<[<]<[-]>[-]<<[>+<-]<[<]>>>]",
+      "expected_behavior": "A quine — outputs its own source code",
+      "categories": ["minimalistic", "self-modifying", "obfuscated"],
+      "difficulty": 5
+    },
+    {
+      "name": "INTERCAL Calculator",
+      "language": "INTERCAL",
+      "source": "DO WRITE IN .1\nDO WRITE IN .2\nPLEASE DO .3 <- .1 \"$.2\nPLEASE DO READ OUT .3\nPLEASE GIVE UP",
+      "expected_behavior": "Reads two numbers and outputs their sum using INTERCAL's mingle/select operations",
+      "categories": ["parody", "obfuscated"],
+      "difficulty": 4
+    },
+    {
+      "name": "GolfScript Quine",
+      "language": "GolfScript",
+      "source": "{'.~'}.~",
+      "expected_behavior": "A classic quine — prints its own source code",
+      "categories": ["concise", "obfuscated"],
+      "difficulty": 3
+    },
+    {
+      "name": "Befunge Self-Interpreter Fragment",
+      "language": "Befunge-93",
+      "source": "89p3p4p5p6p7p8p9p02p>02g1+:02p25*`#v_\n   v                                  <\n   >  02g1g02g8+g:78*\\-!#v_78*-!#v_\n   v   v                  <        <\n   >    >    >    >    v\n",
+      "expected_behavior": "A fragment of a Befunge self-interpreter — reads and interprets Befunge code",
+      "categories": ["2d", "self-modifying", "obfuscated"],
+      "difficulty": 5
+    },
+    {
+      "name": "APL Quine",
+      "language": "APL",
+      "source": "1\u2337\u2349NR 0",
+      "expected_behavior": "A quine that outputs its own source",
+      "categories": ["concise", "obfuscated"],
+      "difficulty": 3
+    },
+    {
+      "name": "Piet Fibonacci Fragment",
+      "language": "Piet",
+      "source": "# Piet Fibonacci program\n# Pushes 1, 1, then repeatedly:\n# Duplicate top, rotate, add, duplicate, output number\n# Codel sequence: push(1) push(1) [dup roll add dup out_num]",
+      "expected_behavior": "Generates Fibonacci sequence — encoded as colored image blocks",
+      "categories": ["visual", "obfuscated"],
+      "difficulty": 5
+    }
+  ]
+}
