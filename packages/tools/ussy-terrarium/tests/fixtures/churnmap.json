@@ -1,0 +1,17 @@
+{
+  "territories": [
+    {
+      "territory_id": "core-auth",
+      "modules": ["src/auth"]
+    },
+    {
+      "territory_id": "utils-helpers",
+      "modules": ["src/utils"]
+    }
+  ],
+  "files": {
+    "src/auth.py": {"territory_id": "core-auth"},
+    "src/utils.py": {"territory_id": "utils-helpers"},
+    "src/main.py": {"territory_id": "core-auth"}
+  }
+}

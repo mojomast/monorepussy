@@ -1,0 +1,15 @@
+{
+  "root": "tests/fixtures/sample_project",
+  "limbs": [
+    {
+      "path": "tests/fixtures/sample_project/src",
+      "type": "git-repo",
+      "state": {"head": "main", "dirty": true}
+    },
+    {
+      "path": "tests/fixtures/sample_project/tests",
+      "type": "bare-directory",
+      "state": {}
+    }
+  ]
+}

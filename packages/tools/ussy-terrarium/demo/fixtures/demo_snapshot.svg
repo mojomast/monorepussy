@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500">
+<rect width="800" height="500" fill="#1a1a2e" rx="10"/>
+<text x="400" y="30" fill="white" text-anchor="middle" font-size="18" font-weight="bold">🌿 Terrarium — Codebase Ecosystem</text>
+<text x="400" y="50" fill="white" text-anchor="middle" font-size="14">Health: 75/100 (GOOD)</text>
+<rect x="10" y="110" width="180" height="6" fill="#333" rx="3"/>
+<rect x="10" y="110" width="135" height="6" fill="#3498db" rx="3"/>
+<text x="100" y="80" fill="white" text-anchor="middle" font-size="24">🌱</text>
+<text x="100" y="100" fill="#3498db" text-anchor="middle" font-size="10">src/api.py</text>
+<text x="100" y="128" fill="#888" text-anchor="middle" font-size="9">75/100</text>
+<rect x="210" y="110" width="180" height="6" fill="#333" rx="3"/>
+<rect x="210" y="110" width="132" height="6" fill="#3498db" rx="3"/>
+<text x="300" y="80" fill="white" text-anchor="middle" font-size="24">🌱</text>
+<text x="300" y="100" fill="#3498db" text-anchor="middle" font-size="10">src/auth.py</text>
+<text x="300" y="128" fill="#888" text-anchor="middle" font-size="9">73/100</text>
+<rect x="410" y="110" width="180" height="6" fill="#333" rx="3"/>
+<rect x="410" y="110" width="135" height="6" fill="#3498db" rx="3"/>
+<text x="500" y="80" fill="white" text-anchor="middle" font-size="24">🌱</text>
+<text x="500" y="100" fill="#3498db" text-anchor="middle" font-size="10">src/cache.py</text>
+<text x="500" y="128" fill="#888" text-anchor="middle" font-size="9">75/100</text>
+<rect x="610" y="110" width="180" height="6" fill="#333" rx="3"/>
+<rect x="610" y="110" width="144" height="6" fill="#2ecc71" rx="3"/>
+<text x="700" y="80" fill="white" text-anchor="middle" font-size="24">🌱</text>
+<text x="700" y="100" fill="#2ecc71" text-anchor="middle" font-size="10">src/config.py</text>
+<text x="700" y="128" fill="#888" text-anchor="middle" font-size="9">80/100</text>
+<rect x="10" y="190" width="180" height="6" fill="#333" rx="3"/>
+<rect x="10" y="190" width="135" height="6" fill="#3498db" rx="3"/>
+<text x="100" y="160" fill="white" text-anchor="middle" font-size="24">🌱</text>
+<text x="100" y="180" fill="#3498db" text-anchor="middle" font-size="10">src/database.py</text>
+<text x="100" y="208" fill="#888" text-anchor="middle" font-size="9">75/100</text>
+<rect x="210" y="190" width="180" height="6" fill="#333" rx="3"/>
+<rect x="210" y="190" width="135" height="6" fill="#3498db" rx="3"/>
+<text x="300" y="160" fill="white" text-anchor="middle" font-size="24">🌱</text>
+<text x="300" y="180" fill="#3498db" text-anchor="middle" font-size="10">src/integrations.py</text>
+<text x="300" y="208" fill="#888" text-anchor="middle" font-size="9">75/100</text>
+<rect x="410" y="190" width="180" height="6" fill="#333" rx="3"/>
+<rect x="410" y="190" width="135" height="6" fill="#3498db" rx="3"/>
+<text x="500" y="160" fill="white" text-anchor="middle" font-size="24">🌱</text>
+<text x="500" y="180" fill="#3498db" text-anchor="middle" font-size="10">src/logging_utils.py</text>
+<text x="500" y="208" fill="#888" text-anchor="middle" font-size="9">75/100</text>
+<rect x="610" y="190" width="180" height="6" fill="#333" rx="3"/>
+<rect x="610" y="190" width="135" height="6" fill="#3498db" rx="3"/>
+<text x="700" y="160" fill="white" text-anchor="middle" font-size="24">🌱</text>
+<text x="700" y="180" fill="#3498db" text-anchor="middle" font-size="10">src/main.py</text>
+<text x="700" y="208" fill="#888" text-anchor="middle" font-size="9">75/100</text>
+<rect x="10" y="270" width="180" height="6" fill="#333" rx="3"/>
+<rect x="10" y="270" width="135" height="6" fill="#3498db" rx="3"/>
+<text x="100" y="240" fill="white" text-anchor="middle" font-size="24">🌱</text>
+<text x="100" y="260" fill="#3498db" text-anchor="middle" font-size="10">src/metrics.py</text>
+<text x="100" y="288" fill="#888" text-anchor="middle" font-size="9">75/100</text>
+<rect x="210" y="270" width="180" height="6" fill="#333" rx="3"/>
+<rect x="210" y="270" width="144" height="6" fill="#2ecc71" rx="3"/>
+<text x="300" y="240" fill="white" text-anchor="middle" font-size="24">🌱</text>
+<text x="300" y="260" fill="#2ecc71" text-anchor="middle" font-size="10">src/models.py</text>
+<text x="300" y="288" fill="#888" text-anchor="middle" font-size="9">80/100</text>
+<rect x="410" y="270" width="180" height="6" fill="#333" rx="3"/>
+<rect x="410" y="270" width="135" height="6" fill="#3498db" rx="3"/>
+<text x="500" y="240" fill="white" text-anchor="middle" font-size="24">🌱</text>
+<text x="500" y="260" fill="#3498db" text-anchor="middle" font-size="10">src/notifications.py</text>
+<text x="500" y="288" fill="#888" text-anchor="middle" font-size="9">75/100</text>
+<rect x="610" y="270" width="180" height="6" fill="#333" rx="3"/>
+<rect x="610" y="270" width="114" height="6" fill="#3498db" rx="3"/>
+<text x="700" y="240" fill="white" text-anchor="middle" font-size="24">🌱</text>
+<text x="700" y="260" fill="#3498db" text-anchor="middle" font-size="10">src/schemas.py</text>
+<text x="700" y="288" fill="#888" text-anchor="middle" font-size="9">63/100</text>
+<rect x="10" y="350" width="180" height="6" fill="#333" rx="3"/>
+<rect x="10" y="350" width="135" height="6" fill="#3498db" rx="3"/>
+<text x="100" y="320" fill="white" text-anchor="middle" font-size="24">🌱</text>
+<text x="100" y="340" fill="#3498db" text-anchor="middle" font-size="10">src/search.py</text>
+<text x="100" y="368" fill="#888" text-anchor="middle" font-size="9">75/100</text>
+<rect x="210" y="350" width="180" height="6" fill="#333" rx="3"/>
+<rect x="210" y="350" width="135" height="6" fill="#3498db" rx="3"/>
+<text x="300" y="320" fill="white" text-anchor="middle" font-size="24">🌱</text>
+<text x="300" y="340" fill="#3498db" text-anchor="middle" font-size="10">src/test_helpers.py</text>
+<text x="300" y="368" fill="#888" text-anchor="middle" font-size="9">75/100</text>
+<rect x="410" y="350" width="180" height="6" fill="#333" rx="3"/>
+<rect x="410" y="350" width="126" height="6" fill="#3498db" rx="3"/>
+<text x="500" y="320" fill="white" text-anchor="middle" font-size="24">🌱</text>
+<text x="500" y="340" fill="#3498db" text-anchor="middle" font-size="10">src/utils.py</text>
+<text x="500" y="368" fill="#888" text-anchor="middle" font-size="9">70/100</text>
+<rect x="610" y="350" width="180" height="6" fill="#333" rx="3"/>
+<rect x="610" y="350" width="135" height="6" fill="#3498db" rx="3"/>
+<text x="700" y="320" fill="white" text-anchor="middle" font-size="24">🌱</text>
+<text x="700" y="340" fill="#3498db" text-anchor="middle" font-size="10">src/worker.py</text>
+<text x="700" y="368" fill="#888" text-anchor="middle" font-size="9">75/100</text>
+<rect x="10" y="430" width="180" height="6" fill="#333" rx="3"/>
+<rect x="10" y="430" width="144" height="6" fill="#2ecc71" rx="3"/>
+<text x="100" y="400" fill="white" text-anchor="middle" font-size="24">🌱</text>
+<text x="100" y="420" fill="#2ecc71" text-anchor="middle" font-size="10">tests/test_api.py</text>
+<text x="100" y="448" fill="#888" text-anchor="middle" font-size="9">80/100</text>
+<rect x="210" y="430" width="180" height="6" fill="#333" rx="3"/>
+<rect x="210" y="430" width="135" height="6" fill="#3498db" rx="3"/>
+<text x="300" y="400" fill="white" text-anchor="middle" font-size="24">🌱</text>
+<text x="300" y="420" fill="#3498db" text-anchor="middle" font-size="10">tests/test_auth.py</text>
+<text x="300" y="448" fill="#888" text-anchor="middle" font-size="9">75/100</text>
+<rect x="410" y="430" width="180" height="6" fill="#333" rx="3"/>
+<rect x="410" y="430" width="135" height="6" fill="#3498db" rx="3"/>
+<text x="500" y="400" fill="white" text-anchor="middle" font-size="24">🌱</text>
+<text x="500" y="420" fill="#3498db" text-anchor="middle" font-size="10">tests/test_utils.py</text>
+<text x="500" y="448" fill="#888" text-anchor="middle" font-size="9">75/100</text>
+</svg>

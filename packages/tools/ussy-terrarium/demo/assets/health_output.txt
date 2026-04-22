@@ -1,0 +1,4 @@
+Ecosystem Health: 75/100 (GOOD)
+  3 thriving, 16 healthy, 0 stressed, 0 critical, 0 dead
+  Most critical: src/schemas.py (health: 63/100)
+  Healthiest: src/config.py (health: 80/100)

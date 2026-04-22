@@ -1,0 +1,21 @@
+{
+  "modules": [
+    {
+      "path": "src/auth.py",
+      "compartment": "I",
+      "patterns": ["bare-except", "print-debugging"]
+    },
+    {
+      "path": "src/utils.py",
+      "compartment": "S",
+      "patterns": []
+    },
+    {
+      "path": "src/main.py",
+      "compartment": "R",
+      "patterns": ["bare-except"]
+    }
+  ],
+  "total_modules": 3,
+  "infected_count": 1
+}

@@ -1,0 +1,32 @@
+{
+    "files": {
+        "src/main.py": {
+            "summary": {
+                "covered_lines": 8,
+                "num_statements": 10,
+                "percent_covered": 80.0
+            }
+        },
+        "src/auth.py": {
+            "summary": {
+                "covered_lines": 15,
+                "num_statements": 35,
+                "percent_covered": 42.85
+            }
+        },
+        "src/utils.py": {
+            "summary": {
+                "covered_lines": 18,
+                "num_statements": 19,
+                "percent_covered": 94.7
+            }
+        },
+        "src/deprecated.py": {
+            "summary": {
+                "covered_lines": 0,
+                "num_statements": 8,
+                "percent_covered": 0.0
+            }
+        }
+    }
+}

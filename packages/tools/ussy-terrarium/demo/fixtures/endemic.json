@@ -1,0 +1,22 @@
+{
+  "modules": [
+    {"path": "src/api.py", "compartment": "S", "patterns": []},
+    {"path": "src/auth.py", "compartment": "I", "patterns": ["bare-except", "print-debugging", "hardcoded-secrets"]},
+    {"path": "src/cache.py", "compartment": "S", "patterns": []},
+    {"path": "src/config.py", "compartment": "S", "patterns": []},
+    {"path": "src/database.py", "compartment": "E", "patterns": ["sql-injection-risk"]},
+    {"path": "src/integrations.py", "compartment": "I", "patterns": ["missing-timeout", "bare-except"]},
+    {"path": "src/logging_utils.py", "compartment": "S", "patterns": []},
+    {"path": "src/main.py", "compartment": "S", "patterns": []},
+    {"path": "src/metrics.py", "compartment": "S", "patterns": []},
+    {"path": "src/models.py", "compartment": "S", "patterns": []},
+    {"path": "src/notifications.py", "compartment": "E", "patterns": ["missing-error-handling"]},
+    {"path": "src/schemas.py", "compartment": "I", "patterns": ["complex-validation", "deep-nesting"]},
+    {"path": "src/search.py", "compartment": "S", "patterns": []},
+    {"path": "src/test_helpers.py", "compartment": "S", "patterns": []},
+    {"path": "src/utils.py", "compartment": "S", "patterns": []},
+    {"path": "src/worker.py", "compartment": "E", "patterns": ["thread-safety-concern"]}
+  ],
+  "total_modules": 16,
+  "infected_count": 3
+}

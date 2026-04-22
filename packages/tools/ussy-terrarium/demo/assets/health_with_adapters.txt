@@ -1,0 +1,4 @@
+Ecosystem Health: 57/100 (FAIR)
+  1 thriving, 11 healthy, 4 stressed, 3 critical, 0 dead
+  Most critical: src/schemas.py (health: 2/100)
+  Healthiest: tests/test_api.py (health: 80/100)

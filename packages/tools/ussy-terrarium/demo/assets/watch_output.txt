@@ -1,0 +1,34 @@
+╔════════════════════════════════════════════════════════════════════════════════╗
+║ 🌿 TERRARIUM — Codebase Ecosystem                                           ║
+║────────────────────────────────────────────────────────────────────────────────║
+║  Ecosystem Health: 75/100 (GOOD)
+║
+║  Organisms: 3 thriving, 16 healthy
+║────────────────────────────────────────────────────────────────────────────────║
+║  🌲📁 src/
+║    🌱 src/config.py [80] 🌱
+║    🌱 src/models.py [80] 🌱
+║    🌱 src/api.py [75] 🌱
+║    🌱 src/cache.py [75] 🌱
+║    🌱 src/database.py [75] 🌱
+║    🌱 src/integrations.py [75] 🌱
+║    🌱 src/logging_utils.py [75] 🌱
+║    🌱 src/main.py [75] 🌱
+║    🌱 src/metrics.py [75] 🌱
+║    🌱 src/notifications.py [75] 🌱
+║    🌱 src/search.py [75] 🌱
+║    🌱 src/test_helpers.py [75] 🌱
+║    🌱 src/worker.py [75] 🌱
+║    🌱 src/auth.py [73] 🌱
+║    🌱 src/utils.py [70] 🌱
+║    🌱 src/schemas.py [63] 🌱
+║
+║  🌲📁 tests/
+║    🌱 tests/test_api.py [80] 🌱
+║    🌱 tests/test_auth.py [75] 🌱
+║    🌱 tests/test_utils.py [75] 🌱
+║
+║────────────────────────────────────────────────────────────────────────────────║
+║  ⚠️  Most critical: src/schemas.py (health: 63/100)
+║  ✨ Healthiest: src/config.py (health: 80/100)
+╚════════════════════════════════════════════════════════════════════════════════╝

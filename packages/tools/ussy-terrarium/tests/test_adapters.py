@@ -1,0 +1,694 @@
+"""Tests for ussyverse adapter integrations."""
+
+import json
+import os
+from typing import Dict
+
+import pytest
+
+from terrarium.adapters.base import BaseAdapter
+from terrarium.adapters.fatigue import FatigueAdapter
+from terrarium.adapters.endemic import EndemicAdapter
+from terrarium.adapters.sentinel import SentinelAdapter
+from terrarium.adapters.kompressi import KompressiAdapter
+from terrarium.adapters.churnmap import ChurnmapAdapter
+from terrarium.adapters.seral import SeralAdapter
+from terrarium.adapters.proprioception import ProprioceptionAdapter
+from terrarium.adapters.snapshot import SnapshotAdapter
+from terrarium.adapters import load_adapters, merge_health_states, reset_adapter_cache
+from terrarium.ecosystem.model import OrganismHealthState
+
+
+FIXTURES_DIR = os.path.join(os.path.dirname(__file__), "fixtures")
+
+
+class TestFatigueAdapter:
+    """Unit tests for the fatigueussy adapter."""
+
+    def test_load_maps_stress_intensity_to_crack_intensity(self):
+        path = os.path.join(FIXTURES_DIR, "fatigue.json")
+        adapter = FatigueAdapter(data_path=path)
+        states = adapter.load()
+
+        assert len(states) == 3
+        assert "src/auth.py" in states
+        assert "src/utils.py" in states
+        assert "src/main.py" in states
+
+    def test_crack_intensity_normalized(self):
+        path = os.path.join(FIXTURES_DIR, "fatigue.json")
+        adapter = FatigueAdapter(data_path=path)
+        states = adapter.load()
+
+        # auth.py has highest K (150), so crack_intensity should be highest
+        auth_state = states["src/auth.py"]
+        assert auth_state.crack_intensity > 0.9
+        assert auth_state.crack_intensity <= 1.0
+
+        # utils.py has K=20, moderate intensity (20/100 = 0.2)
+        utils_state = states["src/utils.py"]
+        assert 0.1 < utils_state.crack_intensity <= 0.2
+
+        # main.py has K=5, low intensity (5/100 = 0.05)
+        main_state = states["src/main.py"]
+        assert main_state.crack_intensity < 0.1
+
+    def test_delta_k_boosts_crack_intensity(self):
+        path = os.path.join(FIXTURES_DIR, "fatigue.json")
+        adapter = FatigueAdapter(data_path=path)
+        states = adapter.load()
+
+        # auth.py has delta_K=10, main.py has delta_K=2
+        auth_state = states["src/auth.py"]
+        main_state = states["src/main.py"]
+
+        # Both should get a growth boost, auth.py more so
+        assert auth_state.crack_intensity > 0.9
+        assert main_state.crack_intensity > 0.03
+
+    def test_vitality_inverse_to_crack(self):
+        path = os.path.join(FIXTURES_DIR, "fatigue.json")
+        adapter = FatigueAdapter(data_path=path)
+        states = adapter.load()
+
+        assert states["src/auth.py"].vitality < states["src/utils.py"].vitality
+        assert states["src/utils.py"].vitality < 1.0
+
+    def test_empty_data_returns_empty(self):
+        adapter = FatigueAdapter(data_path=None)
+        assert adapter.load() == {}
+
+    def test_missing_stress_intensities_returns_empty(self):
+        path = os.path.join(FIXTURES_DIR, "fatigue.json")
+        # Write temp file without stress_intensities
+        with open(path, "r") as f:
+            data = json.load(f)
+        data.pop("stress_intensities")
+        tmp_path = os.path.join(FIXTURES_DIR, "_tmp_fatigue_empty.json")
+        with open(tmp_path, "w") as f:
+            json.dump(data, f)
+        try:
+            adapter = FatigueAdapter(data_path=tmp_path)
+            assert adapter.load() == {}
+        finally:
+            os.remove(tmp_path)
+
+
+class TestEndemicAdapter:
+    """Unit tests for the endemicussy adapter."""
+
+    def test_load_modules_list_format(self):
+        path = os.path.join(FIXTURES_DIR, "endemic.json")
+        adapter = EndemicAdapter(data_path=path)
+        states = adapter.load()
+
+        assert len(states) == 3
+        assert states["src/auth.py"].infection_state == "I"
+        assert states["src/utils.py"].infection_state == "S"
+        assert states["src/main.py"].infection_state == "R"
+
+    def test_load_flat_mapping_format(self):
+        flat_data = {
+            "src/a.py": {"compartment": "E"},
+            "src/b.py": {"compartment": "I"},
+        }
+        tmp_path = os.path.join(FIXTURES_DIR, "_tmp_endemic_flat.json")
+        with open(tmp_path, "w") as f:
+            json.dump(flat_data, f)
+        try:
+            adapter = EndemicAdapter(data_path=tmp_path)
+            states = adapter.load()
+            assert states["src/a.py"].infection_state == "E"
+            assert states["src/b.py"].infection_state == "I"
+        finally:
+            os.remove(tmp_path)
+
+    def test_vitality_by_state(self):
+        path = os.path.join(FIXTURES_DIR, "endemic.json")
+        adapter = EndemicAdapter(data_path=path)
+        states = adapter.load()
+
+        assert states["src/auth.py"].vitality == 0.3  # I
+        assert states["src/utils.py"].vitality == 1.0  # S
+        assert states["src/main.py"].vitality == 0.8  # R
+
+    def test_invalid_state_defaults_to_s(self):
+        data = {"modules": [{"path": "src/x.py", "compartment": "X"}]}
+        tmp_path = os.path.join(FIXTURES_DIR, "_tmp_endemic_bad.json")
+        with open(tmp_path, "w") as f:
+            json.dump(data, f)
+        try:
+            adapter = EndemicAdapter(data_path=tmp_path)
+            states = adapter.load()
+            assert states["src/x.py"].infection_state == "S"
+        finally:
+            os.remove(tmp_path)
+
+    def test_empty_data_returns_empty(self):
+        adapter = EndemicAdapter(data_path=None)
+        assert adapter.load() == {}
+
+
+class TestSentinelAdapter:
+    """Unit tests for the sentinelussy adapter."""
+
+    def test_load_files_format(self):
+        path = os.path.join(FIXTURES_DIR, "sentinel.json")
+        adapter = SentinelAdapter(data_path=path)
+        states = adapter.load()
+
+        assert len(states) == 3
+        assert states["src/auth.py"].anomaly_active is True
+        assert states["src/utils.py"].anomaly_active is False
+        # main.py has only detectors with fp_rate > 0.5, so it is suppressed
+        assert states["src/main.py"].anomaly_active is False
+
+    def test_suppress_high_false_positive_rate(self):
+        path = os.path.join(FIXTURES_DIR, "sentinel.json")
+        adapter = SentinelAdapter(data_path=path)
+        states = adapter.load()
+
+        # main.py has only detectors with fp_rate > 0.5, so should be suppressed
+        assert states["src/main.py"].anomaly_active is False
+        assert states["src/main.py"].vitality > 0.9
+
+    def test_vitality_inverse_to_anomaly_score(self):
+        path = os.path.join(FIXTURES_DIR, "sentinel.json")
+        adapter = SentinelAdapter(data_path=path)
+        states = adapter.load()
+
+        assert states["src/auth.py"].vitality == 1.0 - 0.73
+        assert states["src/utils.py"].vitality == 1.0 - 0.15
+
+    def test_load_detections_list_format(self):
+        data = {
+            "detections": [
+                {
+                    "source_file": "src/a.py",
+                    "strength": 0.6,
+                    "false_positive_rate": 0.1,
+                },
+                {
+                    "source_file": "src/a.py",
+                    "strength": 0.3,
+                    "false_positive_rate": 0.1,
+                },
+            ]
+        }
+        tmp_path = os.path.join(FIXTURES_DIR, "_tmp_sentinel_det.json")
+        with open(tmp_path, "w") as f:
+            json.dump(data, f)
+        try:
+            adapter = SentinelAdapter(data_path=tmp_path)
+            states = adapter.load()
+            assert states["src/a.py"].anomaly_active is True
+            assert states["src/a.py"].vitality == 1.0 - 0.6
+        finally:
+            os.remove(tmp_path)
+
+    def test_empty_data_returns_empty(self):
+        adapter = SentinelAdapter(data_path=None)
+        assert adapter.load() == {}
+
+
+class TestAdapterIntegration:
+    """Integration tests loading all three adapters simultaneously."""
+
+    def test_merge_health_states_all_three(self):
+        fatigue_path = os.path.join(FIXTURES_DIR, "fatigue.json")
+        endemic_path = os.path.join(FIXTURES_DIR, "endemic.json")
+        sentinel_path = os.path.join(FIXTURES_DIR, "sentinel.json")
+
+        adapters = load_adapters(
+            fatigue_data=fatigue_path,
+            endemic_data=endemic_path,
+            sentinel_data=sentinel_path,
+        )
+
+        # 3 explicit + 2 stub adapters (proprioception, snapshot)
+        assert len(adapters) == 5
+        merged = merge_health_states(adapters)
+
+        # All three files should be present
+        assert "src/auth.py" in merged
+        assert "src/utils.py" in merged
+        assert "src/main.py" in merged
+
+        # auth.py: high crack + infected + anomaly
+        auth = merged["src/auth.py"]
+        assert auth.crack_intensity > 0.9
+        assert auth.infection_state == "I"
+        assert auth.anomaly_active is True
+        assert auth.vitality < 1.0
+
+        # utils.py: low crack + susceptible + no anomaly
+        utils = merged["src/utils.py"]
+        assert 0.0 < utils.crack_intensity <= 0.2
+        assert utils.infection_state == "S"
+        assert utils.anomaly_active is False
+
+        # main.py: low crack + recovered + suppressed anomaly
+        main = merged["src/main.py"]
+        assert main.crack_intensity < 0.1
+        assert main.infection_state == "R"
+        assert main.anomaly_active is False  # suppressed by high fp rate
+
+    def test_merge_prioritizes_worst_vitality(self):
+        """When multiple adapters report vitality, the lowest (worst) wins."""
+        tmp_path1 = os.path.join(FIXTURES_DIR, "_tmp_merge1.json")
+        tmp_path2 = os.path.join(FIXTURES_DIR, "_tmp_merge2.json")
+
+        with open(tmp_path1, "w") as f:
+            json.dump({"modules": [{"path": "src/x.py", "compartment": "S"}]}, f)
+        with open(tmp_path2, "w") as f:
+            json.dump(
+                {
+                    "files": {
+                        "src/x.py": {
+                            "anomaly_score": 0.5,
+                            "is_anomalous": True,
+                            "detections": [{"false_positive_rate": 0.1}],
+                        }
+                    }
+                },
+                f,
+            )
+
+        try:
+            adapters = load_adapters(
+                endemic_data=tmp_path1,
+                sentinel_data=tmp_path2,
+            )
+            merged = merge_health_states(adapters)
+            # endemic S = vitality 1.0, sentinel 0.5 = vitality 0.5
+            assert merged["src/x.py"].vitality == 0.5
+        finally:
+            os.remove(tmp_path1)
+            os.remove(tmp_path2)
+
+    def test_graceful_degradation_no_adapters(self):
+        adapters = load_adapters()
+        # Stub adapters (proprioception, snapshot) are always available
+        assert len(adapters) == 2
+        merged = merge_health_states(adapters)
+        assert merged == {}
+
+    def test_partial_adapters(self):
+        fatigue_path = os.path.join(FIXTURES_DIR, "fatigue.json")
+        adapters = load_adapters(fatigue_data=fatigue_path)
+        # 1 explicit + 2 stub adapters
+        assert len(adapters) == 3
+        merged = merge_health_states(adapters)
+        assert len(merged) == 3
+        assert all(s.crack_intensity > 0 for s in merged.values())
+        assert all(s.infection_state == "S" for s in merged.values())
+        assert all(s.anomaly_active is False for s in merged.values())
+
+
+class TestFatigueRegression:
+    """Regression tests for known fatigue.py issues."""
+
+    def test_low_k_repo_does_not_produce_false_critical(self):
+        """A healthy repo where max K is 2.0 should NOT produce
+        crack_intensity = 1.0 for all files."""
+        data = {
+            "stress_intensities": {
+                "src/a.py": {"K": 2.0, "delta_K": 0.0},
+                "src/b.py": {"K": 1.0, "delta_K": 0.0},
+                "src/c.py": {"K": 0.5, "delta_K": 0.0},
+            }
+        }
+        tmp_path = os.path.join(FIXTURES_DIR, "_tmp_fatigue_low_k.json")
+        with open(tmp_path, "w") as f:
+            json.dump(data, f)
+        try:
+            adapter = FatigueAdapter(data_path=tmp_path)
+            states = adapter.load()
+            # With the ceiling at 100.0, 2.0/100.0 = 0.02, not 1.0
+            assert states["src/a.py"].crack_intensity == 0.02
+            assert states["src/b.py"].crack_intensity == 0.01
+            assert states["src/c.py"].crack_intensity == 0.005
+        finally:
+            os.remove(tmp_path)
+
+    def test_configurable_ceiling_overrides_default(self):
+        data = {
+            "stress_intensities": {
+                "src/a.py": {"K": 50.0, "delta_K": 0.0},
+            }
+        }
+        tmp_path = os.path.join(FIXTURES_DIR, "_tmp_fatigue_ceiling.json")
+        with open(tmp_path, "w") as f:
+            json.dump(data, f)
+        try:
+            adapter = FatigueAdapter(data_path=tmp_path, max_k_ceiling=25.0)
+            states = adapter.load()
+            # 50.0 capped to 25.0 gives intensity 2.0, clamped to 1.0
+            assert states["src/a.py"].crack_intensity == 1.0
+        finally:
+            os.remove(tmp_path)
+
+
+class TestEndemicRegression:
+    """Regression tests for known endemic.py issues."""
+
+    def test_flat_mapping_skips_metadata_keys(self):
+        """Metadata keys without path separators should be skipped."""
+        data = {
+            "total_modules": 3,
+            "src/a.py": {"compartment": "I"},
+            "metadata": {"version": "1.0"},
+        }
+        tmp_path = os.path.join(FIXTURES_DIR, "_tmp_endemic_meta.json")
+        with open(tmp_path, "w") as f:
+            json.dump(data, f)
+        try:
+            adapter = EndemicAdapter(data_path=tmp_path)
+            states = adapter.load()
+            assert "src/a.py" in states
+            assert states["src/a.py"].infection_state == "I"
+            assert "metadata" not in states
+            assert "total_modules" not in states
+        finally:
+            os.remove(tmp_path)
+
+
+class TestKompressiAdapter:
+    """Unit tests for the kompressiussy adapter."""
+
+    def test_load_maps_id_to_complexity_score(self):
+        path = os.path.join(FIXTURES_DIR, "kompressi.json")
+        adapter = KompressiAdapter(data_path=path)
+        states = adapter.load()
+
+        assert len(states) == 3
+        assert "src/auth.py" in states
+        assert "src/utils.py" in states
+        assert "src/main.py" in states
+
+    def test_complexity_score_normalized(self):
+        path = os.path.join(FIXTURES_DIR, "kompressi.json")
+        adapter = KompressiAdapter(data_path=path)
+        states = adapter.load()
+
+        # utils.py has highest id (10.15), so complexity_score should be 1.0
+        assert states["src/utils.py"].complexity_score == 1.0
+
+        # auth.py has id=4.12
+        assert states["src/auth.py"].complexity_score == pytest.approx(
+            4.12 / 10.15, abs=0.001
+        )
+
+        # main.py has id=8.0
+        assert states["src/main.py"].complexity_score == pytest.approx(
+            8.0 / 10.15, abs=0.001
+        )
+
+    def test_vitality_penalty(self):
+        path = os.path.join(FIXTURES_DIR, "kompressi.json")
+        adapter = KompressiAdapter(data_path=path)
+        states = adapter.load()
+
+        # utils.py complexity=1.0 → vitality = 1.0 - 0.2 = 0.8
+        assert states["src/utils.py"].vitality == pytest.approx(0.8, abs=0.001)
+
+        # auth.py complexity ≈ 0.406 → vitality ≈ 1.0 - 0.081 = 0.919
+        expected = 1.0 - (4.12 / 10.15) * 0.2
+        assert states["src/auth.py"].vitality == pytest.approx(expected, abs=0.001)
+
+    def test_empty_data_returns_empty(self):
+        adapter = KompressiAdapter(data_path=None)
+        assert adapter.load() == {}
+
+
+class TestChurnmapAdapter:
+    """Unit tests for the churnmap adapter."""
+
+    def test_load_maps_files_to_territories(self):
+        path = os.path.join(FIXTURES_DIR, "churnmap.json")
+        adapter = ChurnmapAdapter(data_path=path)
+        states = adapter.load()
+
+        assert len(states) == 3
+        assert states["src/auth.py"].territory_id == "core-auth"
+        assert states["src/utils.py"].territory_id == "utils-helpers"
+        assert states["src/main.py"].territory_id == "core-auth"
+
+    def test_territory_does_not_affect_vitality(self):
+        path = os.path.join(FIXTURES_DIR, "churnmap.json")
+        adapter = ChurnmapAdapter(data_path=path)
+        states = adapter.load()
+
+        for state in states.values():
+            assert state.vitality == 1.0
+            assert state.crack_intensity == 0.0
+            assert state.anomaly_active is False
+
+    def test_empty_data_returns_empty(self):
+        adapter = ChurnmapAdapter(data_path=None)
+        assert adapter.load() == {}
+
+
+class TestSeralAdapter:
+    """Unit tests for the seralussy adapter."""
+
+    def test_load_maps_stages(self):
+        path = os.path.join(FIXTURES_DIR, "seral.json")
+        adapter = SeralAdapter(data_path=path)
+        states = adapter.load()
+
+        assert len(states) == 4
+        assert states["src/auth.py"].succession_stage == "climax"
+        assert states["src/utils.py"].succession_stage == "seral"
+        assert states["src/main.py"].succession_stage == "pioneer"
+        assert states["src/legacy.py"].succession_stage == "pioneer"
+
+    def test_stage_does_not_affect_vitality(self):
+        path = os.path.join(FIXTURES_DIR, "seral.json")
+        adapter = SeralAdapter(data_path=path)
+        states = adapter.load()
+
+        for state in states.values():
+            assert state.vitality == 1.0
+
+    def test_unknown_stage_defaults_to_seral(self):
+        data = {"src/x.py": "unknown_stage"}
+        tmp_path = os.path.join(FIXTURES_DIR, "_tmp_seral_unknown.json")
+        with open(tmp_path, "w") as f:
+            json.dump(data, f)
+        try:
+            adapter = SeralAdapter(data_path=tmp_path)
+            states = adapter.load()
+            assert states["src/x.py"].succession_stage == "seral"
+        finally:
+            os.remove(tmp_path)
+
+    def test_empty_data_returns_empty(self):
+        adapter = SeralAdapter(data_path=None)
+        assert adapter.load() == {}
+
+
+class TestBaseAdapter:
+    """Unit tests for BaseAdapter contract."""
+
+    def test_is_available_with_data_path(self):
+        adapter = FatigueAdapter(data_path="tests/fixtures/fatigue.json")
+        assert adapter.is_available() is True
+
+    def test_is_available_without_data_path(self):
+        adapter = FatigueAdapter(data_path=None)
+        assert adapter.is_available() is False
+
+    def test_is_available_in_stub_mode(self):
+        adapter = ProprioceptionAdapter(data_path=None)
+        # ProprioceptionAdapter sets STUB_MODE when package is not installed
+        assert adapter.STUB_MODE is True
+        assert adapter.is_available() is True
+
+
+class TestAdapterCache:
+    """Tests for adapter cache management."""
+
+    def test_reset_adapter_cache_clears_state(self):
+        # Discover once to populate cache
+        _ = load_adapters()
+        # Reset should clear it
+        reset_adapter_cache()
+        # Next call should re-discover (stub adapters always present)
+        adapters = load_adapters()
+        assert len(adapters) == 2
+
+
+class TestSixAdapterIntegration:
+    """Integration tests loading all six adapters simultaneously."""
+
+    def test_merge_health_states_all_six(self):
+        fatigue_path = os.path.join(FIXTURES_DIR, "fatigue.json")
+        endemic_path = os.path.join(FIXTURES_DIR, "endemic.json")
+        sentinel_path = os.path.join(FIXTURES_DIR, "sentinel.json")
+        kompressi_path = os.path.join(FIXTURES_DIR, "kompressi.json")
+        churnmap_path = os.path.join(FIXTURES_DIR, "churnmap.json")
+        seral_path = os.path.join(FIXTURES_DIR, "seral.json")
+
+        adapters = load_adapters(
+            fatigue_data=fatigue_path,
+            endemic_data=endemic_path,
+            sentinel_data=sentinel_path,
+            kompressi_data=kompressi_path,
+            churnmap_data=churnmap_path,
+            seral_data=seral_path,
+        )
+
+        # 6 explicit + 2 stub adapters (proprioception, snapshot)
+        assert len(adapters) == 8
+        merged = merge_health_states(adapters)
+
+        # Common files should have merged state from all applicable adapters
+        assert "src/auth.py" in merged
+        auth = merged["src/auth.py"]
+        assert auth.crack_intensity > 0.9
+        assert auth.infection_state == "I"
+        assert auth.anomaly_active is True
+        assert auth.complexity_score > 0.0
+        assert auth.territory_id == "core-auth"
+        assert auth.succession_stage == "climax"
+
+        assert "src/utils.py" in merged
+        utils = merged["src/utils.py"]
+        assert utils.infection_state == "S"
+        assert utils.anomaly_active is False
+        assert utils.territory_id == "utils-helpers"
+        assert utils.succession_stage == "seral"
+
+        assert "src/main.py" in merged
+        main = merged["src/main.py"]
+        assert main.infection_state == "R"
+        assert main.anomaly_active is False  # suppressed
+        assert main.succession_stage == "pioneer"
+
+    def test_merge_complexity_max_wins(self):
+        state_low = OrganismHealthState(path="src/x.py", complexity_score=0.3)
+        state_high = OrganismHealthState(path="src/x.py", complexity_score=0.8)
+
+        class MockAdapter(BaseAdapter):
+            name = "mock"
+
+            def load(self):
+                return {"src/x.py": state_low}
+
+        class MockAdapter2(BaseAdapter):
+            name = "mock2"
+
+            def load(self):
+                return {"src/x.py": state_high}
+
+        merged = merge_health_states([MockAdapter(), MockAdapter2()])
+        assert merged["src/x.py"].complexity_score == 0.8
+
+    def test_merge_territory_first_non_none_wins(self):
+        state_a = OrganismHealthState(path="src/x.py", territory_id="alpha")
+        state_b = OrganismHealthState(path="src/x.py", territory_id="beta")
+
+        class MockAdapter(BaseAdapter):
+            name = "mock"
+
+            def load(self):
+                return {"src/x.py": state_a}
+
+        class MockAdapter2(BaseAdapter):
+            name = "mock2"
+
+            def load(self):
+                return {"src/x.py": state_b}
+
+        merged = merge_health_states([MockAdapter(), MockAdapter2()])
+        # First non-None wins (from first adapter)
+        assert merged["src/x.py"].territory_id == "alpha"
+
+    def test_merge_succession_most_advanced_wins(self):
+        state_pioneer = OrganismHealthState(path="src/x.py", succession_stage="pioneer")
+        state_climax = OrganismHealthState(path="src/x.py", succession_stage="climax")
+        state_seral = OrganismHealthState(path="src/x.py", succession_stage="seral")
+
+        class MockAdapter(BaseAdapter):
+            name = "mock"
+
+            def load(self):
+                return {"src/x.py": state_pioneer}
+
+        class MockAdapter2(BaseAdapter):
+            name = "mock2"
+
+            def load(self):
+                return {"src/x.py": state_climax}
+
+        class MockAdapter3(BaseAdapter):
+            name = "mock3"
+
+            def load(self):
+                return {"src/x.py": state_seral}
+
+        merged = merge_health_states([MockAdapter(), MockAdapter2(), MockAdapter3()])
+        assert merged["src/x.py"].succession_stage == "climax"
+
+    def test_graceful_degradation_no_adapters(self):
+        adapters = load_adapters()
+        # Stub adapters (proprioception, snapshot) are always available
+        assert len(adapters) == 2
+        merged = merge_health_states(adapters)
+        assert merged == {}
+
+
+class TestProprioceptionAdapter:
+    """Unit tests for the proprioceptionussy adapter."""
+
+    def test_load_maps_limb_drift(self):
+        path = os.path.join(FIXTURES_DIR, "proprioception.json")
+        adapter = ProprioceptionAdapter(data_path=path)
+        states = adapter.load()
+
+        assert len(states) == 3  # src, tests, root
+        # 1 of 2 limbs is dirty → drift_score = 0.5
+        # vitality = 1.0 - 0.5 * 0.3 = 0.85
+        for state in states.values():
+            assert state.vitality == pytest.approx(0.85, abs=0.01)
+
+    def test_stub_mode_fallback(self):
+        adapter = ProprioceptionAdapter(data_path=None)
+        assert adapter.load() == {}
+        # Should be in stub mode since proprioceptionussy is not installed
+        assert adapter.STUB_MODE is True
+
+
+class TestSnapshotAdapter:
+    """Unit tests for the snapshotussy adapter."""
+
+    def test_load_maps_open_files(self):
+        path = os.path.join(FIXTURES_DIR, "snapshot.json")
+        adapter = SnapshotAdapter(data_path=path)
+        states = adapter.load()
+
+        assert "src/auth.py" in states
+        assert "src/utils.py" in states
+
+    def test_memory_pressure_calculation(self):
+        path = os.path.join(FIXTURES_DIR, "snapshot.json")
+        adapter = SnapshotAdapter(data_path=path)
+        states = adapter.load()
+
+        # 2 open files / 20 = 0.1, 2 processes / 10 = 0.2, 12 env / 50 = 0.24
+        # pressure = (0.1 + 0.2 + 0.24) / 3 = 0.18
+        # vitality = 1.0 - 0.18 * 0.25 = 0.955
+        auth = states["src/auth.py"]
+        assert auth.vitality == pytest.approx(
+            0.955 * 0.8, abs=0.01
+        )  # modified=True penalty
+
+        utils = states["src/utils.py"]
+        assert utils.vitality == pytest.approx(0.955, abs=0.01)  # modified=False
+
+    def test_stub_mode_fallback(self):
+        adapter = SnapshotAdapter(data_path=None)
+        assert adapter.load() == {}
+        # Should be in stub mode since snapshotussy is not installed
+        assert adapter.STUB_MODE is True
