@@ -1,0 +1,6 @@
+name: github_issue_rule
+pattern: "https://github\\.com/[^/]+/[^/]+/issues/\\d+"
+handler: todo
+msg_type: url
+priority: 10
+enabled: true

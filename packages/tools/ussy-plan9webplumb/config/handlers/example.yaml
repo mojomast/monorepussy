@@ -1,0 +1,5 @@
+name: todo
+command: "echo '{data}' >> ~/todo.md"
+action: exec
+description: "Ingest GitHub Issue URLs into local todo list"
+enabled: true
