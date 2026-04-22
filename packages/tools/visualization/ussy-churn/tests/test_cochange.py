@@ -2,8 +2,8 @@ from __future__ import annotations
 
 from datetime import datetime
 
-from churnmap.cochange import build_cochange_graph
-from churnmap.mining import MinedCommit
+from ussy_churn.cochange import build_cochange_graph
+from ussy_churn.mining import MinedCommit
 
 
 def test_build_cochange_graph_counts_pairs() -> None:

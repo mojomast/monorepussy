@@ -8,7 +8,7 @@ from pathlib import Path
 
 import pytest
 
-from seral.git_utils import (
+from ussy_seral.git_utils import (
     get_commit_count,
     get_contributor_count,
     get_file_count,

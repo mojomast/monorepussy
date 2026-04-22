@@ -1,9 +1,14 @@
+try:
+    from conftest import create_fixture_dir, create_incidents_file
+except ImportError:
+    from .conftest import create_fixture_dir, create_incidents_file
+
 """Tests for tarot.engine module."""
 
 import random
 import pytest
 
-from tarot.cards import (
+from ussy_tarot.cards import (
     CardRegistry,
     DecisionCard,
     Outcome,
@@ -11,8 +16,7 @@ from tarot.cards import (
     InteractionRule,
     InteractionType,
 )
-from tarot.engine import MonteCarloEngine, SimulationResult, SpreadResult
-from tests.conftest import create_fixture_dir
+from ussy_tarot.engine import MonteCarloEngine, SimulationResult, SpreadResult
 
 
 def _make_simple_registry():

@@ -2,8 +2,8 @@
 
 import pytest
 
-from isobar.fields import AtmosphericField, AtmosphericProfile
-from isobar.cyclones import (
+from ussy_isobar.fields import AtmosphericField, AtmosphericProfile
+from ussy_isobar.cyclones import (
     Cyclone, Anticyclone, CycloneCategory, WarningLevel,
     classify_cyclone, determine_warning_level,
     detect_cyclones, detect_anticyclones,

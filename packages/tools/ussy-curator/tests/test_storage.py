@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pytest
 
-from curator.storage import Storage
+from ussy_curator.storage import Storage
 
 
 @pytest.fixture

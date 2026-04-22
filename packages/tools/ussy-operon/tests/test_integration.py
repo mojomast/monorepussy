@@ -5,14 +5,14 @@ from pathlib import Path
 
 import pytest
 
-from operon.enhancer import EnhancerScanner
-from operon.epigenetics import EpigeneticStateTracker
-from operon.mapper import OperonMapper
-from operon.models import Codebase
-from operon.promoter import PromoterDetector
-from operon.repressor import RepressorManager
-from operon.storage import StorageManager
-from operon.transcription import TranscriptionFactorRegistry
+from ussy_operon.enhancer import EnhancerScanner
+from ussy_operon.epigenetics import EpigeneticStateTracker
+from ussy_operon.mapper import OperonMapper
+from ussy_operon.models import Codebase
+from ussy_operon.promoter import PromoterDetector
+from ussy_operon.repressor import RepressorManager
+from ussy_operon.storage import StorageManager
+from ussy_operon.transcription import TranscriptionFactorRegistry
 
 
 class TestIntegration:
@@ -109,14 +109,14 @@ class TestIntegration:
                 storage.save_operon(operon)
 
             # Promoters
-            from operon.promoter import PromoterDetector
+            from ussy_operon.promoter import PromoterDetector
             detector = PromoterDetector()
             triggers = detector.analyze_promoters(codebase, [])
             for t in triggers.values():
                 storage.save_promoter(t)
 
             # Repressors
-            from operon.repressor import RepressorManager
+            from ussy_operon.repressor import RepressorManager
             manager = RepressorManager()
             repressors = manager.manage_repressors(codebase)
             for r in repressors:
@@ -149,7 +149,7 @@ class TestIntegration:
     def test_epigenetic_state_tracking(self):
         """Test epigenetic state tracking over time."""
         from datetime import datetime, timedelta, timezone
-        from operon.models import Gene, Operon, MarkType
+        from ussy_operon.models import Gene, Operon, MarkType
 
         operon = Operon(operon_id="op_0", genes=[Gene(name="old", path="old.py", is_deprecated=True)])
         codebase = Codebase(root_path=".", operons=[operon])
@@ -168,7 +168,7 @@ class TestIntegration:
 
     def test_repressor_lift_and_apply(self):
         """Test repressor lift and apply operations."""
-        from operon.models import Gene
+        from ussy_operon.models import Gene
 
         gene = Gene(name="deprecated", path="deprecated.py", is_deprecated=True)
         codebase = Codebase(root_path=".", deprecated_features=[gene])
@@ -192,7 +192,7 @@ class TestIntegration:
 
     def test_enhancer_strength_calculation(self):
         """Test that enhancer strength decays with distance."""
-        from operon.models import Gene, Operon
+        from ussy_operon.models import Gene, Operon
 
         g1 = Gene(name="a", path="a.py", exports=["shared"], lines_of_code=100)
         g2 = Gene(name="b", path="b.py", exports=["shared"], lines_of_code=100)
@@ -224,7 +224,7 @@ class TestIntegration:
 
     def test_cli_end_to_end(self, capsys):
         """Test CLI commands end-to-end."""
-        from operon.cli import main
+        from ussy_operon.cli import main
 
         with tempfile.TemporaryDirectory() as tmpdir:
             (Path(tmpdir) / "module.py").write_text("def func(): pass\n")

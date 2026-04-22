@@ -2,7 +2,7 @@
 
 import math
 import pytest
-from actuary.backlog import (
+from ussy_actuary.backlog import (
     DevelopmentTriangle,
     compute_age_to_age_factors,
     compute_mack_variance,

@@ -2,9 +2,9 @@
 
 import pytest
 
-from aquifer.topology import ServiceLayer, FlowConnection, Topology, create_sample_topology
-from aquifer.grid import solve_grid
-from aquifer.contour import (
+from ussy_aquifer.topology import ServiceLayer, FlowConnection, Topology, create_sample_topology
+from ussy_aquifer.grid import solve_grid
+from ussy_aquifer.contour import (
     head_to_char,
     flow_arrow,
     generate_head_contour,
@@ -84,7 +84,7 @@ class TestGenerateHeadContour:
 
     def test_empty_grid(self):
         """Grid with no head data should handle gracefully."""
-        from aquifer.grid import GridModel
+        from ussy_aquifer.grid import GridModel
         topo = Topology(name="empty")
         model = GridModel(topology=topo)
         contour = generate_head_contour(model)
@@ -101,7 +101,7 @@ class TestGenerateFlowVectorMap:
         assert "Flow Vector" in vmap
 
     def test_vector_map_with_empty_grid(self):
-        from aquifer.grid import GridModel
+        from ussy_aquifer.grid import GridModel
         topo = Topology(name="empty")
         model = GridModel(topology=topo)
         vmap = generate_flow_vector_map(model)

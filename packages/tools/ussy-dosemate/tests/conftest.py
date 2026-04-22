@@ -72,7 +72,7 @@ def temp_repo():
 @pytest.fixture
 def sample_prs():
     """Create sample PullRequestInfo objects for testing."""
-    from dosemate.git_parser import PullRequestInfo
+    from ussy_dosemate.git_parser import PullRequestInfo
     
     now = datetime.now()
     return [
@@ -112,7 +112,7 @@ def sample_prs():
 @pytest.fixture
 def sample_commits():
     """Create sample CommitInfo objects for testing."""
-    from dosemate.git_parser import CommitInfo
+    from ussy_dosemate.git_parser import CommitInfo
     
     now = datetime.now()
     return [

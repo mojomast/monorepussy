@@ -3,13 +3,13 @@
 import os
 import pytest
 
-from fatigue.stress import (
+from ussy_fatigue.stress import (
     compute_stress_intensity,
     compute_coupling,
     compute_churn_rate,
     estimate_test_coverage,
 )
-from fatigue.models import ModuleMetrics, StressIntensity
+from ussy_fatigue.models import ModuleMetrics, StressIntensity
 
 
 class TestStressIntensity:

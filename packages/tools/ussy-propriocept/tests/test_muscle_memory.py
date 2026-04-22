@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from propriocept.muscle_memory import (
+from ussy_propriocept.muscle_memory import (
     extract_commands,
     find_motor_programs,
     format_alias,

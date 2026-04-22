@@ -2,8 +2,8 @@
 
 import pytest
 
-from endemic.models import SIRSimulation, SIRState
-from endemic.sir_model import (
+from ussy_endemic.models import SIRSimulation, SIRState
+from ussy_endemic.sir_model import (
     compute_beta,
     compute_gamma,
     format_sir_chart,

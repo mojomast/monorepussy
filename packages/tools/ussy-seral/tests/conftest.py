@@ -153,7 +153,7 @@ def tmp_git_repo_with_contributors(tmp_path: Path) -> Generator[Path, None, None
 @pytest.fixture
 def seral_config_dir(tmp_path: Path) -> Path:
     """Create a .seral/ directory with default config."""
-    from seral.config import SeralConfig
+    from ussy_seral.config import SeralConfig
 
     config = SeralConfig(tmp_path)
     config.init()

@@ -8,7 +8,7 @@ from pathlib import Path
 
 import pytest
 
-from curator import utils
+from ussy_curator import utils
 
 
 class TestParseYamlFrontmatter:

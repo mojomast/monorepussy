@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pytest
 
-from stemma.models import Witness
+from ussy_stemma.models import Witness
 
 FIXTURES_DIR = Path(__file__).parent / "fixtures"
 

@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-from telegrapha.models import Hop, Route, PipelineTopology, DLQEntry
+from ussy_telegrapha.models import Hop, Route, PipelineTopology, DLQEntry
 
 FIXTURES_DIR = Path(__file__).parent / "fixtures"
 

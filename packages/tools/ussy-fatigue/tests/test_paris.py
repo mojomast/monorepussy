@@ -3,7 +3,7 @@
 import math
 import pytest
 
-from fatigue.paris import (
+from ussy_fatigue.paris import (
     paris_law,
     log_paris_law,
     calibrate_material_constants,
@@ -12,7 +12,7 @@ from fatigue.paris import (
     estimate_endurance_limit,
     estimate_fracture_toughness,
 )
-from fatigue.models import MaterialConstants
+from ussy_fatigue.models import MaterialConstants
 
 
 class TestParisLaw:

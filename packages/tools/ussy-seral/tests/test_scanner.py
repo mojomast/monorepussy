@@ -6,8 +6,8 @@ from pathlib import Path
 
 import pytest
 
-from seral.models import ModuleMetrics, Stage
-from seral.scanner import Scanner
+from ussy_seral.models import ModuleMetrics, Stage
+from ussy_seral.scanner import Scanner
 
 
 class TestScanner:

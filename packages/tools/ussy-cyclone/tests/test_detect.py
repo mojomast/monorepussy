@@ -2,13 +2,13 @@
 
 import pytest
 
-from cyclone.detect import (
+from ussy_cyclone.detect import (
     detect_cyclones,
     track_cyclone,
     format_detection,
     _find_affected_stages,
 )
-from cyclone.models import (
+from ussy_cyclone.models import (
     CycloneCategory,
     CycloneDetection,
     PipelineStage,
@@ -61,8 +61,8 @@ def calm_topology():
 
 class TestDetectCyclones:
     def test_detects_stormy_stage(self, stormy_topology):
-        from cyclone.vorticity import compute_vorticity_field
-        from cyclone.cisk import detect_cisk
+        from ussy_cyclone.vorticity import compute_vorticity_field
+        from ussy_cyclone.cisk import detect_cisk
 
         cycles, gains = detect_cisk(stormy_topology)
         readings = compute_vorticity_field(stormy_topology)
@@ -78,7 +78,7 @@ class TestDetectCyclones:
         assert len(detections) == 0
 
     def test_cyclone_has_id(self, stormy_topology):
-        from cyclone.vorticity import compute_vorticity_field
+        from ussy_cyclone.vorticity import compute_vorticity_field
 
         readings = compute_vorticity_field(stormy_topology)
         # Only detect where vorticity is above threshold
@@ -87,7 +87,7 @@ class TestDetectCyclones:
             assert len(d.id) == 8  # MD5 hash truncated to 8 chars
 
     def test_cyclone_has_category(self, stormy_topology):
-        from cyclone.vorticity import compute_vorticity_field
+        from ussy_cyclone.vorticity import compute_vorticity_field
 
         readings = compute_vorticity_field(stormy_topology)
         detections = detect_cyclones(stormy_topology, readings=readings)
@@ -95,8 +95,8 @@ class TestDetectCyclones:
             assert isinstance(d.category, CycloneCategory)
 
     def test_cyclone_with_cisk_upgrade(self, stormy_topology):
-        from cyclone.vorticity import compute_vorticity_field
-        from cyclone.cisk import detect_cisk
+        from ussy_cyclone.vorticity import compute_vorticity_field
+        from ussy_cyclone.cisk import detect_cisk
 
         cycles, gains = detect_cisk(stormy_topology)
         readings = compute_vorticity_field(stormy_topology)
@@ -111,7 +111,7 @@ class TestDetectCyclones:
                 assert d.cycle_gain > 0
 
     def test_detection_timestamp(self, stormy_topology):
-        from cyclone.vorticity import compute_vorticity_field
+        from ussy_cyclone.vorticity import compute_vorticity_field
 
         readings = compute_vorticity_field(stormy_topology)
         detections = detect_cyclones(stormy_topology, readings=readings)
@@ -121,7 +121,7 @@ class TestDetectCyclones:
 
 class TestFindAffectedStages:
     def test_finds_nearby_stages(self, stormy_topology):
-        from cyclone.vorticity import compute_vorticity_field
+        from ussy_cyclone.vorticity import compute_vorticity_field
         readings = compute_vorticity_field(stormy_topology)
         affected = _find_affected_stages("enrich", stormy_topology, readings)
         assert "enrich" in affected

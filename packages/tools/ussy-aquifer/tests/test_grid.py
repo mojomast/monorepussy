@@ -3,8 +3,8 @@
 import numpy as np
 import pytest
 
-from aquifer.topology import ServiceLayer, FlowConnection, Topology, create_sample_topology
-from aquifer.grid import GridModel, build_grid, solve_grid
+from ussy_aquifer.topology import ServiceLayer, FlowConnection, Topology, create_sample_topology
+from ussy_aquifer.grid import GridModel, build_grid, solve_grid
 
 
 class TestGridModel:

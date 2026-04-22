@@ -4,8 +4,8 @@ from __future__ import annotations
 
 import pytest
 
-from seral.models import GovernancePrescription, GovernanceRule, ModuleMetrics, Stage
-from seral.prescribe import (
+from ussy_seral.models import GovernancePrescription, GovernanceRule, ModuleMetrics, Stage
+from ussy_seral.prescribe import (
     get_builtin_rules,
     governance_diff,
     prescribe,

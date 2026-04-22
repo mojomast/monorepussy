@@ -1,29 +1,25 @@
-[build-system]
-requires = ["setuptools>=68.0", "wheel"]
-build-backend = "setuptools.build_meta"
-
 [project]
-name = "timeloom"
+name = "ussy-timeloom"
 version = "0.1.0"
-description = "Render git repository history as woven textile patterns"
+description = "Migrated from timeloom"
 readme = "README.md"
-requires-python = ">=3.10"
-license = {text = "MIT"}
+requires-python = ">=3.11"
 dependencies = [
+    "ussy-core",
     "click>=8.0",
 ]
 
-[project.optional-dependencies]
-dev = [
-    "pytest>=7.0",
-    "pytest-cov>=4.0",
-]
-
 [project.scripts]
-timeloom = "timeloom.cli:main"
+ussy-timeloom = "ussy_timeloom.cli:main"
+timeloom = "ussy_timeloom.legacy:deprecated_main"
 
-[tool.setuptools.packages.find]
-where = ["src"]
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/ussy_timeloom"]
 
 [tool.pytest.ini_options]
+pythonpath = ["src"]
 testpaths = ["tests"]

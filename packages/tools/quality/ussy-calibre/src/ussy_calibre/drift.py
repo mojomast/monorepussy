@@ -26,7 +26,7 @@ import math
 from datetime import datetime, timezone, timedelta
 from typing import List, Optional, Tuple
 
-from calibre.models import DriftObservation, DriftResult
+from ussy_calibre.models import DriftObservation, DriftResult
 
 
 def fit_linear_drift(

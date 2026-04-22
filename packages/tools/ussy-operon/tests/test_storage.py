@@ -2,7 +2,7 @@
 
 import pytest
 
-from operon.models import (
+from ussy_operon.models import (
     Codebase,
     Enhancer,
     EpigeneticMark,
@@ -15,7 +15,7 @@ from operon.models import (
     RepressorType,
     TranscriptionFactor,
 )
-from operon.storage import StorageManager
+from ussy_operon.storage import StorageManager
 
 
 @pytest.fixture

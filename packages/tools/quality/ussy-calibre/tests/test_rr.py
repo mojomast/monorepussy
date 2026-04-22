@@ -4,14 +4,14 @@ import math
 
 import pytest
 
-from calibre.models import RRCategory, RRObservation
-from calibre.rr import (
+from ussy_calibre.models import RRCategory, RRObservation
+from ussy_calibre.rr import (
     anova_two_way_random,
     compute_rr_summary,
     format_rr_summary,
     runs_to_rr_observations,
 )
-from calibre.models import TestResult, TestRun
+from ussy_calibre.models import TestResult, TestRun
 
 
 class TestAnovaTwoWayRandom:

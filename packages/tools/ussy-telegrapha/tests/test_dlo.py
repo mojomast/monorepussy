@@ -4,8 +4,8 @@ import json
 import pytest
 from pathlib import Path
 
-from telegrapha.models import DLQEntry
-from telegrapha.dlo import (
+from ussy_telegrapha.models import DLQEntry
+from ussy_telegrapha.dlo import (
     compute_churn_rate,
     compute_health_score,
     classify_failure_taxonomy,

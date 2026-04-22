@@ -6,7 +6,7 @@ import shutil
 
 import pytest
 
-from dosemate.dependency_graph import DependencyGraphAnalyzer, ModuleInfo
+from ussy_dosemate.dependency_graph import DependencyGraphAnalyzer, ModuleInfo
 
 
 class TestDependencyGraphAnalyzer:

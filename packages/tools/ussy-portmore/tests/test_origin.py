@@ -1,7 +1,7 @@
 """Tests for Rules of Origin — Provenance Determination."""
 import pytest
 
-from portmore.origin import (
+from ussy_portmore.origin import (
     accumulation_test,
     absorption_rule,
     de_minimis_test,
@@ -10,7 +10,7 @@ from portmore.origin import (
     value_added_test,
     wholly_obtained_test,
 )
-from portmore.models import OriginStatus
+from ussy_portmore.models import OriginStatus
 
 
 class TestWhollyObtained:

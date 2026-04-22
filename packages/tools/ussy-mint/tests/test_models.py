@@ -3,7 +3,7 @@
 import pytest
 from datetime import datetime, timezone
 
-from mint.models import (
+from ussy_mint.models import (
     MintMark,
     DieVariety,
     Composition,

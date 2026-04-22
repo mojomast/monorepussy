@@ -5,8 +5,8 @@ import os
 import tempfile
 import subprocess
 
-from endemic.git_tracer import GitTracer
-from endemic.models import TransmissionTree
+from ussy_endemic.git_tracer import GitTracer
+from ussy_endemic.models import TransmissionTree
 
 
 def _git_available():

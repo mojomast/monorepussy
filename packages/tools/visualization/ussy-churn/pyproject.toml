@@ -1,29 +1,34 @@
 [build-system]
-requires = ["setuptools>=68", "wheel"]
-build-backend = "setuptools.build_meta"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
 [project]
-name = "churnmap"
+name = "ussy-churn"
 version = "0.1.0"
-description = "Code change impact territory map generator"
+description = "Git co-change territory map generator"
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 dependencies = [
-  "pydriller>=2.6",
-  "networkx>=3.0",
-  "scipy>=1.10",
-  "rich>=13.0",
-  "numpy>=1.24",
+    "pydriller>=2.6",
+    "networkx>=3.0",
+    "scipy>=1.10",
+    "rich>=13.0",
+    "numpy>=1.24",
+    "ussy-core",
 ]
 
 [project.optional-dependencies]
 dev = ["pytest>=7.0", "pytest-cov>=4.0"]
 
 [project.scripts]
-churnmap = "churnmap.cli:main"
+ussy-churn = "ussy_churn.cli:main"
+churnmap = "ussy_churn.legacy:main"
 
-[tool.setuptools]
-include-package-data = true
+[tool.hatch.build.targets.wheel]
+packages = ["src/ussy_churn"]
 
-[tool.setuptools.packages.find]
-include = ["churnmap*"]
+[tool.uv.sources]
+ussy-core = { workspace = true }
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]

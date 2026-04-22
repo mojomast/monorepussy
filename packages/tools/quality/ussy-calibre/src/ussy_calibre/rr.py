@@ -29,7 +29,7 @@ from typing import Dict, List, Optional, Tuple
 
 import numpy as np
 
-from calibre.models import (
+from ussy_calibre.models import (
     RRCategory,
     RRObservation,
     RRSummary,

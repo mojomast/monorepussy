@@ -4,14 +4,14 @@ from datetime import datetime, timezone, timedelta
 
 import pytest
 
-from calibre.models import (
+from ussy_calibre.models import (
     CapabilitySpec,
     DriftObservation,
     TestResult,
     TestRun,
     TraceabilityLink,
 )
-from calibre.report import generate_full_report
+from ussy_calibre.report import generate_full_report
 
 
 class TestGenerateFullReport:

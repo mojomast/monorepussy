@@ -23,3 +23,9 @@ The following 13 Tier 3 repositories are archived and not migrated into the ussy
 - All archived repositories remain available on GitHub in read-only mode.
 - No code is deleted; repositories are archived with deprecation notices.
 - For questions about archived repos, open a discussion in the ussyverse monorepo.
+
+## Archive Stubs
+
+Archived stub READMEs have been created in `packages/archive/` for each Tier 3 repository as part of Phase 5.
+
+- **Date of archival:** April 2026

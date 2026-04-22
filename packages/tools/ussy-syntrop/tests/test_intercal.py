@@ -2,8 +2,8 @@
 
 import pytest
 
-from syntrop.backends.intercal import IntercalBackend, IntercalInstruction
-from syntrop.ir import IRFunction, IRModule, IRNode, IRNodeType
+from ussy_syntrop.backends.intercal import IntercalBackend, IntercalInstruction
+from ussy_syntrop.ir import IRFunction, IRModule, IRNode, IRNodeType
 
 
 class TestIntercalInstruction:
@@ -39,7 +39,7 @@ class TestIntercalBackend:
         assert backend.name == "intercal"
 
     def test_backend_in_registry(self):
-        from syntrop.backends import BACKEND_REGISTRY
+        from ussy_syntrop.backends import BACKEND_REGISTRY
         assert "intercal" in BACKEND_REGISTRY
 
     def test_compile_simple_function(self):

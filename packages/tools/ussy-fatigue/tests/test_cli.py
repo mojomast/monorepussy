@@ -5,7 +5,7 @@ import json
 import tempfile
 import pytest
 
-from fatigue.cli import main, create_parser
+from ussy_fatigue.cli import main, create_parser
 
 
 FIXTURES_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "fixtures")

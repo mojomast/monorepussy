@@ -5,7 +5,7 @@ from datetime import datetime, timezone, timedelta
 
 import pytest
 
-from circadia.session import Session, SessionTracker
+from ussy_circadia.session import Session, SessionTracker
 
 
 @pytest.fixture

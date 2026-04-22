@@ -4,7 +4,7 @@ import math
 
 import pytest
 
-from calibre.capability import (
+from ussy_calibre.capability import (
     capability_analysis,
     compute_cp,
     compute_cpk,
@@ -14,7 +14,7 @@ from calibre.capability import (
     estimate_sigma_within,
     format_capability,
 )
-from calibre.models import CapabilitySpec, TestResult, TestRun
+from ussy_calibre.models import CapabilitySpec, TestResult, TestRun
 
 
 class TestComputeCp:

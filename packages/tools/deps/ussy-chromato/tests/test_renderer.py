@@ -4,7 +4,7 @@ import json
 
 import pytest
 
-from chromato.models import (
+from ussy_chromato.models import (
     ChromatogramResult,
     Coelution,
     Dependency,
@@ -13,7 +13,7 @@ from chromato.models import (
     PeakShape,
     Solvent,
 )
-from chromato.renderer import (
+from ussy_chromato.renderer import (
     render_chromatogram,
     render_diff,
     render_json,

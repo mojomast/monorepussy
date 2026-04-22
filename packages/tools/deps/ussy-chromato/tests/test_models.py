@@ -4,7 +4,7 @@ from datetime import datetime, timezone, timedelta
 
 import pytest
 
-from chromato.models import (
+from ussy_chromato.models import (
     Coelution,
     ChromatogramResult,
     Dependency,

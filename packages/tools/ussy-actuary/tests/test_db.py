@@ -3,7 +3,7 @@
 import os
 import tempfile
 import pytest
-from actuary.db import (
+from ussy_actuary.db import (
     get_connection,
     insert_cve_cohort,
     insert_life_table_row,

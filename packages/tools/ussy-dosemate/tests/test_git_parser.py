@@ -7,7 +7,7 @@ from datetime import datetime, timedelta
 
 import pytest
 
-from dosemate.git_parser import GitHistoryParser, CommitInfo, PullRequestInfo
+from ussy_dosemate.git_parser import GitHistoryParser, CommitInfo, PullRequestInfo
 
 
 class TestGitHistoryParser:
@@ -95,26 +95,26 @@ class TestParseDuration:
     """Tests for the CLI's parse_duration helper."""
 
     def test_parse_days(self):
-        from dosemate.cli import parse_duration
+        from ussy_dosemate.cli import parse_duration
         result = parse_duration("7d")
         assert "7 days ago" in result
 
     def test_parse_weeks(self):
-        from dosemate.cli import parse_duration
+        from ussy_dosemate.cli import parse_duration
         result = parse_duration("2w")
         assert "2 weeks ago" in result
 
     def test_parse_months(self):
-        from dosemate.cli import parse_duration
+        from ussy_dosemate.cli import parse_duration
         result = parse_duration("3m")
         assert "3 months ago" in result
 
     def test_parse_passthrough(self):
-        from dosemate.cli import parse_duration
+        from ussy_dosemate.cli import parse_duration
         result = parse_duration("2024-01-01")
         assert result == "2024-01-01"
 
     def test_parse_single_day(self):
-        from dosemate.cli import parse_duration
+        from ussy_dosemate.cli import parse_duration
         result = parse_duration("1d")
         assert "1 day ago" in result

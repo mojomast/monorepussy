@@ -2,8 +2,8 @@
 
 import pytest
 
-from endemic.models import Pattern, PatternType, PatternStatus, TransmissionTree, TransmissionEvent, TransmissionVector
-from endemic.r0 import (
+from ussy_endemic.models import Pattern, PatternType, PatternStatus, TransmissionTree, TransmissionEvent, TransmissionVector
+from ussy_endemic.r0 import (
     compute_r0_for_patterns,
     determine_status,
     estimate_r0_from_counts,

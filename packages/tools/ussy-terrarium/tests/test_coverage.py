@@ -6,7 +6,7 @@ import tempfile
 
 import pytest
 
-from terrarium.metrics.coverage import (
+from ussy_terrarium.metrics.coverage import (
     parse_coverage_json,
     parse_coverage_lcov,
     auto_detect_coverage,

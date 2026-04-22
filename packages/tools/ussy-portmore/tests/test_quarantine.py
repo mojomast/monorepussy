@@ -1,7 +1,7 @@
 """Tests for Bonded Warehousing — Dependency Quarantine."""
 import pytest
 
-from portmore.quarantine import (
+from ussy_portmore.quarantine import (
     check_class5_manipulation,
     check_constructive_warehouse,
     classify_dependency_zone,
@@ -10,7 +10,7 @@ from portmore.quarantine import (
     generate_quarantine_report,
     in_bond_movement,
 )
-from portmore.models import DependencyZone, QuarantineEntry, WithdrawalType
+from ussy_portmore.models import DependencyZone, QuarantineEntry, WithdrawalType
 
 
 class TestClassifyDependencyZone:

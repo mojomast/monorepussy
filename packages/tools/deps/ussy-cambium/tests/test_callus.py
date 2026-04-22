@@ -6,14 +6,14 @@ import math
 
 import pytest
 
-from cambium.callus import (
+from ussy_cambium.callus import (
     callus_trajectory,
     compute_adapter_quality,
     compute_callus_dynamics,
     estimate_adapter_mismatches,
     format_callus_report,
 )
-from cambium.models import CallusDynamics
+from ussy_cambium.models import CallusDynamics
 
 
 class TestComputeCallusDynamics:

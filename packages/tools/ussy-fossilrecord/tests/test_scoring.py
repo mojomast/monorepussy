@@ -5,10 +5,10 @@ import json
 import pytest
 from pathlib import Path
 
-from fossilrecord.corpus.loader import EsolangProgram, StressCategory
-from fossilrecord.harness.plugins import PluginResult, PluginStatus
-from fossilrecord.harness.runner import TestResult, TestSuiteResult
-from fossilrecord.scoring.fossil_score import (
+from ussy_fossilrecord.corpus.loader import EsolangProgram, StressCategory
+from ussy_fossilrecord.harness.plugins import PluginResult, PluginStatus
+from ussy_fossilrecord.harness.runner import TestResult, TestSuiteResult
+from ussy_fossilrecord.scoring.fossil_score import (
     FossilScore,
     FossilScoreBreakdown,
     compute_fossil_score,

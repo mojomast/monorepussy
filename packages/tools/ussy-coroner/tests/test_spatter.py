@@ -4,8 +4,8 @@ from __future__ import annotations
 
 import math
 
-from coroner.models import StageStatus, VelocityClass
-from coroner.spatter import (
+from ussy_coroner.models import StageStatus, VelocityClass
+from ussy_coroner.spatter import (
     analyze_spatter,
     format_spatter,
     _extract_error_components,
@@ -56,17 +56,17 @@ class TestClassifyVelocity:
     """Tests for velocity classification."""
 
     def test_high_velocity(self):
-        from coroner.models import ErrorStain
+        from ussy_coroner.models import ErrorStain
         stains = [ErrorStain(stage_name="a", stage_index=0, breadth=8, depth=1)]
         assert _classify_velocity(stains) == VelocityClass.HIGH
 
     def test_low_velocity(self):
-        from coroner.models import ErrorStain
+        from ussy_coroner.models import ErrorStain
         stains = [ErrorStain(stage_name="a", stage_index=0, breadth=1, depth=5)]
         assert _classify_velocity(stains) == VelocityClass.LOW
 
     def test_medium_velocity(self):
-        from coroner.models import ErrorStain
+        from ussy_coroner.models import ErrorStain
         stains = [ErrorStain(stage_name="a", stage_index=0, breadth=3, depth=4)]
         assert _classify_velocity(stains) == VelocityClass.MEDIUM
 

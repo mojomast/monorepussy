@@ -9,7 +9,7 @@ from unittest.mock import patch
 
 import pytest
 
-from coroner.cli import build_parser, main
+from ussy_coroner.cli import build_parser, main
 
 
 FIXTURES_DIR = Path(__file__).parent / "fixtures"

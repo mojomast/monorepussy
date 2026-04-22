@@ -2,7 +2,7 @@
 
 import pytest
 
-from terrarium.metrics.models import ModuleMetrics, ProjectMetrics
+from ussy_terrarium.metrics.models import ModuleMetrics, ProjectMetrics
 
 
 class TestModuleMetrics:

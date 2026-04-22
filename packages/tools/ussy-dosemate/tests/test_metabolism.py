@@ -4,8 +4,8 @@ import math
 
 import pytest
 
-from dosemate.metabolism import MetabolismParams, compute_metabolism
-from dosemate.ci_collector import CIMetrics
+from ussy_dosemate.metabolism import MetabolismParams, compute_metabolism
+from ussy_dosemate.ci_collector import CIMetrics
 
 
 class TestMetabolismParams:

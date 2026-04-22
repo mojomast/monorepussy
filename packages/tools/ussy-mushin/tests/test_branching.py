@@ -2,8 +2,8 @@
 
 import pytest
 
-from mushin.branching import Branch, BranchManager
-from mushin.workspace import Workspace, get_active_workspace_id
+from ussy_mushin.branching import Branch, BranchManager
+from ussy_mushin.workspace import Workspace, get_active_workspace_id
 
 
 @pytest.fixture

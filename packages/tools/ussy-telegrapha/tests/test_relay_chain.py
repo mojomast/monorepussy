@@ -3,8 +3,8 @@
 import math
 import pytest
 
-from telegrapha.models import Hop, Route
-from telegrapha.relay_chain import (
+from ussy_telegrapha.models import Hop, Route
+from ussy_telegrapha.relay_chain import (
     compute_required_per_hop,
     compute_series_reliability,
     find_weakest_link,

@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import pytest
 
-from cavity.damping import (
+from ussy_cavity.damping import (
     DampingClass,
     DampingResult,
     analyze_stage_damping,

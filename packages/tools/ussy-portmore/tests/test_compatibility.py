@@ -1,14 +1,14 @@
 """Tests for Preferential Trade Agreements — License Compatibility."""
 import pytest
 
-from portmore.compatibility import (
+from ussy_portmore.compatibility import (
     check_compatibility,
     get_zone,
     PERMISSIVE_ZONE,
     COPYLEFT_ZONE,
     WEAK_COPYLEFT_ZONE,
 )
-from portmore.models import CompatibilityStatus
+from ussy_portmore.models import CompatibilityStatus
 
 
 class TestZoneClassification:

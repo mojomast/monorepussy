@@ -4,8 +4,8 @@ from datetime import datetime, timezone, timedelta
 
 import pytest
 
-from chromato.models import Dependency, DependencyGraph, Solvent
-from chromato.retention import compute_retention_time, compute_all_retention_times
+from ussy_chromato.models import Dependency, DependencyGraph, Solvent
+from ussy_chromato.retention import compute_retention_time, compute_all_retention_times
 
 
 class TestComputeRetentionTime:

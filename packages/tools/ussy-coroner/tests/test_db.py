@@ -7,8 +7,8 @@ from pathlib import Path
 
 import pytest
 
-from coroner.db import ForensicDB
-from coroner.models import (
+from ussy_coroner.db import ForensicDB
+from ussy_coroner.models import (
     CustodyChain,
     CustodyEntry,
     ErrorStain,

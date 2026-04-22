@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pytest
 
-from mushin.cli import build_parser, main
+from ussy_mushin.cli import build_parser, main
 
 
 @pytest.fixture
@@ -114,7 +114,7 @@ class TestResumeCommand:
     def test_resume_workspace(self, project_dir, capsys):
         main(["-C", str(project_dir), "init"])
         main(["-C", str(project_dir), "save", "-n", "resume-ws"])
-        from mushin.workspace import get_active_workspace_id
+        from ussy_mushin.workspace import get_active_workspace_id
         ws_id = get_active_workspace_id(project_dir)
         result = main(["-C", str(project_dir), "resume", ws_id])
         assert result == 0
@@ -124,7 +124,7 @@ class TestDeleteCommand:
     def test_delete(self, project_dir, capsys):
         main(["-C", str(project_dir), "init"])
         main(["-C", str(project_dir), "save", "-n", "del-ws"])
-        from mushin.workspace import get_active_workspace_id
+        from ussy_mushin.workspace import get_active_workspace_id
         ws_id = get_active_workspace_id(project_dir)
         result = main(["-C", str(project_dir), "delete", ws_id])
         assert result == 0
@@ -134,7 +134,7 @@ class TestBranchCommand:
     def test_create_branch(self, project_dir, capsys):
         main(["-C", str(project_dir), "init"])
         main(["-C", str(project_dir), "save", "-n", "parent-ws"])
-        from mushin.workspace import get_active_workspace_id
+        from ussy_mushin.workspace import get_active_workspace_id
         ws_id = get_active_workspace_id(project_dir)
         result = main(["-C", str(project_dir), "branch", "exp", "-p", ws_id])
         assert result == 0

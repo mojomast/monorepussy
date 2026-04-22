@@ -2,9 +2,9 @@
 
 import pytest
 
-from terrarium.ecosystem.organisms import OrganismType, Vitality
-from terrarium.ecosystem.model import Organism, Ecosystem
-from terrarium.renderers.terminal import (
+from ussy_terrarium.ecosystem.organisms import OrganismType, Vitality
+from ussy_terrarium.ecosystem.model import Organism, Ecosystem
+from ussy_terrarium.renderers.terminal import (
     render_organism_line,
     render_terrarium,
     render_microscope,

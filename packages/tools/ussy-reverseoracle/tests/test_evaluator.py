@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from reverseoracle.evaluator import analyze_metrics, diff_summary
+from ussy_reverseoracle.evaluator import analyze_metrics, diff_summary
 
 
 def test_analyze_metrics_counts_python(temp_repo: Path):

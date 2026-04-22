@@ -1,32 +1,25 @@
-[build-system]
-requires = ["setuptools>=68.0", "wheel"]
-build-backend = "setuptools.build_meta"
-
 [project]
-name = "mint"
+name = "ussy-mint"
 version = "0.1.0"
-description = "Numismatic Package Provenance & Version Classification"
+description = "Migrated from mint"
 readme = "README.md"
 requires-python = ">=3.11"
-license = {text = "MIT"}
-authors = [{name = "Mint Contributors"}]
-keywords = ["numismatics", "provenance", "grading", "supply-chain", "security"]
-classifiers = [
-    "Development Status :: 3 - Alpha",
-    "Intended Audience :: Developers",
-    "License :: OSI Approved :: MIT License",
-    "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.11",
-    "Programming Language :: Python :: 3.12",
-    "Topic :: Security",
-    "Topic :: Software Development :: Quality Assurance",
+dependencies = [
+    "ussy-core",
+
 ]
 
 [project.scripts]
-mint = "mint.cli:main"
+ussy-mint = "ussy_mint.cli:main"
+mint = "ussy_mint.legacy:deprecated_main"
 
-[tool.setuptools.packages.find]
-include = ["mint*"]
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/ussy_mint"]
 
 [tool.pytest.ini_options]
+pythonpath = ["src"]
 testpaths = ["tests"]

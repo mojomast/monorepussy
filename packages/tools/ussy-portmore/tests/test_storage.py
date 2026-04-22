@@ -1,7 +1,7 @@
 """Tests for the SQLite storage module."""
 import pytest
 
-from portmore.storage import (
+from ussy_portmore.storage import (
     get_connection,
     query_contagions,
     query_origins,

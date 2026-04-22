@@ -3,21 +3,21 @@
 import pytest
 from pathlib import Path
 
-from crystallo.models import (
+from ussy_crystallo.models import (
     ModuleClassification,
     SpaceGroup,
     StructuralFingerprint,
     SymmetryType,
     UnitCell,
 )
-from crystallo.classify import (
+from ussy_crystallo.classify import (
     classify_module,
     detect_unit_cells,
     _assign_space_group,
     _crystal_system_name,
 )
-from crystallo.parser import parse_directory
-from crystallo.similarity import compute_pairwise_similarities
+from ussy_crystallo.parser import parse_directory
+from ussy_crystallo.similarity import compute_pairwise_similarities
 
 
 FIXTURES = Path(__file__).parent / "fixtures"

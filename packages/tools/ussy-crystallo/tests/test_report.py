@@ -2,7 +2,7 @@
 
 import pytest
 
-from crystallo.models import (
+from ussy_crystallo.models import (
     DefectReport,
     ModuleClassification,
     SpaceGroup,
@@ -12,7 +12,7 @@ from crystallo.models import (
     SymmetryType,
     UnitCell,
 )
-from crystallo.report import (
+from ussy_crystallo.report import (
     format_classification,
     format_defects,
     format_fingerprint_summary,
@@ -131,7 +131,7 @@ class TestFormatFingerprintSummary:
         assert "save" in output
 
     def test_function_fingerprint(self):
-        from crystallo.models import MethodSignature
+        from ussy_crystallo.models import MethodSignature
         fp = StructuralFingerprint(
             name="create_user",
             kind="function",

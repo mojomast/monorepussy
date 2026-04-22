@@ -3,8 +3,8 @@
 import pytest
 from pathlib import Path
 
-from chromato.engine import compute_max_risk, run_diff, run_scan
-from chromato.models import Solvent
+from ussy_chromato.engine import compute_max_risk, run_diff, run_scan
+from ussy_chromato.models import Solvent
 
 
 FIXTURES = Path(__file__).parent.parent / "fixtures"
@@ -98,7 +98,7 @@ class TestComputeMaxRisk:
         assert max_risk > 0.0
 
     def test_empty_result(self):
-        from chromato.models import ChromatogramResult
+        from ussy_chromato.models import ChromatogramResult
         result = ChromatogramResult()
         max_risk = compute_max_risk(result)
         assert max_risk == 0.0

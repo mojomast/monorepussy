@@ -1,28 +1,25 @@
 [build-system]
-requires = ["setuptools>=68.0", "wheel"]
-build-backend = "setuptools.build_meta"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
 [project]
-name = "isobar"
-version = "1.0.0"
-description = "Meteorological micro-climate analysis for developer workspaces"
+name = "ussy-isobar"
+version = "0.1.0"
+description = "Migrated from isobar"
 readme = "README.md"
+requires-python = ">=3.11"
 license = {text = "MIT"}
-requires-python = ">=3.9"
-classifiers = [
-    "Development Status :: 4 - Beta",
-    "Environment :: Console",
-    "Intended Audience :: Developers",
-    "License :: OSI Approved :: MIT License",
-    "Programming Language :: Python :: 3",
-    "Topic :: Software Development :: Quality Assurance",
+dependencies = [
+    "ussy-core",
 ]
 
 [project.scripts]
-isobar = "isobar.cli:main"
+ussy-isobar = "ussy_isobar.cli:main"
+isobar = "ussy_isobar.legacy:main"
 
-[tool.setuptools.packages.find]
-include = ["isobar*"]
+[tool.hatch.build.targets.wheel]
+packages = ["src/ussy_isobar"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+pythonpath = ["src"]

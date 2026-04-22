@@ -5,9 +5,9 @@ import tempfile
 
 import pytest
 
-from terrarium.ecosystem.organisms import OrganismType, Vitality
-from terrarium.ecosystem.model import Organism, Ecosystem
-from terrarium.renderers.static_export import (
+from ussy_terrarium.ecosystem.organisms import OrganismType, Vitality
+from ussy_terrarium.ecosystem.model import Organism, Ecosystem
+from ussy_terrarium.renderers.static_export import (
     render_text_snapshot,
     render_svg_snapshot,
     export_snapshot,

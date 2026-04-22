@@ -7,8 +7,8 @@ from pathlib import Path
 
 import pytest
 
-from curator.provenance import MockCommit, ProvenanceTracker
-from curator.storage import Storage
+from ussy_curator.provenance import MockCommit, ProvenanceTracker
+from ussy_curator.storage import Storage
 
 
 @pytest.fixture

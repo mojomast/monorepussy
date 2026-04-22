@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
-from coroner.models import TraceType
-from coroner.traces import (
+from ussy_coroner.models import TraceType
+from ussy_coroner.traces import (
     analyze_traces,
     format_traces,
     _detect_fibers,
@@ -13,7 +13,7 @@ from coroner.traces import (
     _detect_tool_marks,
     _detect_glass_fragments,
 )
-from coroner.models import Stage, StageStatus, TraceEvidence
+from ussy_coroner.models import Stage, StageStatus, TraceEvidence
 
 
 class TestAnalyzeTraces:
@@ -47,7 +47,7 @@ class TestAnalyzeTraces:
         assert len(suspicious) <= 5
 
     def test_single_stage_run(self):
-        from coroner.models import PipelineRun, Stage
+        from ussy_coroner.models import PipelineRun, Stage
         run = PipelineRun(run_id="single")
         run.stages = [Stage(name="checkout", index=0)]
         result = analyze_traces(run)
@@ -55,7 +55,7 @@ class TestAnalyzeTraces:
         assert len(result.reverse_traces) == 0
 
     def test_empty_run(self):
-        from coroner.models import PipelineRun
+        from ussy_coroner.models import PipelineRun
         run = PipelineRun(run_id="empty")
         result = analyze_traces(run)
         assert len(result.forward_traces) == 0
@@ -144,7 +144,7 @@ class TestFormatTraces:
     """Tests for format_traces."""
 
     def test_format_empty_result(self):
-        from coroner.models import TraceTransferResult
+        from ussy_coroner.models import TraceTransferResult
         result = TraceTransferResult()
         text = format_traces(result)
         assert isinstance(text, str)

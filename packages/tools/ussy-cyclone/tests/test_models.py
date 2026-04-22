@@ -7,7 +7,7 @@ from datetime import datetime, timezone
 
 import pytest
 
-from cyclone.models import (
+from ussy_cyclone.models import (
     CycloneCategory,
     CycloneDetection,
     ForecastStep,

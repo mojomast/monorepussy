@@ -8,7 +8,7 @@ from pathlib import Path
 
 import pytest
 
-from mushin.storage import (
+from ussy_mushin.storage import (
     MUSHIN_DIR,
     atomic_write_bytes,
     atomic_write_json,

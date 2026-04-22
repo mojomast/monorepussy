@@ -1,9 +1,9 @@
 """Tests for the reconstruct module."""
 
-from stemma.classify import classify_all
-from stemma.collation import collate
-from stemma.models import Classification, Witness
-from stemma.reconstruct import reconstruct_archetype
+from ussy_stemma.classify import classify_all
+from ussy_stemma.collation import collate
+from ussy_stemma.models import Classification, Witness
+from ussy_stemma.reconstruct import reconstruct_archetype
 
 
 class TestReconstructArchetype:

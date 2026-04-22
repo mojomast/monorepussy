@@ -6,8 +6,8 @@ from pathlib import Path
 
 import pytest
 
-from seral.models import ModuleMetrics, Stage, TimelineEntry, TrajectoryProjection
-from seral.timeline import TimelineAnalyzer
+from ussy_seral.models import ModuleMetrics, Stage, TimelineEntry, TrajectoryProjection
+from ussy_seral.timeline import TimelineAnalyzer
 
 
 class TestTimelineAnalyzer:

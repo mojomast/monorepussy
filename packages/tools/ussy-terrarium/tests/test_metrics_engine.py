@@ -6,8 +6,8 @@ import json
 
 import pytest
 
-from terrarium.metrics.engine import MetricsEngine
-from terrarium.ecosystem.model import build_ecosystem
+from ussy_terrarium.metrics.engine import MetricsEngine
+from ussy_terrarium.ecosystem.model import build_ecosystem
 
 
 class TestMetricsEngine:

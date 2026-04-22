@@ -2,7 +2,7 @@
 
 import math
 import pytest
-from actuary.aggregate import (
+from ussy_actuary.aggregate import (
     simulate_aggregate_loss,
     compute_var_tvar,
     format_copula_result,

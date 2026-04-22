@@ -2,9 +2,9 @@ from __future__ import annotations
 
 import networkx as nx
 
-from churnmap.communities import ModuleSummary, TerritorySummary
-from churnmap.layout import LayoutResult, TerritoryRegion
-from churnmap.render import render_ascii, render_map, render_svg
+from ussy_churn.communities import ModuleSummary, TerritorySummary
+from ussy_churn.layout import LayoutResult, TerritoryRegion
+from ussy_churn.render import render_ascii, render_map, render_svg
 
 
 def test_render_ascii_contains_panel() -> None:
@@ -12,9 +12,7 @@ def test_render_ascii_contains_panel() -> None:
         width=4,
         height=2,
         territories=[
-            TerritoryRegion(
-                0, "Core", [(0, 0), (1, 0), (1, 1)], (0.5, 0.5), "Core", "Cor"
-            )
+            TerritoryRegion(0, "Core", [(0, 0), (1, 0), (1, 1)], (0.5, 0.5), "Core", "Cor")
         ],
         grid=[[0, 0, 0, 0], [0, 0, 0, 0]],
         conflict_edges=set(),
@@ -31,9 +29,7 @@ def test_render_svg_writes_file(tmp_path) -> None:
         width=4,
         height=2,
         territories=[
-            TerritoryRegion(
-                0, "Core", [(0, 0), (1, 0), (1, 1)], (0.5, 0.5), "Core", "Cor"
-            )
+            TerritoryRegion(0, "Core", [(0, 0), (1, 0), (1, 1)], (0.5, 0.5), "Core", "Cor")
         ],
         grid=[[0, 0, 0, 0], [0, 0, 0, 0]],
         conflict_edges=set(),

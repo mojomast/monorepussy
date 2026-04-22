@@ -4,13 +4,13 @@ from __future__ import annotations
 
 import pytest
 
-from cambium.drift import (
+from ussy_cambium.drift import (
     classify_drift_zone,
     compute_drift_debt,
     drift_forecast,
     format_drift_report,
 )
-from cambium.models import CompatibilityZone, DriftDebt
+from ussy_cambium.models import CompatibilityZone, DriftDebt
 
 
 class TestComputeDriftDebt:

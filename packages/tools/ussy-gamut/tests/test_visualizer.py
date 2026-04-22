@@ -2,8 +2,8 @@
 
 import pytest
 
-from gamut.analyzer import analyze_boundary
-from gamut.models import (
+from ussy_gamut.analyzer import analyze_boundary
+from ussy_gamut.models import (
     BoundaryReport,
     ClippingResult,
     ClippingRisk,
@@ -11,8 +11,8 @@ from gamut.models import (
     RenderingIntent,
     TypeGamut,
 )
-from gamut.profiler import profile_stage
-from gamut.visualizer import (
+from ussy_gamut.profiler import profile_stage
+from ussy_gamut.visualizer import (
     render_boundary_comparison,
     render_field_detail,
     render_gamut_diagram,
@@ -53,14 +53,14 @@ class TestRenderPipelineOverview:
     """Tests for pipeline overview rendering."""
 
     def test_basic_overview(self, sample_dag):
-        from gamut.analyzer import analyze_pipeline
+        from ussy_gamut.analyzer import analyze_pipeline
         reports = analyze_pipeline(sample_dag)
         output = render_pipeline_overview(reports, sample_dag)
         assert "Pipeline: test_pipeline" in output
         assert "Stages:" in output
 
     def test_boundary_summary(self, sample_dag):
-        from gamut.analyzer import analyze_pipeline
+        from ussy_gamut.analyzer import analyze_pipeline
         reports = analyze_pipeline(sample_dag)
         output = render_pipeline_overview(reports, sample_dag)
         assert "Boundary:" in output

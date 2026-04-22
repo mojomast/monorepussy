@@ -3,7 +3,7 @@
 import pytest
 from pathlib import Path
 
-from gamut.cli import main, build_parser
+from ussy_gamut.cli import main, build_parser
 
 
 class TestBuildParser:

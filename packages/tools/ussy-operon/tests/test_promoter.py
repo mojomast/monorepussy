@@ -4,8 +4,8 @@ from datetime import datetime, timezone
 
 import pytest
 
-from operon.models import Codebase, Gene, Operon, Promoter
-from operon.promoter import PromoterDetector
+from ussy_operon.models import Codebase, Gene, Operon, Promoter
+from ussy_operon.promoter import PromoterDetector
 
 
 class TestPromoterDetector:

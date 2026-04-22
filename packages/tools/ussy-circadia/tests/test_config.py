@@ -6,7 +6,7 @@ import tempfile
 import pytest
 from pathlib import Path
 
-from circadia.config import CircadiaConfig, ZoneThresholds, GitHooksConfig, LinterConfig
+from ussy_circadia.config import CircadiaConfig, ZoneThresholds, GitHooksConfig, LinterConfig
 
 
 class TestZoneThresholds:

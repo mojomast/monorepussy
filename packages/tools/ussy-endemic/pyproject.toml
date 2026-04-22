@@ -1,22 +1,25 @@
 [build-system]
-requires = ["setuptools>=68.0", "wheel"]
-build-backend = "setuptools.build_meta"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
 [project]
-name = "endemic"
+name = "ussy-endemic"
 version = "0.1.0"
-description = "Epidemiological Analysis of Code Pattern Propagation"
+description = "Migrated from endemic"
 readme = "README.md"
 requires-python = ">=3.11"
 license = {text = "MIT"}
+dependencies = [
+    "ussy-core",
+]
 
 [project.scripts]
-endemic = "endemic.cli:main"
+ussy-endemic = "ussy_endemic.cli:main"
+endemic = "ussy_endemic.legacy:main"
 
-[tool.setuptools.packages.find]
-include = ["endemic*"]
+[tool.hatch.build.targets.wheel]
+packages = ["src/ussy_endemic"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-python_files = ["test_*.py"]
-python_functions = ["test_*"]
+pythonpath = ["src"]

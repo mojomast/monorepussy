@@ -4,7 +4,7 @@ import math
 
 import pytest
 
-from calibre.classifier import (
+from ussy_calibre.classifier import (
     classify_test,
     compute_combined_ab_uncertainty,
     compute_type_a_uncertainty,
@@ -12,7 +12,7 @@ from calibre.classifier import (
     compute_type_b_uncertainty_triangular,
     format_classification,
 )
-from calibre.models import TestResult, TestRun, UncertaintyType
+from ussy_calibre.models import TestResult, TestRun, UncertaintyType
 
 
 class TestComputeTypeAUncertainty:

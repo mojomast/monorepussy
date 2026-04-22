@@ -5,8 +5,8 @@ from datetime import datetime, timezone, timedelta
 
 import pytest
 
-from calibre.models import TraceabilityLink
-from calibre.traceability import (
+from ussy_calibre.models import TraceabilityLink
+from ussy_calibre.traceability import (
     audit_traceability,
     check_chain_completeness,
     compute_chain_uncertainty,

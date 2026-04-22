@@ -1,7 +1,7 @@
 """Tests for Anti-Dumping/CVD — Copyleft Contagion Containment."""
 import pytest
 
-from portmore.contagion import (
+from ussy_portmore.contagion import (
     assess_contagion,
     causal_link_test,
     circumvention_threshold_test,
@@ -10,7 +10,7 @@ from portmore.contagion import (
     material_injury_test,
     scope_ruling,
 )
-from portmore.models import InjuryIndicator
+from ussy_portmore.models import InjuryIndicator
 
 
 class TestDumpingMargin:

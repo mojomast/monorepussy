@@ -5,8 +5,8 @@ from pathlib import Path
 
 import pytest
 
-from operon.mapper import OperonMapper
-from operon.models import Codebase, Gene
+from ussy_operon.mapper import OperonMapper
+from ussy_operon.models import Codebase, Gene
 
 
 class TestOperonMapper:

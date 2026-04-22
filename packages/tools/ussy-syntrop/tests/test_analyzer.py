@@ -3,7 +3,7 @@
 import pytest
 from pathlib import Path
 
-from syntrop.analyzer import (
+from ussy_syntrop.analyzer import (
     AssumptionScanner,
     BehavioralAssumption,
     scan_source,

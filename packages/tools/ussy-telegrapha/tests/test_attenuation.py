@@ -3,8 +3,8 @@
 import math
 import pytest
 
-from telegrapha.models import Hop, Route
-from telegrapha.attenuation import (
+from ussy_telegrapha.models import Hop, Route
+from ussy_telegrapha.attenuation import (
     compute_fidelity,
     check_distortionless,
     find_loading_coil_position,

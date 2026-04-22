@@ -5,7 +5,7 @@ from __future__ import annotations
 import numpy as np
 import pytest
 
-from cavity.standing_wave import (
+from ussy_cavity.standing_wave import (
     StandingWave,
     _hann_window,
     detect_standing_waves,

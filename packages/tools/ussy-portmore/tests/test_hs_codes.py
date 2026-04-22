@@ -1,7 +1,7 @@
 """Tests for HS Code taxonomy and lookup."""
 import pytest
 
-from portmore.hs_codes import (
+from ussy_portmore.hs_codes import (
     all_hs_codes,
     all_spdx_ids,
     classify_by_family,
@@ -9,7 +9,7 @@ from portmore.hs_codes import (
     get_family_for_chapter,
     lookup_hs_code,
 )
-from portmore.models import LicenseFamily
+from ussy_portmore.models import LicenseFamily
 
 
 class TestHSCodeLookup:

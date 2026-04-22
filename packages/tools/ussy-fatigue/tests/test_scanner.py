@@ -4,13 +4,13 @@ import os
 import tempfile
 import pytest
 
-from fatigue.scanner import (
+from ussy_fatigue.scanner import (
     CrackScanner,
     CrackType,
     detect_circular_dependencies,
     build_import_graph,
 )
-from fatigue.models import Crack
+from ussy_fatigue.models import Crack
 
 
 FIXTURES_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "fixtures")

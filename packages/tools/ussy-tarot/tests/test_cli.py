@@ -1,11 +1,15 @@
+try:
+    from conftest import create_fixture_dir, create_incidents_file
+except ImportError:
+    from .conftest import create_fixture_dir, create_incidents_file
+
 """Tests for tarot.cli module."""
 
 import os
 import tempfile
 import pytest
 
-from tarot.cli import main
-from tests.conftest import create_fixture_dir, create_incidents_file
+from ussy_tarot.cli import main
 
 
 class TestCLIVersion:

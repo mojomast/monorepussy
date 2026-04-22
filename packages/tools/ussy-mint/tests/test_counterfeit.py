@@ -1,7 +1,7 @@
 """Tests for mint.counterfeit — Counterfeit detection."""
 
 import pytest
-from mint.counterfeit import (
+from ussy_mint.counterfeit import (
     detect_typosquat,
     detect_dependency_confusion,
     detect_account_takeover,
@@ -13,7 +13,7 @@ from mint.counterfeit import (
     CounterfeitType,
     Severity,
 )
-from mint.models import ProvenanceLevel
+from ussy_mint.models import ProvenanceLevel
 
 
 class TestDetectTyposquat:

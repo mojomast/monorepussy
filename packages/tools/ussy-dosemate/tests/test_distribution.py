@@ -8,9 +8,9 @@ from datetime import datetime, timedelta
 
 import pytest
 
-from dosemate.distribution import DistributionParams, compute_distribution
-from dosemate.dependency_graph import DependencyGraphAnalyzer
-from dosemate.git_parser import PullRequestInfo
+from ussy_dosemate.distribution import DistributionParams, compute_distribution
+from ussy_dosemate.dependency_graph import DependencyGraphAnalyzer
+from ussy_dosemate.git_parser import PullRequestInfo
 
 
 class TestDistributionParams:

@@ -4,8 +4,8 @@ import os
 import pytest
 import tempfile
 
-from endemic.scanner import PatternScanner, ASTChecker, BUILTIN_PATTERNS
-from endemic.models import PatternType, Compartment
+from ussy_endemic.scanner import PatternScanner, ASTChecker, BUILTIN_PATTERNS
+from ussy_endemic.models import PatternType, Compartment
 
 
 FIXTURES_DIR = os.path.join(os.path.dirname(__file__), "..", "fixtures")

@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-from mushin.workspace import (
+from ussy_mushin.workspace import (
     Workspace,
     WorkspaceMeta,
     delete_workspace,

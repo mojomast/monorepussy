@@ -2,7 +2,7 @@
 
 from datetime import datetime, timezone
 
-from calibre.models import (
+from ussy_calibre.models import (
     CapabilityResult,
     CapabilitySpec,
     DriftObservation,

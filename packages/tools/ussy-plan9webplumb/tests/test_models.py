@@ -5,7 +5,7 @@ from datetime import datetime, timezone
 
 import pytest
 
-from plan9webplumb.models import (
+from ussy_plan9webplumb.models import (
     DispatchResult,
     Handler,
     HandlerAction,

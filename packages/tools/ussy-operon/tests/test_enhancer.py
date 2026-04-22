@@ -2,8 +2,8 @@
 
 import pytest
 
-from operon.enhancer import EnhancerScanner
-from operon.models import Codebase, Gene, Operon
+from ussy_operon.enhancer import EnhancerScanner
+from ussy_operon.models import Codebase, Gene, Operon
 
 
 class TestEnhancerScanner:
@@ -141,7 +141,7 @@ class TestEnhancerScanner:
 
     def test_get_top_enhancers(self):
         scanner = EnhancerScanner()
-        from operon.models import Enhancer
+        from ussy_operon.models import Enhancer
         enhancers = [
             Enhancer(enhancer_id="e1", source_gene="a.py", target_gene="b.py", enhancer_strength=0.3),
             Enhancer(enhancer_id="e2", source_gene="a.py", target_gene="c.py", enhancer_strength=0.9),
@@ -153,7 +153,7 @@ class TestEnhancerScanner:
 
     def test_get_enhancers_for_operon(self):
         scanner = EnhancerScanner()
-        from operon.models import Enhancer
+        from ussy_operon.models import Enhancer
         enhancers = [
             Enhancer(enhancer_id="e1", source_gene="a.py", target_gene="b.py", target_operon="op_0"),
             Enhancer(enhancer_id="e2", source_gene="a.py", target_gene="c.py", target_operon="op_1"),

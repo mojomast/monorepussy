@@ -1,7 +1,7 @@
 """Tests for circadia.zones module."""
 
 import pytest
-from circadia.zones import CognitiveZone, ZoneProbability
+from ussy_circadia.zones import CognitiveZone, ZoneProbability
 
 
 class TestCognitiveZone:

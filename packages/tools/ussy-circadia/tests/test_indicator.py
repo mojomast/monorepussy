@@ -1,9 +1,9 @@
 """Tests for indicator module."""
 import pytest
 
-from circadia.indicator import TerminalIndicator
-from circadia.zones import CognitiveZone
-from circadia.config import CircadiaConfig
+from ussy_circadia.indicator import TerminalIndicator
+from ussy_circadia.zones import CognitiveZone
+from ussy_circadia.config import CircadiaConfig
 
 
 @pytest.fixture

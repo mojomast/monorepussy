@@ -5,7 +5,7 @@ import tempfile
 
 from click.testing import CliRunner
 
-from terrarium.cli import cli, main
+from ussy_terrarium.cli import cli, main
 
 
 runner = CliRunner()

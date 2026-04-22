@@ -2,7 +2,7 @@
 
 import pytest
 
-from endemic.models import (
+from ussy_endemic.models import (
     DeveloperStats,
     HerdImmunityResult,
     Module,
@@ -18,14 +18,14 @@ from endemic.models import (
     VaccinationStrategy,
     ZoonoticJump,
 )
-from endemic.report import (
+from ussy_endemic.report import (
     format_herd_immunity_report,
     format_promote_report,
     format_scan_report,
     format_simulation_report,
     format_trace_report,
 )
-from endemic.sir_model import simulate_sir
+from ussy_endemic.sir_model import simulate_sir
 
 
 class TestFormatScanReport:
@@ -143,7 +143,7 @@ class TestFormatSimulationReport:
         assert "bare-except" in report
 
     def test_with_intervention(self):
-        from endemic.sir_model import simulate_with_intervention
+        from ussy_endemic.sir_model import simulate_with_intervention
         without, with_int = simulate_with_intervention(
             n=47, initial_infected=5, initial_recovered=0,
             r0=3.0, gamma=0.1,

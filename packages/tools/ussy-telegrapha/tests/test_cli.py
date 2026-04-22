@@ -4,7 +4,7 @@ import json
 import pytest
 from pathlib import Path
 
-from telegrapha.cli import main, build_parser
+from ussy_telegrapha.cli import main, build_parser
 
 
 class TestBuildParser:

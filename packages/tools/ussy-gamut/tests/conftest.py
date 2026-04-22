@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-from gamut.models import (
+from ussy_gamut.models import (
     ClippingRisk,
     FieldType,
     FieldProfile,
@@ -14,7 +14,7 @@ from gamut.models import (
     StageProfile,
     TypeGamut,
 )
-from gamut.profiler import profile_stage
+from ussy_gamut.profiler import profile_stage
 
 
 FIXTURES_DIR = Path(__file__).parent / "fixtures"

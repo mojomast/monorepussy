@@ -5,7 +5,7 @@ from __future__ import annotations
 import numpy as np
 import pytest
 
-from cavity.impedance import (
+from ussy_cavity.impedance import (
     ImpedanceBoundary,
     ImpedanceProfile,
     analyze_impedance_mismatches,
@@ -93,7 +93,7 @@ class TestAnalyzeImpedanceMismatches:
         assert len(profile.mismatches) >= 1
 
     def test_no_mismatches(self, minimal_dict):
-        from cavity.topology import PipelineTopology
+        from ussy_cavity.topology import PipelineTopology
         topo = PipelineTopology.from_dict(minimal_dict)
         # a: Z=5000, b: Z=1000 → R = (1000-5000)/6000 = -0.667 → mismatch
         profile = analyze_impedance_mismatches(topo)
@@ -166,7 +166,7 @@ class TestRecommendDamping:
 
     def test_no_mismatches(self):
         """Topology with matched impedances should have no recommendations."""
-        from cavity.topology import PipelineTopology
+        from ussy_cavity.topology import PipelineTopology
         data = {
             "stages": {
                 "a": {"rate": 100, "buffer": 10, "depends_on": [], "locks": []},

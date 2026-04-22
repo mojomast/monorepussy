@@ -4,13 +4,13 @@ from __future__ import annotations
 
 import pytest
 
-from cambium.gci import (
+from ussy_cambium.gci import (
     compute_gci,
     compute_gci_simple,
     format_gci_report,
     gci_trajectory,
 )
-from cambium.models import (
+from ussy_cambium.models import (
     AlignmentScore,
     BondStrength,
     CallusDynamics,

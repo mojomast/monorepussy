@@ -1,10 +1,15 @@
+try:
+    from conftest import create_fixture_dir, create_incidents_file
+except ImportError:
+    from .conftest import create_fixture_dir, create_incidents_file
+
 """Tests for tarot.cards module."""
 
 import os
 import tempfile
 import pytest
 
-from tarot.cards import (
+from ussy_tarot.cards import (
     Outcome,
     CascadeRule,
     InteractionRule,
@@ -19,7 +24,6 @@ from tarot.cards import (
     _parse_interactions,
     load_card_from_markdown,
 )
-from tests.conftest import create_fixture_dir
 
 
 class TestOutcome:

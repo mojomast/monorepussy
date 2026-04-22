@@ -3,9 +3,9 @@ from __future__ import annotations
 from pathlib import Path
 import subprocess
 
-from reverseoracle.config import AppConfig
-from reverseoracle.context import reconstruct_context
-from reverseoracle.generator import (
+from ussy_reverseoracle.config import AppConfig
+from ussy_reverseoracle.context import reconstruct_context
+from ussy_reverseoracle.generator import (
     build_prompt,
     extract_code_blocks,
     generate_counterfactual,

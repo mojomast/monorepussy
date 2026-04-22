@@ -2,8 +2,8 @@
 
 import pytest
 
-from isobar.fields import AtmosphericField, AtmosphericProfile
-from isobar.forecast import (
+from ussy_isobar.fields import AtmosphericField, AtmosphericProfile
+from ussy_isobar.forecast import (
     generate_forecast, format_forecast, Forecast, ForecastStep,
 )
 

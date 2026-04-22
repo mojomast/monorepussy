@@ -4,8 +4,8 @@ from __future__ import annotations
 import json
 import pytest
 
-from fossilrecord.corpus.loader import StressCategory
-from fossilrecord.generator.living_fossil import (
+from ussy_fossilrecord.corpus.loader import StressCategory
+from ussy_fossilrecord.generator.living_fossil import (
     LivingFossilGenerator,
     GenerationConfig,
     EmbeddedProgram,
@@ -123,7 +123,7 @@ class TestLivingFossilGenerator:
 
     def test_embedded_in_python_comment(self):
         gen = LivingFossilGenerator(config=GenerationConfig(count=1, seed=42, host_languages=["python"]))
-        from fossilrecord.corpus.loader import EsolangProgram
+        from ussy_fossilrecord.corpus.loader import EsolangProgram
         prog = EsolangProgram("test", "BF", "+++.", "", [StressCategory.MINIMALISTIC], 1)
         results = gen._generate_embedded([prog], 1)
         assert len(results) == 1
@@ -156,7 +156,7 @@ class TestLivingFossilGenerator:
         assert "Symbol-dense" in source
 
     def test_chimera_generation(self):
-        from fossilrecord.corpus.loader import EsolangProgram
+        from ussy_fossilrecord.corpus.loader import EsolangProgram
         progs = [
             EsolangProgram("p1", "Brainfuck", "+++.", "", [StressCategory.MINIMALISTIC], 1),
             EsolangProgram("p2", "Befunge-93", "0\"!\":v", "", [StressCategory.TWOD], 2),

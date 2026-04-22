@@ -2,8 +2,8 @@
 
 import pytest
 
-from isobar.fields import AtmosphericField, AtmosphericProfile
-from isobar.fronts import (
+from ussy_isobar.fields import AtmosphericField, AtmosphericProfile
+from ussy_isobar.fronts import (
     Front, FrontType, FrontIntensity,
     detect_fronts, format_fronts_report,
     _are_adjacent, _classify_front,

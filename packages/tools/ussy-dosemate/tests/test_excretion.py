@@ -4,8 +4,8 @@ import math
 
 import pytest
 
-from dosemate.excretion import ExcretionParams, compute_excretion
-from dosemate.distribution import DistributionParams
+from ussy_dosemate.excretion import ExcretionParams, compute_excretion
+from ussy_dosemate.distribution import DistributionParams
 
 
 class TestExcretionParams:

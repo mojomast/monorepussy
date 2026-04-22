@@ -1,7 +1,7 @@
 """Tests for Customs Valuation — Compliance Cost Assessment."""
 import pytest
 
-from portmore.valuation import (
+from ussy_portmore.valuation import (
     article8_adjustments,
     compute_valuation_hierarchy,
     method1_transaction_value,
@@ -12,7 +12,7 @@ from portmore.valuation import (
     method6_fallback,
     related_party_test,
 )
-from portmore.models import ValuationMethod
+from ussy_portmore.models import ValuationMethod
 
 
 class TestMethod1TransactionValue:

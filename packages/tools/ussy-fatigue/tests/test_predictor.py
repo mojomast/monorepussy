@@ -2,12 +2,12 @@
 
 import pytest
 
-from fatigue.predictor import (
+from ussy_fatigue.predictor import (
     predict_decay,
     estimate_debt_from_cracks,
     recommend_arrest_strategies,
 )
-from fatigue.models import (
+from ussy_fatigue.models import (
     Crack,
     CrackType,
     DecayPrediction,

@@ -1,7 +1,7 @@
 """Tests for General Interpretative Rules (GIRs) classification."""
 import pytest
 
-from portmore.classifier import (
+from ussy_portmore.classifier import (
     apply_gir1,
     apply_gir2a,
     apply_gir2b,
@@ -10,7 +10,7 @@ from portmore.classifier import (
     apply_gir3c,
     classify_licenses,
 )
-from portmore.models import MultiLicenseResolution
+from ussy_portmore.models import MultiLicenseResolution
 
 
 class TestGIR1:

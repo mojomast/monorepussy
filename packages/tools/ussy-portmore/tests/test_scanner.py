@@ -4,7 +4,7 @@ import pytest
 import tempfile
 from pathlib import Path
 
-from portmore.scanner import (
+from ussy_portmore.scanner import (
     detect_license_from_text,
     find_license_files,
     read_package_json,

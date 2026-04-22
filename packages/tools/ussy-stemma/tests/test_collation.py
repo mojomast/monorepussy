@@ -4,14 +4,14 @@ from pathlib import Path
 
 import pytest
 
-from stemma.collation import (
+from ussy_stemma.collation import (
     collate,
     collate_path,
     identify_variation_units,
     load_witnesses,
     load_witnesses_from_strings,
 )
-from stemma.models import VariantType, Witness
+from ussy_stemma.models import VariantType, Witness
 
 
 class TestLoadWitnesses:

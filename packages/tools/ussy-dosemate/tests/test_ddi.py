@@ -2,13 +2,13 @@
 
 import pytest
 
-from dosemate.ddi import (
+from ussy_dosemate.ddi import (
     DDIResult, compute_ddi, analyze_all_interactions,
     compute_breaking_change_displacement,
 )
-from dosemate.metabolism import MetabolismParams
-from dosemate.git_parser import PullRequestInfo
-from dosemate.dependency_graph import DependencyGraphAnalyzer
+from ussy_dosemate.metabolism import MetabolismParams
+from ussy_dosemate.git_parser import PullRequestInfo
+from ussy_dosemate.dependency_graph import DependencyGraphAnalyzer
 from datetime import datetime, timedelta
 import tempfile
 import os

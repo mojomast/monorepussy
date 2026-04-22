@@ -2,11 +2,11 @@ from __future__ import annotations
 
 from datetime import datetime
 
-from timeloom.git_parser import CoChangeMatrix, CommitInfo
-from timeloom.renderers.svg import render_heatmap_svg, render_weave_svg
-from timeloom.renderers.terminal import render_terminal
-from timeloom.renderers.wif import render_wif
-from timeloom.weave_engine import build_weave_draft
+from ussy_timeloom.git_parser import CoChangeMatrix, CommitInfo
+from ussy_timeloom.renderers.svg import render_heatmap_svg, render_weave_svg
+from ussy_timeloom.renderers.terminal import render_terminal
+from ussy_timeloom.renderers.wif import render_wif
+from ussy_timeloom.weave_engine import build_weave_draft
 
 
 def _draft():

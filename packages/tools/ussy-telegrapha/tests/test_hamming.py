@@ -3,7 +3,7 @@
 import math
 import pytest
 
-from telegrapha.hamming import (
+from ussy_telegrapha.hamming import (
     compute_arq_metrics,
     compute_fec_metrics,
     compute_break_even_error_rate,

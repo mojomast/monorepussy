@@ -10,7 +10,7 @@ from pathlib import Path
 
 import pytest
 
-CLI = [sys.executable, "-m", "propriocept"]
+CLI = [sys.executable, "-m", "ussy_propriocept"]
 _SRC = str(Path(__file__).resolve().parents[1] / "src")
 _ENV = {**os.environ, "PYTHONPATH": _SRC}
 
@@ -127,7 +127,16 @@ class TestMuscleMemoryCommand:
         hist.write_text("git pull\npytest\ngit push\n" * 10)
         out = tmp_path / "aliases.sh"
         result = subprocess.run(
-            [*CLI, "muscle-memory", "--history", str(hist), "--min-freq", "5", "--output", str(out)],
+            [
+                *CLI,
+                "muscle-memory",
+                "--history",
+                str(hist),
+                "--min-freq",
+                "5",
+                "--output",
+                str(out),
+            ],
             capture_output=True,
             text=True,
             env=_ENV,

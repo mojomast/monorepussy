@@ -2,13 +2,13 @@
 
 import math
 import pytest
-from actuary.ibnr import (
+from ussy_actuary.ibnr import (
     bornhuetter_ferguson,
     cape_cod,
     ibnr_from_density,
     format_ibnr,
 )
-from actuary.backlog import DevelopmentTriangle
+from ussy_actuary.backlog import DevelopmentTriangle
 
 
 @pytest.fixture

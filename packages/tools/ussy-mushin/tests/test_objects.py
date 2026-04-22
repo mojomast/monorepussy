@@ -2,7 +2,7 @@
 
 import pytest
 
-from mushin.objects import ObjectCache
+from ussy_mushin.objects import ObjectCache
 
 
 @pytest.fixture

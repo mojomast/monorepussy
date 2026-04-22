@@ -5,7 +5,7 @@ from __future__ import annotations
 import numpy as np
 import pytest
 
-from cavity.beat_frequency import (
+from ussy_cavity.beat_frequency import (
     BeatFrequency,
     autocorrelation,
     detect_beat_frequency,

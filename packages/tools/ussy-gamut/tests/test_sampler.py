@@ -4,9 +4,9 @@ import json
 import pytest
 from pathlib import Path
 
-from gamut.models import FieldType, SampleReport, SampleValue, TypeGamut
-from gamut.profiler import profile_stage
-from gamut.sampler import (
+from ussy_gamut.models import FieldType, SampleReport, SampleValue, TypeGamut
+from ussy_gamut.profiler import profile_stage
+from ussy_gamut.sampler import (
     format_sample_report,
     load_csv_data,
     load_json_data,

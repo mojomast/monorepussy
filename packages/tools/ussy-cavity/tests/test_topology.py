@@ -9,7 +9,7 @@ from pathlib import Path
 import numpy as np
 import pytest
 
-from cavity.topology import Lock, PipelineTopology, Stage
+from ussy_cavity.topology import Lock, PipelineTopology, Stage
 
 
 # ---------------------------------------------------------------------------

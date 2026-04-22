@@ -4,7 +4,7 @@ import json
 import pytest
 from pathlib import Path
 
-from mint.lockfile import (
+from ussy_mint.lockfile import (
     parse_package_lock_json,
     parse_package_json,
     build_dependency_graph,
@@ -95,7 +95,7 @@ class TestBuildDependencyGraph:
 
     def test_no_external_deps(self):
         """Dependencies not in the lockfile should not appear in graph."""
-        from mint.lockfile import LockedPackage
+        from ussy_mint.lockfile import LockedPackage
         packages = [
             LockedPackage(name="a", version="1.0.0", dependencies={"b": "1.0.0"}),
             LockedPackage(name="b", version="1.0.0"),
@@ -105,7 +105,7 @@ class TestBuildDependencyGraph:
 
     def test_missing_dep_excluded(self):
         """Dependencies not present in the lockfile should be excluded from graph."""
-        from mint.lockfile import LockedPackage
+        from ussy_mint.lockfile import LockedPackage
         packages = [
             LockedPackage(name="a", version="1.0.0", dependencies={"missing": "1.0.0"}),
         ]
@@ -117,7 +117,7 @@ class TestExtractPackageNames:
     """Test package name extraction."""
 
     def test_sorted_names(self):
-        from mint.lockfile import LockedPackage
+        from ussy_mint.lockfile import LockedPackage
         packages = [
             LockedPackage(name="z-pkg", version="1.0.0"),
             LockedPackage(name="a-pkg", version="1.0.0"),

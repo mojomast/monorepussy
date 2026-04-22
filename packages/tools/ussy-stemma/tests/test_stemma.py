@@ -1,8 +1,8 @@
 """Tests for the stemma builder module."""
 
-from stemma.collation import collate
-from stemma.models import Witness, WitnessRole
-from stemma.stemma_builder import (
+from ussy_stemma.collation import collate
+from ussy_stemma.models import Witness, WitnessRole
+from ussy_stemma.stemma_builder import (
     build_stemma,
     build_variant_matrix,
     compute_distance_matrix,

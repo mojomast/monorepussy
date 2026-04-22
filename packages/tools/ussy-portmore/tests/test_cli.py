@@ -1,7 +1,7 @@
 """Tests for the CLI interface."""
 import pytest
 
-from portmore.cli import build_parser, main
+from ussy_portmore.cli import build_parser, main
 
 
 class TestCLIParser:

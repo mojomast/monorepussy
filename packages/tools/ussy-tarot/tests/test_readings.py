@@ -1,8 +1,13 @@
+try:
+    from conftest import create_fixture_dir, create_incidents_file
+except ImportError:
+    from .conftest import create_fixture_dir, create_incidents_file
+
 """Tests for tarot.readings module."""
 
 import pytest
 
-from tarot.cards import (
+from ussy_tarot.cards import (
     CardRegistry,
     DecisionCard,
     Outcome,
@@ -10,8 +15,8 @@ from tarot.cards import (
     InteractionRule,
     InteractionType,
 )
-from tarot.engine import MonteCarloEngine
-from tarot.readings import (
+from ussy_tarot.engine import MonteCarloEngine
+from ussy_tarot.readings import (
     ReadingGenerator,
     FullReading,
     TowerReading,
@@ -21,7 +26,6 @@ from tarot.readings import (
     DeathReading,
     format_reading,
 )
-from tests.conftest import create_fixture_dir
 
 
 def _make_risky_registry():

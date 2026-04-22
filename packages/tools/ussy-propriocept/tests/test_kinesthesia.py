@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pytest
 
-from propriocept.kinesthesia import (
+from ussy_propriocept.kinesthesia import (
     compute_vectors,
     kinesthetic_velocity,
     parse_history,

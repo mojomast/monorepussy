@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pytest
 
-from curator import cli
+from ussy_curator import cli
 
 
 class TestCatalogCommand:

@@ -1,19 +1,25 @@
 [build-system]
-requires = ["setuptools>=68.0", "wheel"]
-build-backend = "setuptools.build_meta"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
 [project]
-name = "tarot"
+name = "ussy-tarot"
 version = "0.1.0"
-description = "Probabilistic Risk Divination for Architecture Decisions"
-requires-python = ">=3.9"
+description = "Migrated from tarot"
+readme = "README.md"
+requires-python = ">=3.11"
 license = {text = "MIT"}
+dependencies = [
+    "ussy-core",
+]
 
 [project.scripts]
-tarot = "tarot.cli:main"
+ussy-tarot = "ussy_tarot.cli:main"
+tarot = "ussy_tarot.legacy:main"
 
-[tool.setuptools.packages.find]
-include = ["tarot*"]
+[tool.hatch.build.targets.wheel]
+packages = ["src/ussy_tarot"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+pythonpath = ["src"]

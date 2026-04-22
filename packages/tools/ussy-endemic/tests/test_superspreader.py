@@ -2,13 +2,13 @@
 
 import pytest
 
-from endemic.models import (
+from ussy_endemic.models import (
     DeveloperStats,
     TransmissionEvent,
     TransmissionTree,
     TransmissionVector,
 )
-from endemic.superspreader import (
+from ussy_endemic.superspreader import (
     compute_superspreader_impact,
     identify_superspreader_developers,
     identify_superspreader_events,

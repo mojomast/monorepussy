@@ -2,7 +2,7 @@
 
 import pytest
 
-from syntrop.ir import (
+from ussy_syntrop.ir import (
     IRFunction,
     IRModule,
     IRNode,

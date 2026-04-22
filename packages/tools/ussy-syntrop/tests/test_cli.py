@@ -3,7 +3,7 @@
 import pytest
 from pathlib import Path
 
-from syntrop.cli import build_parser, main
+from ussy_syntrop.cli import build_parser, main
 
 
 SOURCE_ORDER_DEP = """

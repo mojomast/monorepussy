@@ -3,7 +3,7 @@
 import math
 import pytest
 
-from telegrapha.capacity import (
+from ussy_telegrapha.capacity import (
     compute_snr,
     compute_shannon_capacity,
     compute_utilization,

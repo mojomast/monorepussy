@@ -2,7 +2,7 @@
 
 import pytest
 
-from terrarium.metrics.stability import (
+from ussy_terrarium.metrics.stability import (
     classify_stability,
     classify_age,
     is_likely_dead,

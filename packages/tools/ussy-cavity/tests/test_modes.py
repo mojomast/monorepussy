@@ -5,7 +5,7 @@ from __future__ import annotations
 import numpy as np
 import pytest
 
-from cavity.modes import (
+from ussy_cavity.modes import (
     RiskLevel,
     ResonanceMode,
     classify_damping,

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from reverseoracle.models import (
+from ussy_reverseoracle.models import (
     AnalysisReport,
     CodeMetrics,
     DecisionContext,
@@ -8,7 +8,7 @@ from reverseoracle.models import (
     EvaluationStats,
     EvolutionStep,
 )
-from reverseoracle.reporter import render_html, render_json, render_text
+from ussy_reverseoracle.reporter import render_html, render_json, render_text
 
 
 def test_renderers():

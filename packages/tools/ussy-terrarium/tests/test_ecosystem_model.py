@@ -2,15 +2,15 @@
 
 import pytest
 
-from terrarium.metrics.models import ModuleMetrics, ProjectMetrics
-from terrarium.ecosystem.organisms import (
+from ussy_terrarium.metrics.models import ModuleMetrics, ProjectMetrics
+from ussy_terrarium.ecosystem.organisms import (
     OrganismType,
     Vitality,
     ROLE_TO_ORGANISM,
     health_to_vitality,
     get_emoji,
 )
-from terrarium.ecosystem.model import (
+from ussy_terrarium.ecosystem.model import (
     Organism,
     Ecosystem,
     compute_health_score,
@@ -327,7 +327,7 @@ class TestBuildOrganismExtended:
 
     def test_build_organism_with_crack_intensity(self):
         """Crack intensity should reduce health and add symptom."""
-        from terrarium.ecosystem.model import OrganismHealthState
+        from ussy_terrarium.ecosystem.model import OrganismHealthState
 
         m = ModuleMetrics(
             path="cracked.py",
@@ -345,7 +345,7 @@ class TestBuildOrganismExtended:
 
     def test_build_organism_with_infection(self):
         """Infection state should reduce health and add symptoms."""
-        from terrarium.ecosystem.model import OrganismHealthState
+        from ussy_terrarium.ecosystem.model import OrganismHealthState
 
         m = ModuleMetrics(
             path="infected.py",
@@ -376,7 +376,7 @@ class TestBuildOrganismExtended:
 
     def test_build_organism_with_anomaly(self):
         """Anomaly active should reduce health and add symptom."""
-        from terrarium.ecosystem.model import OrganismHealthState
+        from ussy_terrarium.ecosystem.model import OrganismHealthState
 
         m = ModuleMetrics(
             path="anomalous.py",

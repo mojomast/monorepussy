@@ -6,8 +6,8 @@ from pathlib import Path
 
 import pytest
 
-from plan9webplumb.config import Config, DEFAULT_PORT, DEFAULT_HOST
-from plan9webplumb.models import Handler, HandlerRule
+from ussy_plan9webplumb.config import Config, DEFAULT_PORT, DEFAULT_HOST
+from ussy_plan9webplumb.models import Handler, HandlerRule
 
 
 @pytest.fixture

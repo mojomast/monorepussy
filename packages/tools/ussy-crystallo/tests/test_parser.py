@@ -3,8 +3,8 @@
 import pytest
 from pathlib import Path
 
-from crystallo.parser import parse_file, parse_directory, _node_to_name
-from crystallo.models import StructuralFingerprint
+from ussy_crystallo.parser import parse_file, parse_directory, _node_to_name
+from ussy_crystallo.models import StructuralFingerprint
 
 
 FIXTURES = Path(__file__).parent / "fixtures"

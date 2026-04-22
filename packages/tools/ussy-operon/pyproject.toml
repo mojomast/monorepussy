@@ -1,39 +1,25 @@
 [build-system]
-requires = ["setuptools>=61.0", "wheel"]
-build-backend = "setuptools.build_meta"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
 [project]
-name = "operon"
+name = "ussy-operon"
 version = "1.0.0"
 description = "Gene Regulation for Documentation Generation"
 readme = "README.md"
-requires-python = ">=3.10"
 license = {text = "MIT"}
-authors = [
-    {name = "Operon Team"}
-]
-keywords = ["documentation", "gene-regulation", "operon", "code-analysis"]
-classifiers = [
-    "Development Status :: 4 - Beta",
-    "Intended Audience :: Developers",
-    "License :: OSI Approved :: MIT License",
-    "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.10",
-    "Programming Language :: Python :: 3.11",
-    "Programming Language :: Python :: 3.12",
-    "Topic :: Software Development :: Documentation",
-    "Topic :: Software Development :: Libraries :: Python Modules",
+requires-python = ">=3.11"
+dependencies = [
+    "ussy-core",
 ]
 
 [project.scripts]
-operon = "operon.cli:main"
+ussy-operon = "ussy_operon.cli:main"
+operon = "ussy_operon.legacy:deprecated_main"
 
-[tool.setuptools.packages.find]
-where = ["src"]
+[tool.hatch.build.targets.wheel]
+packages = ["src/ussy_operon"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-python_files = ["test_*.py"]
-python_classes = ["Test*"]
-python_functions = ["test_*"]
-addopts = "-q --tb=short"
+pythonpath = ["src"]

@@ -8,7 +8,7 @@ from pathlib import Path
 
 import pytest
 
-from propriocept.schema import build_schema, load_schema, scan_limb
+from ussy_propriocept.schema import build_schema, load_schema, scan_limb
 
 
 class TestScanLimb:

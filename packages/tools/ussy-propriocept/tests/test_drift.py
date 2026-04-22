@@ -7,7 +7,7 @@ from pathlib import Path
 
 import pytest
 
-from propriocept.drift import detect_drift, render_report
+from ussy_propriocept.drift import detect_drift, render_report
 
 
 class TestDetectDrift:

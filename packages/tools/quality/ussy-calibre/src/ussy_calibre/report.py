@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import List, Optional
 
-from calibre.models import (
+from ussy_calibre.models import (
     CapabilityResult,
     CapabilitySpec,
     DriftObservation,
@@ -16,12 +16,12 @@ from calibre.models import (
     TraceabilityResult,
     UncertaintyBudget,
 )
-from calibre.budget import budget_from_test_runs, format_budget
-from calibre.capability import capability_analysis, format_capability
-from calibre.classifier import classify_test, format_classification
-from calibre.drift import analyze_drift, format_drift_result
-from calibre.rr import compute_rr_summary, format_rr_summary, runs_to_rr_observations
-from calibre.traceability import audit_traceability, format_traceability
+from ussy_calibre.budget import budget_from_test_runs, format_budget
+from ussy_calibre.capability import capability_analysis, format_capability
+from ussy_calibre.classifier import classify_test, format_classification
+from ussy_calibre.drift import analyze_drift, format_drift_result
+from ussy_calibre.rr import compute_rr_summary, format_rr_summary, runs_to_rr_observations
+from ussy_calibre.traceability import audit_traceability, format_traceability
 
 
 def generate_full_report(

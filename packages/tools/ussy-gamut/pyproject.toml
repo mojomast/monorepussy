@@ -1,34 +1,25 @@
 [build-system]
-requires = ["setuptools>=64", "wheel"]
-build-backend = "setuptools.build_meta"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
 [project]
-name = "gamut"
+name = "ussy-gamut"
 version = "0.1.0"
 description = "Color science gamut mapping for data pipeline fidelity analysis"
 readme = "README.md"
-requires-python = ">=3.10"
 license = {text = "MIT"}
-keywords = ["data-pipeline", "fidelity", "gamut", "color-science", "clipping"]
-classifiers = [
-    "Development Status :: 3 - Alpha",
-    "Intended Audience :: Developers",
-    "Intended Audience :: Data Engineers",
-    "Topic :: Database",
-    "Topic :: Software Development :: Quality Assurance",
-    "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.10",
-    "Programming Language :: Python :: 3.11",
-    "Programming Language :: Python :: 3.12",
+requires-python = ">=3.11"
+dependencies = [
+    "ussy-core",
 ]
 
 [project.scripts]
-gamut = "gamut.cli:main"
+ussy-gamut = "ussy_gamut.cli:main"
+gamut = "ussy_gamut.legacy:deprecated_main"
 
-[tool.setuptools.packages.find]
-include = ["gamut*"]
+[tool.hatch.build.targets.wheel]
+packages = ["ussy_gamut"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-python_files = "test_*.py"
-python_functions = "test_*"
+pythonpath = ["."]

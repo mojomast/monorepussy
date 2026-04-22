@@ -1,7 +1,7 @@
 """Tests for data models."""
 import pytest
 
-from portmore.models import (
+from ussy_portmore.models import (
     ClassifiedLicense,
     CompatibilityResult,
     CompatibilityStatus,

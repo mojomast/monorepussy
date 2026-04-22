@@ -3,7 +3,7 @@
 import pytest
 from datetime import datetime, timezone
 
-from endemic.models import (
+from ussy_endemic.models import (
     Compartment,
     DeveloperStats,
     HerdImmunityResult,

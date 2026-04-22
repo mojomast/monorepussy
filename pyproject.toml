@@ -23,6 +23,74 @@ dependencies = [
     "ussy-steno",
     "ussy-calibre",
     "ussy-strata",
+    "ussy-chromato",
+    "ussy-cambium",
+    "ussy-deps",
+    "ussy-propriocept",
+    "ussy-curator",
+    "ussy-operon",
+    "ussy-portmore",
+    "ussy-syntrop",
+    "ussy-fossilrecord",
+    "ussy-telegrapha",
+    "ussy-mushin",
+    "ussy-gamut",
+    "ussy-cyclone",
+    "ussy-isobar",
+    "ussy-circadia",
+    "ussy-fatigue",
+    "ussy-endemic",
+    "ussy-stemma",
+    "ussy-crystallo",
+    "ussy-terrarium",
+    "ussy-tarot",
+    "ussy-actuary",
+    "ussy-coroner",
+    "ussy-mint",
+    "ussy-dosemate",
+    "ussy-cavity",
+    "ussy-aquifer",
+    "ussy-seral",
+    "ussy-plan9webplumb",
+    "ussy-reverseoracle",
+    "ussy-timeloom",
+]
+
+[project.optional-dependencies]
+sci = [
+    "numpy>=1.24",
+    "scipy>=1.10",
+]
+cli = [
+    "click>=8.1",
+    "rich>=13.0",
+    "rich-click>=1.0",
+]
+git = [
+    "gitpython>=3.1",
+]
+graph = [
+    "networkx>=3.0",
+]
+web = [
+    "requests>=2.25",
+    "httpx>=0.24",
+    "websockets>=11.0",
+]
+config = [
+    "pyyaml>=6.0",
+]
+viz = [
+    "matplotlib>=3.7",
+]
+compress = [
+    "zstandard>=0.20",
+]
+mining = [
+    "pydriller>=2.6",
+]
+all = [
+    "ussyverse[sci,cli,git,graph,web,config,viz,compress,mining]",
 ]
 
 [tool.uv.workspace]
@@ -36,37 +104,190 @@ members = [
     "packages/tools/triage/*",
     "packages/tools/governance/*",
     "packages/tools/devtools/*",
+    "packages/tools/ussy-*",
     "packages/apps/*",
 ]
-exclude = ["packages/archive"]
+exclude = [
+    "packages/archive",
+]
 
-[tool.uv.sources]
-ussy-core = { workspace = true }
-ussy-cli = { workspace = true }
-ussy-git = { workspace = true }
-ussy-ast = { workspace = true }
-ussy-sqlite = { workspace = true }
-ussy-report = { workspace = true }
-ussy-triage = { workspace = true }
-ussy-sentinel = { workspace = true }
-ussy-gridiron = { workspace = true }
-ussy-parliament = { workspace = true }
-ussy-stratax = { workspace = true }
-ussy-kintsugi = { workspace = true }
-ussy-assay = { workspace = true }
-ussy-petrichor = { workspace = true }
-ussy-snapshot = { workspace = true }
-ussy-churn = { workspace = true }
-ussy-steno = { workspace = true }
-ussy-calibre = { workspace = true }
-ussy-strata = { workspace = true }
+[tool.uv.sources.ussy-core]
+workspace = true
 
-[build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
+[tool.uv.sources.ussy-cli]
+workspace = true
+
+[tool.uv.sources.ussy-git]
+workspace = true
+
+[tool.uv.sources.ussy-ast]
+workspace = true
+
+[tool.uv.sources.ussy-sqlite]
+workspace = true
+
+[tool.uv.sources.ussy-report]
+workspace = true
+
+[tool.uv.sources.ussy-triage]
+workspace = true
+
+[tool.uv.sources.ussy-sentinel]
+workspace = true
+
+[tool.uv.sources.ussy-gridiron]
+workspace = true
+
+[tool.uv.sources.ussy-parliament]
+workspace = true
+
+[tool.uv.sources.ussy-stratax]
+workspace = true
+
+[tool.uv.sources.ussy-kintsugi]
+workspace = true
+
+[tool.uv.sources.ussy-assay]
+workspace = true
+
+[tool.uv.sources.ussy-petrichor]
+workspace = true
+
+[tool.uv.sources.ussy-snapshot]
+workspace = true
+
+[tool.uv.sources.ussy-churn]
+workspace = true
+
+[tool.uv.sources.ussy-steno]
+workspace = true
+
+[tool.uv.sources.ussy-calibre]
+workspace = true
+
+[tool.uv.sources.ussy-strata]
+workspace = true
+
+[tool.uv.sources.ussy-chromato]
+workspace = true
+
+[tool.uv.sources.ussy-cambium]
+workspace = true
+
+[tool.uv.sources.ussy-deps]
+workspace = true
+
+[tool.uv.sources.ussy-isobar]
+workspace = true
+
+[tool.uv.sources.ussy-circadia]
+workspace = true
+
+[tool.uv.sources.ussy-fatigue]
+workspace = true
+
+[tool.uv.sources.ussy-endemic]
+workspace = true
+
+[tool.uv.sources.ussy-stemma]
+workspace = true
+
+[tool.uv.sources.ussy-crystallo]
+workspace = true
+
+[tool.uv.sources.ussy-terrarium]
+workspace = true
+
+[tool.uv.sources.ussy-tarot]
+workspace = true
+
+[tool.uv.sources.ussy-actuary]
+workspace = true
+
+[tool.uv.sources.ussy-coroner]
+workspace = true
+
+[tool.uv.sources.ussy-mint]
+workspace = true
+
+[tool.uv.sources.ussy-dosemate]
+workspace = true
+
+[tool.uv.sources.ussy-cavity]
+workspace = true
+
+[tool.uv.sources.ussy-aquifer]
+workspace = true
+
+[tool.uv.sources.ussy-seral]
+workspace = true
+
+[tool.uv.sources.ussy-plan9webplumb]
+workspace = true
+
+[tool.uv.sources.ussy-reverseoracle]
+workspace = true
+
+[tool.uv.sources.ussy-timeloom]
+workspace = true
+
+[tool.uv.sources.ussy-propriocept]
+workspace = true
+
+[tool.uv.sources.ussy-curator]
+workspace = true
+
+[tool.uv.sources.ussy-operon]
+workspace = true
+
+[tool.uv.sources.ussy-portmore]
+workspace = true
+
+[tool.uv.sources.ussy-syntrop]
+workspace = true
+
+[tool.uv.sources.ussy-fossilrecord]
+workspace = true
+
+[tool.uv.sources.ussy-telegrapha]
+workspace = true
+
+[tool.uv.sources.ussy-mushin]
+workspace = true
+
+[tool.uv.sources.ussy-gamut]
+workspace = true
+
+[tool.uv.sources.ussy-cyclone]
+workspace = true
 
 [tool.hatch.build.targets.wheel]
 bypass-selection = true
+
+[tool.pytest.ini_options]
+testpaths = [
+    "packages",
+]
+norecursedirs = [
+    ".venv",
+    "__pycache__",
+    "demo",
+]
+addopts = "-n auto --import-mode=importlib"
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+
+[build-system]
+requires = [
+    "hatchling",
+]
+build-backend = "hatchling.build"
 
 [dependency-groups]
 dev = [
@@ -80,28 +301,3 @@ dev = [
     "mkdocs-material>=9.5",
     "mkdocstrings[python]>=0.25",
 ]
-
-[project.optional-dependencies]
-sci = ["numpy>=1.24", "scipy>=1.10"]
-cli = ["click>=8.1", "rich>=13.0", "rich-click>=1.0"]
-git = ["gitpython>=3.1"]
-graph = ["networkx>=3.0"]
-web = ["requests>=2.25", "httpx>=0.24", "websockets>=11.0"]
-config = ["pyyaml>=6.0"]
-viz = ["matplotlib>=3.7"]
-compress = ["zstandard>=0.20"]
-mining = ["pydriller>=2.6"]
-all = ["ussyverse[sci,cli,git,graph,web,config,viz,compress,mining]"]
-
-[tool.pytest.ini_options]
-testpaths = ["packages"]
-norecursedirs = [".venv", "__pycache__"]
-addopts = "-n auto"
-
-[tool.ruff]
-target-version = "py311"
-line-length = 100
-
-[tool.mypy]
-python_version = "3.11"
-strict = true

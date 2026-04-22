@@ -9,7 +9,7 @@ from typing import List
 
 import pytest
 
-from calibre.models import (
+from ussy_calibre.models import (
     CapabilitySpec,
     DriftObservation,
     RRObservation,

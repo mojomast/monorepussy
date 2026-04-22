@@ -1,31 +1,27 @@
-[build-system]
-requires = ["setuptools>=68.0", "wheel"]
-build-backend = "setuptools.build_meta"
-
 [project]
-name = "reverseoracle"
+name = "ussy-reverseoracle"
 version = "0.1.0"
-description = "Counterfactual code decision explorer — generate and evaluate alternative implementations"
+description = "Migrated from reverseoracle"
 readme = "README.md"
-requires-python = ">=3.10"
-license = "MIT"
+requires-python = ">=3.11"
 dependencies = [
+    "ussy-core",
     "click>=8.0",
     "httpx>=0.24",
     "pyyaml>=6.0",
 ]
 
-[project.optional-dependencies]
-dev = [
-    "pytest>=7.0",
-    "pytest-cov>=4.0",
-]
-
 [project.scripts]
-reverseoracle = "reverseoracle.cli:main"
+ussy-reverseoracle = "ussy_reverseoracle.cli:main"
+reverseoracle = "ussy_reverseoracle.legacy:deprecated_main"
 
-[tool.setuptools.packages.find]
-where = ["src"]
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/ussy_reverseoracle"]
 
 [tool.pytest.ini_options]
+pythonpath = ["src"]
 testpaths = ["tests"]

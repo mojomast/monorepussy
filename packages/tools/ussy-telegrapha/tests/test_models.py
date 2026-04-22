@@ -2,7 +2,7 @@
 
 import pytest
 
-from telegrapha.models import (
+from ussy_telegrapha.models import (
     Hop, Route, PipelineTopology,
     AttenuationResult, RelayChainResult,
     CapacityResult, PrecedenceClass, PrecedenceResult,

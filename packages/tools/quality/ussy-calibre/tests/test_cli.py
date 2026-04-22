@@ -7,9 +7,9 @@ from pathlib import Path
 
 import pytest
 
-from calibre.cli import build_parser, main
-from calibre.db import CalibreDB
-from calibre.models import (
+from ussy_calibre.cli_measure import build_parser, main
+from ussy_calibre.db import CalibreDB
+from ussy_calibre.models import (
     DriftObservation,
     TestResult,
     TestRun,

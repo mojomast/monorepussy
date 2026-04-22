@@ -2,7 +2,7 @@
 
 import math
 import pytest
-from actuary.credibility import (
+from ussy_actuary.credibility import (
     compute_epv,
     compute_vhm,
     compute_credibility,

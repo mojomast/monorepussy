@@ -4,13 +4,13 @@ from __future__ import annotations
 
 from datetime import datetime, timezone
 
-from coroner.custody import (
+from ussy_coroner.custody import (
     analyze_custody,
     build_custody_chain,
     compare_custody_chains,
     format_custody,
 )
-from coroner.models import CustodyChain, CustodyComparison, CustodyEntry, PipelineRun, Stage, StageStatus
+from ussy_coroner.models import CustodyChain, CustodyComparison, CustodyEntry, PipelineRun, Stage, StageStatus
 
 
 class TestBuildCustodyChain:
@@ -32,7 +32,7 @@ class TestBuildCustodyChain:
 
     def test_deterministic_chain(self, simple_failing_run):
         """Same run should produce same chain (with fixed timestamps)."""
-        from coroner.custody import build_custody_chain
+        from ussy_coroner.custody import build_custody_chain
         # Build chain twice - since timestamps use datetime.now(), hashes will differ
         # Instead verify the chain structure is consistent
         chain = build_custody_chain(simple_failing_run)

@@ -2,8 +2,8 @@
 
 import pytest
 
-from aquifer.topology import ServiceLayer, FlowConnection, Topology, create_sample_topology
-from aquifer.drawdown import (
+from ussy_aquifer.topology import ServiceLayer, FlowConnection, Topology, create_sample_topology
+from ussy_aquifer.drawdown import (
     compute_graph_distance,
     compute_cone_of_depression,
     predict_cascade,

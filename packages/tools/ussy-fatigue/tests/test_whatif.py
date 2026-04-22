@@ -2,12 +2,12 @@
 
 import pytest
 
-from fatigue.whatif import (
+from ussy_fatigue.whatif import (
     simulate_intervention,
     list_interventions,
     INTERVENTIONS,
 )
-from fatigue.models import (
+from ussy_fatigue.models import (
     MaterialConstants,
     ModuleStatus,
     StressIntensity,

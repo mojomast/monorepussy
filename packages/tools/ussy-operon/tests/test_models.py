@@ -5,7 +5,7 @@ from datetime import datetime, timezone
 
 import pytest
 
-from operon.models import (
+from ussy_operon.models import (
     Codebase,
     Enhancer,
     EpigeneticMark,

@@ -5,7 +5,7 @@ import subprocess
 
 from click.testing import CliRunner
 
-from reverseoracle.cli import main
+from ussy_reverseoracle.cli import main
 
 
 def _commit(repo: Path) -> str:

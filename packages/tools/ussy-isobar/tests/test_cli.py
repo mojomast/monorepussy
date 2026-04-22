@@ -7,7 +7,7 @@ from datetime import datetime, timezone, timedelta
 
 import pytest
 
-from isobar.cli import build_parser, main
+from ussy_isobar.cli import build_parser, main
 
 
 @pytest.fixture

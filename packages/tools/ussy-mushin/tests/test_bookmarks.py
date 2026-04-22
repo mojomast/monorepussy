@@ -2,7 +2,7 @@
 
 import pytest
 
-from mushin.bookmarks import Bookmark, BookmarkManager
+from ussy_mushin.bookmarks import Bookmark, BookmarkManager
 
 
 @pytest.fixture

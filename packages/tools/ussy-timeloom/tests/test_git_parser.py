@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import subprocess
 
-from timeloom.git_parser import classify_commit_type, parse_repo
+from ussy_timeloom.git_parser import classify_commit_type, parse_repo
 
 
 def _make_repo(tmp_path):

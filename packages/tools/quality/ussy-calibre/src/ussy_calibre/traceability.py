@@ -23,7 +23,7 @@ import math
 from datetime import datetime, timezone, timedelta
 from typing import Dict, List, Optional, Set
 
-from calibre.models import TraceabilityLink, TraceabilityResult
+from ussy_calibre.models import TraceabilityLink, TraceabilityResult
 
 
 # Ordered chain levels from highest to lowest

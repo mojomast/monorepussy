@@ -6,9 +6,9 @@ from unittest.mock import patch, MagicMock
 
 import pytest
 
-from circadia.hooks import GitHooksManager, HookCheckResult
-from circadia.zones import CognitiveZone
-from circadia.config import CircadiaConfig
+from ussy_circadia.hooks import GitHooksManager, HookCheckResult
+from ussy_circadia.zones import CognitiveZone
+from ussy_circadia.config import CircadiaConfig
 
 
 @pytest.fixture

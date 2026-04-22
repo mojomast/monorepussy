@@ -2,7 +2,7 @@
 
 import math
 import pytest
-from actuary.survival import (
+from ussy_actuary.survival import (
     LifeTableRow,
     SurvivalTable,
     compute_life_table,

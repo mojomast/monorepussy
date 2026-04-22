@@ -1,3 +1,8 @@
+try:
+    from conftest import create_fixture_dir, create_incidents_file
+except ImportError:
+    from .conftest import create_fixture_dir, create_incidents_file
+
 """Tests for tarot.evidence module."""
 
 import json
@@ -5,8 +10,7 @@ import os
 import tempfile
 import pytest
 
-from tarot.evidence import EvidenceCollector, EvidenceItem, IncidentRecord
-from tests.conftest import create_incidents_file
+from ussy_tarot.evidence import EvidenceCollector, EvidenceItem, IncidentRecord
 
 
 class TestEvidenceItem:

@@ -6,7 +6,7 @@ import tempfile
 
 import pytest
 
-from aquifer.topology import (
+from ussy_aquifer.topology import (
     ServiceLayer,
     FlowConnection,
     Topology,

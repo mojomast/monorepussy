@@ -4,8 +4,8 @@ import json
 import pytest
 from pathlib import Path
 
-from gamut.models import FieldType, StageProfile, TypeGamut
-from gamut.profiler import (
+from ussy_gamut.models import FieldType, StageProfile, TypeGamut
+from ussy_gamut.profiler import (
     get_profiler,
     profile_from_json,
     profile_stage,
@@ -13,7 +13,7 @@ from gamut.profiler import (
     dag_from_json,
     dag_from_dir,
 )
-from gamut.systems import SYSTEM_PROFILERS
+from ussy_gamut.systems import SYSTEM_PROFILERS
 
 
 class TestGetProfiler:

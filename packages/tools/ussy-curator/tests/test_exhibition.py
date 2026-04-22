@@ -6,10 +6,10 @@ from pathlib import Path
 
 import pytest
 
-from curator.exhibition import Exhibition
-from curator.models import Document
-from curator.classification import FacetedClassification
-from curator.conservation import ConservationReport
+from ussy_curator.exhibition import Exhibition
+from ussy_curator.models import Document
+from ussy_curator.classification import FacetedClassification
+from ussy_curator.conservation import ConservationReport
 
 
 def _make_doc(tmp_path: Path, name: str, content: str, notation: str) -> Document:

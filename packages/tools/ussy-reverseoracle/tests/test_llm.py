@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from reverseoracle.llm import LLMRequest, MockLLMProvider
+from ussy_reverseoracle.llm import LLMRequest, MockLLMProvider
 
 
 def test_mock_llm_provider_records_requests():

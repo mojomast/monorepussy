@@ -6,7 +6,7 @@ import os
 
 import pytest
 
-from cambium.alignment import (
+from ussy_cambium.alignment import (
     compute_alignment,
     compute_alignment_from_files,
     compute_alignment_from_source,
@@ -15,8 +15,8 @@ from cambium.alignment import (
     compute_signature_match,
     format_alignment_heatmap,
 )
-from cambium.extractor import extract_interface
-from cambium.models import InterfaceInfo
+from ussy_cambium.extractor import extract_interface
+from ussy_cambium.models import InterfaceInfo
 
 
 FIXTURES_DIR = os.path.join(os.path.dirname(__file__), "fixtures")

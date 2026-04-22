@@ -4,13 +4,13 @@ from __future__ import annotations
 
 import pytest
 
-from cambium.bond import (
+from ussy_cambium.bond import (
     bond_trajectory,
     compute_bond_strength,
     detect_decay,
     format_bond_report,
 )
-from cambium.models import BondStrength, BondTrend
+from ussy_cambium.models import BondStrength, BondTrend
 
 
 class TestComputeBondStrength:

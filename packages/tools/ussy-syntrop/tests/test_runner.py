@@ -4,9 +4,9 @@ import pytest
 import tempfile
 from pathlib import Path
 
-from syntrop.runner import run_probe, run_all_probes, probe_file, scan_directory, diff_probes
-from syntrop.ir import ProbeResult, ScanResult, DiffResult
-from syntrop.probes import PROBE_REGISTRY
+from ussy_syntrop.runner import run_probe, run_all_probes, probe_file, scan_directory, diff_probes
+from ussy_syntrop.ir import ProbeResult, ScanResult, DiffResult
+from ussy_syntrop.probes import PROBE_REGISTRY
 
 
 SOURCE_ORDER_DEP = """

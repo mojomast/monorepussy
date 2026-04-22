@@ -5,7 +5,7 @@ import sys
 from io import StringIO
 from pathlib import Path
 
-from mint.cli import main, build_parser, _parse_package_spec
+from ussy_mint.cli import main, build_parser, _parse_package_spec
 
 FIXTURES = Path(__file__).parent / "fixtures"
 

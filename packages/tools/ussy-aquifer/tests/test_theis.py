@@ -4,8 +4,8 @@ import math
 
 import pytest
 
-from aquifer.topology import ServiceLayer, FlowConnection, Topology
-from aquifer.theis import (
+from ussy_aquifer.topology import ServiceLayer, FlowConnection, Topology
+from ussy_aquifer.theis import (
     well_function,
     compute_drawdown,
     compute_time_to_saturation,

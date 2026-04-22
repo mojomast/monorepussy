@@ -10,7 +10,7 @@ from pathlib import Path
 
 import pytest
 
-from propriocept.sense import render_ascii, sense, sense_processes
+from ussy_propriocept.sense import render_ascii, sense, sense_processes
 
 
 class TestSenseProcesses:

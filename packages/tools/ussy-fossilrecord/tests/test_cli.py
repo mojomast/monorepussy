@@ -5,7 +5,7 @@ import json
 import pytest
 from pathlib import Path
 
-from fossilrecord.cli import main as cli_main
+from ussy_fossilrecord.cli import main as cli_main
 
 
 class TestCLIBasic:

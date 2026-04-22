@@ -2,8 +2,8 @@
 
 import pytest
 
-from operon.models import Codebase, FactorType, Gene, Operon
-from operon.transcription import TranscriptionFactorRegistry
+from ussy_operon.models import Codebase, FactorType, Gene, Operon
+from ussy_operon.transcription import TranscriptionFactorRegistry
 
 
 class TestTranscriptionFactorRegistry:
@@ -75,7 +75,7 @@ class TestTranscriptionFactorRegistry:
 
     def test_calculate_expression_positive(self):
         registry = TranscriptionFactorRegistry()
-        from operon.models import TranscriptionFactor
+        from ussy_operon.models import TranscriptionFactor
         activators = [TranscriptionFactor(factor_id="a1", name="a1", factor_type=FactorType.ACTIVATOR, strength=0.8)]
         repressors = [TranscriptionFactor(factor_id="r1", name="r1", factor_type=FactorType.REPRESSOR, strength=0.3)]
         expr = registry._calculate_expression(activators, repressors)

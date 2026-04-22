@@ -6,13 +6,13 @@ import tempfile
 
 import pytest
 
-from cyclone.survey import (
+from ussy_cyclone.survey import (
     discover_config,
     format_survey,
     load_topology,
     survey,
 )
-from cyclone.models import PipelineTopology
+from ussy_cyclone.models import PipelineTopology
 
 
 @pytest.fixture

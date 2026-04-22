@@ -5,7 +5,7 @@ from datetime import datetime, timezone, timedelta
 
 import pytest
 
-from calibre.drift import (
+from ussy_calibre.drift import (
     analyze_drift,
     compute_recalibration_interval,
     detect_cusum,
@@ -13,7 +13,7 @@ from calibre.drift import (
     fit_linear_drift,
     format_drift_result,
 )
-from calibre.models import DriftObservation
+from ussy_calibre.models import DriftObservation
 
 
 class TestFitLinearDrift:

@@ -2,8 +2,8 @@
 
 import pytest
 
-from operon.models import Codebase, Gene, RepressorType
-from operon.repressor import RepressorManager
+from ussy_operon.models import Codebase, Gene, RepressorType
+from ussy_operon.repressor import RepressorManager
 
 
 class TestRepressorManager:

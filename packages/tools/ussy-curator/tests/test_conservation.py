@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pytest
 
-from curator.conservation import ConservationReport
+from ussy_curator.conservation import ConservationReport
 
 
 class TestConservationReport:

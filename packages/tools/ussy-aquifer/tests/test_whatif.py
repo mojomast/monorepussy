@@ -2,8 +2,8 @@
 
 import pytest
 
-from aquifer.topology import ServiceLayer, FlowConnection, Topology, create_sample_topology
-from aquifer.whatif import (
+from ussy_aquifer.topology import ServiceLayer, FlowConnection, Topology, create_sample_topology
+from ussy_aquifer.whatif import (
     drill_well,
     add_fracture,
     remove_confining_layer,

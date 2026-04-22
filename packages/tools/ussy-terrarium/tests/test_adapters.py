@@ -6,17 +6,17 @@ from typing import Dict
 
 import pytest
 
-from terrarium.adapters.base import BaseAdapter
-from terrarium.adapters.fatigue import FatigueAdapter
-from terrarium.adapters.endemic import EndemicAdapter
-from terrarium.adapters.sentinel import SentinelAdapter
-from terrarium.adapters.kompressi import KompressiAdapter
-from terrarium.adapters.churnmap import ChurnmapAdapter
-from terrarium.adapters.seral import SeralAdapter
-from terrarium.adapters.proprioception import ProprioceptionAdapter
-from terrarium.adapters.snapshot import SnapshotAdapter
-from terrarium.adapters import load_adapters, merge_health_states, reset_adapter_cache
-from terrarium.ecosystem.model import OrganismHealthState
+from ussy_terrarium.adapters.base import BaseAdapter
+from ussy_terrarium.adapters.fatigue import FatigueAdapter
+from ussy_terrarium.adapters.endemic import EndemicAdapter
+from ussy_terrarium.adapters.sentinel import SentinelAdapter
+from ussy_terrarium.adapters.kompressi import KompressiAdapter
+from ussy_terrarium.adapters.churnmap import ChurnmapAdapter
+from ussy_terrarium.adapters.seral import SeralAdapter
+from ussy_terrarium.adapters.proprioception import ProprioceptionAdapter
+from ussy_terrarium.adapters.snapshot import SnapshotAdapter
+from ussy_terrarium.adapters import load_adapters, merge_health_states, reset_adapter_cache
+from ussy_terrarium.ecosystem.model import OrganismHealthState
 
 
 FIXTURES_DIR = os.path.join(os.path.dirname(__file__), "fixtures")

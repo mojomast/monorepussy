@@ -9,7 +9,7 @@ from pathlib import Path
 
 import pytest
 
-from cavity.cli import build_parser, main
+from ussy_cavity.cli import build_parser, main
 
 
 FIXTURES_DIR = Path(__file__).parent / "fixtures"
@@ -172,9 +172,9 @@ class TestCmdReport:
 
 class TestModuleExecution:
     def test_python_m_cavity(self):
-        """Test that `python -m cavity` works."""
+        """Test that `python -m ussy_cavity` works."""
         result = subprocess.run(
-            [sys.executable, "-m", "cavity", "--version"],
+            [sys.executable, "-m", "ussy_cavity", "--version"],
             capture_output=True,
             text=True,
             timeout=30,

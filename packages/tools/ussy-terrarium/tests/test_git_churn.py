@@ -7,7 +7,7 @@ from datetime import datetime, timezone
 
 import pytest
 
-from terrarium.metrics.git_churn import (
+from ussy_terrarium.metrics.git_churn import (
     get_git_log,
     get_churn_for_file,
     get_all_file_churn,

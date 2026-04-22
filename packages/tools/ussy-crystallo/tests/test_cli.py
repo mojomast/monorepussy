@@ -3,7 +3,7 @@
 import pytest
 from pathlib import Path
 
-from crystallo.cli import main, build_parser
+from ussy_crystallo.cli import main, build_parser
 
 
 FIXTURES = Path(__file__).parent / "fixtures"

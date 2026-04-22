@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<testsuite name="tests.sample" tests="12" errors="0" failures="3" skipped="2" time="45.2">
+  <testcase classname="tests.sample.test_auth" name="test_login_success" time="0.5"/>
+  <testcase classname="tests.sample.test_auth" name="test_login_failure" time="0.3">
+    <failure message="Login should fail with wrong password">AssertionError: Expected 401, got 200</failure>
+  </testcase>
+  <testcase classname="tests.sample.test_auth" name="test_logout" time="0.2"/>
+  <testcase classname="tests.sample.test_auth" name="test_token_expiry" time="1.2">
+    <failure message="Token should expire">AssertionError: Token still valid after expiry</failure>
+  </testcase>
+  <testcase classname="tests.sample.test_models" name="test_user_creation" time="0.1"/>
+  <testcase classname="tests.sample.test_models" name="test_user_validation" time="0.1"/>
+  <testcase classname="tests.sample.test_models" name="test_user_str" time="0.05">
+    <skipped message="Not implemented yet">skip reason: feature pending</skipped>
+  </testcase>
+  <testcase classname="tests.sample.test_api" name="test_get_users" time="2.5"/>
+  <testcase classname="tests.sample.test_api" name="test_post_user" time="1.8">
+    <failure message="API returned 500">AssertionError: Expected 201, got 500</failure>
+  </testcase>
+  <testcase classname="tests.sample.test_api" name="test_delete_user" time="0.9"/>
+  <testcase classname="tests.sample.test_utils" name="test_helper_trivial" time="0.01"/>
+  <testcase classname="tests.sample.test_utils" name="test_date_format" time="0.3">
+    <skipped message="Timezone dependent">xfail reason: timezone issue</skipped>
+  </testcase>
+</testsuite>

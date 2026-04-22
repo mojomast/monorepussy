@@ -6,8 +6,8 @@ import shutil
 
 import pytest
 
-from dosemate.ci_collector import CICollector, CIMetrics
-from dosemate.git_parser import GitHistoryParser
+from ussy_dosemate.ci_collector import CICollector, CIMetrics
+from ussy_dosemate.git_parser import GitHistoryParser
 
 
 class TestCICollector:

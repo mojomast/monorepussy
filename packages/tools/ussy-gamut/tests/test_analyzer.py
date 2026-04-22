@@ -2,14 +2,14 @@
 
 import pytest
 
-from gamut.models import (
+from ussy_gamut.models import (
     ClippingRisk,
     FieldType,
     FieldProfile,
     RenderingIntent,
     TypeGamut,
 )
-from gamut.analyzer import (
+from ussy_gamut.analyzer import (
     analyze_boundary,
     analyze_field,
     analyze_pipeline,
@@ -18,7 +18,7 @@ from gamut.analyzer import (
     compute_delta_e,
     generate_clipped_examples,
 )
-from gamut.profiler import profile_stage
+from ussy_gamut.profiler import profile_stage
 
 
 class TestComputeDeltaE:
@@ -232,7 +232,7 @@ class TestAnalyzePipeline:
         assert total_clipping > 0
 
     def test_pipeline_from_file(self, sample_pipeline_json):
-        from gamut.profiler import dag_from_json
+        from ussy_gamut.profiler import dag_from_json
         dag = dag_from_json(sample_pipeline_json)
         reports = analyze_pipeline(dag)
         assert len(reports) == 2

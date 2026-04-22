@@ -4,12 +4,12 @@ import os
 
 import pytest
 
-from cyclone.models import (
+from ussy_cyclone.models import (
     CycloneCategory,
     PipelineStage,
     PipelineTopology,
 )
-from cyclone.vorticity import (
+from ussy_cyclone.vorticity import (
     compute_stage_vorticity,
     compute_vorticity_field,
     compute_vorticity_change,
@@ -41,7 +41,7 @@ def simple_topology():
 @pytest.fixture
 def hurricane_topology():
     """Load the hurricane pipeline fixture."""
-    from cyclone.models import topology_from_json
+    from ussy_cyclone.models import topology_from_json
     fixtures_dir = os.path.join(os.path.dirname(__file__), "fixtures")
     return topology_from_json(os.path.join(fixtures_dir, "hurricane_pipeline.json"))
 
@@ -127,7 +127,7 @@ class TestComputeVorticityField:
 
 class TestComputeVorticityChange:
     def test_change_computed(self):
-        from cyclone.models import VorticityReading
+        from ussy_cyclone.models import VorticityReading
         from datetime import datetime, timezone
         now = datetime.now(timezone.utc)
 
@@ -145,7 +145,7 @@ class TestComputeVorticityChange:
         assert changes["b"] == pytest.approx(0.0)
 
     def test_missing_stage(self):
-        from cyclone.models import VorticityReading
+        from ussy_cyclone.models import VorticityReading
         from datetime import datetime, timezone
         now = datetime.now(timezone.utc)
 

@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
-from coroner.models import LuminolResult
-from coroner.luminol import (
+from ussy_coroner.models import LuminolResult
+from ussy_coroner.luminol import (
     analyze_luminol,
     cache_luminol,
     confirmatory_test,
@@ -28,7 +28,7 @@ class TestCacheLuminol:
 
     def test_missing_artifact_hashes_flagged(self):
         """Stage with success but no artifact hashes should be flagged."""
-        from coroner.models import PipelineRun, Stage, StageStatus
+        from ussy_coroner.models import PipelineRun, Stage, StageStatus
         run = PipelineRun(run_id="no-arts")
         run.stages = [
             Stage(name="build", index=0, status=StageStatus.SUCCESS, artifact_hashes={}),
@@ -55,7 +55,7 @@ class TestNinhydrinScan:
 
     def test_well_known_vars_filtered(self):
         """Well-known CI variables should not be flagged."""
-        from coroner.models import PipelineRun, Stage, StageStatus
+        from ussy_coroner.models import PipelineRun, Stage, StageStatus
         run = PipelineRun(run_id="well-known")
         run.stages = [
             Stage(name="a", index=0, status=StageStatus.SUCCESS,
@@ -75,7 +75,7 @@ class TestConfirmatoryTest:
     """Tests for confirmatory testing (false positive elimination)."""
 
     def test_single_cache_finding_not_confirmed(self):
-        from coroner.models import LuminolFinding, LuminolResult
+        from ussy_coroner.models import LuminolFinding, LuminolResult
         presumptive = [
             LuminolFinding(
                 category="cache",
@@ -86,7 +86,7 @@ class TestConfirmatoryTest:
                 description="Test finding",
             ),
         ]
-        from coroner.models import PipelineRun
+        from ussy_coroner.models import PipelineRun
         run = PipelineRun(run_id="test")
         confirmed = confirmatory_test(run, presumptive)
         # Single uncorroborated finding should remain presumptive
@@ -95,7 +95,7 @@ class TestConfirmatoryTest:
         assert len(confirmed_findings) == 0
 
     def test_multiple_findings_corroborated(self):
-        from coroner.models import LuminolFinding, LuminolResult
+        from ussy_coroner.models import LuminolFinding, LuminolResult
         presumptive = [
             LuminolFinding(
                 category="cache",
@@ -118,7 +118,7 @@ class TestConfirmatoryTest:
                 description="Finding 2",
             ),
         ]
-        from coroner.models import PipelineRun
+        from ussy_coroner.models import PipelineRun
         run = PipelineRun(run_id="test")
         confirmed = confirmatory_test(run, presumptive)
         # Multiple cache findings should corroborate each other

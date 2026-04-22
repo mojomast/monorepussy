@@ -2,8 +2,8 @@ from __future__ import annotations
 
 from datetime import datetime
 
-from timeloom.git_parser import CoChangeMatrix, CommitInfo
-from timeloom.weave_engine import build_weave_draft, crossing_density
+from ussy_timeloom.git_parser import CoChangeMatrix, CommitInfo
+from ussy_timeloom.weave_engine import build_weave_draft, crossing_density
 
 
 def _matrix():

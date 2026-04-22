@@ -1,30 +1,25 @@
 [build-system]
-requires = ["setuptools>=68.0", "wheel"]
-build-backend = "setuptools.build_meta"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
 [project]
-name = "syntrop"
+name = "ussy-syntrop"
 version = "0.1.0"
 description = "Cross-language behavioral fuzzing via esolang compilation and semantic probes"
 readme = "README.md"
 license = {text = "MIT"}
-requires-python = ">=3.10"
-classifiers = [
-    "Programming Language :: Python :: 3",
-    "License :: OSI Approved :: MIT License",
-    "Topic :: Software Development :: Testing",
+requires-python = ">=3.11"
+dependencies = [
+    "ussy-core",
 ]
-dependencies = []
-
-[project.optional-dependencies]
-rich = ["rich>=13.0"]
-dev = ["pytest>=7.0", "rich>=13.0"]
 
 [project.scripts]
-syntrop = "syntrop.cli:main"
+ussy-syntrop = "ussy_syntrop.cli:main"
+syntrop = "ussy_syntrop.legacy:deprecated_main"
 
-[tool.setuptools.packages.find]
-include = ["syntrop*"]
+[tool.hatch.build.targets.wheel]
+packages = ["ussy_syntrop"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+pythonpath = ["."]

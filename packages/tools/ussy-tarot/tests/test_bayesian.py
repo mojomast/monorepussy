@@ -1,13 +1,18 @@
+try:
+    from conftest import create_fixture_dir, create_incidents_file
+except ImportError:
+    from .conftest import create_fixture_dir, create_incidents_file
+
 """Tests for tarot.bayesian module."""
 
 import pytest
 
-from tarot.cards import (
+from ussy_tarot.cards import (
     CardRegistry,
     DecisionCard,
     Outcome,
 )
-from tarot.bayesian import (
+from ussy_tarot.bayesian import (
     BetaDistribution,
     BayesianUpdater,
     OutcomeObservation,

@@ -8,8 +8,8 @@ from pathlib import Path
 
 import pytest
 
-from seral.config import SeralConfig, DEFAULT_THRESHOLDS
-from seral.models import Stage, StageTransition
+from ussy_seral.config import SeralConfig, DEFAULT_THRESHOLDS
+from ussy_seral.models import Stage, StageTransition
 
 
 class TestSeralConfig:

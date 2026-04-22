@@ -1,12 +1,12 @@
 """Tests for the alignment module."""
 
-from stemma.alignment import (
+from ussy_stemma.alignment import (
     line_similarity,
     needleman_wunsch,
     pairwise_distance,
     align_witnesses,
 )
-from stemma.models import Witness
+from ussy_stemma.models import Witness
 
 
 class TestLineSimilarity:

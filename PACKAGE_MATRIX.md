@@ -17,16 +17,16 @@ This matrix maps all 63 repositories from github.com/mojomast to their monorepo 
 | # | Repo | Decision | Target Package | Path | Dependencies | Test Count | Priority | Status | Justification |
 |---|------|----------|----------------|------|--------------|------------|----------|--------|---------------|
 | 1 | triageussy | KEEP | ussy-triage | packages/tools/triage/ | stdlib only | 160 | P0 | **Migrated** | Tier 1, unique forensic methodology, zero deps, pilot candidate |
-| 2 | stenographussy | MERGE | ussy-steno | packages/tools/security/ | stdlib only | ~10 | P0 | Planned | Tier 1, merge with stenography; full-featured successor with SARIF |
+| 2 | stenographussy | MERGE | ussy-steno | packages/tools/security/ | stdlib only | 70 | P0 | **Migrated** | Tier 1, merge with stenography; full-featured successor with SARIF |
 | 3 | sentinelussy | KEEP | ussy-sentinel | packages/tools/governance/ | stdlib only | 117 | P0 | **Migrated** | Tier 1, unique immunological governance, no overlap |
 | 4 | gridironussy | KEEP | ussy-gridiron | packages/tools/deps/ | stdlib only | 162 | P0 | **Migrated** | Tier 1, dependency analysis cluster; power-grid reliability metaphor |
-| 5 | parliamentussy | KEEP | ussy-parliament | packages/tools/governance/ | stdlib only | ~8 | P0 | Tier 1, unique agent governance domain, requires Python 3.11 |
-| 6 | snapshotussy | KEEP | ussy-snapshot | packages/tools/devtools/ | stdlib only | ~8 | P0 | Tier 1, unique dev state management; fix secret storage in migration |
-| 7 | strataussy | KEEP | ussy-stratax | packages/tools/deps/ | requests, pyyaml | ~8 | P0 | Tier 1, dependency analysis cluster; behavioral probing; renamed to avoid conflict with ussy-strata |
-| 8 | kintsugiussy | KEEP | ussy-kintsugi | packages/tools/devtools/ | stdlib only | ~8 | P0 | Tier 1, unique bug repair annotation concept |
-| 9 | assayussy | KEEP | ussy-assay | packages/tools/devtools/ | stdlib only | ~8 | P0 | Tier 1, unique metallurgical code grading metaphor |
-| 10 | petrichorussy | KEEP | ussy-petrichor | packages/tools/devtools/ | stdlib only | ~8 | P0 | Tier 1, unique config drift detection; fix encryption in migration |
-| 11 | unconformity | MERGE | ussy-strata | packages/tools/forensics/ | gitpython, click, rich | ~6 | P0 | Tier 1, merge with stratagitussy; complementary git forensics tools |
+| 5 | parliamentussy | KEEP | ussy-parliament | packages/tools/governance/ | stdlib only | 120 | P0 | **Migrated** | Tier 1, unique agent governance domain, requires Python 3.11 |
+| 6 | snapshotussy | KEEP | ussy-snapshot | packages/tools/devtools/ | stdlib only | 220 | P0 | **Migrated** | Tier 1, unique dev state management; fix secret storage in migration |
+| 7 | strataussy | KEEP | ussy-stratax | packages/tools/deps/ | requests, pyyaml | 155 | P0 | **Migrated** | Tier 1, dependency analysis cluster; behavioral probing; renamed to avoid conflict with ussy-strata |
+| 8 | kintsugiussy | KEEP | ussy-kintsugi | packages/tools/devtools/ | stdlib only | 121 | P0 | **Migrated** | Tier 1, unique bug repair annotation concept |
+| 9 | assayussy | KEEP | ussy-assay | packages/tools/devtools/ | stdlib only | 163 | P0 | **Migrated** | Tier 1, unique metallurgical code grading metaphor |
+| 10 | petrichorussy | KEEP | ussy-petrichor | packages/tools/devtools/ | stdlib only | 140 | P0 | **Migrated** | Tier 1, unique config drift detection; fix encryption in migration |
+| 11 | unconformity | MERGE | ussy-strata | packages/tools/forensics/ | gitpython, click, rich | 153 | P0 | **Migrated** | Tier 1, merge with stratagitussy; complementary git forensics tools |
 
 **Tier 1 Summary:** 11 repos → 10 packages (1 merge: unconformity → strata)
 
@@ -36,45 +36,45 @@ This matrix maps all 63 repositories from github.com/mojomast to their monorepo 
 
 | # | Repo | Decision | Target Package | Path | Dependencies | Test Count | Priority | Justification |
 |---|------|----------|----------------|------|--------------|------------|----------|---------------|
-| 12 | proprioceptionussy | KEEP | ussy-propriocept | packages/tools/ | stdlib only | ~8 | P1 | Agent/swarm infrastructure; zero deps |
-| 13 | curatorussy | KEEP | ussy-curator | packages/tools/ | stdlib only | ~8 | P1 | Documentation health; zero deps |
-| 14 | operonussy | KEEP | ussy-operon | packages/tools/ | stdlib only | ~8 | P1 | Documentation health; zero deps |
-| 15 | actuaryussy | KEEP | ussy-actuary | packages/tools/ | numpy, scipy | ~8 | P2 | Test suite quality; scientific stack |
-| 16 | portmoreussy | KEEP | ussy-portmore | packages/tools/ | stdlib only | ~8 | P2 | Worth developing; zero deps |
-| 17 | calibreussy | MERGE | ussy-calibre | packages/tools/quality/ | numpy, scipy | ~8 | P0 | Test suite quality cluster; primary merge target |
-| 18 | acumenussy | MERGE | ussy-calibre | packages/tools/quality/ | stdlib only | ~8 | P1 | Test suite quality cluster; audiology diagnostics |
-| 19 | cambiumussy | KEEP | ussy-cambium | packages/tools/deps/ | stdlib only | ~8 | P1 | Dependency analysis cluster; grafting compatibility |
-| 20 | lehrussy | MERGE | ussy-calibre | packages/tools/quality/ | stdlib only | ~8 | P1 | Test suite quality cluster; glass annealing metaphor |
+| 12 | proprioceptionussy | KEEP | ussy-propriocept | packages/tools/ | stdlib only | 81 | P1 | **Migrated** |
+| 13 | curatorussy | KEEP | ussy-curator | packages/tools/ | stdlib only | 140 | P1 | **Migrated** |
+| 14 | operonussy | KEEP | ussy-operon | packages/tools/ | stdlib only | 207 | P1 | **Migrated** |
+| 15 | actuaryussy | KEEP | ussy-actuary | packages/tools/ | numpy, scipy | 141 | P2 | **Migrated** |
+| 16 | portmoreussy | KEEP | ussy-portmore | packages/tools/ | stdlib only | 298 | P2 | **Migrated** |
+| 17 | calibreussy | MERGE | ussy-calibre | packages/tools/quality/ | numpy, scipy | 124 | P0 | **Migrated** |
+| 18 | acumenussy | MERGE | ussy-calibre | packages/tools/quality/ | stdlib only | 124 | P1 | **Migrated** |
+| 19 | cambiumussy | KEEP | ussy-cambium | packages/tools/deps/ | stdlib only | 187 | P1 | **Migrated** |
+| 20 | lehrussy | MERGE | ussy-calibre | packages/tools/quality/ | stdlib only | 124 | P1 | **Migrated** |
 | 21 | clavisussy | KEEP | ussy-clavis | packages/tools/ | stdlib only | ~8 | P1 | Security & forensics; zero deps |
-| 22 | marksmanussy | MERGE | ussy-calibre | packages/tools/quality/ | numpy, scipy | ~8 | P1 | Test suite quality cluster; archery precision |
-| 23 | levainussy | MERGE | ussy-calibre | packages/tools/quality/ | stdlib only | ~8 | P1 | Test suite quality cluster; fermentation health |
-| 24 | chromatoussy | KEEP | ussy-chromato | packages/tools/deps/ | stdlib only | ~8 | P1 | Dependency analysis cluster; chromatography risk |
-| 25 | syntropussy | KEEP | ussy-syntrop | packages/tools/ | stdlib only | ~8 | P1 | Code quality & analysis; zero deps |
-| 26 | coronerussy | KEEP | ussy-coroner | packages/tools/ | numpy, scipy | ~8 | P2 | CI/pipeline reliability; scientific stack |
-| 27 | mintussy | KEEP | ussy-mint | packages/tools/ | stdlib only | ~8 | P2 | Worth developing; zero deps |
-| 28 | fossilrecordussy | KEEP | ussy-fossilrecord | packages/tools/ | stdlib only | ~8 | P1 | Worth developing; zero deps |
-| 29 | telegraphaussy | KEEP | ussy-telegrapha | packages/tools/ | stdlib only | ~8 | P1 | CI/pipeline reliability; zero deps |
-| 30 | mushinussy | KEEP | ussy-mushin | packages/tools/ | stdlib only | ~8 | P1 | Config & drift; zero deps; fix pickle cache in migration |
-| 31 | dosemateussy | KEEP | ussy-dosemate | packages/tools/ | stdlib only | ~8 | P2 | Worth developing; only setup.py repo — convert to pyproject.toml |
-| 32 | cavityussy | KEEP | ussy-cavity | packages/tools/ | pyyaml | ~8 | P2 | CI/pipeline reliability; YAML config |
-| 33 | gamutussy | KEEP | ussy-gamut | packages/tools/ | stdlib only | ~8 | P1 | CI/pipeline reliability; zero deps |
-| 34 | aquiferussy | KEEP | ussy-aquifer | packages/tools/ | numpy | ~8 | P2 | CI/pipeline reliability; numpy dependency |
-| 35 | cycloneussy | KEEP | ussy-cyclone | packages/tools/ | stdlib only | ~8 | P1 | CI/pipeline reliability; zero deps |
-| 36 | isobarussy | KEEP | ussy-isobar | packages/tools/ | stdlib only | ~8 | P1 | Code quality & analysis; zero deps |
-| 37 | circadiaussy | KEEP | ussy-circadia | packages/tools/ | stdlib only | ~8 | P1 | Agent/swarm infrastructure; zero deps |
-| 38 | seralussy | KEEP | ussy-seral | packages/tools/ | click, rich | ~8 | P2 | Code quality & analysis; CLI tools |
-| 39 | fatigueussy | KEEP | ussy-fatigue | packages/tools/ | stdlib only | ~8 | P1 | Worth developing; zero deps |
-| 40 | endemicussy | KEEP | ussy-endemic | packages/tools/ | stdlib only | ~8 | P1 | Worth developing; zero deps |
-| 41 | stemmaussy | KEEP | ussy-stemma | packages/tools/ | stdlib only | ~8 | P1 | Code quality & analysis; zero deps |
-| 42 | plan9webplumbussy | KEEP | ussy-plan9webplumb | packages/tools/ | rich, pyyaml, websockets | ~8 | P2 | Code quality & analysis; web stack; fix security issue in migration |
-| 43 | crystallossy | KEEP | ussy-crystallo | packages/tools/ | stdlib only | ~8 | P1 | Code quality & analysis; zero deps |
-| 44 | terrariumussy | KEEP | ussy-terrarium | packages/tools/ | stdlib only | ~8 | P1 | Worth developing; zero deps |
-| 45 | tarotussy | KEEP | ussy-tarot | packages/tools/ | stdlib only | ~8 | P1 | Worth developing; zero deps |
-| 46 | stratagitussy | MERGE | ussy-strata | packages/tools/forensics/ | stdlib only | ~8 | P0 | Git forensics cluster; geological visualization; merge with unconformity |
-| 47 | reverseoracleussy | KEEP | ussy-reverseoracle | packages/tools/ | click, rich, pyyaml, httpx | ~8 | P2 | Worth developing; requires external LLM API |
-| 48 | timeloomussy | KEEP | ussy-timeloom | packages/tools/ | click, rich | ~8 | P2 | Worth developing; CLI tools |
-| 49 | stenography | MERGE | ussy-steno | packages/tools/security/ | rich | ~8 | P0 | Steganography cluster; lightweight predecessor; archive after merge |
-| 50 | churnmap | KEEP | ussy-churn | packages/tools/visualization/ | numpy, scipy, networkx, pydriller, matplotlib | ~8 | P0 | Git churn cluster; mature implementation; keep as base |
+| 22 | marksmanussy | MERGE | ussy-calibre | packages/tools/quality/ | numpy, scipy | 124 | P1 | **Migrated** |
+| 23 | levainussy | MERGE | ussy-calibre | packages/tools/quality/ | stdlib only | 124 | P1 | **Migrated** |
+| 24 | chromatoussy | KEEP | ussy-chromato | packages/tools/deps/ | stdlib only | 144 | P1 | **Migrated** |
+| 25 | syntropussy | KEEP | ussy-syntrop | packages/tools/ | stdlib only | 135 | P1 | **Migrated** |
+| 26 | coronerussy | KEEP | ussy-coroner | packages/tools/ | numpy, scipy | 176 | P2 | **Migrated** |
+| 27 | mintussy | KEEP | ussy-mint | packages/tools/ | stdlib only | 210 | P2 | **Migrated** |
+| 28 | fossilrecordussy | KEEP | ussy-fossilrecord | packages/tools/ | stdlib only | 152 | P1 | **Migrated** |
+| 29 | telegraphaussy | KEEP | ussy-telegrapha | packages/tools/ | stdlib only | 213 | P1 | **Migrated** |
+| 30 | mushinussy | KEEP | ussy-mushin | packages/tools/ | stdlib only | 135 | P1 | **Migrated** |
+| 31 | dosemateussy | KEEP | ussy-dosemate | packages/tools/ | stdlib only | 130 | P2 | **Migrated** |
+| 32 | cavityussy | KEEP | ussy-cavity | packages/tools/ | pyyaml | 172 | P2 | **Migrated** |
+| 33 | gamutussy | KEEP | ussy-gamut | packages/tools/ | stdlib only | 145 | P1 | **Migrated** |
+| 34 | aquiferussy | KEEP | ussy-aquifer | packages/tools/ | numpy | 167 | P2 | **Migrated** |
+| 35 | cycloneussy | KEEP | ussy-cyclone | packages/tools/ | stdlib only | 85 | P1 | **Migrated** |
+| 36 | isobarussy | KEEP | ussy-isobar | packages/tools/ | stdlib only | 152 | P1 | **Migrated** |
+| 37 | circadiaussy | KEEP | ussy-circadia | packages/tools/ | stdlib only | 107 | P1 | **Migrated** |
+| 38 | seralussy | KEEP | ussy-seral | packages/tools/ | click, rich | 110 | P2 | **Migrated** |
+| 39 | fatigueussy | KEEP | ussy-fatigue | packages/tools/ | stdlib only | 129 | P1 | **Migrated** |
+| 40 | endemicussy | KEEP | ussy-endemic | packages/tools/ | stdlib only | 170 | P1 | **Migrated** |
+| 41 | stemmaussy | KEEP | ussy-stemma | packages/tools/ | stdlib only | 102 | P1 | **Migrated** |
+| 42 | plan9webplumbussy | KEEP | ussy-plan9webplumb | packages/tools/ | rich, pyyaml, websockets | 57 | P2 | **Migrated** |
+| 43 | crystallossy | KEEP | ussy-crystallo | packages/tools/ | stdlib only | 124 | P1 | **Migrated** |
+| 44 | terrariumussy | KEEP | ussy-terrarium | packages/tools/ | stdlib only | 254 | P1 | **Migrated** |
+| 45 | tarotussy | KEEP | ussy-tarot | packages/tools/ | stdlib only | 140 | P1 | **Migrated** |
+| 46 | stratagitussy | MERGE | ussy-strata | packages/tools/forensics/ | stdlib only | 153 | P0 | **Migrated** |
+| 47 | reverseoracleussy | KEEP | ussy-reverseoracle | packages/tools/ | click, rich, pyyaml, httpx | 12 | P2 | **Migrated** |
+| 48 | timeloomussy | KEEP | ussy-timeloom | packages/tools/ | click, rich | 16 | P2 | **Migrated** |
+| 49 | stenography | MERGE | ussy-steno | packages/tools/security/ | rich | 70 | P0 | **Migrated** |
+| 50 | churnmap | KEEP | ussy-churn | packages/tools/visualization/ | numpy, scipy, networkx, pydriller, matplotlib | 6 | P0 | **Migrated** |
 
 **Tier 2 Summary:** 39 repos → 33 packages (6 merges: calibre cluster ×5, stenography, stratagitussy)
 
@@ -106,11 +106,11 @@ This matrix maps all 63 repositories from github.com/mojomast to their monorepo 
 
 | Cluster | Repos | Result | Target Package | Test Count | Notes |
 |---------|-------|--------|----------------|------------|-------|
-| Test Suite Quality | calibreussy, acumenussy, lehrussy, marksmanussy, levainussy | 5 → 1 | ussy-calibre | ~40 | Subcommands: measure, hearing, stabilize, precision, health |
-| Steganography | stenographussy, stenography | 2 → 1 | ussy-steno | ~18 | Archive stenography after porting unique detectors |
-| Git Churn | churnmap, churnmapussy | 2 → 1 | ussy-churn | ~16 | Archive churnmapussy after porting ASCII renderer |
-| Git Forensics | stratagitussy, unconformity | 2 → 1 | ussy-strata | ~14 | Subcommands: survey, missing, timeline |
-| Dependency Analysis | gridironussy, chromatoussy, cambiumussy, strataussy | 4 → 4 + meta | ussy-gridiron, ussy-chromato, ussy-cambium, ussy-stratax + ussy-deps | ~32 | Keep separate; meta-package for unified CLI |
+| Test Suite Quality | calibreussy, acumenussy, lehrussy, marksmanussy, levainussy | 5 → 1 | ussy-calibre | 124 | Subcommands: measure, hearing, stabilize, precision, health |
+| Steganography | stenographussy, stenography | 2 → 1 | ussy-steno | 70 | Archive stenography after porting unique detectors |
+| Git Churn | churnmap, churnmapussy | 2 → 1 | ussy-churn | 6 | Archive churnmapussy after porting ASCII renderer |
+| Git Forensics | stratagitussy, unconformity | 2 → 1 | ussy-strata | 153 | Subcommands: survey, missing, timeline |
+| Dependency Analysis | gridironussy, chromatoussy, cambiumussy, strataussy | 4 → 4 + meta | ussy-gridiron, ussy-chromato, ussy-cambium, ussy-stratax + ussy-deps | 162+ | Keep separate; meta-package for unified CLI |
 
 ---
 
@@ -122,7 +122,7 @@ This matrix maps all 63 repositories from github.com/mojomast to their monorepo 
 | Migrated as standalone | 38 |
 | Merged into other packages | 9 (from 14 repos) |
 | Archived (not migrated) | 13 |
-| **Final packages in monorepo** | **~47** (38 standalone + 4 merged packages + 1 meta-package + 6 shared libs + 1 root) |
+| **Final packages in monorepo** | **~49** (38 standalone + 4 merged packages + 1 meta-package + 6 shared libs + 1 root) |
 | Shared libraries | 6 (ussy-core, ussy-cli, ussy-git, ussy-ast, ussy-sqlite, ussy-report) |
 | Meta-packages | 1 (ussy-deps) |
 
@@ -159,5 +159,5 @@ This matrix maps all 63 repositories from github.com/mojomast to their monorepo 
 
 ---
 
-*Document Version: 1.0*
-*Last Updated: April 2026*
+*Document Version: 2.0*
+*Last Updated: April 2026 — Migration Complete*

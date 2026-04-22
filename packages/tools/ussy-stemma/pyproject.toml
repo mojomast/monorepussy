@@ -1,20 +1,25 @@
 [build-system]
-requires = ["setuptools>=64", "wheel"]
-build-backend = "setuptools.build_meta"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
 [project]
-name = "stemma"
+name = "ussy-stemma"
 version = "0.1.0"
-description = "Philological code variant reconstruction from textual evidence alone"
+description = "Migrated from stemma"
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 license = {text = "MIT"}
+dependencies = [
+    "ussy-core",
+]
 
 [project.scripts]
-stemma = "stemma.cli:main"
+ussy-stemma = "ussy_stemma.cli:main"
+stemma = "ussy_stemma.legacy:main"
 
-[tool.setuptools.packages.find]
-include = ["stemma*"]
+[tool.hatch.build.targets.wheel]
+packages = ["src/ussy_stemma"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+pythonpath = ["src"]

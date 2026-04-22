@@ -7,8 +7,8 @@ from pathlib import Path
 
 import pytest
 
-from calibre.db import CalibreDB
-from calibre.models import (
+from ussy_calibre.db import CalibreDB
+from ussy_calibre.models import (
     DriftObservation,
     RRObservation,
     TestResult,

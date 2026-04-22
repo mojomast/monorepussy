@@ -2,8 +2,8 @@
 
 import pytest
 
-from mushin.diff import DiffResult, diff_workspaces
-from mushin.workspace import Workspace
+from ussy_mushin.diff import DiffResult, diff_workspaces
+from ussy_mushin.workspace import Workspace
 
 
 @pytest.fixture
@@ -17,12 +17,12 @@ class TestDiffResult:
         assert not result.has_changes
 
     def test_diff_with_entries(self):
-        from mushin.journal import JournalEntry
+        from ussy_mushin.journal import JournalEntry
         result = DiffResult(added_entries=[JournalEntry(expression="x")])
         assert result.has_changes
 
     def test_summary(self):
-        from mushin.journal import JournalEntry
+        from ussy_mushin.journal import JournalEntry
         result = DiffResult(
             left_id="aaa",
             right_id="bbb",

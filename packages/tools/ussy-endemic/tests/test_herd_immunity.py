@@ -2,7 +2,7 @@
 
 import pytest
 
-from endemic.models import (
+from ussy_endemic.models import (
     HerdImmunityResult,
     Module,
     Pattern,
@@ -10,7 +10,7 @@ from endemic.models import (
     Compartment,
     VaccinationStrategy,
 )
-from endemic.herd_immunity import (
+from ussy_endemic.herd_immunity import (
     calculate_combined_effort,
     calculate_herd_immunity,
     generate_vaccination_strategies,

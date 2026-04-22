@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pytest
 
-from curator.catalog import ControlledVocabulary, MARCRecord
+from ussy_curator.catalog import ControlledVocabulary, MARCRecord
 
 
 class TestControlledVocabulary:
@@ -64,7 +64,7 @@ class TestMARCRecord:
         b.write_text("See [a](a.md)")
         record = MARCRecord(a)
 
-        from curator.models import Document
+        from ussy_curator.models import Document
         docs = {
             a: Document(path=a, content=a.read_text(), backlinks=[b]),
             b: Document(path=b, content=b.read_text(), backlinks=[a]),

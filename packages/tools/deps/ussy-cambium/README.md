@@ -1,13 +1,15 @@
-# Cambium — Horticultural Grafting Science for Dependency Compatibility Analysis
+# ussy-cambium — Horticultural Grafting Science for Dependency Compatibility Analysis
+
+> **Migrated**: This package was originally `cambiumussy` and has been migrated into the [ussyverse monorepo](https://github.com/mojomast/ussyverse).
 
 ## Overview
 
-Cambium applies **horticultural grafting science** to dependency compatibility analysis. Instead of binary semver pass/fail, it produces a **Graft Compatibility Index (GCI)** — a time-dependent, multi-dimensional compatibility score that provides continuous, predictive assessment of dependency health.
+ussy-cambium applies **horticultural grafting science** to dependency compatibility analysis. Instead of binary semver pass/fail, it produces a **Graft Compatibility Index (GCI)** — a time-dependent, multi-dimensional compatibility score that provides continuous, predictive assessment of dependency health.
 
 ### Key Innovations
 
-| Dimension | Traditional Tool | Cambium |
-|-----------|-----------------|---------|
+| Dimension | Traditional Tool | ussy-cambium |
+|-----------|-----------------|--------------|
 | Compatibility | Binary semver pass/fail | Continuous 0-1 API surface match score |
 | Interface alignment | Type checker pass/fail | Multi-dimensional alignment with heatmap |
 | Adapter quality | Not measured | Callus formation model with trajectory |
@@ -18,10 +20,10 @@ Cambium applies **horticultural grafting science** to dependency compatibility a
 ## Installation
 
 ```bash
-pip install -e .
+pip install ussy-cambium
 ```
 
-Requires Python 3.10+. No external runtime dependencies (stdlib only).
+Requires Python 3.11+. No external runtime dependencies (stdlib only).
 
 ## Usage Examples
 
@@ -29,40 +31,42 @@ Requires Python 3.10+. No external runtime dependencies (stdlib only).
 
 ```bash
 # Full GCI assessment for all dependencies
-cambium scan ./myproject
+ussy-cambium scan ./myproject
 
 # JSON output
-cambium --json scan ./myproject
+ussy-cambium --json scan ./myproject
 ```
+
+> **Legacy alias**: The `cambium` command is deprecated and will be removed in a future release. Please use `ussy-cambium`.
 
 ### Compatibility analysis
 
 ```bash
 # Detailed scion/rootstock compatibility between two modules
-cambium compatibility consumer.py provider.py
+ussy-cambium compatibility consumer.py provider.py
 
 # Named modules (uses synthetic analysis)
-cambium compatibility authlib requests
+ussy-cambium compatibility authlib requests
 ```
 
 ### Interface alignment
 
 ```bash
 # Cambium alignment score with heatmap
-cambium alignment consumer.py provider.py
+ussy-cambium alignment consumer.py provider.py
 
 # JSON output
-cambium --json alignment consumer.py provider.py
+ussy-cambium --json alignment consumer.py provider.py
 ```
 
 ### Drift forecasting
 
 ```bash
 # Predictive drift breakage timeline
-cambium drift-forecast my-dependency
+ussy-cambium drift-forecast my-dependency
 
 # Custom drift parameters
-cambium drift-forecast my-dependency \
+ussy-cambium drift-forecast my-dependency \
   --delta-behavior 0.05 \
   --delta-contract 0.03 \
   --delta-environment 0.02 \
@@ -74,38 +78,39 @@ cambium drift-forecast my-dependency \
 
 ```bash
 # Integration bond strength trajectory
-cambium bond-traj my-dependency
+ussy-cambium bond-traj my-dependency
 
 # Custom bond parameters
-cambium bond-traj my-dependency --b-max 0.9 --k-b 0.25 --t50 4.0
+ussy-cambium bond-traj my-dependency --b-max 0.9 --k-b 0.25 --t50 4.0
 ```
 
 ### Dwarfing analysis
 
 ```bash
 # Find dwarfing dependencies in a project
-cambium dwarfing ./myproject
+ussy-cambium dwarfing ./myproject
 ```
 
 ### GCI history
 
 ```bash
 # GCI trend over time from stored data
-cambium gci-history my-dependency --limit 20
+ussy-cambium gci-history my-dependency --limit 20
 ```
 
 ### Python module support
 
 ```bash
-python -m cambium scan ./myproject
+python -m ussy_cambium scan ./myproject
 ```
 
 ## Architecture
 
 ```
-cambium/
+src/ussy_cambium/
 ├── __init__.py         # Package init
-├── __main__.py         # python -m cambium support
+├── __main__.py         # python -m ussy_cambium support
+├── legacy.py           # Deprecated cambium CLI alias
 ├── models.py           # Core data models (CompatibilityScore, AlignmentScore, etc.)
 ├── extractor.py        # AST-based interface extraction
 ├── compatibility.py    # Scion/rootstock API surface match

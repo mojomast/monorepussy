@@ -1,6 +1,6 @@
 """Tests for the models module."""
 
-from stemma.models import (
+from ussy_stemma.models import (
     ArchetypeResult,
     Classification,
     CollationResult,

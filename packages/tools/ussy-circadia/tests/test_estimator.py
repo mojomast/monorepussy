@@ -3,8 +3,8 @@
 import pytest
 from datetime import datetime, timezone, timedelta
 
-from circadia.estimator import CircadianEstimator, _gaussian
-from circadia.zones import CognitiveZone, ZoneProbability
+from ussy_circadia.estimator import CircadianEstimator, _gaussian
+from ussy_circadia.zones import CognitiveZone, ZoneProbability
 
 
 class TestGaussian:

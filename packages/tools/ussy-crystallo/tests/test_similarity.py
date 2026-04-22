@@ -2,13 +2,13 @@
 
 import pytest
 
-from crystallo.models import (
+from ussy_crystallo.models import (
     MethodSignature,
     StructuralFingerprint,
     SymmetryIntent,
     SymmetryType,
 )
-from crystallo.similarity import (
+from ussy_crystallo.similarity import (
     classify_intent,
     classify_symmetry,
     compute_pairwise_similarities,

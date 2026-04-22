@@ -3,7 +3,7 @@
 import pytest
 from datetime import datetime, timezone, timedelta
 
-from mint.debasement import (
+from ussy_mint.debasement import (
     compute_debasement_rate,
     project_zero_date,
     detect_recoinage_events,
@@ -181,7 +181,7 @@ class TestFormatDebasementReport:
     """Test debasement report formatting."""
 
     def test_report_output(self):
-        from mint.debasement import DebasementCurve
+        from ussy_mint.debasement import DebasementCurve
         curve = DebasementCurve(
             package="test-pkg",
             versions=[
@@ -197,7 +197,7 @@ class TestFormatDebasementReport:
         assert "0.83" in report
 
     def test_empty_versions(self):
-        from mint.debasement import DebasementCurve
+        from ussy_mint.debasement import DebasementCurve
         curve = DebasementCurve(package="empty-pkg")
         report = format_debasement_report(curve)
         assert "empty-pkg" in report

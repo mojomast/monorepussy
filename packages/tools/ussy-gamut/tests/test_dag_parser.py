@@ -4,8 +4,8 @@ import json
 import pytest
 from pathlib import Path
 
-from gamut.dag_parser import parse_pipeline, dag_from_yaml, _parse_simple_yaml, _yaml_value
-from gamut.models import PipelineDAG
+from ussy_gamut.dag_parser import parse_pipeline, dag_from_yaml, _parse_simple_yaml, _yaml_value
+from ussy_gamut.models import PipelineDAG
 
 
 class TestParsePipeline:

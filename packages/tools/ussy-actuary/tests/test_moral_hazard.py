@@ -2,7 +2,7 @@
 
 import math
 import pytest
-from actuary.moral_hazard import (
+from ussy_actuary.moral_hazard import (
     compute_moral_hazard,
     analyze_sla,
     format_moral_hazard,

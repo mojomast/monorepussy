@@ -6,7 +6,7 @@ import os
 
 import pytest
 
-from cambium.compatibility import (
+from ussy_cambium.compatibility import (
     compute_compatibility,
     compute_compatibility_from_files,
     compute_compatibility_from_source,
@@ -14,8 +14,8 @@ from cambium.compatibility import (
     compute_version_overlap,
     jaccard_similarity,
 )
-from cambium.extractor import extract_interface
-from cambium.models import InterfaceInfo
+from ussy_cambium.extractor import extract_interface
+from ussy_cambium.models import InterfaceInfo
 
 
 FIXTURES_DIR = os.path.join(os.path.dirname(__file__), "fixtures")

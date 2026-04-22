@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pytest
 
-from curator.classification import FacetedClassification, classify_document, DDC_TOP_LEVEL
+from ussy_curator.classification import FacetedClassification, classify_document, DDC_TOP_LEVEL
 
 
 class TestFacetedClassification:

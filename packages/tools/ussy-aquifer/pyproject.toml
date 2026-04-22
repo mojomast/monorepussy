@@ -1,19 +1,25 @@
-[build-system]
-requires = ["setuptools>=64", "wheel"]
-build-backend = "setuptools.build_meta"
-
 [project]
-name = "aquifer"
-version = "1.0.0"
-description = "Darcy's Law groundwater flow modeling for data pipeline bottleneck analysis"
-requires-python = ">=3.9"
-dependencies = ["numpy"]
+name = "ussy-aquifer"
+version = "0.1.0"
+description = "Migrated from aquifer"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "ussy-core",
+    "numpy>=1.24",
+]
 
 [project.scripts]
-aquifer = "aquifer.cli:main"
+ussy-aquifer = "ussy_aquifer.cli:main"
+aquifer = "ussy_aquifer.legacy:deprecated_main"
 
-[tool.setuptools.packages.find]
-include = ["aquifer*"]
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/ussy_aquifer"]
 
 [tool.pytest.ini_options]
+pythonpath = ["src"]
 testpaths = ["tests"]

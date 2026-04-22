@@ -3,9 +3,9 @@ from __future__ import annotations
 from pathlib import Path
 import subprocess
 
-from reverseoracle.config import AppConfig
-from reverseoracle.context import reconstruct_context
-from reverseoracle.evolution import post_decision_commits, evolve_counterfactual
+from ussy_reverseoracle.config import AppConfig
+from ussy_reverseoracle.context import reconstruct_context
+from ussy_reverseoracle.evolution import post_decision_commits, evolve_counterfactual
 
 
 def test_post_decision_commits_empty(temp_repo: Path):

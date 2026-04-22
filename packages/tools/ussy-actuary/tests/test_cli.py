@@ -2,7 +2,7 @@
 
 import json
 import pytest
-from actuary.cli import build_parser, main
+from ussy_actuary.cli import build_parser, main
 
 
 class TestBuildParser:

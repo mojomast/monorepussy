@@ -1,7 +1,7 @@
 """Tests for mint.distance — Levenshtein distance and typosquat detection."""
 
 import pytest
-from mint.distance import levenshtein_distance, normalized_distance, is_typosquat
+from ussy_mint.distance import levenshtein_distance, normalized_distance, is_typosquat
 
 
 class TestLevenshteinDistance:

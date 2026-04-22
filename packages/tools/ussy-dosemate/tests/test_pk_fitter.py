@@ -7,12 +7,12 @@ import shutil
 
 import pytest
 
-from dosemate.pk_fitter import PKModelFitter, report_to_dict, ChangePK, PKReport
-from dosemate.absorption import compute_absorption
-from dosemate.distribution import compute_distribution
-from dosemate.excretion import compute_excretion
-from dosemate.metabolism import compute_metabolism
-from dosemate.ci_collector import CIMetrics
+from ussy_dosemate.pk_fitter import PKModelFitter, report_to_dict, ChangePK, PKReport
+from ussy_dosemate.absorption import compute_absorption
+from ussy_dosemate.distribution import compute_distribution
+from ussy_dosemate.excretion import compute_excretion
+from ussy_dosemate.metabolism import compute_metabolism
+from ussy_dosemate.ci_collector import CIMetrics
 
 
 class TestPKModelFitter:
@@ -78,8 +78,8 @@ class TestPropertyInvariants:
 
     def test_half_life_always_positive(self):
         """Half-life should always be > 0."""
-        from dosemate.distribution import DistributionParams
-        from dosemate.excretion import compute_excretion
+        from ussy_dosemate.distribution import DistributionParams
+        from ussy_dosemate.excretion import compute_excretion
         
         for Vd in [1, 5, 10, 50, 100]:
             dist = DistributionParams(
@@ -114,7 +114,7 @@ class TestPropertyInvariants:
             with open(os.path.join(tmpdir, "src", "mod.py"), 'w') as f:
                 f.write("def foo(): pass\n")
             
-            from dosemate.dependency_graph import DependencyGraphAnalyzer
+            from ussy_dosemate.dependency_graph import DependencyGraphAnalyzer
             analyzer = DependencyGraphAnalyzer(tmpdir)
             analyzer.analyze()
             
@@ -128,8 +128,8 @@ class TestPropertyInvariants:
 
     def test_accumulation_factor_ge_1(self):
         """Accumulation factor R should always be >= 1."""
-        from dosemate.excretion import ExcretionParams
-        from dosemate.steady_state import compute_steady_state
+        from ussy_dosemate.excretion import ExcretionParams
+        from ussy_dosemate.steady_state import compute_steady_state
         
         for ke in [0.001, 0.01, 0.1, 1.0, 10.0]:
             for tau in [0.5, 1.0, 2.0, 4.0]:

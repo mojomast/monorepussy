@@ -6,8 +6,8 @@ from pathlib import Path
 
 import pytest
 
-from seral.disturbances import DisturbanceDetector
-from seral.models import ModuleMetrics, Stage
+from ussy_seral.disturbances import DisturbanceDetector
+from ussy_seral.models import ModuleMetrics, Stage
 
 
 class TestDisturbanceDetector:
@@ -71,7 +71,7 @@ class TestDisturbanceDetector:
     def test_disturbance_event_types(self):
         """Verify that different disturbance types can be detected."""
         # We test the event creation logic directly
-        from seral.models import DisturbanceEvent
+        from ussy_seral.models import DisturbanceEvent
 
         e1 = DisturbanceEvent(
             path="src/legacy",

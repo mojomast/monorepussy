@@ -2,7 +2,7 @@
 import json
 import pytest
 
-from portmore.formatter import (
+from ussy_portmore.formatter import (
     format_compatibility,
     format_contagion,
     format_origin,
@@ -10,7 +10,7 @@ from portmore.formatter import (
     format_resolution,
     format_valuation,
 )
-from portmore.models import (
+from ussy_portmore.models import (
     CompatibilityResult,
     CompatibilityStatus,
     ContagionAssessment,

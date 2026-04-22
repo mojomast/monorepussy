@@ -4,10 +4,10 @@ import json
 
 import pytest
 
-from terrarium.engine import TerrariumEngine
-from terrarium.health import HealthScore
-from terrarium.adapters.base import BaseAdapter
-from terrarium.ecosystem.model import OrganismHealthState
+from ussy_terrarium.engine import TerrariumEngine
+from ussy_terrarium.health import HealthScore
+from ussy_terrarium.adapters.base import BaseAdapter
+from ussy_terrarium.ecosystem.model import OrganismHealthState
 
 
 class MockAdapter(BaseAdapter):

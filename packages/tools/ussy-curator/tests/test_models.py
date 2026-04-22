@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pytest
 
-from curator.models import Document, Link
+from ussy_curator.models import Document, Link
 
 
 class TestLink:

@@ -4,8 +4,8 @@
 
 This guide documents the migration of 63 Python repositories from github.com/mojomast into the `ussyverse` monorepo. Whether you are an existing user of one of the original tools or a new contributor, this guide will help you navigate the transition.
 
-**Migration Status:** In Progress (Phase 1)
-**Target Completion:** Week 15 (approx. mid-July 2026)
+**Migration Status:** ✅ Complete
+**Completion Date:** April 2026
 
 ---
 
@@ -196,20 +196,37 @@ uv run mypy packages/
 | Phase | Dates | Repos | Status |
 |-------|-------|-------|--------|
 | Phase 1 | Apr 2026 | Foundation + shared libraries | ✅ Complete |
-| Phase 2 | Apr 2026 | Tier 1 individual repos (3 migrated) | 🔄 In Progress |
-| Phase 3 | May 2026 | Tier 1 clusters + remaining | ⏳ Planned |
-| Phase 4 | Jun 2026 | Tier 2 batch migration | ⏳ Planned |
-| Phase 5 | Jul 2026 | Tier 3 archive + cleanup | ⏳ Planned |
+| Phase 2 | Apr 2026 | Tier 1 individual repos (6 migrated) | ✅ Complete |
+| Phase 3 | Apr 2026 | Tier 1 clusters (4 merges) | ✅ Complete |
+| Phase 4 | Apr 2026 | Tier 2 batch migration (28 repos) | ✅ Complete |
+| Phase 5 | Apr 2026 | Tier 3 archive + cleanup | ✅ Complete |
 
 ### 5.1 Migrated Repositories
 
 | Repo | Migration Date | New Location | Status |
 |------|---------------|--------------|--------|
-| triageussy | Apr 2026 | `packages/tools/triage/ussy-triage/` | ✅ Migrated |
-| sentinelussy | Apr 2026 | `packages/tools/governance/ussy-sentinel/` | ✅ Migrated |
-| gridironussy | Apr 2026 | `packages/tools/deps/ussy-gridiron/` | ✅ Migrated |
-| stenographussy | Apr 2026 | `packages/tools/security/ussy-steno/` | ✅ Migrated |
-| stratagitussy | Apr 2026 | `packages/tools/forensics/ussy-strata/` | ✅ Migrated |
+| triageussy | Apr 2026 | `packages/tools/triage/ussy-triage/` | ✅ Migrated (160 tests) |
+| sentinelussy | Apr 2026 | `packages/tools/governance/ussy-sentinel/` | ✅ Migrated (117 tests) |
+| gridironussy | Apr 2026 | `packages/tools/deps/ussy-gridiron/` | ✅ Migrated (162 tests) |
+| parliamentussy | Apr 2026 | `packages/tools/governance/ussy-parliament/` | ✅ Migrated (120 tests) |
+| snapshotussy | Apr 2026 | `packages/tools/devtools/ussy-snapshot/` | ✅ Migrated (220 tests) |
+| strataussy | Apr 2026 | `packages/tools/deps/ussy-stratax/` | ✅ Migrated (155 tests) |
+| kintsugiussy | Apr 2026 | `packages/tools/devtools/ussy-kintsugi/` | ✅ Migrated (121 tests) |
+| assayussy | Apr 2026 | `packages/tools/devtools/ussy-assay/` | ✅ Migrated (163 tests) |
+| petrichorussy | Apr 2026 | `packages/tools/devtools/ussy-petrichor/` | ✅ Migrated (140 tests) |
+| stenographussy | Apr 2026 | `packages/tools/security/ussy-steno/` | ✅ Merged (70 tests) |
+| stratagitussy | Apr 2026 | `packages/tools/forensics/ussy-strata/` | ✅ Merged (153 tests) |
+| calibreussy | Apr 2026 | `packages/tools/quality/ussy-calibre/` | ✅ Merged (124 tests) |
+| acumenussy | Apr 2026 | `packages/tools/quality/ussy-calibre/` | ✅ Merged |
+| lehrussy | Apr 2026 | `packages/tools/quality/ussy-calibre/` | ✅ Merged |
+| marksmanussy | Apr 2026 | `packages/tools/quality/ussy-calibre/` | ✅ Merged |
+| levainussy | Apr 2026 | `packages/tools/quality/ussy-calibre/` | ✅ Merged |
+| chromatoussy | Apr 2026 | `packages/tools/deps/ussy-chromato/` | ✅ Migrated (144 tests) |
+| cambiumussy | Apr 2026 | `packages/tools/deps/ussy-cambium/` | ✅ Migrated (187 tests) |
+| churnmap | Apr 2026 | `packages/tools/visualization/ussy-churn/` | ✅ Migrated (6 tests) |
+| **Tier 2 Batch 1** | Apr 2026 | — | ✅ 10 repos migrated (1,591 tests) |
+| **Tier 2 Batch 2** | Apr 2026 | — | ✅ 10 repos migrated (1,495 tests) |
+| **Tier 2 Batch 3** | Apr 2026 | — | ✅ 8 repos migrated (874 tests) |
 
 ### 5.2 Archived Repositories
 
@@ -218,9 +235,18 @@ uv run mypy packages/
 | stenography | Apr 2026 | Archived/merged into ussy-steno |
 | churnmapussy | Apr 2026 | Archived/merged into ussy-churn |
 | unconformity | Apr 2026 | Archived/merged into ussy-strata |
-| cartographerussy | TBD | Games/edutainment |
-| codelineageussy | TBD | Security issue (.venv committed) |
-| driftnetussy | TBD | No code (specifications only) |
+| cartographerussy | Apr 2026 | Games/edutainment |
+| codelineageussy | Apr 2026 | Security issue (.venv committed) |
+| entrainussy | Apr 2026 | Games/edutainment |
+| escutcheonussy | Apr 2026 | Games/edutainment |
+| driftlineussy | Apr 2026 | Games/edutainment |
+| tellussy | Apr 2026 | Games/edutainment |
+| alembicussy | Apr 2026 | Games/edutainment |
+| hitchussy | Apr 2026 | Games/edutainment |
+| morsethussy | Apr 2026 | Games/edutainment |
+| kompressiussy | Apr 2026 | Maintenance mode, zstandard dep |
+| inkblotussy | Apr 2026 | Privacy concerns (developer fingerprinting) |
+| driftnetussy | Apr 2026 | No code (specifications only) |
 
 ---
 

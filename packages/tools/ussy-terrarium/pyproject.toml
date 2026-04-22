@@ -1,43 +1,27 @@
 [build-system]
-requires = ["setuptools>=68.0", "wheel"]
-build-backend = "setuptools.build_meta"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
 [project]
-name = "terrarium"
-version = "0.2.0"
-description = "Your codebase is a living ecosystem — visualize code health as biological vitality"
+name = "ussy-terrarium"
+version = "0.1.0"
+description = "Migrated from terrarium"
 readme = "README.md"
-license = {text = "MIT"}
 requires-python = ">=3.11"
-classifiers = [
-    "Development Status :: 3 - Alpha",
-    "Intended Audience :: Developers",
-    "License :: OSI Approved :: MIT License",
-    "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.11",
-    "Programming Language :: Python :: 3.12",
-    "Programming Language :: Python :: 3.13",
-    "Topic :: Software Development :: Quality Assurance",
-]
+license = {text = "MIT"}
 dependencies = [
     "click>=8.0",
     "rich>=13.0",
-]
-
-[project.optional-dependencies]
-dev = [
-    "pytest>=9.0",
-    "pytest-cov",
+    "ussy-core",
 ]
 
 [project.scripts]
-terrarium = "terrarium.cli:main"
+ussy-terrarium = "ussy_terrarium.cli:main"
+terrarium = "ussy_terrarium.legacy:main"
 
-[tool.setuptools.packages.find]
-include = ["terrarium*"]
+[tool.hatch.build.targets.wheel]
+packages = ["src/ussy_terrarium"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-python_files = ["test_*.py"]
-python_classes = ["Test*"]
-python_functions = ["test_*"]
+pythonpath = ["src"]

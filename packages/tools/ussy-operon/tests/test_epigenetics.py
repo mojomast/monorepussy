@@ -4,8 +4,8 @@ from datetime import datetime, timedelta, timezone
 
 import pytest
 
-from operon.epigenetics import EpigeneticStateTracker
-from operon.models import Codebase, Gene, MarkType, Operon
+from ussy_operon.epigenetics import EpigeneticStateTracker
+from ussy_operon.models import Codebase, Gene, MarkType, Operon
 
 
 class TestEpigeneticStateTracker:

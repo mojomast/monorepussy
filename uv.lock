@@ -8,24 +8,55 @@ resolution-markers = [
 
 [manifest]
 members = [
-    "stratagit",
+    "ussy-actuary",
+    "ussy-aquifer",
     "ussy-assay",
     "ussy-ast",
     "ussy-calibre",
+    "ussy-cambium",
+    "ussy-cavity",
+    "ussy-chromato",
     "ussy-churn",
+    "ussy-circadia",
     "ussy-cli",
     "ussy-core",
+    "ussy-coroner",
+    "ussy-crystallo",
+    "ussy-curator",
+    "ussy-cyclone",
+    "ussy-deps",
+    "ussy-dosemate",
+    "ussy-endemic",
+    "ussy-fatigue",
+    "ussy-fossilrecord",
+    "ussy-gamut",
     "ussy-git",
     "ussy-gridiron",
+    "ussy-isobar",
     "ussy-kintsugi",
+    "ussy-mint",
+    "ussy-mushin",
+    "ussy-operon",
     "ussy-parliament",
     "ussy-petrichor",
+    "ussy-plan9webplumb",
+    "ussy-portmore",
+    "ussy-propriocept",
     "ussy-report",
+    "ussy-reverseoracle",
     "ussy-sentinel",
+    "ussy-seral",
     "ussy-snapshot",
     "ussy-sqlite",
+    "ussy-stemma",
     "ussy-steno",
+    "ussy-strata",
     "ussy-stratax",
+    "ussy-syntrop",
+    "ussy-tarot",
+    "ussy-telegrapha",
+    "ussy-terrarium",
+    "ussy-timeloom",
     "ussy-triage",
     "ussyverse",
 ]
@@ -1663,11 +1694,6 @@ wheels = [
 ]
 
 [[package]]
-name = "stratagit"
-version = "0.1.0"
-source = { editable = "packages/tools/forensics/ussy-strata" }
-
-[[package]]
 name = "tomli"
 version = "2.4.1"
 source = { registry = "https://pypi.org/simple" }
@@ -1761,6 +1787,38 @@ wheels = [
 ]
 
 [[package]]
+name = "ussy-actuary"
+version = "0.1.0"
+source = { editable = "packages/tools/ussy-actuary" }
+dependencies = [
+    { name = "numpy" },
+    { name = "scipy" },
+    { name = "ussy-core" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "numpy", specifier = ">=1.24" },
+    { name = "scipy", specifier = ">=1.10" },
+    { name = "ussy-core", editable = "packages/libs/ussy-core" },
+]
+
+[[package]]
+name = "ussy-aquifer"
+version = "0.1.0"
+source = { editable = "packages/tools/ussy-aquifer" }
+dependencies = [
+    { name = "numpy" },
+    { name = "ussy-core" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "numpy", specifier = ">=1.24" },
+    { name = "ussy-core", editable = "packages/libs/ussy-core" },
+]
+
+[[package]]
 name = "ussy-assay"
 version = "0.1.0"
 source = { editable = "packages/tools/devtools/ussy-assay" }
@@ -1807,6 +1865,45 @@ requires-dist = [
 ]
 
 [[package]]
+name = "ussy-cambium"
+version = "0.1.0"
+source = { editable = "packages/tools/deps/ussy-cambium" }
+dependencies = [
+    { name = "ussy-core" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "ussy-core", editable = "packages/libs/ussy-core" }]
+
+[[package]]
+name = "ussy-cavity"
+version = "0.1.0"
+source = { editable = "packages/tools/ussy-cavity" }
+dependencies = [
+    { name = "numpy" },
+    { name = "pyyaml" },
+    { name = "ussy-core" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "numpy", specifier = ">=1.24" },
+    { name = "pyyaml", specifier = ">=6.0" },
+    { name = "ussy-core", editable = "packages/libs/ussy-core" },
+]
+
+[[package]]
+name = "ussy-chromato"
+version = "0.1.0"
+source = { editable = "packages/tools/deps/ussy-chromato" }
+dependencies = [
+    { name = "ussy-core" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "ussy-core", editable = "packages/libs/ussy-core" }]
+
+[[package]]
 name = "ussy-churn"
 version = "0.1.0"
 source = { editable = "packages/tools/visualization/ussy-churn" }
@@ -1837,6 +1934,17 @@ requires-dist = [
     { name = "ussy-core", editable = "packages/libs/ussy-core" },
 ]
 provides-extras = ["dev"]
+
+[[package]]
+name = "ussy-circadia"
+version = "0.1.0"
+source = { editable = "packages/tools/ussy-circadia" }
+dependencies = [
+    { name = "ussy-core" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "ussy-core", editable = "packages/libs/ussy-core" }]
 
 [[package]]
 name = "ussy-cli"
@@ -1883,6 +1991,130 @@ requires-dist = [
 provides-extras = ["dev"]
 
 [[package]]
+name = "ussy-coroner"
+version = "0.1.0"
+source = { editable = "packages/tools/ussy-coroner" }
+dependencies = [
+    { name = "numpy" },
+    { name = "ussy-core" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "numpy", specifier = ">=1.24" },
+    { name = "ussy-core", editable = "packages/libs/ussy-core" },
+]
+
+[[package]]
+name = "ussy-crystallo"
+version = "0.1.0"
+source = { editable = "packages/tools/ussy-crystallo" }
+dependencies = [
+    { name = "ussy-core" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "ussy-core", editable = "packages/libs/ussy-core" }]
+
+[[package]]
+name = "ussy-curator"
+version = "0.1.0"
+source = { editable = "packages/tools/ussy-curator" }
+dependencies = [
+    { name = "ussy-core" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "ussy-core", editable = "packages/libs/ussy-core" }]
+
+[[package]]
+name = "ussy-cyclone"
+version = "0.1.0"
+source = { editable = "packages/tools/ussy-cyclone" }
+dependencies = [
+    { name = "ussy-core" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "ussy-core", editable = "packages/libs/ussy-core" }]
+
+[[package]]
+name = "ussy-deps"
+version = "2025.1.0"
+source = { editable = "packages/tools/deps/ussy-deps" }
+dependencies = [
+    { name = "ussy-cambium" },
+    { name = "ussy-chromato" },
+    { name = "ussy-core" },
+    { name = "ussy-gridiron" },
+    { name = "ussy-stratax" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "ussy-cambium", editable = "packages/tools/deps/ussy-cambium" },
+    { name = "ussy-chromato", editable = "packages/tools/deps/ussy-chromato" },
+    { name = "ussy-core", editable = "packages/libs/ussy-core" },
+    { name = "ussy-gridiron", editable = "packages/tools/deps/ussy-gridiron" },
+    { name = "ussy-stratax", editable = "packages/tools/deps/ussy-stratax" },
+]
+
+[[package]]
+name = "ussy-dosemate"
+version = "0.1.0"
+source = { editable = "packages/tools/ussy-dosemate" }
+dependencies = [
+    { name = "ussy-core" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "ussy-core", editable = "packages/libs/ussy-core" }]
+
+[[package]]
+name = "ussy-endemic"
+version = "0.1.0"
+source = { editable = "packages/tools/ussy-endemic" }
+dependencies = [
+    { name = "ussy-core" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "ussy-core", editable = "packages/libs/ussy-core" }]
+
+[[package]]
+name = "ussy-fatigue"
+version = "0.1.0"
+source = { editable = "packages/tools/ussy-fatigue" }
+dependencies = [
+    { name = "ussy-core" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "ussy-core", editable = "packages/libs/ussy-core" }]
+
+[[package]]
+name = "ussy-fossilrecord"
+version = "0.1.0"
+source = { editable = "packages/tools/ussy-fossilrecord" }
+dependencies = [
+    { name = "ussy-core" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "ussy-core", editable = "packages/libs/ussy-core" }]
+
+[[package]]
+name = "ussy-gamut"
+version = "0.1.0"
+source = { editable = "packages/tools/ussy-gamut" }
+dependencies = [
+    { name = "ussy-core" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "ussy-core", editable = "packages/libs/ussy-core" }]
+
+[[package]]
 name = "ussy-git"
 version = "0.1.0"
 source = { editable = "packages/libs/ussy-git" }
@@ -1916,9 +2148,53 @@ requires-dist = [
 ]
 
 [[package]]
+name = "ussy-isobar"
+version = "0.1.0"
+source = { editable = "packages/tools/ussy-isobar" }
+dependencies = [
+    { name = "ussy-core" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "ussy-core", editable = "packages/libs/ussy-core" }]
+
+[[package]]
 name = "ussy-kintsugi"
 version = "0.1.0"
 source = { editable = "packages/tools/devtools/ussy-kintsugi" }
+dependencies = [
+    { name = "ussy-core" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "ussy-core", editable = "packages/libs/ussy-core" }]
+
+[[package]]
+name = "ussy-mint"
+version = "0.1.0"
+source = { editable = "packages/tools/ussy-mint" }
+dependencies = [
+    { name = "ussy-core" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "ussy-core", editable = "packages/libs/ussy-core" }]
+
+[[package]]
+name = "ussy-mushin"
+version = "0.1.0"
+source = { editable = "packages/tools/ussy-mushin" }
+dependencies = [
+    { name = "ussy-core" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "ussy-core", editable = "packages/libs/ussy-core" }]
+
+[[package]]
+name = "ussy-operon"
+version = "1.0.0"
+source = { editable = "packages/tools/ussy-operon" }
 dependencies = [
     { name = "ussy-core" },
 ]
@@ -1949,6 +2225,45 @@ dependencies = [
 requires-dist = [{ name = "ussy-core", editable = "packages/libs/ussy-core" }]
 
 [[package]]
+name = "ussy-plan9webplumb"
+version = "0.1.0"
+source = { editable = "packages/tools/ussy-plan9webplumb" }
+dependencies = [
+    { name = "pyyaml" },
+    { name = "ussy-core" },
+    { name = "websockets" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "pyyaml", specifier = ">=6.0" },
+    { name = "ussy-core", editable = "packages/libs/ussy-core" },
+    { name = "websockets", specifier = ">=11.0" },
+]
+
+[[package]]
+name = "ussy-portmore"
+version = "0.1.0"
+source = { editable = "packages/tools/ussy-portmore" }
+dependencies = [
+    { name = "ussy-core" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "ussy-core", editable = "packages/libs/ussy-core" }]
+
+[[package]]
+name = "ussy-propriocept"
+version = "0.1.0"
+source = { editable = "packages/tools/ussy-propriocept" }
+dependencies = [
+    { name = "ussy-core" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "ussy-core", editable = "packages/libs/ussy-core" }]
+
+[[package]]
 name = "ussy-report"
 version = "0.1.0"
 source = { editable = "packages/libs/ussy-report" }
@@ -1967,6 +2282,25 @@ requires-dist = [
 provides-extras = ["dev"]
 
 [[package]]
+name = "ussy-reverseoracle"
+version = "0.1.0"
+source = { editable = "packages/tools/ussy-reverseoracle" }
+dependencies = [
+    { name = "click" },
+    { name = "httpx" },
+    { name = "pyyaml" },
+    { name = "ussy-core" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "click", specifier = ">=8.0" },
+    { name = "httpx", specifier = ">=0.24" },
+    { name = "pyyaml", specifier = ">=6.0" },
+    { name = "ussy-core", editable = "packages/libs/ussy-core" },
+]
+
+[[package]]
 name = "ussy-sentinel"
 version = "1.0.0"
 source = { editable = "packages/tools/governance/ussy-sentinel" }
@@ -1978,6 +2312,25 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "ussy-ast", editable = "packages/libs/ussy-ast" },
+    { name = "ussy-core", editable = "packages/libs/ussy-core" },
+]
+
+[[package]]
+name = "ussy-seral"
+version = "0.1.0"
+source = { editable = "packages/tools/ussy-seral" }
+dependencies = [
+    { name = "click" },
+    { name = "pyyaml" },
+    { name = "rich" },
+    { name = "ussy-core" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "click", specifier = ">=8.0" },
+    { name = "pyyaml", specifier = ">=6.0" },
+    { name = "rich", specifier = ">=13.0" },
     { name = "ussy-core", editable = "packages/libs/ussy-core" },
 ]
 
@@ -2011,6 +2364,17 @@ requires-dist = [
 provides-extras = ["dev"]
 
 [[package]]
+name = "ussy-stemma"
+version = "0.1.0"
+source = { editable = "packages/tools/ussy-stemma" }
+dependencies = [
+    { name = "ussy-core" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "ussy-core", editable = "packages/libs/ussy-core" }]
+
+[[package]]
 name = "ussy-steno"
 version = "1.0.0"
 source = { editable = "packages/tools/security/ussy-steno" }
@@ -2020,6 +2384,36 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [{ name = "ussy-core", editable = "packages/libs/ussy-core" }]
+
+[[package]]
+name = "ussy-strata"
+version = "0.1.0"
+source = { editable = "packages/tools/forensics/ussy-strata" }
+dependencies = [
+    { name = "click" },
+    { name = "gitpython" },
+    { name = "rich" },
+    { name = "rich-click" },
+    { name = "ussy-core" },
+]
+
+[package.optional-dependencies]
+dev = [
+    { name = "pytest" },
+    { name = "pytest-cov" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "click", specifier = ">=8.1" },
+    { name = "gitpython", specifier = ">=3.1" },
+    { name = "pytest", marker = "extra == 'dev'", specifier = ">=8.0" },
+    { name = "pytest-cov", marker = "extra == 'dev'", specifier = ">=4.0" },
+    { name = "rich", specifier = ">=13.0" },
+    { name = "rich-click", specifier = ">=1.0" },
+    { name = "ussy-core", editable = "packages/libs/ussy-core" },
+]
+provides-extras = ["dev"]
 
 [[package]]
 name = "ussy-stratax"
@@ -2048,6 +2442,71 @@ requires-dist = [
 provides-extras = ["dev"]
 
 [[package]]
+name = "ussy-syntrop"
+version = "0.1.0"
+source = { editable = "packages/tools/ussy-syntrop" }
+dependencies = [
+    { name = "ussy-core" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "ussy-core", editable = "packages/libs/ussy-core" }]
+
+[[package]]
+name = "ussy-tarot"
+version = "0.1.0"
+source = { editable = "packages/tools/ussy-tarot" }
+dependencies = [
+    { name = "ussy-core" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "ussy-core", editable = "packages/libs/ussy-core" }]
+
+[[package]]
+name = "ussy-telegrapha"
+version = "0.1.0"
+source = { editable = "packages/tools/ussy-telegrapha" }
+dependencies = [
+    { name = "ussy-core" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "ussy-core", editable = "packages/libs/ussy-core" }]
+
+[[package]]
+name = "ussy-terrarium"
+version = "0.1.0"
+source = { editable = "packages/tools/ussy-terrarium" }
+dependencies = [
+    { name = "click" },
+    { name = "rich" },
+    { name = "ussy-core" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "click", specifier = ">=8.0" },
+    { name = "rich", specifier = ">=13.0" },
+    { name = "ussy-core", editable = "packages/libs/ussy-core" },
+]
+
+[[package]]
+name = "ussy-timeloom"
+version = "0.1.0"
+source = { editable = "packages/tools/ussy-timeloom" }
+dependencies = [
+    { name = "click" },
+    { name = "ussy-core" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "click", specifier = ">=8.0" },
+    { name = "ussy-core", editable = "packages/libs/ussy-core" },
+]
+
+[[package]]
 name = "ussy-triage"
 version = "1.0.0"
 source = { editable = "packages/tools/triage/ussy-triage" }
@@ -2074,23 +2533,55 @@ name = "ussyverse"
 version = "2025.1.0"
 source = { editable = "." }
 dependencies = [
+    { name = "ussy-actuary" },
+    { name = "ussy-aquifer" },
     { name = "ussy-assay" },
     { name = "ussy-ast" },
     { name = "ussy-calibre" },
+    { name = "ussy-cambium" },
+    { name = "ussy-cavity" },
+    { name = "ussy-chromato" },
     { name = "ussy-churn" },
+    { name = "ussy-circadia" },
     { name = "ussy-cli" },
     { name = "ussy-core" },
+    { name = "ussy-coroner" },
+    { name = "ussy-crystallo" },
+    { name = "ussy-curator" },
+    { name = "ussy-cyclone" },
+    { name = "ussy-deps" },
+    { name = "ussy-dosemate" },
+    { name = "ussy-endemic" },
+    { name = "ussy-fatigue" },
+    { name = "ussy-fossilrecord" },
+    { name = "ussy-gamut" },
     { name = "ussy-git" },
     { name = "ussy-gridiron" },
+    { name = "ussy-isobar" },
     { name = "ussy-kintsugi" },
+    { name = "ussy-mint" },
+    { name = "ussy-mushin" },
+    { name = "ussy-operon" },
     { name = "ussy-parliament" },
     { name = "ussy-petrichor" },
+    { name = "ussy-plan9webplumb" },
+    { name = "ussy-portmore" },
+    { name = "ussy-propriocept" },
     { name = "ussy-report" },
+    { name = "ussy-reverseoracle" },
     { name = "ussy-sentinel" },
+    { name = "ussy-seral" },
     { name = "ussy-snapshot" },
     { name = "ussy-sqlite" },
+    { name = "ussy-stemma" },
     { name = "ussy-steno" },
+    { name = "ussy-strata" },
     { name = "ussy-stratax" },
+    { name = "ussy-syntrop" },
+    { name = "ussy-tarot" },
+    { name = "ussy-telegrapha" },
+    { name = "ussy-terrarium" },
+    { name = "ussy-timeloom" },
     { name = "ussy-triage" },
 ]
 
@@ -2171,23 +2662,55 @@ requires-dist = [
     { name = "rich", marker = "extra == 'cli'", specifier = ">=13.0" },
     { name = "rich-click", marker = "extra == 'cli'", specifier = ">=1.0" },
     { name = "scipy", marker = "extra == 'sci'", specifier = ">=1.10" },
+    { name = "ussy-actuary", editable = "packages/tools/ussy-actuary" },
+    { name = "ussy-aquifer", editable = "packages/tools/ussy-aquifer" },
     { name = "ussy-assay", editable = "packages/tools/devtools/ussy-assay" },
     { name = "ussy-ast", editable = "packages/libs/ussy-ast" },
     { name = "ussy-calibre", editable = "packages/tools/quality/ussy-calibre" },
+    { name = "ussy-cambium", editable = "packages/tools/deps/ussy-cambium" },
+    { name = "ussy-cavity", editable = "packages/tools/ussy-cavity" },
+    { name = "ussy-chromato", editable = "packages/tools/deps/ussy-chromato" },
     { name = "ussy-churn", editable = "packages/tools/visualization/ussy-churn" },
+    { name = "ussy-circadia", editable = "packages/tools/ussy-circadia" },
     { name = "ussy-cli", editable = "packages/libs/ussy-cli" },
     { name = "ussy-core", editable = "packages/libs/ussy-core" },
+    { name = "ussy-coroner", editable = "packages/tools/ussy-coroner" },
+    { name = "ussy-crystallo", editable = "packages/tools/ussy-crystallo" },
+    { name = "ussy-curator", editable = "packages/tools/ussy-curator" },
+    { name = "ussy-cyclone", editable = "packages/tools/ussy-cyclone" },
+    { name = "ussy-deps", editable = "packages/tools/deps/ussy-deps" },
+    { name = "ussy-dosemate", editable = "packages/tools/ussy-dosemate" },
+    { name = "ussy-endemic", editable = "packages/tools/ussy-endemic" },
+    { name = "ussy-fatigue", editable = "packages/tools/ussy-fatigue" },
+    { name = "ussy-fossilrecord", editable = "packages/tools/ussy-fossilrecord" },
+    { name = "ussy-gamut", editable = "packages/tools/ussy-gamut" },
     { name = "ussy-git", editable = "packages/libs/ussy-git" },
     { name = "ussy-gridiron", editable = "packages/tools/deps/ussy-gridiron" },
+    { name = "ussy-isobar", editable = "packages/tools/ussy-isobar" },
     { name = "ussy-kintsugi", editable = "packages/tools/devtools/ussy-kintsugi" },
+    { name = "ussy-mint", editable = "packages/tools/ussy-mint" },
+    { name = "ussy-mushin", editable = "packages/tools/ussy-mushin" },
+    { name = "ussy-operon", editable = "packages/tools/ussy-operon" },
     { name = "ussy-parliament", editable = "packages/tools/governance/ussy-parliament" },
     { name = "ussy-petrichor", editable = "packages/tools/devtools/ussy-petrichor" },
+    { name = "ussy-plan9webplumb", editable = "packages/tools/ussy-plan9webplumb" },
+    { name = "ussy-portmore", editable = "packages/tools/ussy-portmore" },
+    { name = "ussy-propriocept", editable = "packages/tools/ussy-propriocept" },
     { name = "ussy-report", editable = "packages/libs/ussy-report" },
+    { name = "ussy-reverseoracle", editable = "packages/tools/ussy-reverseoracle" },
     { name = "ussy-sentinel", editable = "packages/tools/governance/ussy-sentinel" },
+    { name = "ussy-seral", editable = "packages/tools/ussy-seral" },
     { name = "ussy-snapshot", editable = "packages/tools/devtools/ussy-snapshot" },
     { name = "ussy-sqlite", editable = "packages/libs/ussy-sqlite" },
+    { name = "ussy-stemma", editable = "packages/tools/ussy-stemma" },
     { name = "ussy-steno", editable = "packages/tools/security/ussy-steno" },
+    { name = "ussy-strata", editable = "packages/tools/forensics/ussy-strata" },
     { name = "ussy-stratax", editable = "packages/tools/deps/ussy-stratax" },
+    { name = "ussy-syntrop", editable = "packages/tools/ussy-syntrop" },
+    { name = "ussy-tarot", editable = "packages/tools/ussy-tarot" },
+    { name = "ussy-telegrapha", editable = "packages/tools/ussy-telegrapha" },
+    { name = "ussy-terrarium", editable = "packages/tools/ussy-terrarium" },
+    { name = "ussy-timeloom", editable = "packages/tools/ussy-timeloom" },
     { name = "ussy-triage", editable = "packages/tools/triage/ussy-triage" },
     { name = "ussyverse", extras = ["sci", "cli", "git", "graph", "web", "config", "viz", "compress", "mining"], marker = "extra == 'all'" },
     { name = "websockets", marker = "extra == 'web'", specifier = ">=11.0" },

@@ -7,12 +7,12 @@ import tempfile
 
 import pytest
 
-from cambium.extractor import (
+from ussy_cambium.extractor import (
     extract_interface,
     extract_interfaces_from_directory,
     extract_interface_from_file,
 )
-from cambium.models import InterfaceInfo
+from ussy_cambium.models import InterfaceInfo
 
 
 FIXTURES_DIR = os.path.join(os.path.dirname(__file__), "fixtures")

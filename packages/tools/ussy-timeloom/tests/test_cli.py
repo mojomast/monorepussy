@@ -4,7 +4,7 @@ import subprocess
 
 from click.testing import CliRunner
 
-from timeloom.cli import main
+from ussy_timeloom.cli import main
 
 
 def _make_repo(tmp_path):

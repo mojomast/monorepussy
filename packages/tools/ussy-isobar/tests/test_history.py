@@ -3,9 +3,9 @@
 import pytest
 from datetime import datetime, timezone, timedelta
 
-from isobar.fields import AtmosphericField, AtmosphericProfile
-from isobar.scanner import ScanResult, FileHistory, FileCommit
-from isobar.history import (
+from ussy_isobar.fields import AtmosphericField, AtmosphericProfile
+from ussy_isobar.scanner import ScanResult, FileHistory, FileCommit
+from ussy_isobar.history import (
     compute_historical_fields, compare_sprints, format_history,
 )
 

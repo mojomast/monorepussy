@@ -6,7 +6,7 @@ import tempfile
 
 import pytest
 
-from terrarium.metrics.complexity import (
+from ussy_terrarium.metrics.complexity import (
     ComplexityVisitor,
     analyze_complexity,
     analyze_file_complexity,

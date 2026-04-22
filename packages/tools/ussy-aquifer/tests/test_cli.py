@@ -6,8 +6,8 @@ import tempfile
 
 import pytest
 
-from aquifer.cli import main, build_parser
-from aquifer.topology import create_sample_topology, save_topology
+from ussy_aquifer.cli import main, build_parser
+from ussy_aquifer.topology import create_sample_topology, save_topology
 
 
 @pytest.fixture

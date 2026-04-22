@@ -8,8 +8,8 @@ import tempfile
 
 import pytest
 
-from cambium.models import GCISnapshot
-from cambium.storage import Storage
+from ussy_cambium.models import GCISnapshot
+from ussy_cambium.storage import Storage
 
 
 class TestStorageInit:

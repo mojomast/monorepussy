@@ -9,7 +9,7 @@ import sys
 
 import pytest
 
-from cambium.cli import main
+from ussy_cambium.cli import main
 
 FIXTURES_DIR = os.path.join(os.path.dirname(__file__), "fixtures")
 

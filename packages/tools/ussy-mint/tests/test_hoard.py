@@ -1,14 +1,14 @@
 """Tests for mint.hoard — Dependency cluster analysis."""
 
 import pytest
-from mint.hoard import (
+from ussy_mint.hoard import (
     find_connected_components,
     identify_cluster_name,
     compute_contamination_risk,
     analyze_hoard,
     format_hoard_report,
 )
-from mint.lockfile import LockedPackage, parse_package_lock_json
+from ussy_mint.lockfile import LockedPackage, parse_package_lock_json
 from pathlib import Path
 
 FIXTURES = Path(__file__).parent / "fixtures"
@@ -166,7 +166,7 @@ class TestFormatHoardReport:
     """Test hoard report formatting."""
 
     def test_report_output(self):
-        from mint.models import Hoard
+        from ussy_mint.models import Hoard
         hoards = [
             Hoard(
                 name="Test Cluster",

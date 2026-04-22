@@ -1,20 +1,28 @@
 [build-system]
-requires = ["setuptools>=64", "wheel"]
-build-backend = "setuptools.build_meta"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
 [project]
-name = "chromato"
+name = "ussy-chromato"
 version = "0.1.0"
 description = "Chromatographic dependency separation and profiling tool"
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 license = {text = "MIT"}
+dependencies = [
+    "ussy-core",
+]
 
 [project.scripts]
-chromato = "chromato.cli:main"
+ussy-chromato = "ussy_chromato.cli:main"
+chromato = "ussy_chromato.legacy:main"
 
-[tool.setuptools.packages.find]
-include = ["chromato*"]
+[tool.hatch.build.targets.wheel]
+packages = ["src/ussy_chromato"]
+
+[tool.uv.sources]
+ussy-core = { workspace = true }
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+pythonpath = ["src"]

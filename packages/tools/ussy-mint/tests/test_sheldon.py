@@ -1,7 +1,7 @@
 """Tests for mint.sheldon — Sheldon grading system."""
 
 import pytest
-from mint.sheldon import (
+from ussy_mint.sheldon import (
     sheldon_grade,
     grade_package,
     grade_breakdown,
@@ -10,7 +10,7 @@ from mint.sheldon import (
     compute_luster,
     compute_eye_appeal,
 )
-from mint.models import PackageInfo, get_grade_label, get_grade_category
+from ussy_mint.models import PackageInfo, get_grade_label, get_grade_category
 
 
 class TestSheldonGrade:

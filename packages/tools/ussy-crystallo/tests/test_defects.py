@@ -3,15 +3,15 @@
 import pytest
 from pathlib import Path
 
-from crystallo.models import (
+from ussy_crystallo.models import (
     DefectReport,
     StructuralFingerprint,
     SymmetryIntent,
     SymmetryType,
 )
-from crystallo.defects import detect_defects, detect_translational_groups
-from crystallo.parser import parse_directory
-from crystallo.similarity import compute_pairwise_similarities
+from ussy_crystallo.defects import detect_defects, detect_translational_groups
+from ussy_crystallo.parser import parse_directory
+from ussy_crystallo.similarity import compute_pairwise_similarities
 
 
 FIXTURES = Path(__file__).parent / "fixtures"

@@ -3,8 +3,8 @@ from __future__ import annotations
 
 import pytest
 
-from fossilrecord.scoring.fossil_score import FossilScore, FossilScoreBreakdown
-from fossilrecord.compare.comparator import ToolComparator, ComparisonResult
+from ussy_fossilrecord.scoring.fossil_score import FossilScore, FossilScoreBreakdown
+from ussy_fossilrecord.compare.comparator import ToolComparator, ComparisonResult
 
 
 def _make_score(name: str, score_val: float, components=None, categories=None):

@@ -17,7 +17,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import Dict, List, Optional, Tuple
 
-from calibre.models import TestRun, UncertaintyBudget, UncertaintySource
+from ussy_calibre.models import TestRun, UncertaintyBudget, UncertaintySource
 
 
 def compute_sensitivity_coefficients(

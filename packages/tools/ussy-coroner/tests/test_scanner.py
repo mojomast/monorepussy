@@ -8,9 +8,9 @@ from pathlib import Path
 
 import pytest
 
-from coroner.models import PipelineRun, StageStatus
-from coroner.models import PipelineRun, StageStatus
-from coroner.scanner import (
+from ussy_coroner.models import PipelineRun, StageStatus
+from ussy_coroner.models import PipelineRun, StageStatus
+from ussy_coroner.scanner import (
     ingest_json,
     scan_directory,
     _detect_status,

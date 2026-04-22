@@ -7,7 +7,7 @@ from datetime import datetime, timezone, timedelta
 
 import pytest
 
-from isobar.scanner import GitScanner, FileCommit, FileHistory, ScanResult
+from ussy_isobar.scanner import GitScanner, FileCommit, FileHistory, ScanResult
 
 
 @pytest.fixture

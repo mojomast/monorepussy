@@ -4,14 +4,14 @@ from __future__ import annotations
 
 import pytest
 
-from cambium.dwarfing import (
+from ussy_cambium.dwarfing import (
     analyze_dependency_chain,
     compute_chain_capability,
     compute_dwarf_factor,
     find_dwarfing_dependencies,
     format_dwarfing_report,
 )
-from cambium.models import DependencyNode, DwarfFactor
+from ussy_cambium.models import DependencyNode, DwarfFactor
 
 
 class TestComputeDwarfFactor:

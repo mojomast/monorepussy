@@ -1,6 +1,6 @@
 """Tests for the classify module."""
 
-from stemma.classify import (
+from ussy_stemma.classify import (
     classify_all,
     classify_variant,
     compute_confidence,
@@ -8,8 +8,8 @@ from stemma.classify import (
     is_scribal_error_pattern,
     lectio_difficilior_score,
 )
-from stemma.collation import collate
-from stemma.models import (
+from ussy_stemma.collation import collate
+from ussy_stemma.models import (
     Classification,
     CollationResult,
     Reading,

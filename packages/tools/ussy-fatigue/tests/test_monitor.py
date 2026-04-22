@@ -4,14 +4,14 @@ import os
 import tempfile
 import pytest
 
-from fatigue.monitor import (
+from ussy_fatigue.monitor import (
     get_changed_files,
     get_previous_K,
     save_K,
     format_alert,
     run_monitor,
 )
-from fatigue.models import MaterialConstants
+from ussy_fatigue.models import MaterialConstants
 
 
 class TestGetChangedFiles:

@@ -2,7 +2,7 @@
 
 import pytest
 
-from chromato.models import (
+from ussy_chromato.models import (
     Coelution,
     Dependency,
     DependencyGraph,
@@ -10,7 +10,7 @@ from chromato.models import (
     Peak,
     PeakShape,
 )
-from chromato.coelution import classify_entanglement, detect_coelution, peak_overlap
+from ussy_chromato.coelution import classify_entanglement, detect_coelution, peak_overlap
 
 
 class TestPeakOverlap:

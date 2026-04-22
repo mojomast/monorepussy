@@ -2,8 +2,8 @@
 
 import pytest
 
-from terrarium.viz import render_dashboard, _bar, _score_color, _status_label
-from terrarium.health import HealthScore
+from ussy_terrarium.viz import render_dashboard, _bar, _score_color, _status_label
+from ussy_terrarium.health import HealthScore
 
 
 class TestRenderDashboard:

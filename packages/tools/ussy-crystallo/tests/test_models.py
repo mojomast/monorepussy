@@ -2,7 +2,7 @@
 
 import pytest
 
-from crystallo.models import (
+from ussy_crystallo.models import (
     DefectReport,
     MethodSignature,
     ModuleClassification,

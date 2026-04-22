@@ -5,7 +5,7 @@ import os
 import pytest
 from pathlib import Path
 
-from chromato.parser import (
+from ussy_chromato.parser import (
     parse_dependency_file,
     _parse_requirements_txt,
     _parse_package_json,

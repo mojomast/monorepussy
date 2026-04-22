@@ -8,7 +8,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import List, Optional
 
-from calibre.models import (
+from ussy_calibre.models import (
     DriftObservation,
     RRObservation,
     TestResult,

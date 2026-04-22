@@ -1,26 +1,25 @@
 [build-system]
-requires = ["setuptools>=61.0"]
-build-backend = "setuptools.build_meta"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
 [project]
-name = "curator"
+name = "ussy-curator"
 version = "0.1.0"
 description = "Library science for documentation health"
 readme = "README.md"
-requires-python = ">=3.10"
-classifiers = [
-    "Development Status :: 4 - Beta",
-    "Intended Audience :: Developers",
-    "License :: OSI Approved :: MIT License",
-    "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.10",
-    "Programming Language :: Python :: 3.11",
-    "Programming Language :: Python :: 3.12",
+license = {text = "MIT"}
+requires-python = ">=3.11"
+dependencies = [
+    "ussy-core",
 ]
 
 [project.scripts]
-curator = "curator.cli:main"
+ussy-curator = "ussy_curator.cli:main"
+curator = "ussy_curator.legacy:deprecated_main"
 
-[tool.setuptools.packages.find]
-where = ["."]
-include = ["curator*"]
+[tool.hatch.build.targets.wheel]
+packages = ["ussy_curator"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

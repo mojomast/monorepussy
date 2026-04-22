@@ -4,7 +4,7 @@ import math
 
 import pytest
 
-from calibre.budget import (
+from ussy_calibre.budget import (
     build_budget,
     budget_from_test_runs,
     compute_combined_uncertainty,
@@ -12,7 +12,7 @@ from calibre.budget import (
     find_dominant_source,
     format_budget,
 )
-from calibre.models import (
+from ussy_calibre.models import (
     TestResult,
     TestRun,
     UncertaintyBudget,

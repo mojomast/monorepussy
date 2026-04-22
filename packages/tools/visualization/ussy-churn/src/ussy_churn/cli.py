@@ -1,4 +1,4 @@
-"""Command-line interface for ChurnMap."""
+"""Command-line interface for ussy-churn."""
 
 from __future__ import annotations
 
@@ -20,7 +20,7 @@ def build_parser() -> argparse.ArgumentParser:
     """Build the CLI argument parser."""
 
     parser = argparse.ArgumentParser(
-        prog="churnmap", description="Render a git co-change territory map"
+        prog="ussy-churn", description="Render a git co-change territory map"
     )
     parser.add_argument("repo_path", type=Path)
     parser.add_argument("--since")
@@ -55,9 +55,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             )
             progress.start()
         try:
-            mining_task = (
-                progress.add_task("Mining repository", total=None) if progress else None
-            )
+            mining_task = progress.add_task("Mining repository", total=None) if progress else None
             commits = mine_repository(
                 args.repo_path,
                 since=args.since,
@@ -72,9 +70,7 @@ def main(argv: Sequence[str] | None = None) -> int:
                 raise ValueError("No commits found in the requested range")
 
             graph_task = (
-                progress.add_task("Building co-change graph", total=None)
-                if progress
-                else None
+                progress.add_task("Building co-change graph", total=None) if progress else None
             )
             graph = build_cochange_graph(commits, min_cochanges=args.min_cochanges)
             if progress and graph_task is not None:
@@ -87,23 +83,15 @@ def main(argv: Sequence[str] | None = None) -> int:
                 return 0
 
             communities_task = (
-                progress.add_task("Detecting communities", total=None)
-                if progress
-                else None
+                progress.add_task("Detecting communities", total=None) if progress else None
             )
             communities = detect_communities(graph)
-            territory_summaries, module_summaries = summarize_communities(
-                graph, communities
-            )
+            territory_summaries, module_summaries = summarize_communities(graph, communities)
             if progress and communities_task is not None:
                 progress.update(communities_task, completed=1, total=1)
 
-            layout_task = (
-                progress.add_task("Computing layout", total=None) if progress else None
-            )
-            layout = build_layout(
-                graph, territory_summaries, width=args.width, height=args.height
-            )
+            layout_task = progress.add_task("Computing layout", total=None) if progress else None
+            layout = build_layout(graph, territory_summaries, width=args.width, height=args.height)
             if progress and layout_task is not None:
                 progress.update(layout_task, completed=1, total=1)
 

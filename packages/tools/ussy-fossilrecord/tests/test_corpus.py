@@ -5,7 +5,7 @@ import json
 import pytest
 from pathlib import Path
 
-from fossilrecord.corpus.loader import (
+from ussy_fossilrecord.corpus.loader import (
     CorpusLoader,
     EsolangProgram,
     StressCategory,

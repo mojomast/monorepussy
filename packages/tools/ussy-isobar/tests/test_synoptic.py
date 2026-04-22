@@ -2,10 +2,10 @@
 
 import pytest
 
-from isobar.fields import AtmosphericField, AtmosphericProfile
-from isobar.fronts import Front, FrontType, FrontIntensity
-from isobar.cyclones import Cyclone, CycloneCategory, WarningLevel, Anticyclone
-from isobar.synoptic import (
+from ussy_isobar.fields import AtmosphericField, AtmosphericProfile
+from ussy_isobar.fronts import Front, FrontType, FrontIntensity
+from ussy_isobar.cyclones import Cyclone, CycloneCategory, WarningLevel, Anticyclone
+from ussy_isobar.synoptic import (
     render_synoptic_map, render_current_conditions, render_climate_report,
 )
 

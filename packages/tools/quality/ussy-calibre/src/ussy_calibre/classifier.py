@@ -25,7 +25,7 @@ from __future__ import annotations
 import math
 from typing import Dict, List, Optional
 
-from calibre.models import (
+from ussy_calibre.models import (
     FlakinessClassification,
     TestResult,
     TestRun,

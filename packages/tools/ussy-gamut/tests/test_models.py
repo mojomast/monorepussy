@@ -3,7 +3,7 @@
 import pytest
 from datetime import datetime, timezone
 
-from gamut.models import (
+from ussy_gamut.models import (
     BoundaryReport,
     ClippingResult,
     ClippingRisk,

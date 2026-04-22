@@ -1,9 +1,9 @@
 """Tests for linter module."""
 import pytest
 
-from circadia.linter import LinterAdapter, LinterRuleSet
-from circadia.zones import CognitiveZone
-from circadia.config import CircadiaConfig
+from ussy_circadia.linter import LinterAdapter, LinterRuleSet
+from ussy_circadia.zones import CognitiveZone
+from ussy_circadia.config import CircadiaConfig
 
 
 @pytest.fixture

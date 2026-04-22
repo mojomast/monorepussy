@@ -1,31 +1,24 @@
 [build-system]
-requires = ["setuptools>=68.0", "wheel"]
-build-backend = "setuptools.build_meta"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
 [project]
-name = "crystallo"
+name = "ussy-crystallo"
 version = "0.1.0"
-description = "Crystallographic symmetry detection in code structure"
+description = "Migrated from crystallo"
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 license = {text = "MIT"}
-authors = [{name = "Crystallo Contributors"}]
-classifiers = [
-    "Development Status :: 3 - Alpha",
-    "Intended Audience :: Developers",
-    "License :: OSI Approved :: MIT License",
-    "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.10",
-    "Programming Language :: Python :: 3.11",
-    "Programming Language :: Python :: 3.12",
-    "Topic :: Software Development :: Quality Assurance",
+dependencies = [
+    "ussy-core",
 ]
 
 [project.scripts]
-crystallo = "crystallo.cli:main"
+ussy-crystallo = "ussy_crystallo.cli:main"
+crystallo = "ussy_crystallo.legacy:main"
 
-[tool.setuptools.packages.find]
-where = ["src"]
+[tool.hatch.build.targets.wheel]
+packages = ["src/ussy_crystallo"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

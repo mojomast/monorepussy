@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from reverseoracle.marks import add_mark, load_marks, lookup_mark
+from ussy_reverseoracle.marks import add_mark, load_marks, lookup_mark
 
 
 def test_marks_round_trip(temp_repo):

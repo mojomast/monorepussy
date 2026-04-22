@@ -5,7 +5,7 @@ import tempfile
 
 import pytest
 
-from terrarium.metrics.dead_code import (
+from ussy_terrarium.metrics.dead_code import (
     ImportCollector,
     ExportCollector,
     find_unused_exports,

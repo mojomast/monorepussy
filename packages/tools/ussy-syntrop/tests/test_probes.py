@@ -2,13 +2,13 @@
 
 import pytest
 
-from syntrop.probes import PROBE_REGISTRY
-from syntrop.probes.base import BaseProbe
-from syntrop.probes.randomize_iteration import RandomizeIterationProbe
-from syntrop.probes.shuffle_eval_order import ShuffleEvalOrderProbe
-from syntrop.probes.alias_state import AliasStateProbe
-from syntrop.probes.nondeterministic_timing import NondeterministicTimingProbe
-from syntrop.ir import ProbeResult
+from ussy_syntrop.probes import PROBE_REGISTRY
+from ussy_syntrop.probes.base import BaseProbe
+from ussy_syntrop.probes.randomize_iteration import RandomizeIterationProbe
+from ussy_syntrop.probes.shuffle_eval_order import ShuffleEvalOrderProbe
+from ussy_syntrop.probes.alias_state import AliasStateProbe
+from ussy_syntrop.probes.nondeterministic_timing import NondeterministicTimingProbe
+from ussy_syntrop.ir import ProbeResult
 
 
 # --- Test source code fixtures ---

@@ -5,7 +5,7 @@ from __future__ import annotations
 import math
 from datetime import datetime, timezone
 
-from coroner.models import (
+from ussy_coroner.models import (
     TRACE_PERSISTENCE,
     CustodyChain,
     CustodyComparison,

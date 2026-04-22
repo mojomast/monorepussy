@@ -6,7 +6,7 @@ import time
 
 import pytest
 
-from terrarium.watcher import FileWatcher
+from ussy_terrarium.watcher import FileWatcher
 
 
 class TestFileWatcher:

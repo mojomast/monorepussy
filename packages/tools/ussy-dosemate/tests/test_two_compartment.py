@@ -4,8 +4,8 @@ import math
 
 import pytest
 
-from dosemate.two_compartment import TwoCompartmentParams, compute_two_compartment, compute_propagation_curve
-from dosemate.distribution import DistributionParams
+from ussy_dosemate.two_compartment import TwoCompartmentParams, compute_two_compartment, compute_propagation_curve
+from ussy_dosemate.distribution import DistributionParams
 
 
 class TestTwoCompartmentParams:

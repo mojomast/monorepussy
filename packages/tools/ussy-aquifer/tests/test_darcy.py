@@ -2,8 +2,8 @@
 
 import pytest
 
-from aquifer.topology import ServiceLayer, FlowConnection, Topology
-from aquifer.darcy import (
+from ussy_aquifer.topology import ServiceLayer, FlowConnection, Topology
+from ussy_aquifer.darcy import (
     compute_darcy_flux,
     compute_hydraulic_gradient,
     analyze_flow,

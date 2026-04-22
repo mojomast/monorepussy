@@ -4,7 +4,7 @@ from datetime import datetime, timezone
 
 import pytest
 
-from seral.models import (
+from ussy_seral.models import (
     DisturbanceEvent,
     GovernancePrescription,
     GovernanceRule,

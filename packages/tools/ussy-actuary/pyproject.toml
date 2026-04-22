@@ -1,24 +1,27 @@
 [build-system]
-requires = ["setuptools>=68.0", "wheel"]
-build-backend = "setuptools.build_meta"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
 [project]
-name = "actuary"
+name = "ussy-actuary"
 version = "0.1.0"
-description = "Actuary — Actuarial Vulnerability Risk Quantification: apply insurance mathematics to software vulnerability risk"
+description = "Migrated from actuary"
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 license = {text = "MIT"}
 dependencies = [
     "numpy>=1.24",
     "scipy>=1.10",
+    "ussy-core",
 ]
 
 [project.scripts]
-actuary = "actuary.cli:main"
+ussy-actuary = "ussy_actuary.cli:main"
+actuary = "ussy_actuary.legacy:main"
 
-[tool.setuptools.packages.find]
-where = ["src"]
+[tool.hatch.build.targets.wheel]
+packages = ["src/ussy_actuary"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+pythonpath = ["src"]

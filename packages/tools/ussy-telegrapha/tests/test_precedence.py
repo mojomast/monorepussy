@@ -2,8 +2,8 @@
 
 import pytest
 
-from telegrapha.models import PrecedenceClass
-from telegrapha.precedence import (
+from ussy_telegrapha.models import PrecedenceClass
+from ussy_telegrapha.precedence import (
     compute_mg1_avg_wait,
     compute_system_stability,
     compute_residual_service_time,

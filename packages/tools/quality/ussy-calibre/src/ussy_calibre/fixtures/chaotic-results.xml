@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<testsuite name="tests.chaotic" tests="10" errors="1" failures="4" skipped="0" time="30.5">
+  <testcase classname="tests.chaotic.test_unstable" name="test_flaky_1" time="1.0">
+    <failure message="Random failure">AssertionError: flaky</failure>
+  </testcase>
+  <testcase classname="tests.chaotic.test_unstable" name="test_flaky_2" time="1.5"/>
+  <testcase classname="tests.chaotic.test_unstable" name="test_flaky_3" time="2.0">
+    <failure message="Another failure">AssertionError: also flaky</failure>
+  </testcase>
+  <testcase classname="tests.chaotic.test_unstable" name="test_broken_1" time="0.5">
+    <error message="Setup error">RuntimeError: database not available</error>
+  </testcase>
+  <testcase classname="tests.chaotic.test_unstable" name="test_flaky_4" time="0.8">
+    <failure message="Timing issue">AssertionError: timeout</failure>
+  </testcase>
+  <testcase classname="tests.chaotic.test_unstable" name="test_ok_1" time="0.3"/>
+  <testcase classname="tests.chaotic.test_unstable" name="test_flaky_5" time="1.2">
+    <failure message="Race condition">AssertionError: concurrent modification</failure>
+  </testcase>
+  <testcase classname="tests.chaotic.test_unstable" name="test_ok_2" time="0.4"/>
+  <testcase classname="tests.chaotic.test_unstable" name="test_ok_3" time="0.2"/>
+  <testcase classname="tests.chaotic.test_unstable" name="test_ok_4" time="0.1"/>
+</testsuite>

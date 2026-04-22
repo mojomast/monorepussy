@@ -1,8 +1,13 @@
+try:
+    from conftest import create_fixture_dir, create_incidents_file
+except ImportError:
+    from .conftest import create_fixture_dir, create_incidents_file
+
 """Tests for tarot.community module."""
 
 import pytest
 
-from tarot.community import CommunityDatabase, COMMUNITY_SEED_DATA
+from ussy_tarot.community import CommunityDatabase, COMMUNITY_SEED_DATA
 
 
 class TestCommunityDatabase:

@@ -1,21 +1,29 @@
 [build-system]
-requires = ["setuptools>=68.0", "wheel"]
-build-backend = "setuptools.build_meta"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
 [project]
-name = "cambium"
+name = "ussy-cambium"
 version = "0.1.0"
 description = "Horticultural grafting science for dependency compatibility analysis"
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 license = {text = "MIT"}
 authors = [{name = "Cambium Contributors"}]
+dependencies = [
+    "ussy-core",
+]
 
 [project.scripts]
-cambium = "cambium.cli:main"
+ussy-cambium = "ussy_cambium.cli:main"
+cambium = "ussy_cambium.legacy:main"
 
-[tool.setuptools.packages.find]
-include = ["cambium*"]
+[tool.hatch.build.targets.wheel]
+packages = ["src/ussy_cambium"]
+
+[tool.uv.sources]
+ussy-core = { workspace = true }
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+pythonpath = ["src"]

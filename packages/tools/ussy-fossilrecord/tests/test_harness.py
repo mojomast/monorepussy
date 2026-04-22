@@ -6,8 +6,8 @@ import pytest
 from pathlib import Path
 from unittest.mock import patch
 
-from fossilrecord.corpus.loader import EsolangProgram, StressCategory
-from fossilrecord.harness.plugins import (
+from ussy_fossilrecord.corpus.loader import EsolangProgram, StressCategory
+from ussy_fossilrecord.harness.plugins import (
     ParserPlugin,
     LinterPlugin,
     FormatterPlugin,
@@ -15,7 +15,7 @@ from fossilrecord.harness.plugins import (
     PluginResult,
     PluginStatus,
 )
-from fossilrecord.harness.runner import HarnessRunner, TestResult, TestSuiteResult
+from ussy_fossilrecord.harness.runner import HarnessRunner, TestResult, TestSuiteResult
 
 
 def _make_program(**kwargs):

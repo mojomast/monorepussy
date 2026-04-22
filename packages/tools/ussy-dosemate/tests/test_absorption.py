@@ -5,8 +5,8 @@ from datetime import datetime, timedelta
 
 import pytest
 
-from dosemate.absorption import AbsorptionParams, compute_absorption
-from dosemate.git_parser import PullRequestInfo
+from ussy_dosemate.absorption import AbsorptionParams, compute_absorption
+from ussy_dosemate.git_parser import PullRequestInfo
 
 
 class TestAbsorptionParams:

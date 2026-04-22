@@ -8,13 +8,13 @@ import tempfile
 
 import pytest
 
-from cambium.scanner import (
+from ussy_cambium.scanner import (
     format_scan_report,
     scan_project,
     _parse_dependencies,
     _build_dependency_tree,
 )
-from cambium.models import DependencyNode
+from ussy_cambium.models import DependencyNode
 
 
 FIXTURES_DIR = os.path.join(os.path.dirname(__file__), "fixtures")

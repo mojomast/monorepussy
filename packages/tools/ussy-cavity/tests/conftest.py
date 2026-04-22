@@ -9,7 +9,7 @@ from typing import Any
 import numpy as np
 import pytest
 
-from cavity.topology import PipelineTopology
+from ussy_cavity.topology import PipelineTopology
 
 
 FIXTURES_DIR = Path(__file__).parent / "fixtures"

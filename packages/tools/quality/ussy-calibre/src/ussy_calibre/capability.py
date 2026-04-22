@@ -16,7 +16,7 @@ from __future__ import annotations
 import math
 from typing import Dict, List, Optional
 
-from calibre.models import CapabilityResult, CapabilitySpec, TestRun
+from ussy_calibre.models import CapabilityResult, CapabilitySpec, TestRun
 
 
 def compute_cp(usl: float, lsl: float, sigma_within: float) -> float:

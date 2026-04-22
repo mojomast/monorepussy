@@ -4,11 +4,11 @@ import math
 
 import pytest
 
-from dosemate.steady_state import (
+from ussy_dosemate.steady_state import (
     SteadyStateParams, DosePlan,
     compute_steady_state, compute_dose_plan,
 )
-from dosemate.excretion import ExcretionParams
+from ussy_dosemate.excretion import ExcretionParams
 
 
 class TestComputeSteadyState:

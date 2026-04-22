@@ -7,7 +7,7 @@ from datetime import datetime, timezone
 
 import pytest
 
-from cambium.models import (
+from ussy_cambium.models import (
     AlignmentScore,
     BondStrength,
     BondTrend,

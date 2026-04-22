@@ -1,7 +1,7 @@
 """Tests for mint.composition — Fineness and alloy analysis."""
 
 import pytest
-from mint.composition import (
+from ussy_mint.composition import (
     compute_fineness,
     categorize_alloy,
     compute_maintainer_overlap,

@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
-from coroner.investigate import investigate
-from coroner.models import Investigation, VelocityClass
+from ussy_coroner.investigate import investigate
+from ussy_coroner.models import Investigation, VelocityClass
 
 
 class TestInvestigate:
@@ -69,7 +69,7 @@ class TestInvestigationReport:
     """Tests for investigation report generation."""
 
     def test_report_generation(self, simple_failing_run):
-        from coroner.report import generate_report
+        from ussy_coroner.report import generate_report
         inv = investigate(simple_failing_run)
         report = generate_report(inv)
         assert "AUTOPSY REPORT" in report
@@ -80,13 +80,13 @@ class TestInvestigationReport:
         assert "CHAIN OF CUSTODY" in report
 
     def test_report_with_striation(self, simple_failing_run, build_38_run):
-        from coroner.report import generate_report
+        from ussy_coroner.report import generate_report
         inv = investigate(simple_failing_run, compare_runs=[build_38_run])
         report = generate_report(inv)
         assert "STRIATION" in report
 
     def test_report_format_complete(self, multi_failure_run):
-        from coroner.report import generate_report
+        from ussy_coroner.report import generate_report
         inv = investigate(multi_failure_run)
         report = generate_report(inv)
         assert "END OF AUTOPSY REPORT" in report

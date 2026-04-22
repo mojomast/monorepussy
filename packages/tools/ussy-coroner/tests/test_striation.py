@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
-from coroner.models import PipelineRun, Stage, StageStatus
-from coroner.striation import (
+from ussy_coroner.models import PipelineRun, Stage, StageStatus
+from ussy_coroner.striation import (
     analyze_striations,
     compare_signatures,
     compute_error_signature,

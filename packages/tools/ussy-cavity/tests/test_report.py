@@ -7,8 +7,8 @@ import json
 import numpy as np
 import pytest
 
-from cavity.report import CavityReport, generate_report
-from cavity.topology import PipelineTopology
+from ussy_cavity.report import CavityReport, generate_report
+from ussy_cavity.topology import PipelineTopology
 
 
 # ---------------------------------------------------------------------------

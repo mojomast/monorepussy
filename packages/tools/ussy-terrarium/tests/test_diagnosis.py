@@ -2,9 +2,9 @@
 
 import pytest
 
-from terrarium.ecosystem.organisms import OrganismType, Vitality
-from terrarium.ecosystem.model import Organism
-from terrarium.ecosystem.diagnosis import diagnose, Diagnosis
+from ussy_terrarium.ecosystem.organisms import OrganismType, Vitality
+from ussy_terrarium.ecosystem.model import Organism
+from ussy_terrarium.ecosystem.diagnosis import diagnose, Diagnosis
 
 
 class TestDiagnose:

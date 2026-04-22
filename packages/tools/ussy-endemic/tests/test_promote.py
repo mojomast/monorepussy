@@ -2,8 +2,8 @@
 
 import pytest
 
-from endemic.models import Module, Pattern, PatternType, Compartment
-from endemic.promote import (
+from ussy_endemic.models import Module, Pattern, PatternType, Compartment
+from ussy_endemic.promote import (
     compute_cross_protection,
     find_optimal_seed,
     predict_r0_increase,

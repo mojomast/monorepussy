@@ -3,14 +3,14 @@
 import pytest
 from datetime import datetime, timezone
 
-from mint.provenance import (
+from ussy_mint.provenance import (
     create_provenance_chain,
     determine_provenance_level,
     find_provenance_gaps,
     format_provenance_report,
     verify_mint_mark_consistency,
 )
-from mint.models import MintMark, ProvenanceLevel
+from ussy_mint.models import MintMark, ProvenanceLevel
 
 
 class TestCreateProvenanceChain:

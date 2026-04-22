@@ -4,8 +4,8 @@ import json
 import pytest
 from pathlib import Path
 
-from telegrapha.models import Hop, Route, PipelineTopology
-from telegrapha.dashboard import (
+from ussy_telegrapha.models import Hop, Route, PipelineTopology
+from ussy_telegrapha.dashboard import (
     generate_dashboard,
     format_dashboard_report,
 )

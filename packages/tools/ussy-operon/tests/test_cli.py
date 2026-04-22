@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pytest
 
-from operon.cli import (
+from ussy_operon.cli import (
     cmd_enhance,
     cmd_epigenetics,
     cmd_express,
@@ -16,7 +16,7 @@ from operon.cli import (
     create_parser,
     main,
 )
-from operon.storage import StorageManager
+from ussy_operon.storage import StorageManager
 
 
 class TestCreateParser:
@@ -199,14 +199,14 @@ class TestCmdExpress:
 
     def test_express_with_operon(self):
         storage = StorageManager(":memory:")
-        from operon.models import Gene, Operon
-        from operon.mapper import OperonMapper
+        from ussy_operon.models import Gene, Operon
+        from ussy_operon.mapper import OperonMapper
 
         with tempfile.TemporaryDirectory() as tmpdir:
             (Path(tmpdir) / "a.py").write_text('"""Auth module."""\ndef login(): pass\n')
             codebase = OperonMapper().map_operons(type("obj", (), {"root_path": tmpdir, "genes": [], "operons": [], "deprecated_features": [], "internal_apis": []})())
             # Actually create a proper Codebase
-            from operon.models import Codebase
+            from ussy_operon.models import Codebase
             cb = Codebase(root_path=tmpdir)
             mapper = OperonMapper()
             operons = mapper.map_operons(cb)
@@ -229,7 +229,7 @@ class TestCmdEpigenetics:
 
     def test_epigenetics_with_operon_filter(self):
         storage = StorageManager(":memory:")
-        from operon.models import Gene, Operon
+        from ussy_operon.models import Gene, Operon
         operon = Operon(operon_id="op_0", genes=[Gene(name="old", path="old.py", is_deprecated=True)])
         storage.save_operon(operon)
         args = create_parser().parse_args(["epigenetics", "--operon", "op_0"])

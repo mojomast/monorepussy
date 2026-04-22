@@ -2,8 +2,8 @@
 
 import pytest
 
-from endemic.models import Module, Pattern, PatternType, Compartment, ZoonoticJump
-from endemic.zoonotic import (
+from ussy_endemic.models import Module, Pattern, PatternType, Compartment, ZoonoticJump
+from ussy_endemic.zoonotic import (
     detect_zoonotic_jumps,
     format_zoonotic_alert,
     infer_domain,

@@ -1,13 +1,13 @@
 """Tests for the contaminate module."""
 
-from stemma.classify import classify_all
-from stemma.collation import collate
-from stemma.contaminate import (
+from ussy_stemma.classify import classify_all
+from ussy_stemma.collation import collate
+from ussy_stemma.contaminate import (
     detect_contamination,
     detect_contamination_from_collation,
 )
-from stemma.models import Witness
-from stemma.stemma_builder import build_stemma
+from ussy_stemma.models import Witness
+from ussy_stemma.stemma_builder import build_stemma
 
 
 class TestDetectContamination:

@@ -14,7 +14,7 @@ PROJECT_ROOT = os.path.join(os.path.dirname(__file__), "..")
 class TestCLIHelp:
     def test_help(self):
         result = subprocess.run(
-            [sys.executable, "-m", "endemic", "--help"],
+            [sys.executable, "-m", "ussy_endemic", "--help"],
             capture_output=True, text=True,
             cwd=PROJECT_ROOT,
         )
@@ -23,7 +23,7 @@ class TestCLIHelp:
 
     def test_version(self):
         result = subprocess.run(
-            [sys.executable, "-m", "endemic", "--version"],
+            [sys.executable, "-m", "ussy_endemic", "--version"],
             capture_output=True, text=True,
             cwd=PROJECT_ROOT,
         )
@@ -32,7 +32,7 @@ class TestCLIHelp:
 
     def test_scan_help(self):
         result = subprocess.run(
-            [sys.executable, "-m", "endemic", "scan", "--help"],
+            [sys.executable, "-m", "ussy_endemic", "scan", "--help"],
             capture_output=True, text=True,
             cwd=PROJECT_ROOT,
         )
@@ -41,7 +41,7 @@ class TestCLIHelp:
 
     def test_simulate_help(self):
         result = subprocess.run(
-            [sys.executable, "-m", "endemic", "simulate", "--help"],
+            [sys.executable, "-m", "ussy_endemic", "simulate", "--help"],
             capture_output=True, text=True,
             cwd=PROJECT_ROOT,
         )
@@ -51,7 +51,7 @@ class TestCLIHelp:
 class TestCLIScan:
     def test_scan_fixtures(self):
         result = subprocess.run(
-            [sys.executable, "-m", "endemic", "scan", FIXTURES_DIR],
+            [sys.executable, "-m", "ussy_endemic", "scan", FIXTURES_DIR],
             capture_output=True, text=True,
             cwd=PROJECT_ROOT,
         )
@@ -61,7 +61,7 @@ class TestCLIScan:
     def test_scan_single_file(self):
         filepath = os.path.join(FIXTURES_DIR, "sample_bad.py")
         result = subprocess.run(
-            [sys.executable, "-m", "endemic", "scan", filepath],
+            [sys.executable, "-m", "ussy_endemic", "scan", filepath],
             capture_output=True, text=True,
             cwd=PROJECT_ROOT,
         )
@@ -71,7 +71,7 @@ class TestCLIScan:
 class TestCLISimulate:
     def test_simulate_with_r0(self):
         result = subprocess.run(
-            [sys.executable, "-m", "endemic", "simulate",
+            [sys.executable, "-m", "ussy_endemic", "simulate",
              "--r0", "3.0", "--population", "50"],
             capture_output=True, text=True,
             cwd=PROJECT_ROOT,
@@ -81,7 +81,7 @@ class TestCLISimulate:
 
     def test_simulate_with_intervention(self):
         result = subprocess.run(
-            [sys.executable, "-m", "endemic", "simulate",
+            [sys.executable, "-m", "ussy_endemic", "simulate",
              "--r0", "3.0", "--intervention-r0", "0.5", "--population", "50"],
             capture_output=True, text=True,
             cwd=PROJECT_ROOT,
@@ -93,7 +93,7 @@ class TestCLISimulate:
 class TestCLIHerdImmunity:
     def test_herd_immunity_basic(self):
         result = subprocess.run(
-            [sys.executable, "-m", "endemic", "herd-immunity",
+            [sys.executable, "-m", "ussy_endemic", "herd-immunity",
              "--pattern", "bare-except", "--r0", "3.2", "--population", "50"],
             capture_output=True, text=True,
             cwd=PROJECT_ROOT,
@@ -105,7 +105,7 @@ class TestCLIHerdImmunity:
 class TestCLIWatch:
     def test_watch_fixtures(self):
         result = subprocess.run(
-            [sys.executable, "-m", "endemic", "watch", FIXTURES_DIR],
+            [sys.executable, "-m", "ussy_endemic", "watch", FIXTURES_DIR],
             capture_output=True, text=True,
             cwd=PROJECT_ROOT,
         )
@@ -115,7 +115,7 @@ class TestCLIWatch:
 class TestCLIPromote:
     def test_promote_help(self):
         result = subprocess.run(
-            [sys.executable, "-m", "endemic", "promote", "--help"],
+            [sys.executable, "-m", "ussy_endemic", "promote", "--help"],
             capture_output=True, text=True,
             cwd=PROJECT_ROOT,
         )
@@ -123,7 +123,7 @@ class TestCLIPromote:
 
     def test_promote_with_path(self):
         result = subprocess.run(
-            [sys.executable, "-m", "endemic", "promote",
+            [sys.executable, "-m", "ussy_endemic", "promote",
              "--pattern", "structured-logging", "--r0", "2.0",
              "--path", FIXTURES_DIR],
             capture_output=True, text=True,

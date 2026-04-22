@@ -4,7 +4,7 @@ from datetime import datetime, timezone, timedelta
 
 import pytest
 
-from mushin.journal import Journal, JournalEntry
+from ussy_mushin.journal import Journal, JournalEntry
 
 
 @pytest.fixture

@@ -2,8 +2,8 @@
 
 import pytest
 
-from chromato.models import Dependency, DependencyGraph, PeakShape
-from chromato.peak import (
+from ussy_chromato.models import Dependency, DependencyGraph, PeakShape
+from ussy_chromato.peak import (
     analyze_peak,
     build_peaks,
     compute_peak_area,

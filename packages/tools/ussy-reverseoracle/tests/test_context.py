@@ -3,7 +3,7 @@ from __future__ import annotations
 from pathlib import Path
 import subprocess
 
-from reverseoracle.context import reconstruct_context, is_test_file
+from ussy_reverseoracle.context import reconstruct_context, is_test_file
 
 
 def test_is_test_file():

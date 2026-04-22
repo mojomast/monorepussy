@@ -1,24 +1,33 @@
-[build-system]
-requires = ["setuptools>=64", "wheel"]
-build-backend = "setuptools.build_meta"
-
 [project]
-name = "calibre"
+name = "ussy-calibre"
 version = "0.1.0"
-description = "Metrological measurement science for test suite quality analysis"
+description = "Test Suite Quality Analysis — merged from calibreussy, acumenussy, lehrussy, marksmanussy, levainussy"
 readme = "README.md"
-requires-python = ">=3.9"
-license = {text = "MIT"}
+requires-python = ">=3.11"
 dependencies = [
-    "numpy>=1.21",
-    "scipy>=1.7",
+    "ussy-core",
+    "numpy>=1.24",
+    "scipy>=1.10",
 ]
 
 [project.scripts]
-calibre = "calibre.cli:main"
+ussy-calibre = "ussy_calibre.cli:main"
+calibre = "ussy_calibre.legacy:calibre_main"
+acumen = "ussy_calibre.legacy:acumen_main"
+lehr = "ussy_calibre.legacy:lehr_main"
+marksman = "ussy_calibre.legacy:marksman_main"
+levain = "ussy_calibre.legacy:levain_main"
 
-[tool.setuptools.packages.find]
-where = ["src"]
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/ussy_calibre"]
+
+[tool.uv.sources]
+ussy-core = { workspace = true }
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+pythonpath = ["src"]

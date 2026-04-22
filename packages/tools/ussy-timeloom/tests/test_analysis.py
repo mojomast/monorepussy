@@ -1,13 +1,13 @@
 from __future__ import annotations
 
-from timeloom.analysis import (
+from ussy_timeloom.analysis import (
     analyze_draft,
     check_selvedge_integrity,
     detect_floats,
     find_coupling_clusters,
     find_pattern_repeats,
 )
-from timeloom.weave_engine import WeaveDraft
+from ussy_timeloom.weave_engine import WeaveDraft
 
 
 def _draft():

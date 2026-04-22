@@ -9,7 +9,7 @@ from datetime import datetime, timezone
 
 import pytest
 
-from coroner.models import (
+from ussy_coroner.models import (
     CustodyChain,
     CustodyEntry,
     ErrorStain,
@@ -25,7 +25,7 @@ from coroner.models import (
     TraceType,
     VelocityClass,
 )
-from coroner.scanner import ingest_json
+from ussy_coroner.scanner import ingest_json
 
 FIXTURES_DIR = Path(__file__).parent / "fixtures"
 SAMPLE_RUN_JSON = FIXTURES_DIR / "sample_run" / "run.json"

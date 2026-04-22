@@ -6,8 +6,8 @@ from collections import defaultdict
 
 import pytest
 
-from isobar.scanner import FileCommit, FileHistory, ScanResult
-from isobar.fields import (
+from ussy_isobar.scanner import FileCommit, FileHistory, ScanResult
+from ussy_isobar.fields import (
     AtmosphericProfile, AtmosphericField,
     compute_temperature, compute_pressure, compute_humidity,
     compute_wind, compute_dew_point, compute_vorticity,
