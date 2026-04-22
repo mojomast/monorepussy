@@ -160,3 +160,120 @@ class TestTerrariumEngine:
         assert "unavailable" in result
         assert result["unavailable"]["error"] == "adapter not available"
         assert result["unavailable"]["stub"] is True
+
+    def test_score_real_adapter_data(self):
+        """Test that score() with real adapter data produces correct dimension scores."""
+        adapters = [
+            MockAdapter(
+                "fatigue",
+                {
+                    "src/a.py": OrganismHealthState(
+                        path="src/a.py", crack_intensity=0.2
+                    ),
+                    "src/b.py": OrganismHealthState(
+                        path="src/b.py", crack_intensity=0.4
+                    ),
+                },
+            ),
+            MockAdapter(
+                "endemic",
+                {
+                    "src/a.py": OrganismHealthState(
+                        path="src/a.py", infection_state="S"
+                    ),
+                    "src/b.py": OrganismHealthState(
+                        path="src/b.py", infection_state="I"
+                    ),
+                },
+            ),
+            MockAdapter(
+                "sentinel",
+                {
+                    "src/a.py": OrganismHealthState(
+                        path="src/a.py", anomaly_active=False
+                    ),
+                    "src/b.py": OrganismHealthState(
+                        path="src/b.py", anomaly_active=True
+                    ),
+                },
+            ),
+            MockAdapter(
+                "kompressi",
+                {
+                    "src/a.py": OrganismHealthState(
+                        path="src/a.py", complexity_score=0.1
+                    ),
+                    "src/b.py": OrganismHealthState(
+                        path="src/b.py", complexity_score=0.3
+                    ),
+                },
+            ),
+            MockAdapter(
+                "churnmap",
+                {
+                    "src/a.py": OrganismHealthState(
+                        path="src/a.py", territory_id="core"
+                    ),
+                    "src/b.py": OrganismHealthState(path="src/b.py", territory_id=""),
+                },
+            ),
+            MockAdapter(
+                "seral",
+                {
+                    "src/a.py": OrganismHealthState(
+                        path="src/a.py", succession_stage="climax"
+                    ),
+                },
+            ),
+        ]
+        engine = TerrariumEngine(adapters)
+        engine.collect()
+        score = engine.score()
+        # fatigue: 1.0 - mean([0.2, 0.4]) = 0.7
+        assert score.fatigue == pytest.approx(0.7, abs=0.01)
+        # epidemic: 1.0 - (1 infected / 2) = 0.5
+        assert score.epidemic == pytest.approx(0.5, abs=0.01)
+        # anomaly: 1.0 - (1 anomalous / 2) = 0.5
+        assert score.anomaly == pytest.approx(0.5, abs=0.01)
+        # complexity: 1.0 - mean([0.1, 0.3]) = 0.8
+        assert score.complexity == pytest.approx(0.8, abs=0.01)
+        # churn: 1.0 - (1 churning / 2) = 0.5
+        assert score.churn == pytest.approx(0.5, abs=0.01)
+        # territory and succession from first available
+        assert score.territory == "core"
+        assert score.succession == "climax"
+        # overall should be weighted average
+        assert 0.0 < score.overall < 1.0
+
+    def test_score_missing_adapters(self):
+        """Test that score() properly handles missing adapters."""
+        engine = TerrariumEngine([])
+        engine.collect()
+        score = engine.score()
+        assert score.overall == 1.0
+        assert score.fatigue == 1.0
+        assert score.epidemic == 1.0
+        assert score.anomaly == 1.0
+        assert score.drift == 1.0
+        assert score.churn == 1.0
+        assert score.complexity == 1.0
+        assert score.territory == ""
+        assert score.succession == "seral"
+
+    def test_to_json_valid(self):
+        """Test that to_json() produces valid JSON."""
+        adapter = MockAdapter(
+            "fatigue",
+            {
+                "src/a.py": OrganismHealthState(path="src/a.py", crack_intensity=0.25),
+            },
+        )
+        engine = TerrariumEngine([adapter])
+        engine.collect()
+        json_str = engine.to_json()
+        data = json.loads(json_str)
+        assert "health" in data
+        assert "adapters" in data
+        assert data["health"]["fatigue"] == pytest.approx(0.75, abs=0.01)
+        assert "fatigue" in data["adapters"]
+        assert data["adapters"]["fatigue"]["count"] == 1

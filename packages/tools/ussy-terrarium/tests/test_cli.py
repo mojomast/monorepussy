@@ -107,3 +107,24 @@ class TestClickCommands:
         result = runner.invoke(cli, ["watch-live", "--help"])
         assert result.exit_code == 0
         assert "interval" in result.output
+
+    def test_main_health_returns_zero(self):
+        """Test that main(['health', '.']) returns 0."""
+        result = main(["health", "."])
+        assert result == 0
+
+    def test_main_watch_returns_zero(self):
+        """Test that main(['watch', '.']) returns 0."""
+        result = main(["watch", "."])
+        assert result == 0
+
+    def test_main_nonexistent_path(self):
+        """Test error handling for nonexistent paths."""
+        result = main(["health", "/nonexistent/path/that/does/not/exist"])
+        assert result == 1
+
+        result = main(["watch", "/nonexistent/path/that/does/not/exist"])
+        assert result == 1
+
+        result = main(["snapshot", "/nonexistent/path/that/does/not/exist"])
+        assert result == 1

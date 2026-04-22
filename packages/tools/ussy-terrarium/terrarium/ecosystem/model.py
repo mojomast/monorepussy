@@ -208,95 +208,69 @@ def compute_health_score(metrics: ModuleMetrics, avg_churn: float = 5.0) -> floa
     return max(0.0, min(100.0, score))
 
 
-def build_organism(
+def _extract_adapter_state(
+    health_state: Optional[OrganismHealthState],
+) -> tuple:
+    """Extract values from health_state, returning defaults if None."""
+    if health_state is None:
+        return (0.0, "S", False, 0.0, None, "seral")
+    return (
+        health_state.crack_intensity,
+        health_state.infection_state,
+        health_state.anomaly_active,
+        health_state.complexity_score,
+        health_state.territory_id,
+        health_state.succession_stage,
+    )
+
+
+def _apply_health_modifiers(
+    health: float,
+    crack_intensity: float,
+    infection_state: str,
+    anomaly_active: bool,
+) -> float:
+    """Apply external health state modifiers to health score."""
+    health -= crack_intensity * 30
+
+    if infection_state == "I":
+        health -= 20
+    elif infection_state == "E":
+        health -= 10
+    elif infection_state == "R":
+        health -= 5
+
+    if anomaly_active:
+        health -= 15
+
+    return max(0.0, min(100.0, health))
+
+
+def _collect_symptoms(
     metrics: ModuleMetrics,
-    avg_churn: float = 5.0,
-    health_state: Optional[OrganismHealthState] = None,
-) -> Organism:
-    """Build an Organism from module metrics.
-
-    Args:
-        metrics: Module metrics to convert.
-        avg_churn: Average churn for the project.
-        health_state: Optional merged health state from external adapters.
-
-    Returns:
-        An Organism with computed health and type.
-    """
-    from ..metrics.stability import classify_stability, classify_age
-
-    # Determine organism type
-    if metrics.age_days < 30 and not metrics.is_deprecated:
-        organism_type = OrganismType.SEEDLING
-    else:
-        organism_type = ROLE_TO_ORGANISM.get(metrics.module_role, OrganismType.BUSH)
-
-    # Compute health
-    health = compute_health_score(metrics, avg_churn)
-
-    # Apply external health state modifiers
-    crack_intensity = 0.0
-    infection_state = "S"
-    anomaly_active = False
-    complexity_score = 0.0
-    territory_id = None
-    succession_stage = "seral"
-
-    if health_state is not None:
-        crack_intensity = health_state.crack_intensity
-        infection_state = health_state.infection_state
-        anomaly_active = health_state.anomaly_active
-        complexity_score = health_state.complexity_score
-        territory_id = health_state.territory_id
-        succession_stage = health_state.succession_stage
-
-        # Crack intensity reduces health (wound level)
-        health -= crack_intensity * 30
-
-        # Infection reduces health
-        if infection_state == "I":
-            health -= 20
-        elif infection_state == "E":
-            health -= 10
-        elif infection_state == "R":
-            # Recovered — scarred but stable, slight penalty
-            health -= 5
-
-        # Anomaly active reduces health
-        if anomaly_active:
-            health -= 15
-
-        # Complexity score reduces vitality (but not health directly)
-        # This is applied via the vitality field, not the health score
-        # per the spec: "vitality -= complexity_score * 0.2 (capped at 0.0)"
-        # We handle this in the OrganismHealthState vitality, not here
-
-        health = max(0.0, min(100.0, health))
-
-    # Collect symptoms and strengths
+    crack_intensity: float,
+    infection_state: str,
+    anomaly_active: bool,
+    complexity_score: float,
+    succession_stage: str,
+) -> List[str]:
+    """Collect symptom strings based on metrics and health state."""
     symptoms = []
-    strengths = []
 
     if metrics.churn_rate > CHURN_THRESHOLD:
         symptoms.append(
             f"Churn rate {metrics.churn_rate:.1f}x above threshold (>{CHURN_THRESHOLD}/month)"
         )
-    elif metrics.churn_rate < 1.0 and metrics.commit_count > 0:
-        strengths.append("Low churn — stable and predictable")
 
     if metrics.complexity > COMPLEXITY_THRESHOLD:
         symptoms.append(
             f"Cyclomatic complexity: {metrics.complexity} (threshold: {COMPLEXITY_THRESHOLD})"
         )
-    elif metrics.complexity <= 5 and metrics.complexity > 0:
-        strengths.append("Low complexity — easy to understand")
 
     if metrics.test_coverage < COVERAGE_THRESHOLD and not metrics.is_test:
         symptoms.append(
             f"Test coverage: {metrics.test_coverage:.0%} (threshold: {COVERAGE_THRESHOLD:.0%})"
         )
-    elif metrics.test_coverage >= COVERAGE_THRESHOLD:
-        strengths.append(f"Good test coverage: {metrics.test_coverage:.0%}")
 
     if metrics.bug_count > 0:
         symptoms.append(f"{metrics.bug_count} open bug(s) assigned")
@@ -316,8 +290,6 @@ def build_organism(
         symptoms.append("Infection active — contagion glow detected")
     elif infection_state == "E":
         symptoms.append("Exposed to infection — incubating")
-    elif infection_state == "R":
-        strengths.append("Recovered from infection — scarred but stable")
 
     if anomaly_active:
         symptoms.append("Anomaly detected — immune response active")
@@ -327,10 +299,89 @@ def build_organism(
             f"High Kolmogorov complexity: {complexity_score:.2f} — dense, unpredictable structure"
         )
 
+    return symptoms
+
+
+def _collect_strengths(
+    metrics: ModuleMetrics,
+    churn_rate: float,
+    complexity: float,
+    coverage: float,
+    succession_stage: str,
+) -> List[str]:
+    """Collect strength strings based on metrics and health state."""
+    strengths = []
+
+    if churn_rate < 1.0 and metrics.commit_count > 0:
+        strengths.append("Low churn — stable and predictable")
+
+    if complexity <= 5 and complexity > 0:
+        strengths.append("Low complexity — easy to understand")
+
+    if coverage >= COVERAGE_THRESHOLD:
+        strengths.append(f"Good test coverage: {coverage:.0%}")
+
     if succession_stage == "pioneer":
         strengths.append("Pioneer stage — young, adaptable code")
     elif succession_stage == "climax":
         strengths.append("Climax stage — mature, stable ecosystem")
+
+    return strengths
+
+
+def build_organism(
+    metrics: ModuleMetrics,
+    avg_churn: float = 5.0,
+    health_state: Optional[OrganismHealthState] = None,
+) -> Organism:
+    """Build an Organism from module metrics.
+
+    Args:
+        metrics: Module metrics to convert.
+        avg_churn: Average churn for the project.
+        health_state: Optional merged health state from external adapters.
+
+    Returns:
+        An Organism with computed health and type.
+    """
+    from ..metrics.stability import classify_stability, classify_age
+
+    if metrics.age_days < 30 and not metrics.is_deprecated:
+        organism_type = OrganismType.SEEDLING
+    else:
+        organism_type = ROLE_TO_ORGANISM.get(metrics.module_role, OrganismType.BUSH)
+
+    health = compute_health_score(metrics, avg_churn)
+
+    (
+        crack_intensity,
+        infection_state,
+        anomaly_active,
+        complexity_score,
+        territory_id,
+        succession_stage,
+    ) = _extract_adapter_state(health_state)
+
+    if health_state is not None:
+        health = _apply_health_modifiers(
+            health, crack_intensity, infection_state, anomaly_active
+        )
+
+    symptoms = _collect_symptoms(
+        metrics,
+        crack_intensity,
+        infection_state,
+        anomaly_active,
+        complexity_score,
+        succession_stage,
+    )
+    strengths = _collect_strengths(
+        metrics,
+        metrics.churn_rate,
+        metrics.complexity,
+        metrics.test_coverage,
+        succession_stage,
+    )
 
     stability_tier = classify_stability(metrics.days_since_last_change)
     age_tier = classify_age(metrics.age_days)

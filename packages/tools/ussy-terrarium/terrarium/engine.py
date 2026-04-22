@@ -60,6 +60,56 @@ class TerrariumEngine:
             "succession_stage": state.succession_stage,
         }
 
+    @staticmethod
+    def _compute_fatigue(fatigue_data: Dict) -> float:
+        if "states" in fatigue_data:
+            intensities = [
+                s["crack_intensity"] for s in fatigue_data["states"].values()
+            ]
+            return 1.0 - (sum(intensities) / len(intensities)) if intensities else 1.0
+        return 1.0
+
+    @staticmethod
+    def _compute_epidemic(endemic_data: Dict) -> float:
+        if "states" in endemic_data:
+            states_list = list(endemic_data["states"].values())
+            infected = sum(1 for s in states_list if s["infection_state"] == "I")
+            return 1.0 - (infected / len(states_list)) if states_list else 1.0
+        return 1.0
+
+    @staticmethod
+    def _compute_anomaly(sentinel_data: Dict) -> float:
+        if "states" in sentinel_data:
+            states_list = list(sentinel_data["states"].values())
+            anomalous = sum(1 for s in states_list if s["anomaly_active"])
+            return 1.0 - (anomalous / len(states_list)) if states_list else 1.0
+        return 1.0
+
+    @staticmethod
+    def _compute_drift(collected: Dict) -> float:
+        drift_values = []
+        for adapter_name, data in collected.items():
+            if "states" in data:
+                for state in data["states"].values():
+                    if state["vitality"] < 1.0:
+                        drift_values.append(1.0 - state["vitality"])
+        return 1.0 - (sum(drift_values) / len(drift_values)) if drift_values else 1.0
+
+    @staticmethod
+    def _compute_complexity(kompressi_data: Dict) -> float:
+        if "states" in kompressi_data:
+            scores = [s["complexity_score"] for s in kompressi_data["states"].values()]
+            return 1.0 - (sum(scores) / len(scores)) if scores else 1.0
+        return 1.0
+
+    @staticmethod
+    def _compute_churn(churnmap_data: Dict) -> float:
+        if "states" in churnmap_data:
+            states_list = list(churnmap_data["states"].values())
+            churning = sum(1 for s in states_list if s.get("territory_id"))
+            return 1.0 - (churning / len(states_list)) if states_list else 1.0
+        return 1.0
+
     def score(self) -> HealthScore:
         """Compute a 0.0–1.0 overall ecosystem health score from merged metrics.
 
@@ -77,57 +127,12 @@ class TerrariumEngine:
         health = HealthScore()
         health.raw = collected
 
-        # Fatigue score
-        fatigue_data = collected.get("fatigue", {})
-        if "states" in fatigue_data:
-            intensities = [
-                s["crack_intensity"] for s in fatigue_data["states"].values()
-            ]
-            health.fatigue = (
-                1.0 - (sum(intensities) / len(intensities)) if intensities else 1.0
-            )
-
-        # Epidemic score
-        endemic_data = collected.get("endemic", {})
-        if "states" in endemic_data:
-            states_list = list(endemic_data["states"].values())
-            infected = sum(1 for s in states_list if s["infection_state"] == "I")
-            health.epidemic = (
-                1.0 - (infected / len(states_list)) if states_list else 1.0
-            )
-
-        # Anomaly score
-        sentinel_data = collected.get("sentinel", {})
-        if "states" in sentinel_data:
-            states_list = list(sentinel_data["states"].values())
-            anomalous = sum(1 for s in states_list if s["anomaly_active"])
-            health.anomaly = (
-                1.0 - (anomalous / len(states_list)) if states_list else 1.0
-            )
-
-        # Drift score (from proprioception or any adapter reporting vitality < 1.0)
-        drift_values = []
-        for adapter_name, data in collected.items():
-            if "states" in data:
-                for state in data["states"].values():
-                    if state["vitality"] < 1.0:
-                        drift_values.append(1.0 - state["vitality"])
-        health.drift = (
-            1.0 - (sum(drift_values) / len(drift_values)) if drift_values else 1.0
-        )
-
-        # Complexity score
-        kompressi_data = collected.get("kompressi", {})
-        if "states" in kompressi_data:
-            scores = [s["complexity_score"] for s in kompressi_data["states"].values()]
-            health.complexity = 1.0 - (sum(scores) / len(scores)) if scores else 1.0
-
-        # Churn score
-        churnmap_data = collected.get("churnmap", {})
-        if "states" in churnmap_data:
-            states_list = list(churnmap_data["states"].values())
-            churning = sum(1 for s in states_list if s.get("territory_id"))
-            health.churn = 1.0 - (churning / len(states_list)) if states_list else 1.0
+        health.fatigue = self._compute_fatigue(collected.get("fatigue", {}))
+        health.epidemic = self._compute_epidemic(collected.get("endemic", {}))
+        health.anomaly = self._compute_anomaly(collected.get("sentinel", {}))
+        health.drift = self._compute_drift(collected)
+        health.complexity = self._compute_complexity(collected.get("kompressi", {}))
+        health.churn = self._compute_churn(collected.get("churnmap", {}))
 
         # Territory / succession from first available adapter
         for adapter_name in ("churnmap", "seral"):
