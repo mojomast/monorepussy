@@ -39,6 +39,9 @@ class OrganismHealthState:
     crack_intensity: float = 0.0
     infection_state: str = "S"
     anomaly_active: bool = False
+    complexity_score: float = 0.0
+    territory_id: Optional[str] = None
+    succession_stage: str = "seral"
 
 
 @dataclass
@@ -57,6 +60,9 @@ class Organism:
     crack_intensity: float = 0.0
     infection_state: str = "S"
     anomaly_active: bool = False
+    complexity_score: float = 0.0
+    territory_id: Optional[str] = None
+    succession_stage: str = "seral"
 
     def __post_init__(self) -> None:
         """Compute derived fields."""
@@ -232,11 +238,17 @@ def build_organism(
     crack_intensity = 0.0
     infection_state = "S"
     anomaly_active = False
+    complexity_score = 0.0
+    territory_id = None
+    succession_stage = "seral"
 
     if health_state is not None:
         crack_intensity = health_state.crack_intensity
         infection_state = health_state.infection_state
         anomaly_active = health_state.anomaly_active
+        complexity_score = health_state.complexity_score
+        territory_id = health_state.territory_id
+        succession_stage = health_state.succession_stage
 
         # Crack intensity reduces health (wound level)
         health -= crack_intensity * 30
@@ -253,6 +265,11 @@ def build_organism(
         # Anomaly active reduces health
         if anomaly_active:
             health -= 15
+
+        # Complexity score reduces vitality (but not health directly)
+        # This is applied via the vitality field, not the health score
+        # per the spec: "vitality -= complexity_score * 0.2 (capped at 0.0)"
+        # We handle this in the OrganismHealthState vitality, not here
 
         health = max(0.0, min(100.0, health))
 
@@ -305,6 +322,16 @@ def build_organism(
     if anomaly_active:
         symptoms.append("Anomaly detected — immune response active")
 
+    if complexity_score > 0.0:
+        symptoms.append(
+            f"High Kolmogorov complexity: {complexity_score:.2f} — dense, unpredictable structure"
+        )
+
+    if succession_stage == "pioneer":
+        strengths.append("Pioneer stage — young, adaptable code")
+    elif succession_stage == "climax":
+        strengths.append("Climax stage — mature, stable ecosystem")
+
     stability_tier = classify_stability(metrics.days_since_last_change)
     age_tier = classify_age(metrics.age_days)
 
@@ -319,6 +346,9 @@ def build_organism(
         crack_intensity=crack_intensity,
         infection_state=infection_state,
         anomaly_active=anomaly_active,
+        complexity_score=complexity_score,
+        territory_id=territory_id,
+        succession_stage=succession_stage,
     )
 
 

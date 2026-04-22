@@ -43,7 +43,10 @@ terrarium health ./my-project
 terrarium watch ./my-project \
   --fatigue-data fatigue-scan.json \
   --endemic-data endemic-scan.json \
-  --sentinel-data sentinel-check.json
+  --sentinel-data sentinel-check.json \
+  --kompressi-data kompressi-profile.json \
+  --churnmap-data churnmap-territories.json \
+  --seral-data seral-stages.json
 ```
 
 ## Architecture
@@ -79,6 +82,9 @@ File Changes → Metrics Engine → Ecosystem Model → Renderer
     - **fatigue**: Maps Paris' Law crack growth to organism wound levels
     - **endemic**: Maps SIR/SEIR infection states to contagion glow
     - **sentinel**: Maps anomaly detections to immune response markers
+    - **kompressi**: Maps Kolmogorov complexity estimates to organism density
+    - **churnmap**: Maps territory/community clusters to organism biomes
+    - **seral**: Maps ecological succession stages to organism visual age
     - Auto-discovered and loaded; graceful degradation when absent
 
 4. **Renderers** (`terrarium/renderers/`):
@@ -99,6 +105,9 @@ Terrarium can optionally ingest live data from three external **ussyverse** tool
 | `fatigue` | [fatigueussy](https://github.com/mojomast/fatigueussy) | `--fatigue-data` | Crack intensity → cracked bark / wilting |
 | `endemic` | [endemicussy](https://github.com/mojomast/endemicussy) | `--endemic-data` | Infection state (S/E/I/R) → contagion glow |
 | `sentinel` | [sentinelussy](https://github.com/mojomast/sentinelussy) | `--sentinel-data` | Anomaly detection → immune response marker |
+| `kompressi` | [kompressiussy](https://github.com/mojomast/kompressiussy) | `--kompressi-data` | Complexity score → dense/unpredictable structure |
+| `churnmap` | [churnmap](https://github.com/mojomast/churnmap) | `--churnmap-data` | Territory ID → shared biome/cluster |
+| `seral` | [seralussy](https://github.com/mojomast/seralussy) | `--seral-data` | Succession stage → pioneer/seral/climax visual age |
 
 ### Adapter JSON Formats
 
@@ -141,6 +150,41 @@ Or a flat mapping:
 ```
 Detectors with a false-positive rate > 0.5 are suppressed as background noise.
 
+**kompressiussy** — accepts a serialized `FileProfile` list:
+```json
+[
+  {
+    "path": "src/auth.py",
+    "id": 10.15,
+    "ae": 1442.0
+  }
+]
+```
+`id` (information density = ae/loc) is normalized to a 0.0–1.0 complexity score.
+
+**churnmap** — accepts a JSON file with territory clusters:
+```json
+{
+  "territories": [
+    {"territory_id": "core-api", "modules": ["core/api"]}
+  ],
+  "files": {
+    "src/auth.py": {"territory_id": "core-api"}
+  }
+}
+```
+Territory IDs are visual metadata only — they do not affect health scores.
+
+**seralussy** — accepts the native `.seral/stages.json` output:
+```json
+{
+  "src/auth.py": "climax",
+  "src/new.py": "pioneer",
+  "src/payments.py": "seral_mid"
+}
+```
+Stages are mapped to `pioneer` / `seral` / `climax`. This is a neutral visual marker.
+
 ### Health Score Calculation
 
 Health scores (0-100) are computed as:
@@ -151,6 +195,7 @@ Health scores (0-100) are computed as:
   - Crack intensity × 30
   - Infected (I) −20, Exposed (E) −10, Recovered (R) −5
   - Active anomaly −15
+  - Complexity score × 0.2 vitality reduction (kompressi)
 
 ### Module Role → Organism Type Mapping
 

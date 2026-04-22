@@ -1,0 +1,53 @@
+[
+  {
+    "path": "src/auth.py",
+    "raw_size": 1954,
+    "compressed_size": 313,
+    "loc": 76,
+    "ae": 313.0,
+    "ar": 0.8398,
+    "id": 4.12,
+    "spread": 0.0041,
+    "compressor_ratios": {
+      "bz2": 0.1643,
+      "gzip": 0.1602,
+      "lzma": 0.1638
+    },
+    "is_anomaly": false,
+    "annotations": []
+  },
+  {
+    "path": "src/utils.py",
+    "raw_size": 4336,
+    "compressed_size": 1442,
+    "loc": 142,
+    "ae": 1442.0,
+    "ar": 0.6674,
+    "id": 10.15,
+    "spread": 0.0134,
+    "compressor_ratios": {
+      "bz2": 0.3406,
+      "gzip": 0.3326,
+      "lzma": 0.3459
+    },
+    "is_anomaly": false,
+    "annotations": []
+  },
+  {
+    "path": "src/main.py",
+    "raw_size": 1200,
+    "compressed_size": 400,
+    "loc": 50,
+    "ae": 400.0,
+    "ar": 0.6667,
+    "id": 8.0,
+    "spread": 0.01,
+    "compressor_ratios": {
+      "bz2": 0.34,
+      "gzip": 0.33,
+      "lzma": 0.35
+    },
+    "is_anomaly": false,
+    "annotations": []
+  }
+]

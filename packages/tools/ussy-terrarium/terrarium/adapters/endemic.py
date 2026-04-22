@@ -77,6 +77,9 @@ class EndemicAdapter(BaseAdapter):
         for path, info in data.items():
             if not isinstance(info, dict):
                 continue
+            # Skip metadata keys that don't look like file paths
+            if "/" not in path and "\\" not in path and not path.endswith(".py"):
+                continue
             compartment = info.get("compartment", "S")
             if compartment not in self.VALID_STATES:
                 compartment = "S"

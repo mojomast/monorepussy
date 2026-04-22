@@ -51,6 +51,12 @@ def _discover_adapter_classes() -> List[type[BaseAdapter]]:
 _ADAPTER_CLASSES: Optional[List[type[BaseAdapter]]] = None
 
 
+def reset_adapter_cache() -> None:
+    """Reset the adapter class cache. Useful in tests to force re-discovery."""
+    global _ADAPTER_CLASSES
+    _ADAPTER_CLASSES = None
+
+
 def _get_adapter_classes() -> List[type[BaseAdapter]]:
     global _ADAPTER_CLASSES
     if _ADAPTER_CLASSES is None:
@@ -62,6 +68,9 @@ def load_adapters(
     fatigue_data: Optional[str] = None,
     endemic_data: Optional[str] = None,
     sentinel_data: Optional[str] = None,
+    kompressi_data: Optional[str] = None,
+    churnmap_data: Optional[str] = None,
+    seral_data: Optional[str] = None,
 ) -> List[BaseAdapter]:
     """Load all available adapters based on provided data paths.
 
@@ -78,6 +87,9 @@ def load_adapters(
         "fatigue": fatigue_data,
         "endemic": endemic_data,
         "sentinel": sentinel_data,
+        "kompressi": kompressi_data,
+        "churnmap": churnmap_data,
+        "seral": seral_data,
     }
 
     for cls in _get_adapter_classes():
@@ -87,6 +99,12 @@ def load_adapters(
             adapters.append(adapter)
 
     return adapters
+
+
+def _merge_succession_stage(existing: str, new: str) -> str:
+    """Return the most advanced succession stage."""
+    order = {"pioneer": 0, "seral": 1, "climax": 2}
+    return new if order.get(new, 1) >= order.get(existing, 1) else existing
 
 
 def merge_health_states(adapters: List[BaseAdapter]) -> Dict[str, OrganismHealthState]:
@@ -107,9 +125,18 @@ def merge_health_states(adapters: List[BaseAdapter]) -> Dict[str, OrganismHealth
                 merged[path] = state
             else:
                 existing = merged[path]
+                # vitality: take the worst (lowest)
+                merged_vitality = min(existing.vitality, state.vitality)
+                # complexity_score penalty on vitality
+                if existing.complexity_score > 0 or state.complexity_score > 0:
+                    max_complexity = max(
+                        existing.complexity_score, state.complexity_score
+                    )
+                    merged_vitality = max(0.0, merged_vitality - max_complexity * 0.2)
+
                 merged[path] = OrganismHealthState(
                     path=path,
-                    vitality=min(existing.vitality, state.vitality),
+                    vitality=merged_vitality,
                     crack_intensity=max(
                         existing.crack_intensity, state.crack_intensity
                     ),
@@ -117,6 +144,21 @@ def merge_health_states(adapters: List[BaseAdapter]) -> Dict[str, OrganismHealth
                     if state.infection_state != "S"
                     else existing.infection_state,
                     anomaly_active=existing.anomaly_active or state.anomaly_active,
+                    complexity_score=max(
+                        existing.complexity_score, state.complexity_score
+                    ),
+                    territory_id=existing.territory_id
+                    if existing.territory_id is not None
+                    else state.territory_id,
+                    succession_stage=(
+                        existing.succession_stage
+                        if state.succession_stage == "seral"
+                        else state.succession_stage
+                        if existing.succession_stage == "seral"
+                        else _merge_succession_stage(
+                            existing.succession_stage, state.succession_stage
+                        )
+                    ),
                 )
 
     return merged

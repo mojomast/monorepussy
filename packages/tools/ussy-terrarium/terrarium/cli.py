@@ -40,6 +40,21 @@ def _add_adapter_args(parser: argparse.ArgumentParser) -> None:
         default=None,
         help="Path to sentinelussy JSON output",
     )
+    parser.add_argument(
+        "--kompressi-data",
+        default=None,
+        help="Path to kompressiussy JSON output",
+    )
+    parser.add_argument(
+        "--churnmap-data",
+        default=None,
+        help="Path to churnmap JSON output",
+    )
+    parser.add_argument(
+        "--seral-data",
+        default=None,
+        help="Path to seralussy JSON output",
+    )
 
 
 def create_parser() -> argparse.ArgumentParser:
@@ -150,6 +165,9 @@ def _load_health_states(args: argparse.Namespace) -> dict:
         fatigue_data=getattr(args, "fatigue_data", None),
         endemic_data=getattr(args, "endemic_data", None),
         sentinel_data=getattr(args, "sentinel_data", None),
+        kompressi_data=getattr(args, "kompressi_data", None),
+        churnmap_data=getattr(args, "churnmap_data", None),
+        seral_data=getattr(args, "seral_data", None),
     )
     return merge_health_states(adapters)
 

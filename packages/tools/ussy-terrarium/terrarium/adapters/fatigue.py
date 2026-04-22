@@ -28,6 +28,16 @@ class FatigueAdapter(BaseAdapter):
 
     name = "fatigue"
 
+    DEFAULT_MAX_K_CEILING = 100.0
+
+    def __init__(
+        self, data_path: Optional[str] = None, max_k_ceiling: Optional[float] = None
+    ) -> None:
+        super().__init__(data_path=data_path)
+        self.max_k_ceiling = (
+            max_k_ceiling if max_k_ceiling is not None else self.DEFAULT_MAX_K_CEILING
+        )
+
     def load(self) -> Dict[str, OrganismHealthState]:
         """Load fatigueussy data and map to organism health states.
 
@@ -44,10 +54,13 @@ class FatigueAdapter(BaseAdapter):
         if not stress_intensities:
             return {}
 
-        # Compute max K for normalization
-        max_k = max(
+        # Compute max K for normalization. Use a fixed ceiling as the
+        # denominator so healthy repos with low absolute K values don't
+        # produce false critical scores.
+        raw_max_k = max(
             (si.get("K", 0.0) for si in stress_intensities.values()), default=1.0
         )
+        max_k = self.max_k_ceiling
         if max_k <= 0:
             max_k = 1.0
 
@@ -56,7 +69,7 @@ class FatigueAdapter(BaseAdapter):
             k = si.get("K", 0.0)
             delta_k = si.get("delta_K", 0.0)
 
-            # Normalize crack intensity 0.0–1.0
+            # Normalize crack intensity 0.0–1.0 against capped max
             crack_intensity = min(k / max_k, 1.0)
 
             # Increase intensity if crack is actively growing
