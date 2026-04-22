@@ -1,0 +1,14 @@
+{
+  "name": "synthetic-project-dev",
+  "open_files": [
+    {"path": "src/auth.py", "modified": true},
+    {"path": "src/schemas.py", "modified": true},
+    {"path": "src/utils.py", "modified": false}
+  ],
+  "processes": [
+    {"command": "pytest", "pid": 1234},
+    {"command": "python main.py", "pid": 5678}
+  ],
+  "env_var_count": 42,
+  "memory_pressure": 0.35
+}

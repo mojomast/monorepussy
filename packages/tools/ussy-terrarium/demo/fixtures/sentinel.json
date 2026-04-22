@@ -1,0 +1,131 @@
+{
+  "files": {
+    "src/api.py": {
+      "anomaly_score": 0.35,
+      "severity": "NORMAL",
+      "is_anomalous": false,
+      "num_detectors_fired": 0,
+      "detections": []
+    },
+    "src/auth.py": {
+      "anomaly_score": 0.78,
+      "severity": "ELEVATED",
+      "is_anomalous": true,
+      "num_detectors_fired": 3,
+      "detections": [
+        {"detector_id": "D-001", "pattern_name": "credential_exposure", "false_positive_rate": 0.1},
+        {"detector_id": "D-002", "pattern_name": "complex_function", "false_positive_rate": 0.2},
+        {"detector_id": "D-003", "pattern_name": "missing_input_validation", "false_positive_rate": 0.15}
+      ]
+    },
+    "src/cache.py": {
+      "anomaly_score": 0.12,
+      "severity": "NORMAL",
+      "is_anomalous": false,
+      "num_detectors_fired": 0,
+      "detections": []
+    },
+    "src/config.py": {
+      "anomaly_score": 0.08,
+      "severity": "NORMAL",
+      "is_anomalous": false,
+      "num_detectors_fired": 0,
+      "detections": []
+    },
+    "src/database.py": {
+      "anomaly_score": 0.42,
+      "severity": "MODERATE",
+      "is_anomalous": false,
+      "num_detectors_fired": 1,
+      "detections": [
+        {"detector_id": "D-004", "pattern_name": "sql_string_concat", "false_positive_rate": 0.6}
+      ]
+    },
+    "src/integrations.py": {
+      "anomaly_score": 0.65,
+      "severity": "ELEVATED",
+      "is_anomalous": true,
+      "num_detectors_fired": 2,
+      "detections": [
+        {"detector_id": "D-005", "pattern_name": "missing_timeout", "false_positive_rate": 0.1},
+        {"detector_id": "D-006", "pattern_name": "unchecked_response", "false_positive_rate": 0.25}
+      ]
+    },
+    "src/logging_utils.py": {
+      "anomaly_score": 0.05,
+      "severity": "NORMAL",
+      "is_anomalous": false,
+      "num_detectors_fired": 0,
+      "detections": []
+    },
+    "src/main.py": {
+      "anomaly_score": 0.22,
+      "severity": "NORMAL",
+      "is_anomalous": false,
+      "num_detectors_fired": 0,
+      "detections": []
+    },
+    "src/metrics.py": {
+      "anomaly_score": 0.18,
+      "severity": "NORMAL",
+      "is_anomalous": false,
+      "num_detectors_fired": 0,
+      "detections": []
+    },
+    "src/models.py": {
+      "anomaly_score": 0.10,
+      "severity": "NORMAL",
+      "is_anomalous": false,
+      "num_detectors_fired": 0,
+      "detections": []
+    },
+    "src/notifications.py": {
+      "anomaly_score": 0.28,
+      "severity": "NORMAL",
+      "is_anomalous": false,
+      "num_detectors_fired": 0,
+      "detections": []
+    },
+    "src/schemas.py": {
+      "anomaly_score": 0.82,
+      "severity": "CRITICAL",
+      "is_anomalous": true,
+      "num_detectors_fired": 3,
+      "detections": [
+        {"detector_id": "D-007", "pattern_name": "deep_nesting", "false_positive_rate": 0.05},
+        {"detector_id": "D-008", "pattern_name": "excessive_branching", "false_positive_rate": 0.1},
+        {"detector_id": "D-009", "pattern_name": "magic_values", "false_positive_rate": 0.2}
+      ]
+    },
+    "src/search.py": {
+      "anomaly_score": 0.15,
+      "severity": "NORMAL",
+      "is_anomalous": false,
+      "num_detectors_fired": 0,
+      "detections": []
+    },
+    "src/test_helpers.py": {
+      "anomaly_score": 0.08,
+      "severity": "NORMAL",
+      "is_anomalous": false,
+      "num_detectors_fired": 0,
+      "detections": []
+    },
+    "src/utils.py": {
+      "anomaly_score": 0.20,
+      "severity": "NORMAL",
+      "is_anomalous": false,
+      "num_detectors_fired": 0,
+      "detections": []
+    },
+    "src/worker.py": {
+      "anomaly_score": 0.48,
+      "severity": "MODERATE",
+      "is_anomalous": false,
+      "num_detectors_fired": 1,
+      "detections": [
+        {"detector_id": "D-010", "pattern_name": "thread_safety_risk", "false_positive_rate": 0.4}
+      ]
+    }
+  }
+}

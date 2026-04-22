@@ -468,10 +468,10 @@
     <div class="hero-content">
       <div class="tagline">
         <span class="dot"></span>
-        Live demo — scanning a real Python project
+        Live demo — 8 adapters analyzing 19 Python files
       </div>
       <h2>See your code as a <span>living ecosystem</span></h2>
-      <p>Terrarium analyzes your Python codebase and renders it as a biological ecosystem. Modules become organisms. Complexity becomes stress. Dead code decays. See the health of your entire codebase at a glance.</p>
+      <p>Terrarium analyzes your Python codebase through 8 dimensions: complexity, churn, coverage, dead code, fatigue, infection, anomalies, and drift. Without adapters: <strong>75/100 GOOD</strong>. With all 8 adapters: <strong>57/100 FAIR</strong>. The full picture reveals what static analysis alone cannot see.</p>
       <div class="cta-group">
         <a href="https://github.com/mojomast/terrariumussy" target="_blank" class="btn btn-primary">
           <i data-lucide="github" style="width:16px;height:16px;"></i>
@@ -534,34 +534,49 @@
     
     <div class="findings-grid">
       <div class="finding-card">
-        <div class="metric warn">63</div>
-        <div class="label">Lowest health score</div>
-        <div class="detail">src/schemas.py<br>Cyclomatic complexity: 22</div>
+        <div class="metric bad">57</div>
+        <div class="label">Overall with 8 adapters</div>
+        <div class="detail">1 thriving, 11 healthy<br>4 stressed, 3 critical</div>
+      </div>
+      <div class="finding-card">
+        <div class="metric warn">75</div>
+        <div class="label">Overall without adapters</div>
+        <div class="detail">3 thriving, 16 healthy<br>0 stressed, 0 critical</div>
       </div>
       <div class="finding-card">
         <div class="metric bad">0%</div>
-        <div class="label">Test coverage detected</div>
+        <div class="label">Test coverage</div>
         <div class="detail">All 19 modules<br>No coverage data found</div>
       </div>
       <div class="finding-card">
-        <div class="metric warn">16</div>
-        <div class="label">Complexity threshold exceeded</div>
-        <div class="detail">auth.py: complexity 16<br>threshold: 15</div>
+        <div class="metric bad">3</div>
+        <div class="label">Infected modules (endemic)</div>
+        <div class="detail">auth.py: infected<br>integrations.py: infected<br>schemas.py: infected</div>
       </div>
       <div class="finding-card">
-        <div class="metric good">19</div>
-        <div class="label">Files analyzed</div>
-        <div class="detail">16 in src/<br>3 in tests/</div>
+        <div class="metric bad">3</div>
+        <div class="label">Anomalous modules (sentinel)</div>
+        <div class="detail">auth.py: score 0.78<br>integrations.py: 0.65<br>schemas.py: 0.82</div>
       </div>
       <div class="finding-card">
-        <div class="metric good">0</div>
-        <div class="label">Dead code detected</div>
-        <div class="detail">No likely dead modules<br>No deprecated files</div>
+        <div class="metric warn">3</div>
+        <div class="label">Stressed modules (fatigue)</div>
+        <div class="detail">auth.py: K=95<br>schemas.py: K=85<br>integrations.py: K=65</div>
       </div>
       <div class="finding-card">
-        <div class="metric good">3</div>
-        <div class="label">Modules thriving</div>
-        <div class="detail">config.py, models.py<br>test_api.py</div>
+        <div class="metric warn">3</div>
+        <div class="label">Exposed modules (snapshot)</div>
+        <div class="detail">auth.py: modified<br>schemas.py: modified<br>3 open files, 2 processes</div>
+      </div>
+      <div class="finding-card">
+        <div class="metric bad">0.0</div>
+        <div class="label">Churn score (churnmap)</div>
+        <div class="detail">All 16 files in territories<br>100% actively churning</div>
+      </div>
+      <div class="finding-card">
+        <div class="metric good">4</div>
+        <div class="label">Climax modules (seral)</div>
+        <div class="detail">api.py, auth.py, config.py<br>database.py, main.py...</div>
       </div>
     </div>
   </section>
@@ -573,6 +588,7 @@
 
     <div class="command-tabs">
       <button class="command-tab active" data-tab="health">terrarium health</button>
+      <button class="command-tab" data-tab="health-adapters">health + adapters</button>
       <button class="command-tab" data-tab="watch">terrarium watch</button>
       <button class="command-tab" data-tab="diagnose">terrarium diagnose</button>
       <button class="command-tab" data-tab="snapshot">terrarium snapshot</button>
@@ -595,7 +611,44 @@
   Healthiest: src/config.py (health: 80/100)</div>
       </div>
       <p style="margin-top: 16px; color: var(--text-muted); font-size: 14px;">
-        <strong style="color: var(--text);">health</strong> — Get a compact health summary with overall score, organism counts, and identifies the most critical and healthiest modules.
+        <strong style="color: var(--text);">health</strong> — Static analysis alone. Scans files, complexity, coverage, churn. Looks fine — 75/100 GOOD.
+      </p>
+    </div>
+
+    <div class="command-panel" id="panel-health-adapters">
+      <div class="terminal" style="margin-top: 0; border-radius: 0 0 12px 12px;">
+        <div class="terminal-header">
+          <span class="terminal-dot red"></span>
+          <span class="terminal-dot yellow"></span>
+          <span class="terminal-dot green"></span>
+          <span class="terminal-title">$ terrarium health + 8 adapters</span>
+        </div>
+        <div class="terminal-body"><span class="prompt">$</span> <span class="cmd">terrarium health demo/synthetic_project \
+  --fatigue-data fixtures/fatigue.json \
+  --endemic-data fixtures/endemic.json \
+  --sentinel-data fixtures/sentinel.json \
+  --kompressi-data fixtures/kompressi.json \
+  --churnmap-data fixtures/churnmap.json \
+  --seral-data fixtures/seral.json \
+  --proprioception-data fixtures/proprioception.json \
+  --snapshot-data fixtures/snapshot.json</span>
+
+<span class="danger">Ecosystem Health: 57/100 (FAIR)</span>
+  1 thriving, 11 healthy, 4 stressed, 3 critical, 0 dead
+
+  Most critical: src/schemas.py (health: 2/100)
+  Healthiest: tests/test_api.py (health: 80/100)
+
+[2m  Adapter contributions:[0m
+    fatigue:     0.578  (auth.py K=95, schemas.py K=85)
+    epidemic:    0.812  (3 infected: auth.py, integrations.py, schemas.py)
+    anomaly:     0.812  (3 anomalous: schemas.py 0.82, auth.py 0.78)
+    drift:       0.714  (proprioception: 67% dirty limbs)
+    churn:       0.000  (16/16 files in active territories)
+    complexity:  0.588  (kompressi: schemas.py id=15.8)</div>
+      </div>
+      <p style="margin-top: 16px; color: var(--text-muted); font-size: 14px;">
+        <strong style="color: var(--text);">health + 8 adapters</strong> — The full picture. Adapters reveal infection spread, anomaly patterns, stress cracks, and churn territories that static analysis misses. Score drops from 75 to 57.
       </p>
     </div>
 

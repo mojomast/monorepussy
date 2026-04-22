@@ -1,0 +1,18 @@
+{
+  "src/api.py": "climax",
+  "src/auth.py": "climax",
+  "src/cache.py": "seral",
+  "src/config.py": "climax",
+  "src/database.py": "climax",
+  "src/integrations.py": "pioneer",
+  "src/logging_utils.py": "climax",
+  "src/main.py": "climax",
+  "src/metrics.py": "seral",
+  "src/models.py": "climax",
+  "src/notifications.py": "pioneer",
+  "src/schemas.py": "pioneer",
+  "src/search.py": "seral",
+  "src/test_helpers.py": "climax",
+  "src/utils.py": "climax",
+  "src/worker.py": "pioneer"
+}

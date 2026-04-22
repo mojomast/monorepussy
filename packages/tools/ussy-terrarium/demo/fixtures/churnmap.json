@@ -1,0 +1,28 @@
+{
+  "territories": [
+    {"territory_id": "core-api", "modules": ["src/api", "src/main"]},
+    {"territory_id": "core-auth", "modules": ["src/auth", "src/models"]},
+    {"territory_id": "data-layer", "modules": ["src/database", "src/cache"]},
+    {"territory_id": "integrations", "modules": ["src/integrations", "src/notifications"]},
+    {"territory_id": "utils-helpers", "modules": ["src/utils", "src/search", "src/logging_utils", "src/config", "src/test_helpers"]},
+    {"territory_id": "background", "modules": ["src/worker", "src/metrics", "src/schemas"]}
+  ],
+  "files": {
+    "src/api.py": {"territory_id": "core-api"},
+    "src/auth.py": {"territory_id": "core-auth"},
+    "src/cache.py": {"territory_id": "data-layer"},
+    "src/config.py": {"territory_id": "utils-helpers"},
+    "src/database.py": {"territory_id": "data-layer"},
+    "src/integrations.py": {"territory_id": "integrations"},
+    "src/logging_utils.py": {"territory_id": "utils-helpers"},
+    "src/main.py": {"territory_id": "core-api"},
+    "src/metrics.py": {"territory_id": "background"},
+    "src/models.py": {"territory_id": "core-auth"},
+    "src/notifications.py": {"territory_id": "integrations"},
+    "src/schemas.py": {"territory_id": "background"},
+    "src/search.py": {"territory_id": "utils-helpers"},
+    "src/test_helpers.py": {"territory_id": "utils-helpers"},
+    "src/utils.py": {"territory_id": "utils-helpers"},
+    "src/worker.py": {"territory_id": "background"}
+  }
+}

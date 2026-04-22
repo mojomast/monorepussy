@@ -1,0 +1,10 @@
+{
+  "root": "./demo/synthetic_project",
+  "limbs": [
+    {"path": "./demo/synthetic_project/src", "type": "source", "state": {"dirty": true, "uncommitted": 7}},
+    {"path": "./demo/synthetic_project/tests", "type": "test", "state": {"dirty": false, "uncommitted": 0}},
+    {"path": "./demo/synthetic_project", "type": "git-repo", "state": {"dirty": true, "branch": "main", "ahead": 3}}
+  ],
+  "drift_score": 0.67,
+  "sync_status": "DESYNC"
+}
