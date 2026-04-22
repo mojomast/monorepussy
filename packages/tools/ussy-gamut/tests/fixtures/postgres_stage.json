@@ -1,0 +1,10 @@
+{
+  "stage_name": "postgres_source",
+  "system": "postgresql",
+  "fields": {
+    "id": {"type": "BIGINT", "nullable": false},
+    "amount": {"type": "NUMERIC(38,18)"},
+    "created_at": {"type": "TIMESTAMPTZ"},
+    "description": {"type": "VARCHAR(500)"}
+  }
+}

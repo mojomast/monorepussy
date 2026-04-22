@@ -1,0 +1,42 @@
+{
+  "name": "etl_pipeline",
+  "stages": [
+    {
+      "name": "postgres_source",
+      "system": "postgresql",
+      "fields": {
+        "id": {"type": "BIGINT", "nullable": false},
+        "amount": {"type": "NUMERIC(38,18)"},
+        "created_at": {"type": "TIMESTAMPTZ"},
+        "description": {"type": "VARCHAR(500)"},
+        "is_active": {"type": "BOOLEAN"}
+      }
+    },
+    {
+      "name": "json_api",
+      "system": "json",
+      "fields": {
+        "id": {"type": "number"},
+        "amount": {"type": "number"},
+        "created_at": {"type": "string"},
+        "description": {"type": "string"},
+        "is_active": {"type": "boolean"}
+      }
+    },
+    {
+      "name": "bigquery_dest",
+      "system": "bigquery",
+      "fields": {
+        "id": {"type": "INT64"},
+        "amount": {"type": "NUMERIC(38,9)"},
+        "created_at": {"type": "DATETIME"},
+        "description": {"type": "STRING"},
+        "is_active": {"type": "BOOL"}
+      }
+    }
+  ],
+  "edges": [
+    {"source": "postgres_source", "dest": "json_api", "label": "api_export"},
+    {"source": "json_api", "dest": "bigquery_dest", "label": "bq_load"}
+  ]
+}

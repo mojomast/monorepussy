@@ -1,0 +1,6 @@
+id,amount,created_at,description,is_active
+1,99999999999999.123456789012345678,2024-01-15T10:30:00.123456+00:00,Hello world,True
+2,0.000000000000000001,2024-02-20T23:59:59.999999+00:00,Unicode: café résumé naïve,False
+3,-99999999999999.999999999999999999,2024-03-01T00:00:00.000000Z,A very long description that might exceed certain length limits in downstream systems,True
+4,3.141592653589793238,2024-06-15T12:00:00.500000+05:30,Short,True
+5,1e18,2024-12-31T23:59:59.999999Z,Test,NULL

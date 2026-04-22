@@ -1,0 +1,33 @@
+name: avro_to_parquet
+stages:
+  - name: avro_source
+    system: avro
+    fields:
+      id:
+        type: long
+      amount:
+        type: decimal
+        precision: 38
+        scale: 18
+      created_at:
+        type: timestamp-micros
+        timezone_aware: true
+      description:
+        type: string
+  - name: parquet_dest
+    system: parquet
+    fields:
+      id:
+        type: int64
+      amount:
+        type: decimal(38,9)
+      created_at:
+        type: int64
+        logical_type: timestamp
+        is_adjusted_to_utc: "true"
+      description:
+        type: utf8
+edges:
+  - source: avro_source
+    dest: parquet_dest
+    label: convert
