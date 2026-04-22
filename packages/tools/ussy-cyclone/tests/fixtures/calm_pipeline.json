@@ -1,0 +1,42 @@
+{
+    "stages": [
+        {
+            "name": "source",
+            "type": "kafka",
+            "forward_rate": 10000.0,
+            "reprocessing_rate": 10.0,
+            "queue_depth": 50,
+            "consumer_count": 8,
+            "error_rate": 2.0,
+            "dlq_depth": 5,
+            "base_retry_rate": 1.0
+        },
+        {
+            "name": "processor",
+            "type": "generic",
+            "forward_rate": 9900.0,
+            "reprocessing_rate": 20.0,
+            "queue_depth": 80,
+            "consumer_count": 6,
+            "error_rate": 5.0,
+            "dlq_depth": 10,
+            "base_retry_rate": 2.0
+        },
+        {
+            "name": "output",
+            "type": "generic",
+            "forward_rate": 9800.0,
+            "reprocessing_rate": 5.0,
+            "queue_depth": 30,
+            "consumer_count": 4,
+            "error_rate": 1.0,
+            "dlq_depth": 2,
+            "base_retry_rate": 0.5
+        }
+    ],
+    "edges": [
+        ["source", "processor"],
+        ["processor", "output"]
+    ],
+    "retry_edges": []
+}
