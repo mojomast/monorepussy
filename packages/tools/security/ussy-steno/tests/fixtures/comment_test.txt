@@ -1,0 +1,6 @@
+# Test fixture: comment steganography
+# Hello️ World
+hidden = "Ḧ̈ello"
+x = 1  # ʰmodifier
+payload = "da̧ta"
+attack = "à́̂̃̄"

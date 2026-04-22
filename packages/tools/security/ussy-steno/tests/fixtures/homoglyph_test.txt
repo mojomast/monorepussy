@@ -1,0 +1,11 @@
+# Test fixture: homoglyph substitutions
+pаssword = "hacked"
+usеrname = "admin"
+authоr = "evil"
+imрort os
+aсcess = True
+lοgin = True
+Вool = True
+МAX = 100
+НOST = "evil.com"
+admіn = "root"

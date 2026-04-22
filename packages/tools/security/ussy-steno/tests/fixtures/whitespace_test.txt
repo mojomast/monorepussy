@@ -1,0 +1,7 @@
+# Test fixture: whitespace steganography
+x = 1        
+y = 2		 	
+def foo():
+	    pass
+    return 1
+z = 3         

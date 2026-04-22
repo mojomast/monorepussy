@@ -1,0 +1,7 @@
+# Test fixture: RTL override exploits
+access_level = "user"
+allow‭ = True
+role‫ = "admin"
+flag‪ = True
+auth­orize = True
+is admin = True
