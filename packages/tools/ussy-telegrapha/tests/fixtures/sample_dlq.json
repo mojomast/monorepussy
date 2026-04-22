@@ -1,0 +1,184 @@
+{
+  "entries": [
+    {
+      "id": "msg-001",
+      "timestamp": "2024-01-15T10:30:00Z",
+      "failure_type": "no_response",
+      "source_hop": "fraud-service",
+      "original_topic": "orders",
+      "payload_summary": "Order #12345",
+      "age_hours": 2.5
+    },
+    {
+      "id": "msg-002",
+      "timestamp": "2024-01-15T10:31:00Z",
+      "failure_type": "destination_closed",
+      "source_hop": "fraud-service",
+      "original_topic": "payments",
+      "payload_summary": "Payment #67890",
+      "age_hours": 1.8
+    },
+    {
+      "id": "msg-003",
+      "timestamp": "2024-01-15T10:32:00Z",
+      "failure_type": "address_undecipherable",
+      "source_hop": "order-service",
+      "original_topic": "orders",
+      "payload_summary": "Order #11111",
+      "age_hours": 4.2
+    },
+    {
+      "id": "msg-004",
+      "timestamp": "2024-01-15T10:33:00Z",
+      "failure_type": "no_response",
+      "source_hop": "fraud-service",
+      "original_topic": "orders",
+      "payload_summary": "Order #22222",
+      "age_hours": 3.1
+    },
+    {
+      "id": "msg-005",
+      "timestamp": "2024-01-15T10:34:00Z",
+      "failure_type": "destination_closed",
+      "source_hop": "payment-service",
+      "original_topic": "payments",
+      "payload_summary": "Payment #33333",
+      "age_hours": 0.5
+    },
+    {
+      "id": "msg-006",
+      "timestamp": "2024-01-15T10:35:00Z",
+      "failure_type": "content_indecipherable",
+      "source_hop": "fraud-service",
+      "original_topic": "orders",
+      "payload_summary": "Order #44444",
+      "age_hours": 6.0
+    },
+    {
+      "id": "msg-007",
+      "timestamp": "2024-01-15T10:36:00Z",
+      "failure_type": "regulatory_rejection",
+      "source_hop": "compliance-service",
+      "original_topic": "orders",
+      "payload_summary": "Order #55555",
+      "age_hours": 1.0
+    },
+    {
+      "id": "msg-008",
+      "timestamp": "2024-01-15T10:37:00Z",
+      "failure_type": "no_response",
+      "source_hop": "fraud-service",
+      "original_topic": "payments",
+      "payload_summary": "Payment #66666",
+      "age_hours": 2.0
+    },
+    {
+      "id": "msg-009",
+      "timestamp": "2024-01-15T10:38:00Z",
+      "failure_type": "destination_closed",
+      "source_hop": "payment-service",
+      "original_topic": "payments",
+      "payload_summary": "Payment #77777",
+      "age_hours": 0.3
+    },
+    {
+      "id": "msg-010",
+      "timestamp": "2024-01-15T10:39:00Z",
+      "failure_type": "no_response",
+      "source_hop": "fraud-service",
+      "original_topic": "orders",
+      "payload_summary": "Order #88888",
+      "age_hours": 5.5
+    },
+    {
+      "id": "msg-011",
+      "timestamp": "2024-01-15T10:40:00Z",
+      "failure_type": "address_undecipherable",
+      "source_hop": "order-service",
+      "original_topic": "orders",
+      "payload_summary": "Order #99999",
+      "age_hours": 1.5
+    },
+    {
+      "id": "msg-012",
+      "timestamp": "2024-01-15T10:41:00Z",
+      "failure_type": "content_indecipherable",
+      "source_hop": "ledger",
+      "original_topic": "orders",
+      "payload_summary": "Order #10101",
+      "age_hours": 8.0
+    },
+    {
+      "id": "msg-013",
+      "timestamp": "2024-01-15T10:42:00Z",
+      "failure_type": "destination_closed",
+      "source_hop": "payment-service",
+      "original_topic": "payments",
+      "payload_summary": "Payment #20202",
+      "age_hours": 0.1
+    },
+    {
+      "id": "msg-014",
+      "timestamp": "2024-01-15T10:43:00Z",
+      "failure_type": "no_response",
+      "source_hop": "fraud-service",
+      "original_topic": "orders",
+      "payload_summary": "Order #30303",
+      "age_hours": 3.5
+    },
+    {
+      "id": "msg-015",
+      "timestamp": "2024-01-15T10:44:00Z",
+      "failure_type": "regulatory_rejection",
+      "source_hop": "compliance-service",
+      "original_topic": "orders",
+      "payload_summary": "Order #40404",
+      "age_hours": 2.0
+    },
+    {
+      "id": "msg-016",
+      "timestamp": "2024-01-15T10:45:00Z",
+      "failure_type": "destination_closed",
+      "source_hop": "payment-service",
+      "original_topic": "payments",
+      "payload_summary": "Payment #50505",
+      "age_hours": 0.7
+    },
+    {
+      "id": "msg-017",
+      "timestamp": "2024-01-15T10:46:00Z",
+      "failure_type": "no_response",
+      "source_hop": "fraud-service",
+      "original_topic": "orders",
+      "payload_summary": "Order #60606",
+      "age_hours": 4.0
+    },
+    {
+      "id": "msg-018",
+      "timestamp": "2024-01-15T10:47:00Z",
+      "failure_type": "content_indecipherable",
+      "source_hop": "fraud-service",
+      "original_topic": "orders",
+      "payload_summary": "Order #70707",
+      "age_hours": 7.0
+    },
+    {
+      "id": "msg-019",
+      "timestamp": "2024-01-15T10:48:00Z",
+      "failure_type": "address_undecipherable",
+      "source_hop": "order-service",
+      "original_topic": "orders",
+      "payload_summary": "Order #80808",
+      "age_hours": 2.8
+    },
+    {
+      "id": "msg-020",
+      "timestamp": "2024-01-15T10:49:00Z",
+      "failure_type": "no_response",
+      "source_hop": "fraud-service",
+      "original_topic": "payments",
+      "payload_summary": "Payment #90909",
+      "age_hours": 1.2
+    }
+  ]
+}
