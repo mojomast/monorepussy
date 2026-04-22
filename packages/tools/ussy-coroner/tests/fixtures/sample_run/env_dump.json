@@ -1,0 +1,7 @@
+{
+    "DEP_VERSION": "4.17.20",
+    "NODE_VERSION": "18",
+    "REDIS_URL": "redis://localhost:6379",
+    "CC": "gcc",
+    "GCC_VERSION": "12.2"
+}

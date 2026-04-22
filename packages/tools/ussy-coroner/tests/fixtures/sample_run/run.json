@@ -1,0 +1,55 @@
+{
+    "run_id": "build-42",
+    "metadata": {
+        "branch": "main",
+        "commit": "a3f8d2e1c4b5a6",
+        "trigger": "push"
+    },
+    "stages": [
+        {
+            "name": "checkout",
+            "index": 0,
+            "status": "success",
+            "log_content": "Cloning repository...\nChecking out commit a3f8d2e1c4b5a6\nexport DEP_VERSION=4.17.20\nexport NODE_VERSION=18\nexport REDIS_URL=redis://localhost:6379\nCheckout complete.",
+            "env_vars": {"DEP_VERSION": "4.17.20", "NODE_VERSION": "18", "REDIS_URL": "redis://localhost:6379"},
+            "artifacts": ["src/", "package.json"],
+            "artifact_hashes": {"src/": "a1b2c3d4e5f6", "package.json": "f1e2d3c4b5a6"}
+        },
+        {
+            "name": "build",
+            "index": 1,
+            "status": "success",
+            "log_content": "Building project...\nexport CC=gcc\nexport GCC_VERSION=12.2\nCompiling auth-module...\nCompilation complete.\nBUILD SUCCESSFUL",
+            "env_vars": {"DEP_VERSION": "4.17.20", "NODE_VERSION": "18", "CC": "gcc", "GCC_VERSION": "12.2"},
+            "artifacts": ["dist/bundle.js", ".cache/compiled.o"],
+            "artifact_hashes": {"dist/bundle.js": "9a8b7c6d5e4f", ".cache/compiled.o": "1a2b3c4d5e6f"}
+        },
+        {
+            "name": "test",
+            "index": 2,
+            "status": "failure",
+            "log_content": "Running tests...\nFAILED auth-module/login.test.js\n  AssertionError: expected 200 but got 401\n  at Object.<anonymous> (auth-module/login.test.js:42)\nFAILED auth-module/session.test.js\n  TypeError: Cannot read property 'token' of undefined\n  at SessionManager.validate (auth-module/session.test.js:15)\n3 tests FAILED, 12 passed\nexit code 1",
+            "env_vars": {"DEP_VERSION": "4.17.20", "NODE_VERSION": "18", "REDIS_URL": "redis://cache.example.com:6379", "MAX_OLD_SPACE": "4096"},
+            "artifacts": ["coverage/coverage.json"],
+            "artifact_hashes": {"coverage/coverage.json": "d4e5f6a7b8c9"}
+        },
+        {
+            "name": "integration",
+            "index": 3,
+            "status": "failure",
+            "log_content": "Running integration tests...\nFAILED integration/auth-flow.test.js\n  Error: Connection refused to auth-service:8080\n  at HttpClient.request (integration/auth-flow.test.js:28)\nFAILED integration/api-gateway.test.js\n  Timeout: request exceeded 5000ms\n  at ApiGateway.forward (integration/api-gateway.test.js:55)\n2 tests FAILED, 8 passed\nexit code 1",
+            "env_vars": {"DEP_VERSION": "4.17.20", "REDIS_URL": "redis://cache.example.com:6379", "NODE_OPTIONS": "--max-old-space-size=4096"},
+            "artifacts": [],
+            "artifact_hashes": {}
+        },
+        {
+            "name": "deploy",
+            "index": 4,
+            "status": "failure",
+            "log_content": "Deploying to staging...\nFAILED deployment\n  FATAL: health check failed for auth-service\n  Error: Service returned 503\n  at HealthChecker.verify (deploy/health-check.js:10)\n  at Pipeline.deploy (deploy/index.js:33)\nDeployment aborted.\nexit code 1",
+            "env_vars": {"DEP_VERSION": "4.17.20", "REDIS_URL": "redis://cache.example.com:6379", "NODE_OPTIONS": "--max-old-space-size=4096"},
+            "artifacts": [],
+            "artifact_hashes": {}
+        }
+    ]
+}

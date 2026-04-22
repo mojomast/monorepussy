@@ -1,0 +1,34 @@
+{
+    "run_id": "build-38",
+    "metadata": {
+        "branch": "main",
+        "commit": "7a2e9f8d3c1b",
+        "trigger": "push"
+    },
+    "stages": [
+        {
+            "name": "checkout",
+            "index": 0,
+            "status": "success",
+            "log_content": "Cloning repository...\nCheckout complete.",
+            "env_vars": {"DEP_VERSION": "4.17.20", "NODE_VERSION": "18"},
+            "artifact_hashes": {"src/": "a1b2c3d4e5f6", "package.json": "f1e2d3c4b5a6"}
+        },
+        {
+            "name": "build",
+            "index": 1,
+            "status": "success",
+            "log_content": "Building project...\nexport CC=gcc\nexport GCC_VERSION=12.1\nBUILD SUCCESSFUL",
+            "env_vars": {"DEP_VERSION": "4.17.20", "NODE_VERSION": "18", "CC": "gcc", "GCC_VERSION": "12.1"},
+            "artifact_hashes": {"dist/bundle.js": "8c3d4e5f6a7b", ".cache/compiled.o": "1a2b3c4d5e6f"}
+        },
+        {
+            "name": "test",
+            "index": 2,
+            "status": "failure",
+            "log_content": "Running tests...\nFAILED auth-module/login.test.js\n  AssertionError: expected 200 but got 401\n  at Object.<anonymous> (auth-module/login.test.js:42)\n3 tests FAILED, 12 passed\nexit code 1",
+            "env_vars": {"DEP_VERSION": "4.17.20", "NODE_VERSION": "18"},
+            "artifact_hashes": {"coverage/coverage.json": "d4e5f6a7b8c9"}
+        }
+    ]
+}
