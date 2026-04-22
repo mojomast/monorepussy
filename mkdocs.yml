@@ -1,0 +1,56 @@
+site_name: "Ussyverse"
+
+theme:
+  name: material
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - search.suggest
+    - search.highlight
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          paths: [packages]
+          options:
+            docstring_style: google
+
+nav:
+  - Home: index.md
+  - Architecture: architecture.md
+  - Contributing: contributing.md
+  - Migration Guide: migration-guide.md
+  - ADRs:
+      - Overview: adr/index.md
+      - ADR-001: Monorepo: adr/adr-001-monorepo.md
+
+markdown_extensions:
+  - admonition
+  - codehilite
+  - toc:
+      permalink: true
+  - pymdownx.superfences
+
+extra_css:
+  - stylesheets/extra.css
+
+extra_js:
+  - javascripts/extra.js
