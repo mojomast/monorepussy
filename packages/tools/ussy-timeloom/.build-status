@@ -1,0 +1,17 @@
+{
+  "spec_file": "~/specs/06-timeloom-code-textile.md",
+  "started_at": "2026-04-09T11:00:00Z",
+  "current_step": 7,
+  "total_steps": 7,
+  "step_description": "Build complete - committed (fixed matrix transpose bug)",
+  "completed_steps": [
+    "1. Project scaffolding and venv",
+    "2. OpenCode build pass (code existed from prior session)",
+    "3. Found and fixed critical matrix transpose bug (files×commits → commits×files)",
+    "4. Fixed pyproject.toml build-backend",
+    "5. Smoke tests (weave SVG, analyze, terminal render, heatmap, export WIF all work)",
+    "6. ast.parse verification (all 10 source files clean)",
+    "7. Git commit (21 files, 1376 insertions)"
+  ],
+  "last_updated": "2026-04-09T15:15:00Z"
+}
