@@ -1,0 +1,26 @@
+{
+  "name": "minimal",
+  "services": [
+    {
+      "name": "source",
+      "hydraulic_conductivity": 100.0,
+      "queue_depth": 10,
+      "processing_latency": 0.1,
+      "is_recharge": true,
+      "grid_x": 0,
+      "grid_y": 0
+    },
+    {
+      "name": "sink",
+      "hydraulic_conductivity": 50.0,
+      "queue_depth": 5,
+      "processing_latency": 0.05,
+      "is_discharge": true,
+      "grid_x": 1,
+      "grid_y": 0
+    }
+  ],
+  "connections": [
+    {"source": "source", "target": "sink", "connection_type": "porous"}
+  ]
+}

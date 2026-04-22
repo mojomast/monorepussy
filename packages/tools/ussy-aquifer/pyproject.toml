@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "aquifer"
+version = "1.0.0"
+description = "Darcy's Law groundwater flow modeling for data pipeline bottleneck analysis"
+requires-python = ">=3.9"
+dependencies = ["numpy"]
+
+[project.scripts]
+aquifer = "aquifer.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["aquifer*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
