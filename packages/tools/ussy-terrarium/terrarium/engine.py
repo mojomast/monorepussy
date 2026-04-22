@@ -26,6 +26,12 @@ class TerrariumEngine:
         """
         collected: Dict[str, Dict] = {}
         for adapter in self.adapters:
+            if not adapter.is_available():
+                collected[adapter.name] = {
+                    "error": "adapter not available",
+                    "stub": True,
+                }
+                continue
             try:
                 states = adapter.load()
                 collected[adapter.name] = {
@@ -115,6 +121,13 @@ class TerrariumEngine:
         if "states" in kompressi_data:
             scores = [s["complexity_score"] for s in kompressi_data["states"].values()]
             health.complexity = 1.0 - (sum(scores) / len(scores)) if scores else 1.0
+
+        # Churn score
+        churnmap_data = collected.get("churnmap", {})
+        if "states" in churnmap_data:
+            states_list = list(churnmap_data["states"].values())
+            churning = sum(1 for s in states_list if s.get("territory_id"))
+            health.churn = 1.0 - (churning / len(states_list)) if states_list else 1.0
 
         # Territory / succession from first available adapter
         for adapter_name in ("churnmap", "seral"):

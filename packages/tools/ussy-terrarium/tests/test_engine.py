@@ -13,6 +13,8 @@ from terrarium.ecosystem.model import OrganismHealthState
 class MockAdapter(BaseAdapter):
     """Mock adapter for testing."""
 
+    STUB_MODE = True
+
     def __init__(self, name, states):
         super().__init__()
         self.name = name
@@ -124,3 +126,37 @@ class TestTerrariumEngine:
         engine.collect()
         score = engine.score()
         assert score.overall == 1.0
+
+    def test_score_churn_from_churnmap(self):
+        adapters = [
+            MockAdapter(
+                "churnmap",
+                {
+                    "src/a.py": OrganismHealthState(
+                        path="src/a.py", territory_id="core-auth"
+                    ),
+                    "src/b.py": OrganismHealthState(path="src/b.py", territory_id=""),
+                    "src/c.py": OrganismHealthState(path="src/c.py", territory_id=None),
+                },
+            ),
+        ]
+        engine = TerrariumEngine(adapters)
+        engine.collect()
+        score = engine.score()
+        # 1 of 3 files is churning (has territory_id)
+        assert score.churn == pytest.approx(1.0 - (1 / 3), abs=0.01)
+
+    def test_collect_skips_unavailable_adapter(self):
+        class UnavailableAdapter(BaseAdapter):
+            name = "unavailable"
+            data_path = None
+            STUB_MODE = False
+
+            def load(self):
+                return {}
+
+        engine = TerrariumEngine([UnavailableAdapter()])
+        result = engine.collect()
+        assert "unavailable" in result
+        assert result["unavailable"]["error"] == "adapter not available"
+        assert result["unavailable"]["stub"] is True

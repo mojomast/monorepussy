@@ -28,6 +28,10 @@ Every adapter must:
 5. Return an empty dict `{}` if `self.data_path` is `None`
 6. Gracefully handle missing/invalid JSON files
 
+### Availability
+
+`BaseAdapter.is_available()` returns `True` when either `STUB_MODE` is `True` or `data_path` is not `None`. The engine calls `is_available()` before `load()` to skip adapters that have no data source, producing an explicit `{"error": "adapter not available", "stub": True}` record rather than swallowing exceptions.
+
 ### OrganismHealthState Fields
 
 ```python
@@ -54,6 +58,7 @@ The `TerrariumEngine.score()` method computes sub-scores as follows:
    - `anomaly = 1.0 - (anomalous_count / total_files)` from sentinel adapter
    - `drift = 1.0 - mean(1.0 - vitality)` across all adapters reporting vitality < 1.0
    - `complexity = 1.0 - mean(complexity_score)` from kompressi adapter
+   - `churn = 1.0 - (churning_count / total_files)` from churnmap adapter, where a file is "churning" if it has a non-null/non-empty `territory_id`
 3. Compute `overall` as weighted average:
    ```
    overall = (
@@ -65,7 +70,7 @@ The `TerrariumEngine.score()` method computes sub-scores as follows:
        0.10 * churn
    )
    ```
-4. If an adapter is missing, its dimension defaults to `1.0` (perfect health)
+4. If an adapter is missing or unavailable, its dimension defaults to `1.0` (perfect health)
 
 ## Merge Strategy
 

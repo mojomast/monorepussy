@@ -25,5 +25,9 @@ class BaseAdapter(ABC):
         ...
 
     def is_available(self) -> bool:
-        """Check if this adapter has data available to load."""
-        return self.data_path is not None
+        """Check if this adapter has data available to load.
+
+        Returns True if the adapter is in STUB_MODE (always available)
+        or if a data_path has been configured.
+        """
+        return getattr(self, "STUB_MODE", False) or self.data_path is not None

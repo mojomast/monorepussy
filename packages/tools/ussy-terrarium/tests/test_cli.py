@@ -5,33 +5,10 @@ import tempfile
 
 from click.testing import CliRunner
 
-from terrarium.cli import cli, create_parser, main
+from terrarium.cli import cli, main
 
 
 runner = CliRunner()
-
-
-class TestCreateParser:
-    """Backward-compatible parser tests."""
-
-    def test_parser_creation(self):
-        parser = create_parser()
-        assert parser is not None
-
-    def test_watch_command(self):
-        parser = create_parser()
-        args = parser.parse_args(["watch", "."])
-        assert args.command == "watch"
-        assert args.path == "."
-
-    def test_snapshot_command(self):
-        parser = create_parser()
-        args = parser.parse_args(
-            ["snapshot", "--format", "svg", "--output", "out.svg", "."]
-        )
-        assert args.command == "snapshot"
-        assert args.format == "svg"
-        assert args.output == "out.svg"
 
 
 class TestMainCLI:

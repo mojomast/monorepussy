@@ -5,11 +5,21 @@
 ```python
 class BaseAdapter(ABC):
     name: str = ""
+    STUB_MODE: bool = False
 
     def __init__(self, data_path: Optional[str] = None)
     def load(self) -> Dict[str, OrganismHealthState]
     def is_available(self) -> bool
 ```
+
+### `is_available()`
+
+Returns `True` when the adapter can produce data. An adapter is considered available if either:
+
+- `STUB_MODE` is `True` (the adapter can produce synthetic/demo data without an external data file)
+- `data_path` is not `None` (the adapter has a real data file to load)
+
+This lets the engine distinguish between "adapter not present" and "adapter loaded but failed", rather than relying on swallowed exceptions.
 
 ## FatigueAdapter
 

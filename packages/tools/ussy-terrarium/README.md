@@ -74,6 +74,25 @@ terrarium export --format json --output metrics.json
 └─────────────────────────────────────────────────────────────┘
 ```
 
+## Health Scoring
+
+Terrarium computes a 0.0–1.0 **overall health score** from seven dimensions. Each dimension is normalized so that:
+
+- **1.0** = perfect health / no issues detected
+- **0.0** = critical / maximum issues detected
+
+| Dimension | Weight | Source | 1.0 means… | 0.0 means… |
+|-----------|--------|--------|------------|------------|
+| `fatigue` | 0.20 | fatigue adapter | No stress cracks | Every file at max crack intensity |
+| `epidemic` | 0.20 | endemic adapter | No infections | Every file infected |
+| `anomaly` | 0.20 | sentinel adapter | No anomalies | Every file anomalous |
+| `drift` | 0.15 | any adapter with vitality < 1.0 | No drift | All files drifting |
+| `complexity` | 0.15 | kompressi adapter | Zero complexity | Max complexity everywhere |
+| `churn` | 0.10 | churnmap adapter | No active churn | Every file actively churning |
+| `overall` | 1.00 | weighted average | Ecosystem thriving | Ecosystem critical |
+
+The `overall` score is a weighted average of the six sub-scores. Missing adapters default to 1.0 (perfect health) so the engine degrades gracefully.
+
 ## Data Sources
 
 | Adapter | Source | Status | What it measures |

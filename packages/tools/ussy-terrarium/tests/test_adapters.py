@@ -225,7 +225,8 @@ class TestAdapterIntegration:
             sentinel_data=sentinel_path,
         )
 
-        assert len(adapters) == 3
+        # 3 explicit + 2 stub adapters (proprioception, snapshot)
+        assert len(adapters) == 5
         merged = merge_health_states(adapters)
 
         # All three files should be present
@@ -287,14 +288,16 @@ class TestAdapterIntegration:
 
     def test_graceful_degradation_no_adapters(self):
         adapters = load_adapters()
-        assert adapters == []
+        # Stub adapters (proprioception, snapshot) are always available
+        assert len(adapters) == 2
         merged = merge_health_states(adapters)
         assert merged == {}
 
     def test_partial_adapters(self):
         fatigue_path = os.path.join(FIXTURES_DIR, "fatigue.json")
         adapters = load_adapters(fatigue_data=fatigue_path)
-        assert len(adapters) == 1
+        # 1 explicit + 2 stub adapters
+        assert len(adapters) == 3
         merged = merge_health_states(adapters)
         assert len(merged) == 3
         assert all(s.crack_intensity > 0 for s in merged.values())
@@ -485,6 +488,24 @@ class TestSeralAdapter:
         assert adapter.load() == {}
 
 
+class TestBaseAdapter:
+    """Unit tests for BaseAdapter contract."""
+
+    def test_is_available_with_data_path(self):
+        adapter = FatigueAdapter(data_path="tests/fixtures/fatigue.json")
+        assert adapter.is_available() is True
+
+    def test_is_available_without_data_path(self):
+        adapter = FatigueAdapter(data_path=None)
+        assert adapter.is_available() is False
+
+    def test_is_available_in_stub_mode(self):
+        adapter = ProprioceptionAdapter(data_path=None)
+        # ProprioceptionAdapter sets STUB_MODE when package is not installed
+        assert adapter.STUB_MODE is True
+        assert adapter.is_available() is True
+
+
 class TestAdapterCache:
     """Tests for adapter cache management."""
 
@@ -493,9 +514,9 @@ class TestAdapterCache:
         _ = load_adapters()
         # Reset should clear it
         reset_adapter_cache()
-        # Next call should re-discover (we just verify no error)
+        # Next call should re-discover (stub adapters always present)
         adapters = load_adapters()
-        assert adapters == []
+        assert len(adapters) == 2
 
 
 class TestSixAdapterIntegration:
@@ -518,7 +539,8 @@ class TestSixAdapterIntegration:
             seral_data=seral_path,
         )
 
-        assert len(adapters) == 6
+        # 6 explicit + 2 stub adapters (proprioception, snapshot)
+        assert len(adapters) == 8
         merged = merge_health_states(adapters)
 
         # Common files should have merged state from all applicable adapters
@@ -611,7 +633,8 @@ class TestSixAdapterIntegration:
 
     def test_graceful_degradation_no_adapters(self):
         adapters = load_adapters()
-        assert adapters == []
+        # Stub adapters (proprioception, snapshot) are always available
+        assert len(adapters) == 2
         merged = merge_health_states(adapters)
         assert merged == {}
 
