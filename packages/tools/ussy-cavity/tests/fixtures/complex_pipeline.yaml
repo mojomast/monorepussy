@@ -1,0 +1,65 @@
+# Complex pipeline with multiple dependencies and potential deadlocks
+stages:
+  producer_a:
+    rate: 500
+    buffer: 1000
+    depends_on: []
+    locks: [lock_a]
+
+  producer_b:
+    rate: 300
+    buffer: 500
+    depends_on: []
+    locks: [lock_b]
+
+  merger:
+    rate: 400
+    buffer: 200
+    depends_on: [producer_a, producer_b]
+    locks: [lock_a, lock_b]
+
+  transformer:
+    rate: 350
+    buffer: 150
+    depends_on: [merger]
+    locks: [schema_mutex]
+
+  validator:
+    rate: 200
+    buffer: 50
+    depends_on: [transformer]
+    locks: [schema_mutex, validation_lock]
+
+  writer:
+    rate: 100
+    buffer: 30
+    depends_on: [validator]
+    locks: [db_connection_pool, validation_lock]
+
+  consumer:
+    rate: 150
+    buffer: 80
+    depends_on: [writer]
+    locks: [db_connection_pool]
+
+locks:
+  lock_a:
+    type: exclusive
+    holders: [producer_a, merger]
+
+  lock_b:
+    type: exclusive
+    holders: [producer_b, merger]
+
+  schema_mutex:
+    type: exclusive
+    holders: [transformer, validator]
+
+  validation_lock:
+    type: exclusive
+    holders: [validator, writer]
+
+  db_connection_pool:
+    type: semaphore
+    capacity: 5
+    holders: [writer, consumer]
