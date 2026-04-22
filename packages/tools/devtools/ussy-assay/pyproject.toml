@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "assay"
+version = "0.1.0"
+description = "Metallurgical code grading - separate precious logic from slag"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [{name = "Assay Team"}]
+
+[project.scripts]
+assay = "assay.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["assay*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
