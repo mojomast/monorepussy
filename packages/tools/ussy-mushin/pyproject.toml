@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mushin"
+version = "0.1.0"
+description = "Persistent live workspace for code exploration — evaluation journal, workspace branching, spatial bookmarks"
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "MIT"}
+keywords = ["workspace", "journal", "repl", "exploration", "persistence"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Topic :: Software Development",
+]
+
+[project.scripts]
+mushin = "mushin.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["mushin*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
