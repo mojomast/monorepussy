@@ -42,7 +42,7 @@ export async function initEcosystemPanel(containerSelector) {
   if (!container) return;
 
   const width = container.clientWidth;
-  const height = Math.max(500, window.innerHeight * 0.6);
+  const height = Math.max(360, Math.min(520, width * 0.55));
 
   container.style.width = "100%";
   container.style.height = height + "px";
@@ -124,12 +124,14 @@ export async function initEcosystemPanel(containerSelector) {
     }
   }
 
-  // Simulation
+  // Simulation — keep nodes grouped and within bounds
   const simulation = d3.forceSimulation(nodes)
-    .force("link", d3.forceLink(links).id(d => d.id).distance(60))
-    .force("charge", d3.forceManyBody().strength(-200))
+    .force("link", d3.forceLink(links).id(d => d.id).distance(80))
+    .force("charge", d3.forceManyBody().strength(-150))
     .force("center", d3.forceCenter(width / 2, height / 2))
-    .force("collision", d3.forceCollide().radius(d => d.radius + 4));
+    .force("x", d3.forceX(width / 2).strength(0.08))
+    .force("y", d3.forceY(height / 2).strength(0.08))
+    .force("collision", d3.forceCollide().radius(d => d.radius + 6));
 
   // Links
   const link = svg.append("g")
@@ -252,6 +254,13 @@ export async function initEcosystemPanel(containerSelector) {
   node.call(drag);
 
   simulation.on("tick", () => {
+    // Clamp nodes within padding of the viewBox
+    const pad = 20;
+    nodes.forEach(d => {
+      d.x = Math.max(pad, Math.min(width - pad, d.x));
+      d.y = Math.max(pad, Math.min(height - pad, d.y));
+    });
+
     link
       .attr("x1", d => d.source.x)
       .attr("y1", d => d.source.y)
@@ -264,8 +273,14 @@ export async function initEcosystemPanel(containerSelector) {
   // Resize handler
   window.addEventListener("resize", () => {
     const newWidth = container.clientWidth;
-    svg.attr("viewBox", [0, 0, newWidth, height]).attr("width", newWidth);
-    simulation.force("center", d3.forceCenter(newWidth / 2, height / 2));
+    const newHeight = Math.max(360, Math.min(520, newWidth * 0.55));
+    container.style.height = newHeight + "px";
+    svg.attr("viewBox", [0, 0, newWidth, newHeight])
+       .attr("width", newWidth)
+       .attr("height", newHeight);
+    simulation.force("center", d3.forceCenter(newWidth / 2, newHeight / 2));
+    simulation.force("x", d3.forceX(newWidth / 2).strength(0.08));
+    simulation.force("y", d3.forceY(newHeight / 2).strength(0.08));
     simulation.alpha(0.3).restart();
   });
 }
