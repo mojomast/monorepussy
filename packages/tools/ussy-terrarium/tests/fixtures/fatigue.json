@@ -1,0 +1,46 @@
+{
+  "total_cracks": 5,
+  "modules_scanned": 3,
+  "crack_types": {
+    "TODO/FIXME/HACK": 2,
+    "Missing error handling": 3
+  },
+  "cracks": [
+    {
+      "type": "TODO/FIXME/HACK",
+      "file": "src/auth.py",
+      "line": 12,
+      "severity": 5.5,
+      "description": "# FIXME: refactor this"
+    },
+    {
+      "type": "Missing error handling",
+      "file": "src/auth.py",
+      "line": 45,
+      "severity": 7.0,
+      "description": "Function 'login' calls open without try/except"
+    }
+  ],
+  "stress_intensities": {
+    "src/auth.py": {
+      "K": 150.0,
+      "delta_K": 10.0
+    },
+    "src/utils.py": {
+      "K": 20.0,
+      "delta_K": 0.0
+    },
+    "src/main.py": {
+      "K": 5.0,
+      "delta_K": 2.0
+    }
+  },
+  "critical": [
+    {
+      "file": "src/auth.py",
+      "type": "TODO/FIXME/HACK",
+      "K": 150.0,
+      "description": "# FIXME: refactor this"
+    }
+  ]
+}

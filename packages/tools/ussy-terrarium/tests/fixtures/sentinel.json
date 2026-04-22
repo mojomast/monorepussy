@@ -1,0 +1,42 @@
+{
+  "files": {
+    "src/auth.py": {
+      "anomaly_score": 0.73,
+      "severity": "ELEVATED",
+      "is_anomalous": true,
+      "num_detectors_fired": 2,
+      "detections": [
+        {
+          "detector_id": "D-0028",
+          "pattern_name": "complex_function",
+          "false_positive_rate": 0.2
+        },
+        {
+          "detector_id": "D-0042",
+          "pattern_name": "large_class",
+          "false_positive_rate": 0.1
+        }
+      ]
+    },
+    "src/utils.py": {
+      "anomaly_score": 0.15,
+      "severity": "NORMAL",
+      "is_anomalous": false,
+      "num_detectors_fired": 0,
+      "detections": []
+    },
+    "src/main.py": {
+      "anomaly_score": 0.60,
+      "severity": "MODERATE",
+      "is_anomalous": true,
+      "num_detectors_fired": 1,
+      "detections": [
+        {
+          "detector_id": "D-0099",
+          "pattern_name": "unusual_pattern",
+          "false_positive_rate": 0.8
+        }
+      ]
+    }
+  }
+}

@@ -5,8 +5,14 @@ from typing import Dict, List, Optional
 
 from ..metrics.models import ModuleMetrics, ProjectMetrics
 from .organisms import (
-    OrganismType, Vitality, ROLE_TO_ORGANISM,
-    health_to_vitality, get_emoji, VITALITY_COLORS, ANSI_RESET, ANSI_BOLD,
+    OrganismType,
+    Vitality,
+    ROLE_TO_ORGANISM,
+    health_to_vitality,
+    get_emoji,
+    VITALITY_COLORS,
+    ANSI_RESET,
+    ANSI_BOLD,
 )
 
 
@@ -25,6 +31,17 @@ COVERAGE_THRESHOLD = 0.80
 
 
 @dataclass
+class OrganismHealthState:
+    """Merged health state from external ussyverse data sources."""
+
+    path: str
+    vitality: float = 1.0
+    crack_intensity: float = 0.0
+    infection_state: str = "S"
+    anomaly_active: bool = False
+
+
+@dataclass
 class Organism:
     """A living organism representing a code module."""
 
@@ -37,6 +54,9 @@ class Organism:
     emoji: str = ""
     symptoms: List[str] = field(default_factory=list)
     strengths: List[str] = field(default_factory=list)
+    crack_intensity: float = 0.0
+    infection_state: str = "S"
+    anomaly_active: bool = False
 
     def __post_init__(self) -> None:
         """Compute derived fields."""
@@ -67,15 +87,27 @@ class Ecosystem:
         if not self.organisms:
             return
 
-        self.overall_health = sum(o.health for o in self.organisms.values()) / len(self.organisms)
-
-        self.thriving_count = sum(1 for o in self.organisms.values() if o.vitality == Vitality.THRIVING)
-        self.healthy_count = sum(1 for o in self.organisms.values() if o.vitality == Vitality.HEALTHY)
-        self.stressed_count = sum(1 for o in self.organisms.values() if o.vitality == Vitality.STRESSED)
-        self.critical_count = sum(
-            1 for o in self.organisms.values() if o.vitality in (Vitality.WILTING, Vitality.DYING)
+        self.overall_health = sum(o.health for o in self.organisms.values()) / len(
+            self.organisms
         )
-        self.dead_count = sum(1 for o in self.organisms.values() if o.vitality == Vitality.DEAD)
+
+        self.thriving_count = sum(
+            1 for o in self.organisms.values() if o.vitality == Vitality.THRIVING
+        )
+        self.healthy_count = sum(
+            1 for o in self.organisms.values() if o.vitality == Vitality.HEALTHY
+        )
+        self.stressed_count = sum(
+            1 for o in self.organisms.values() if o.vitality == Vitality.STRESSED
+        )
+        self.critical_count = sum(
+            1
+            for o in self.organisms.values()
+            if o.vitality in (Vitality.WILTING, Vitality.DYING)
+        )
+        self.dead_count = sum(
+            1 for o in self.organisms.values() if o.vitality == Vitality.DEAD
+        )
 
     @property
     def health_tier(self) -> str:
@@ -118,7 +150,9 @@ def compute_health_score(metrics: ModuleMetrics, avg_churn: float = 5.0) -> floa
 
     # Churn penalty: high churn = stressed
     if metrics.churn_rate > CHURN_THRESHOLD:
-        churn_penalty = min((metrics.churn_rate - CHURN_THRESHOLD) / CHURN_THRESHOLD, 1.0)
+        churn_penalty = min(
+            (metrics.churn_rate - CHURN_THRESHOLD) / CHURN_THRESHOLD, 1.0
+        )
         score -= churn_penalty * 25 * CHURN_PENALTY_WEIGHT / 0.25
     else:
         # Bonus for low churn
@@ -126,7 +160,9 @@ def compute_health_score(metrics: ModuleMetrics, avg_churn: float = 5.0) -> floa
 
     # Complexity penalty
     if metrics.complexity > COMPLEXITY_THRESHOLD:
-        complexity_penalty = min((metrics.complexity - COMPLEXITY_THRESHOLD) / COMPLEXITY_THRESHOLD, 1.0)
+        complexity_penalty = min(
+            (metrics.complexity - COMPLEXITY_THRESHOLD) / COMPLEXITY_THRESHOLD, 1.0
+        )
         score -= complexity_penalty * 25 * COMPLEXITY_PENALTY_WEIGHT / 0.20
     elif metrics.complexity <= 5:
         # Bonus for low complexity
@@ -134,10 +170,14 @@ def compute_health_score(metrics: ModuleMetrics, avg_churn: float = 5.0) -> floa
 
     # Coverage bonus/penalty
     if metrics.test_coverage >= COVERAGE_THRESHOLD:
-        coverage_bonus = (metrics.test_coverage - COVERAGE_THRESHOLD) / (1.0 - COVERAGE_THRESHOLD)
+        coverage_bonus = (metrics.test_coverage - COVERAGE_THRESHOLD) / (
+            1.0 - COVERAGE_THRESHOLD
+        )
         score += coverage_bonus * 10
     else:
-        coverage_penalty = (COVERAGE_THRESHOLD - metrics.test_coverage) / COVERAGE_THRESHOLD
+        coverage_penalty = (
+            COVERAGE_THRESHOLD - metrics.test_coverage
+        ) / COVERAGE_THRESHOLD
         score -= coverage_penalty * 20
 
     # Bug penalty
@@ -162,12 +202,17 @@ def compute_health_score(metrics: ModuleMetrics, avg_churn: float = 5.0) -> floa
     return max(0.0, min(100.0, score))
 
 
-def build_organism(metrics: ModuleMetrics, avg_churn: float = 5.0) -> Organism:
+def build_organism(
+    metrics: ModuleMetrics,
+    avg_churn: float = 5.0,
+    health_state: Optional[OrganismHealthState] = None,
+) -> Organism:
     """Build an Organism from module metrics.
 
     Args:
         metrics: Module metrics to convert.
         avg_churn: Average churn for the project.
+        health_state: Optional merged health state from external adapters.
 
     Returns:
         An Organism with computed health and type.
@@ -183,22 +228,56 @@ def build_organism(metrics: ModuleMetrics, avg_churn: float = 5.0) -> Organism:
     # Compute health
     health = compute_health_score(metrics, avg_churn)
 
+    # Apply external health state modifiers
+    crack_intensity = 0.0
+    infection_state = "S"
+    anomaly_active = False
+
+    if health_state is not None:
+        crack_intensity = health_state.crack_intensity
+        infection_state = health_state.infection_state
+        anomaly_active = health_state.anomaly_active
+
+        # Crack intensity reduces health (wound level)
+        health -= crack_intensity * 30
+
+        # Infection reduces health
+        if infection_state == "I":
+            health -= 20
+        elif infection_state == "E":
+            health -= 10
+        elif infection_state == "R":
+            # Recovered — scarred but stable, slight penalty
+            health -= 5
+
+        # Anomaly active reduces health
+        if anomaly_active:
+            health -= 15
+
+        health = max(0.0, min(100.0, health))
+
     # Collect symptoms and strengths
     symptoms = []
     strengths = []
 
     if metrics.churn_rate > CHURN_THRESHOLD:
-        symptoms.append(f"Churn rate {metrics.churn_rate:.1f}x above threshold (>{CHURN_THRESHOLD}/month)")
+        symptoms.append(
+            f"Churn rate {metrics.churn_rate:.1f}x above threshold (>{CHURN_THRESHOLD}/month)"
+        )
     elif metrics.churn_rate < 1.0 and metrics.commit_count > 0:
         strengths.append("Low churn — stable and predictable")
 
     if metrics.complexity > COMPLEXITY_THRESHOLD:
-        symptoms.append(f"Cyclomatic complexity: {metrics.complexity} (threshold: {COMPLEXITY_THRESHOLD})")
+        symptoms.append(
+            f"Cyclomatic complexity: {metrics.complexity} (threshold: {COMPLEXITY_THRESHOLD})"
+        )
     elif metrics.complexity <= 5 and metrics.complexity > 0:
         strengths.append("Low complexity — easy to understand")
 
     if metrics.test_coverage < COVERAGE_THRESHOLD and not metrics.is_test:
-        symptoms.append(f"Test coverage: {metrics.test_coverage:.0%} (threshold: {COVERAGE_THRESHOLD:.0%})")
+        symptoms.append(
+            f"Test coverage: {metrics.test_coverage:.0%} (threshold: {COVERAGE_THRESHOLD:.0%})"
+        )
     elif metrics.test_coverage >= COVERAGE_THRESHOLD:
         strengths.append(f"Good test coverage: {metrics.test_coverage:.0%}")
 
@@ -211,6 +290,21 @@ def build_organism(metrics: ModuleMetrics, avg_churn: float = 5.0) -> Organism:
     if metrics.is_deprecated:
         symptoms.append("Module is deprecated")
 
+    if crack_intensity > 0.0:
+        symptoms.append(
+            f"Crack intensity: {crack_intensity:.2f} — cracked bark, wilting"
+        )
+
+    if infection_state == "I":
+        symptoms.append("Infection active — contagion glow detected")
+    elif infection_state == "E":
+        symptoms.append("Exposed to infection — incubating")
+    elif infection_state == "R":
+        strengths.append("Recovered from infection — scarred but stable")
+
+    if anomaly_active:
+        symptoms.append("Anomaly detected — immune response active")
+
     stability_tier = classify_stability(metrics.days_since_last_change)
     age_tier = classify_age(metrics.age_days)
 
@@ -222,14 +316,22 @@ def build_organism(metrics: ModuleMetrics, avg_churn: float = 5.0) -> Organism:
         age_tier=age_tier,
         symptoms=symptoms,
         strengths=strengths,
+        crack_intensity=crack_intensity,
+        infection_state=infection_state,
+        anomaly_active=anomaly_active,
     )
 
 
-def build_ecosystem(project: ProjectMetrics) -> Ecosystem:
+def build_ecosystem(
+    project: ProjectMetrics,
+    health_states: Optional[Dict[str, OrganismHealthState]] = None,
+) -> Ecosystem:
     """Build a full Ecosystem from project metrics.
 
     Args:
         project: ProjectMetrics from the metrics engine.
+        health_states: Optional mapping of file path to merged health state
+            from external adapters.
 
     Returns:
         An Ecosystem with all organisms and aggregate stats.
@@ -237,9 +339,11 @@ def build_ecosystem(project: ProjectMetrics) -> Ecosystem:
     ecosystem = Ecosystem(root_path=project.root_path)
 
     avg_churn = project.avg_churn if project.avg_churn > 0 else 5.0
+    health_states = health_states or {}
 
     for path, metrics in project.modules.items():
-        organism = build_organism(metrics, avg_churn)
+        health_state = health_states.get(path)
+        organism = build_organism(metrics, avg_churn, health_state)
         ecosystem.organisms[path] = organism
 
     ecosystem.compute_stats()
