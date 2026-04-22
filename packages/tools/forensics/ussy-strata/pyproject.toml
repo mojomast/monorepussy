@@ -1,21 +1,38 @@
 [build-system]
-requires = ["setuptools>=64"]
-build-backend = "setuptools.build_meta"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
 [project]
-name = "stratagit"
+name = "ussy-strata"
 version = "0.1.0"
-description = "Geological metaphor for Git history visualization"
+description = "Git forensics with geological metaphors — merged stratagit + unconformity"
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.11"
 license = {text = "MIT"}
-keywords = ["git", "visualization", "geological", "stratigraphy"]
+keywords = ["git", "forensics", "geological", "stratigraphy", "visualization"]
+dependencies = [
+    "click>=8.1",
+    "gitpython>=3.1",
+    "rich>=13.0",
+    "rich-click>=1.0",
+    "ussy-core",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-cov>=4.0",
+]
 
 [project.scripts]
-stratagit = "stratagit.cli:main"
+ussy-strata = "ussy_strata.cli:main"
+stratagit = "ussy_strata.legacy:stratagit"
+unconformity = "ussy_strata.legacy:unconformity"
+disconformitussy = "ussy_strata.legacy:disconformitussy"
 
-[tool.setuptools.packages.find]
-include = ["stratagit*"]
+[tool.hatch.build.targets.wheel]
+packages = ["src/ussy_strata"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+pythonpath = ["src"]

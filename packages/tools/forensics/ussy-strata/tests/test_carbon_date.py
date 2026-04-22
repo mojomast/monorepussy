@@ -1,7 +1,7 @@
 """Tests for carbon dating (stratagit.core.carbon_date)."""
 
 import pytest
-from stratagit.core.carbon_date import carbon_date
+from ussy_strata.core.carbon_date import carbon_date
 
 
 class TestCarbonDate:

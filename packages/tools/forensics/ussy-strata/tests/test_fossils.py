@@ -2,12 +2,12 @@
 
 import pytest
 import subprocess
-from stratagit.core.fossils import (
+from ussy_strata.core.fossils import (
     _extract_artifacts,
     excavate_fossils,
     find_fossils_in_diff,
 )
-from stratagit.core import Fossil
+from ussy_strata.core import Fossil
 
 
 class TestExtractArtifacts:

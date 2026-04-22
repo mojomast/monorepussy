@@ -8,8 +8,11 @@ resolution-markers = [
 
 [manifest]
 members = [
+    "stratagit",
     "ussy-assay",
     "ussy-ast",
+    "ussy-calibre",
+    "ussy-churn",
     "ussy-cli",
     "ussy-core",
     "ussy-git",
@@ -21,6 +24,7 @@ members = [
     "ussy-sentinel",
     "ussy-snapshot",
     "ussy-sqlite",
+    "ussy-steno",
     "ussy-stratax",
     "ussy-triage",
     "ussyverse",
@@ -1659,6 +1663,11 @@ wheels = [
 ]
 
 [[package]]
+name = "stratagit"
+version = "0.1.0"
+source = { editable = "packages/tools/forensics/ussy-strata" }
+
+[[package]]
 name = "tomli"
 version = "2.4.1"
 source = { registry = "https://pypi.org/simple" }
@@ -1777,6 +1786,55 @@ dev = [
 requires-dist = [
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=8.0" },
     { name = "pytest-cov", marker = "extra == 'dev'", specifier = ">=4.0" },
+]
+provides-extras = ["dev"]
+
+[[package]]
+name = "ussy-calibre"
+version = "0.1.0"
+source = { editable = "packages/tools/quality/ussy-calibre" }
+dependencies = [
+    { name = "numpy" },
+    { name = "scipy" },
+    { name = "ussy-core" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "numpy", specifier = ">=1.24" },
+    { name = "scipy", specifier = ">=1.10" },
+    { name = "ussy-core", editable = "packages/libs/ussy-core" },
+]
+
+[[package]]
+name = "ussy-churn"
+version = "0.1.0"
+source = { editable = "packages/tools/visualization/ussy-churn" }
+dependencies = [
+    { name = "networkx" },
+    { name = "numpy" },
+    { name = "pydriller" },
+    { name = "rich" },
+    { name = "scipy" },
+    { name = "ussy-core" },
+]
+
+[package.optional-dependencies]
+dev = [
+    { name = "pytest" },
+    { name = "pytest-cov" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "networkx", specifier = ">=3.0" },
+    { name = "numpy", specifier = ">=1.24" },
+    { name = "pydriller", specifier = ">=2.6" },
+    { name = "pytest", marker = "extra == 'dev'", specifier = ">=7.0" },
+    { name = "pytest-cov", marker = "extra == 'dev'", specifier = ">=4.0" },
+    { name = "rich", specifier = ">=13.0" },
+    { name = "scipy", specifier = ">=1.10" },
+    { name = "ussy-core", editable = "packages/libs/ussy-core" },
 ]
 provides-extras = ["dev"]
 
@@ -1953,6 +2011,17 @@ requires-dist = [
 provides-extras = ["dev"]
 
 [[package]]
+name = "ussy-steno"
+version = "1.0.0"
+source = { editable = "packages/tools/security/ussy-steno" }
+dependencies = [
+    { name = "ussy-core" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "ussy-core", editable = "packages/libs/ussy-core" }]
+
+[[package]]
 name = "ussy-stratax"
 version = "0.1.0"
 source = { editable = "packages/tools/deps/ussy-stratax" }
@@ -2007,6 +2076,8 @@ source = { editable = "." }
 dependencies = [
     { name = "ussy-assay" },
     { name = "ussy-ast" },
+    { name = "ussy-calibre" },
+    { name = "ussy-churn" },
     { name = "ussy-cli" },
     { name = "ussy-core" },
     { name = "ussy-git" },
@@ -2018,6 +2089,7 @@ dependencies = [
     { name = "ussy-sentinel" },
     { name = "ussy-snapshot" },
     { name = "ussy-sqlite" },
+    { name = "ussy-steno" },
     { name = "ussy-stratax" },
     { name = "ussy-triage" },
 ]
@@ -2101,6 +2173,8 @@ requires-dist = [
     { name = "scipy", marker = "extra == 'sci'", specifier = ">=1.10" },
     { name = "ussy-assay", editable = "packages/tools/devtools/ussy-assay" },
     { name = "ussy-ast", editable = "packages/libs/ussy-ast" },
+    { name = "ussy-calibre", editable = "packages/tools/quality/ussy-calibre" },
+    { name = "ussy-churn", editable = "packages/tools/visualization/ussy-churn" },
     { name = "ussy-cli", editable = "packages/libs/ussy-cli" },
     { name = "ussy-core", editable = "packages/libs/ussy-core" },
     { name = "ussy-git", editable = "packages/libs/ussy-git" },
@@ -2112,6 +2186,7 @@ requires-dist = [
     { name = "ussy-sentinel", editable = "packages/tools/governance/ussy-sentinel" },
     { name = "ussy-snapshot", editable = "packages/tools/devtools/ussy-snapshot" },
     { name = "ussy-sqlite", editable = "packages/libs/ussy-sqlite" },
+    { name = "ussy-steno", editable = "packages/tools/security/ussy-steno" },
     { name = "ussy-stratax", editable = "packages/tools/deps/ussy-stratax" },
     { name = "ussy-triage", editable = "packages/tools/triage/ussy-triage" },
     { name = "ussyverse", extras = ["sci", "cli", "git", "graph", "web", "config", "viz", "compress", "mining"], marker = "extra == 'all'" },

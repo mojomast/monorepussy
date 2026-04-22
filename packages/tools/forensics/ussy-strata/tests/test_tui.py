@@ -2,8 +2,8 @@
 
 import pytest
 from datetime import datetime, timezone
-from stratagit.tui import render_cross_section, render_legend, render_stratum_detail
-from stratagit.core import Stratum, MineralType
+from ussy_strata.tui import render_cross_section, render_legend, render_stratum_detail
+from ussy_strata.core import Stratum, MineralType
 
 
 def _make_strata(count=3):

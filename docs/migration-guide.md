@@ -56,7 +56,7 @@ uv sync --package ussy-steno
 | calibreussy | `ussy-calibre` | `ussy-calibre` |
 | chromatoussy | `ussy-chromato` | `ussy-chromato` |
 | cambiumussy | `ussy-cambium` | `ussy-cambium` |
-| churnmap | `ussy-churn` | `ussy-churn` |
+| churnmap | `ussy-churn` | `ussy-churn` (legacy: `churnmap`) |
 | stratagitussy | `ussy-strata` | `ussy-strata` |
 
 **Merged packages:**
@@ -208,13 +208,16 @@ uv run mypy packages/
 | triageussy | Apr 2026 | `packages/tools/triage/ussy-triage/` | ✅ Migrated |
 | sentinelussy | Apr 2026 | `packages/tools/governance/ussy-sentinel/` | ✅ Migrated |
 | gridironussy | Apr 2026 | `packages/tools/deps/ussy-gridiron/` | ✅ Migrated |
+| stenographussy | Apr 2026 | `packages/tools/security/ussy-steno/` | ✅ Migrated |
+| stratagitussy | Apr 2026 | `packages/tools/forensics/ussy-strata/` | ✅ Migrated |
 
 ### 5.2 Archived Repositories
 
 | Repo | Archive Date | Reason |
 |------|-------------|--------|
-| stenography | TBD | Merged into ussy-steno |
-| churnmapussy | TBD | Merged into ussy-churn |
+| stenography | Apr 2026 | Archived/merged into ussy-steno |
+| churnmapussy | Apr 2026 | Archived/merged into ussy-churn |
+| unconformity | Apr 2026 | Archived/merged into ussy-strata |
 | cartographerussy | TBD | Games/edutainment |
 | codelineageussy | TBD | Security issue (.venv committed) |
 | driftnetussy | TBD | No code (specifications only) |

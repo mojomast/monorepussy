@@ -2,7 +2,7 @@
 
 import pytest
 import subprocess
-from stratagit.core.parser import (
+from ussy_strata.core.parser import (
     is_git_repo,
     parse_commits,
     _parse_log_output,
@@ -10,7 +10,7 @@ from stratagit.core.parser import (
     assign_branch_names,
     compute_stability,
 )
-from stratagit.core import Stratum, Intrusion, IntrusionType
+from ussy_strata.core import Stratum, Intrusion, IntrusionType
 
 
 class TestIsGitRepo:

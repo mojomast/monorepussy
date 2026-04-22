@@ -1,8 +1,8 @@
 """Tests for unconformity detection (stratagit.core.unconformity)."""
 
 import pytest
-from stratagit.core.unconformity import detect_unconformities
-from stratagit.core import Unconformity, UnconformityType
+from ussy_strata.core.unconformity import detect_unconformities
+from ussy_strata.core import Unconformity, UnconformityType
 
 
 class TestDetectUnconformities:

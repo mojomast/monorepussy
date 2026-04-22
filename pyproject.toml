@@ -19,6 +19,10 @@ dependencies = [
     "ussy-assay",
     "ussy-petrichor",
     "ussy-snapshot",
+    "ussy-churn",
+    "ussy-steno",
+    "ussy-calibre",
+    "ussy-strata",
 ]
 
 [tool.uv.workspace]
@@ -52,6 +56,10 @@ ussy-kintsugi = { workspace = true }
 ussy-assay = { workspace = true }
 ussy-petrichor = { workspace = true }
 ussy-snapshot = { workspace = true }
+ussy-churn = { workspace = true }
+ussy-steno = { workspace = true }
+ussy-calibre = { workspace = true }
+ussy-strata = { workspace = true }
 
 [build-system]
 requires = ["hatchling"]

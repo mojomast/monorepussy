@@ -1,8 +1,8 @@
 """Tests for the survey module (stratagit.core.survey)."""
 
 import pytest
-from stratagit.core.survey import survey, format_report
-from stratagit.core import GeologicalReport
+from ussy_strata.core.survey import survey, format_report
+from ussy_strata.core import GeologicalReport
 
 
 class TestSurvey:

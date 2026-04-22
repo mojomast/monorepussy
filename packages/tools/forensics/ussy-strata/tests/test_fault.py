@@ -1,8 +1,8 @@
 """Tests for fault line detection (stratagit.core.fault)."""
 
 import pytest
-from stratagit.core.fault import detect_faults
-from stratagit.core import FaultLine
+from ussy_strata.core.fault import detect_faults
+from ussy_strata.core import FaultLine
 
 
 class TestDetectFaults:

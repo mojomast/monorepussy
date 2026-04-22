@@ -5,18 +5,18 @@ import json
 import tempfile
 import pytest
 
-from stenography.models import Finding, Severity, Context, ScanResult
-from stenography.scanners import (
+from ussy_steno.models import Finding, Severity, Context, ScanResult
+from ussy_steno.scanners import (
     ZeroWidthScanner,
     HomoglyphScanner,
     RTLScanner,
     WhitespaceScanner,
     CommentScanner,
 )
-from stenography.engine import ScannerEngine
-from stenography.formatters import get_formatter, JsonFormatter, SarifFormatter, TableFormatter
-from stenography.context import classify_context
-from stenography.cli import main as cli_main
+from ussy_steno.engine import ScannerEngine
+from ussy_steno.formatters import get_formatter, JsonFormatter, SarifFormatter, TableFormatter
+from ussy_steno.context import classify_context
+from ussy_steno.cli import main as cli_main
 
 FIXTURES_DIR = os.path.join(os.path.dirname(__file__), "fixtures")
 
@@ -146,7 +146,7 @@ class TestZeroWidthScanner:
 
     def test_detects_15_plus_zero_width_chars(self):
         """Verify the scanner has 15+ zero-width character definitions."""
-        from stenography.scanners.zero_width import ZERO_WIDTH_CHARS
+        from ussy_steno.scanners.zero_width import ZERO_WIDTH_CHARS
         assert len(ZERO_WIDTH_CHARS) >= 15
 
     def test_fixture_file(self):
@@ -217,7 +217,7 @@ class TestHomoglyphScanner:
 
     def test_50_plus_homoglyph_pairs(self):
         """Verify 50+ homoglyph pairs are defined."""
-        from stenography.scanners.homoglyph import HOMOGLYPH_MAP
+        from ussy_steno.scanners.homoglyph import HOMOGLYPH_MAP
         assert len(HOMOGLYPH_MAP) >= 50
 
     def test_fixture_file(self):
@@ -325,7 +325,7 @@ class TestWhitespaceScanner:
         # 0=space, 1=tab: space tab space space space space space tab
         trailing = " \t    \t"
         line = f"x = 1{trailing}"
-        from stenography.scanners.whitespace import _decode_space_tab_binary
+        from ussy_steno.scanners.whitespace import _decode_space_tab_binary
         decoded = _decode_space_tab_binary(line)
         # Should decode to something (maybe partial)
         # The exact decoding depends on the implementation

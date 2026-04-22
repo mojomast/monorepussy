@@ -2,7 +2,7 @@
 
 import pytest
 from datetime import datetime, timezone
-from stratagit.core import (
+from ussy_strata.core import (
     MineralType,
     IntrusionType,
     UnconformityType,
