@@ -1,0 +1,11 @@
+🩺 auth.py — HEALTHY
+
+Symptoms:
+  - Cyclomatic complexity: 16 (threshold: 15)
+  - Test coverage: 0% (threshold: 80%)
+
+Diagnosis: This module has high cyclomatic complexity, making it hard to understand, test, and maintain.
+
+Treatment: Refactor complex functions into smaller, composable pieces. Use early returns, guard clauses, and polymorphism to reduce branching.
+
+Prognosis: Manageable with targeted refactoring. Priority: LOW.

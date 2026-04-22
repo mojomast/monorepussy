@@ -1,0 +1,4 @@
+Usage: terrarium export [OPTIONS]
+Try 'terrarium export --help' for help.
+
+Error: Got unexpected extra argument (demo/synthetic_project)
