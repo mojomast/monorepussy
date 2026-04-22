@@ -3,9 +3,9 @@
 import os
 import tempfile
 import pytest
-from triage.enricher import ContextEnricher
-from triage.extractor import ErrorExtractor, IsolatedError
-from triage.models import EnrichedError, VictimType
+from ussy_triage.enricher import ContextEnricher
+from ussy_triage.extractor import ErrorExtractor, IsolatedError
+from ussy_triage.models import EnrichedError, VictimType
 
 
 class TestContextEnricherBasic:
@@ -14,7 +14,7 @@ class TestContextEnricherBasic:
     def setup_method(self):
         self.tmpdir = tempfile.mkdtemp()
         db_path = os.path.join(self.tmpdir, "test_patterns.db")
-        from triage.patterns import PatternMatcher
+        from ussy_triage.patterns import PatternMatcher
         self.matcher = PatternMatcher(db_path=db_path)
         self.enricher = ContextEnricher(
             project_dir=self.tmpdir,
@@ -103,7 +103,7 @@ class TestContextEnricherWithGit:
         os.system(f'cd {self.tmpdir} && git add -A && git commit -m "initial commit"')
 
         db_path = os.path.join(self.tmpdir, "test_patterns.db")
-        from triage.patterns import PatternMatcher
+        from ussy_triage.patterns import PatternMatcher
         self.matcher = PatternMatcher(db_path=db_path)
         self.enricher = ContextEnricher(
             project_dir=self.tmpdir,
@@ -150,7 +150,7 @@ class TestExtractSearchTerms:
     def setup_method(self):
         self.tmpdir = tempfile.mkdtemp()
         db_path = os.path.join(self.tmpdir, "test_patterns.db")
-        from triage.patterns import PatternMatcher
+        from ussy_triage.patterns import PatternMatcher
         self.matcher = PatternMatcher(db_path=db_path)
         self.enricher = ContextEnricher(
             project_dir=self.tmpdir,

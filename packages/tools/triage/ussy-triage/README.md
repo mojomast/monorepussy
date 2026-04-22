@@ -1,4 +1,6 @@
-# Triage — Error Logs as Crime Scenes
+# Ussy Triage — Error Logs as Crime Scenes
+
+> **Migration Notice:** This package was migrated from the standalone `triageussy` repository into the `ussyverse` monorepo. The package name is now `ussy-triage` and the Python import path is `ussy_triage`. The legacy `triage` command still works but emits a deprecation warning.
 
 > Build failures are crime scenes. Triage is the detective.
 
@@ -50,77 +52,77 @@ Add `impl From<sqlx::Error> for AppError { ... }` or use a type that already imp
 ## Installation
 
 ```bash
-pip install .
+pip install ussy-triage
 ```
 
-Or for development:
+Or for development inside the monorepo:
 ```bash
-pip install -e .
+uv sync --package ussy-triage
 ```
 
 ## Usage
 
-### Pipe any command's output through triage
+### Pipe any command's output through ussy-triage
 
 ```bash
 # Rust
-cargo build 2>&1 | triage
+cargo build 2>&1 | ussy-triage
 
 # Python
-python app.py 2>&1 | triage
+python app.py 2>&1 | ussy-triage
 
 # Node.js
-npm run build 2>&1 | triage
+npm run build 2>&1 | ussy-triage
 
 # Go
-go build ./... 2>&1 | triage
+go build ./... 2>&1 | ussy-triage
 ```
 
 ### Analyze a saved log file
 
 ```bash
-triage analyze build-log.txt
+ussy-triage analyze build-log.txt
 ```
 
 ### Quick mode — just the fix
 
 ```bash
-npm run build 2>&1 | triage --quick
+npm run build 2>&1 | ussy-triage --quick
 # Output: [src/app.ts:42] Check the function signature and ensure arguments match expected types (confidence: 80%)
 ```
 
 ### Teaching mode — extended explanations
 
 ```bash
-triage analyze error.log --teach
+ussy-triage analyze error.log --teach
 ```
 
 ### JSON output for tool integration
 
 ```bash
-triage analyze error.log --json
+ussy-triage analyze error.log --json
 ```
 
 ### Manage error patterns
 
 ```bash
 # Add a custom pattern
-triage pattern add --regex "CustomError: (.*)" --cause "Our custom error" --fix "Check the config"
+ussy-triage pattern add --regex "CustomError: (.*)" --cause "Our custom error" --fix "Check the config"
 
 # List patterns
-triage pattern list
+ussy-triage pattern list
 
 # Filter by language
-triage pattern list --language python
+ussy-triage pattern list --language python
 
 # Remove a custom pattern
-triage pattern remove 42
+ussy-triage pattern remove 42
 ```
 
 ### Specify project directory for git context
 
 ```bash
-triage analyze error.log --project /path/to/project
+ussy-triage analyze error.log --project /path/to/project
 ```
 
 ## Architecture
@@ -140,12 +142,15 @@ Raw Log/Stdin → ErrorExtractor → PatternMatcher → ContextEnricher → Diag
 
 | Module | Purpose |
 |--------|---------|
+| Module | Purpose |
+|--------|---------|
 | `extractor.py` | Multi-format log parser — isolates errors from noise |
 | `patterns.py` | SQLite-backed pattern database with 50+ curated error patterns |
 | `enricher.py` | Git blame, history search, and context gathering |
 | `renderer.py` | Output formatting — detective, JSON, minimal, teaching modes |
 | `models.py` | Shared data models (IsolatedError, EnrichedError, Diagnosis) |
 | `cli.py` | CLI interface with argparse |
+| `legacy.py` | Deprecation shim for the old `triage` entry point |
 
 ### Supported Error Types
 
@@ -158,8 +163,8 @@ Raw Log/Stdin → ErrorExtractor → PatternMatcher → ContextEnricher → Diag
 
 ## Requirements
 
-- Python 3.8+
-- No external dependencies (stdlib only)
+- Python 3.11+
+- `ussy-core` (workspace dependency)
 - Git (optional, for git blame and history features)
 
 ## License

@@ -4,7 +4,7 @@ import json
 import os
 import tempfile
 import pytest
-from triage.cli import main, create_parser, read_input, get_output_format
+from ussy_triage.cli import main, create_parser, read_input, get_output_format
 
 
 class TestCreateParser:

@@ -3,8 +3,8 @@
 import os
 import tempfile
 import pytest
-from triage.patterns import PatternMatcher, SEED_PATTERNS
-from triage.models import ErrorPattern, VictimType
+from ussy_triage.patterns import PatternMatcher, SEED_PATTERNS
+from ussy_triage.models import ErrorPattern, VictimType
 
 
 class TestPatternMatcherInit:

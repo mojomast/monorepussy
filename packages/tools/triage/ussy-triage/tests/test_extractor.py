@@ -1,7 +1,7 @@
 """Tests for the ErrorExtractor module."""
 
 import pytest
-from triage.extractor import ErrorExtractor, IsolatedError
+from ussy_triage.extractor import ErrorExtractor, IsolatedError
 
 
 class TestIsolatedError:

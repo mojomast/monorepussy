@@ -2,8 +2,8 @@
 
 import json
 import pytest
-from triage.renderer import DiagnosisRenderer
-from triage.models import (
+from ussy_triage.renderer import DiagnosisRenderer
+from ussy_triage.models import (
     Diagnosis, EnrichedError, ErrorPattern, GitContext,
     HistoryMatch, VictimType, Confidence
 )

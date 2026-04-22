@@ -1,7 +1,7 @@
 """Tests for the data models."""
 
 import pytest
-from triage.models import (
+from ussy_triage.models import (
     VictimType, Confidence, ErrorPattern, GitContext,
     HistoryMatch, EnrichedError, Diagnosis
 )

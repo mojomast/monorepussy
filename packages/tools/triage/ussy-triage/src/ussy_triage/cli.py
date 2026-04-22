@@ -43,13 +43,13 @@ from .models import EnrichedError, Diagnosis
 def create_parser() -> argparse.ArgumentParser:
     """Create the CLI argument parser."""
     parser = argparse.ArgumentParser(
-        prog="triage",
-        description="Triage — Error Logs as Crime Scenes. "
+        prog="ussy-triage",
+        description="Ussy Triage — Error Logs as Crime Scenes. "
                     "Analyzes build failures, stack traces, and error logs "
                     "using forensic methodology to produce detective-style diagnostic reports.",
     )
     parser.add_argument(
-        "--version", action="version", version=f"triage {__version__}"
+        "--version", action="version", version=f"ussy-triage {__version__}"
     )
 
     subparsers = parser.add_subparsers(dest="command", help="Available commands")
